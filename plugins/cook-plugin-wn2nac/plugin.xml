@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cook-plugin-wn2nac"
+        version="0.1.0">
+
+    <name>WN2NAC</name>
+
+    <engines>
+        <engine name="cordova" version=">=3.4.0"/>
+    </engines>
+
+    <js-module src="www/wn2nac.js" name="WN2NAC">
+        <clobbers target="wn2nac" />
+    </js-module>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="WN2NAC">
+                <param name="android-package" value="tw.edu.ntu.as.cook.WN2NAC"/>
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+            <uses-permission android:name="android.permission.INTERNET"/>
+        </config-file>
+        <source-file src="android/build-extras.gradle" target-dir="." />
+        <source-file src="android/src/WN2NAC.java" target-dir="src/tw/edu/ntu/as/cook/"/>
+        <source-file src="android/src/api/EventDetect.java" target-dir="src/ch/skywatch/windoo/api/"/>
+        <source-file src="android/src/api/EventDetectCalibration.java" target-dir="src/ch/skywatch/windoo/api/"/>
+        <source-file src="android/src/api/EventDetectFrequency.java" target-dir="src/ch/skywatch/windoo/api/"/>
+        <source-file src="android/src/api/FFTComplex1D.java" target-dir="src/ch/skywatch/windoo/api/"/>
+        <source-file src="android/src/api/FFTRealDouble_Mixed.java" target-dir="src/ch/skywatch/windoo/api/"/>
+        <source-file src="android/src/api/FFTRealDouble.java" target-dir="src/ch/skywatch/windoo/api/"/>
+        <source-file src="android/src/api/JDCWindooEvent.java" target-dir="src/ch/skywatch/windoo/api/"/>
+        <source-file src="android/src/api/JDCWindooManager.java" target-dir="src/ch/skywatch/windoo/api/"/>
+        <source-file src="android/src/api/JDCWindooMeasurement.java" target-dir="src/ch/skywatch/windoo/api/"/>
+        <source-file src="android/src/api/ReceiverAudioBecomingNoisy.java" target-dir="src/ch/skywatch/windoo/api/"/>
+        <source-file src="android/src/api/ReceiverHeadset.java" target-dir="src/ch/skywatch/windoo/api/"/>
+        <source-file src="android/src/api/ReceiverMediaButton.java" target-dir="src/ch/skywatch/windoo/api/"/>
+        <source-file src="android/src/api/ToolConverter.java" target-dir="src/ch/skywatch/windoo/api/"/>
+        <source-file src="android/src/api/ToolDataManager.java" target-dir="src/ch/skywatch/windoo/api/"/>
+        <source-file src="android/src/api/ToolWaveAnalysis.java" target-dir="src/ch/skywatch/windoo/api/"/>
+        <source-file src="android/src/api/ToolWaveGenerator.java" target-dir="src/ch/skywatch/windoo/api/"/>
+        <source-file src="android/src/api/ToolWindooFileManager.java" target-dir="src/ch/skywatch/windoo/api/"/>
+        <source-file src="android/src/api/ToolWindooSystemInfo.java" target-dir="src/ch/skywatch/windoo/api/"/>
+    </platform>
+
+</plugin>

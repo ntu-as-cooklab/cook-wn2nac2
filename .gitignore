@@ -3,5 +3,5 @@
 
 node_modules/
 platforms/
-plugins/
-!plugins/cordova-plugin-wn2nac/
+plugins/*
+!plugins/cook-plugin-wn2nac/
