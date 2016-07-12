@@ -1,23 +1,13 @@
 "use strict";
 
-function main()
+var log = function(message)
 {
-    wn2nac.init();
-    wn2nac.start();
-    wn2nac.setCallback(onEvent);
+    return function() { console.log(message); }
 }
 
-function onEvent(data)
+function main()
 {
-    /*switch(data.dataType)
-    {
-        case n:
-            code block
-            break;
-        case n:
-            code block
-            break;
-        default:
-            default code block
-    }*/
+    wn2nac.init(log("Windoo intialized"));
+    wn2nac.start(log("Windoo started"));
+    wn2nac.setCallback(onEvent);
 }
