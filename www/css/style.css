@@ -1,1 +1,74 @@
 /* Empty. Add your own CSS if you like */
+#map{
+  width: 100%;
+  height: 94.5%;
+}
+
+#nav{
+  display: table;
+  height: 50px;
+  width: 100%;
+}
+
+#nav li{
+  display: table-cell;
+  width: 20%;
+  line-height: 20px;
+  background: #23272d;
+  white-space: nowrap;
+}
+
+#nav li:hover{
+  background-color: #2a2e36;
+}
+
+.icon-link{
+  display: flex;
+  text-decoration: none;
+  align-content: center;
+  justify-content: center;
+  color: #5085c8;
+  font-size: 30px;
+}
+
+.text-link{
+  display: flex;
+  text-decoration: none;
+  align-content: center;
+  justify-content: center;
+  color: #5085c8;
+  font-size: 13px;
+}
+
+.float-button{
+  background-color: white;
+  opacity: 0.9;
+  border-radius: 50%;
+  padding: 10px;
+  font-size: 30px;
+  position: fixed;
+  bottom: 15%;
+  right: 3%;
+}
+
+.float-button .float-button-content{
+  color: black;
+}
+
+#temp{
+  position: absolute;
+  bottom: 0;
+}
+
+#temp li a{
+  color: black;
+  font-size: 15px;
+}
+
+.scroll{
+  height: 100%;
+}
+
+.content{
+  overflow: visible !important;
+}
