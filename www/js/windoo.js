@@ -29,15 +29,19 @@ function onEvent(event)
             break;
         case JDCWindooNewWindValue:
             console.log("New wind:        " + event.data);
+            windDisplay.innerHTML = event.data.toFixed(2);
             break;
         case JDCWindooNewTemperatureValue:
             console.log("New temperature: " + event.data);
+            temperatureDisplay.innerHTML = event.data.toFixed(2);
             break;
         case JDCWindooNewHumidityValue:
             console.log("New humidity:    " + event.data);
+            humidityDisplay.innerHTML = event.data.toFixed(2);
             break;
         case JDCWindooNewPressureValue:
             console.log("New pressure:    " + event.data);
+            pressureDisplay.innerHTML = event.data.toFixed(2);
             break;
         case JDCWindooPublishSuccess:
             console.log("Publish success");

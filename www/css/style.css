@@ -1,1 +1,35 @@
-/* Empty. Add your own CSS if you like */
+.windooContainer {
+    margin: 25px;
+    width: 40%;
+    height: 40%;
+    position: absolute;
+    display: inline-block;
+}
+
+#windContainer {
+    left: 0px;
+}
+#temperatureContainer {
+    right: 0px;
+}
+#humidityContainer {
+    bottom:0px;
+    right: 0px;
+}
+#pressureContainer {
+    bottom:0px;
+    left: 0px;
+}
+
+
+.windooTitle {
+    text-align: center;
+}
+
+.windooUnit {
+    text-align: right;
+}
+
+.windooDisplay {
+    text-align: center;
+}

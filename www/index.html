@@ -1,36 +1,56 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>WN2NAC2</title>
 
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+        <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+        <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+        <link href="css/ionic.app.css" rel="stylesheet">
+        -->
+        <script src="lib/ionic/js/ionic.bundle.js"></script> <!-- ionic/angularjs js -->
+        <script src="cordova.js"></script>  <!-- cordova script (this will be a 404 during development) -->
 
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
+        <!-- WN2NAC sources -->
+        <link href="css/style.css" rel="stylesheet">
+        <script src="js/app.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/windoo.js"></script>
+        <script src="js/ui.js"></script>
+    </head>
 
-    <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <body ng-app="starter">
+        <ion-pane>
+            <ion-header-bar class="bar-stable">
+                <h1 class="title">Windoo</h1>
+            </ion-header-bar>
 
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
+            <ion-content>
 
-    <!-- your app's js -->
-    <script src="js/app.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/windoo.js"></script>
-  </head>
-  <body ng-app="starter">
+                    <div class="windooContainer" id="windContainer">
+                        <h5 class="windooTitle">Wind speed</h5>
+                        <h6 class="windooUnit">m/s</h6>
+                        <h1 class="windooDisplay" id="windDisplay">N/A</h2>
+                    </div>
+                    <div class="windooContainer" id="temperatureContainer">
+                        <h5 class="windooTitle">Temperature</h5>
+                        <h6 class="windooUnit">°C</h6>
+                        <h1 class="windooDisplay" id="temperatureDisplay">N/A</h2>
+                    </div>
+                    <div class="windooContainer" id="humidityContainer">
+                        <h5 class="windooTitle">Humidity</h5>
+                        <h6 class="windooUnit">%RH</h6>
+                        <h1 class="windooDisplay" id="humidityDisplay">N/A</h2>
+                    </div>
+                    <div class="windooContainer" id="pressureContainer">
+                        <h5 class="windooTitle">Pressure</h5>
+                        <h6 class="windooUnit">hPA</h6>
+                        <h1 class="windooDisplay" id="pressureDisplay">N/A</h2>
+                    </div>
 
-    <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
-      </ion-header-bar>
-      <ion-content>
-      </ion-content>
-    </ion-pane>
-  </body>
+            </ion-content>
+        </ion-pane>
+    </body>
+
 </html>
