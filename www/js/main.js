@@ -9,7 +9,7 @@ function main()
 
 function onEvent(data)
 {
-    switch(data.dataType)
+    /*switch(data.dataType)
     {
         case n:
             code block
@@ -19,5 +19,5 @@ function onEvent(data)
             break;
         default:
             default code block
-    }
+    }*/
 }

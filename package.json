@@ -1,7 +1,7 @@
 {
-  "name": "wn2nac2",
+  "name": "WN2NAC2",
   "version": "1.1.1",
-  "description": "wn2nac2: An Ionic project",
+  "description": "WN2NAC2",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^2.0.4",

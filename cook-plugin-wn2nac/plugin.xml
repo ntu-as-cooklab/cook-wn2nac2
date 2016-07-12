@@ -9,7 +9,7 @@
         <engine name="cordova" version=">=3.4.0"/>
     </engines>
 
-    <js-module src="www/wn2nac.js" name="WN2NAC">
+    <js-module src="js/wn2nac.js" name="WN2NAC">
         <clobbers target="wn2nac" />
     </js-module>
 
