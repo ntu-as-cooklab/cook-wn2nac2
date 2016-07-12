@@ -21,7 +21,7 @@ angular.module('starter', ['ionic'])
       StatusBar.styleDefault();
     }
 
-   wn2nac.start("yah", function(message){ alert(message); }, function(){});
+   main();
 
   });
 })
