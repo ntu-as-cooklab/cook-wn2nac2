@@ -2,6 +2,7 @@
 
 var windooObservation;
 var currentMeasurement;
+var windDisplay, tempDisplay, humidityDisplay, pressureDisplay;
 
 var log = function(message)
 {
@@ -10,7 +11,10 @@ var log = function(message)
 
 function weather_main()
 {
-    createUI();
+    windDisplay         = document.getElementById("windDisplay");
+    tempDisplay         = document.getElementById("tempDisplay");
+    humidityDisplay     = document.getElementById("humidityDisplay");
+    pressureDisplay     = document.getElementById("pressureDisplay");
 
     if (typeof Windoo !== 'undefined')
     {
