@@ -40,7 +40,7 @@ var WindooObservation = function(_ = this)
     {
         return function()
         {
-            var noEarlierThan = Date.now() - duration;
+            var noEarlierThan = Date.now() - _.duration;
             while (time[0] < noEarlierThan)
             {
                 val.shift();

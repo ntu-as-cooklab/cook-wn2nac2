@@ -1,0 +1,36 @@
+
+/*--- Weather Tab ---*/
+
+.windooRow {
+    height: 40vh;
+}
+
+.windooContainer {
+    display: flex;
+    flex-flow: column;
+    margin-top:     2vh;
+    margin-bottom:  2vh;
+    margin-right:   2vw;
+    margin-left:    2vw;
+}
+
+.windooTitle {
+    font-size: 120%;
+    line-height: 5vh;
+    text-align: center;
+}
+
+.windooUnit {
+    font-size: 100%;
+    line-height: 5vh;
+    text-align: right;
+}
+
+.windooDisplay {
+    display: inline-block;
+    font-size: 300%;
+    text-align:center;
+    line-height: 15vh;
+    flex: 1 1 auto;
+    vertical-align: middle;
+}
