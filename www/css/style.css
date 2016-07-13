@@ -1,63 +1,60 @@
-/* Empty. Add your own CSS if you like */
+/*--- tabs at very top hack ---*/
+.tabs-top > .tabs, .tabs.tabs-top{
+  top: 0 !important;
+}
+.has-tabs-top {
+  top: 49px !important;
+}
+
+/*--- Home Tab ---*/
 #map{
   width: 100%;
-  height: 94.5%;
-}
-
-#nav{
-  display: table;
-  height: 50px;
-  width: 100%;
-}
-
-#nav li{
-  display: table-cell;
-  width: 20%;
-  line-height: 20px;
-  background: #23272d;
-  white-space: nowrap;
-}
-
-#nav li:hover{
-  background-color: #2a2e36;
-}
-
-.icon-link{
-  display: flex;
-  text-decoration: none;
-  align-content: center;
-  justify-content: center;
-  color: #5085c8;
-  font-size: 30px;
-}
-
-.text-link{
-  display: flex;
-  text-decoration: none;
-  align-content: center;
-  justify-content: center;
-  color: #5085c8;
-  font-size: 13px;
+  height: 100%;
 }
 
 .float-button{
-  background-color: white;
+  background-color: #f0f0f0;
   opacity: 0.9;
   border-radius: 50%;
-  padding: 10px;
-  font-size: 30px;
+  padding: 8px;
   position: fixed;
   bottom: 15%;
-  right: 3%;
+  right: 2.5%;
 }
 
 .float-button .float-button-content{
   color: black;
+  font-size: 30px;
+}
+
+.float-button-message{
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.3s, opacity 0.3s linear;
+  transition: all 0.4s ease;
+  transition-delay: .1s;
+}
+
+#float-button-message{
+  background: none;
+  overflow: hidden;
+  left: -175px;
+  line-height: 20px;
+  position: absolute;
+  top: 15px;
+  font-size: 20px;
+}
+
+.float-button:hover > .float-button-message{
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.3s ease;
+  transition-delay: 0s;
 }
 
 #temp{
   position: absolute;
-  bottom: 0;
+  bottom: 17px;
 }
 
 #temp li a{
@@ -72,3 +69,5 @@
 .content{
   overflow: visible !important;
 }
+
+/*--- Weather Tab ---*/

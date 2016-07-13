@@ -26,20 +26,105 @@ angular.module('starter', ['ionic'])
   });
 })
 
-.controller('MapCtrl', function($scope, $ionicLoading, $compile) {
+.config(function($stateProvider, $urlRouterProvider) {
+  $stateProvider
+    .state('tabs', {
+      url: '/tab',
+      abstract: true,
+      templateUrl: 'templates/tabs.html'
+    })
+    .state('tabs.home', {
+      url: '/home',
+      views: {
+        'home-view' : {
+          templateUrl: 'templates/home_view.html',
+          controller: 'HomeViewController'
+        }
+      }
+    })
+    .state('tabs.weather', {
+      url: '/weather',
+      views: {
+        'weather-view' : {
+          templateUrl: 'templates/weather_view.html'
+        }
+      }
+    })
+    .state('tabs.map', {
+      url: '/map',
+      views: {
+        'map-view' : {
+          templateUrl: 'templates/map_view.html'
+        }
+      }
+    })
+    .state('tabs.history', {
+      url: '/history',
+      views: {
+        'history-view' : {
+          templateUrl: 'templates/history_view.html'
+        }
+      }
+    })
+    .state('tabs.settings', {
+      url: '/settings',
+      views: {
+        'settings-view' : {
+          templateUrl: 'templates/settings_view.html'
+        }
+      }
+    })
+    .state('tabs.user', {
+      url: '/user',
+      views: {
+        'user-view' : {
+          templateUrl: 'templates/user_view.html'
+        }
+      }
+    })
+  $urlRouterProvider.otherwise('/tab/home');
+})
+
+.controller('HomeViewController', function($scope, $ionicLoading, $compile) {
+  var LatLng = new google.maps.LatLng(25.015, 121.539);
+  navigator.geolocation.getCurrentPosition(function(pos) {
+    LatLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+  }, function(error) {
+    alert('Unable to get location: ' + error.message);
+  });
+
+  var mapOptions = {
+    center: LatLng,
+    zoom: 15,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+
+  $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+  google.maps.event.addListenerOnce($scope.map, 'idle', function() {
+    var marker = new google.maps.Marker({
+      map: $scope.map,
+      animation: google.maps.Animation.DROP,
+      position: LatLng
+    });
+
+    var infoWindow = new google.maps.InfoWindow({
+      //ADD DATA READINGS/ETC. HERE
+      content: "Current Position"
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+      infoWindow.open($scope.map, marker);
+    })
+  });
+
   $scope.centerOnMe = function() {
     if(!$scope.map) {
       return;
     }
 
-    $scope.loading = $ionicLoading.show({
-      content: 'Getting current location...',
-      showBackdrop: false
-    });
-
     navigator.geolocation.getCurrentPosition(function(pos) {
       $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-      $scope.loading.hide();
     }, function(error) {
       alert('Unable to get location: ' + error.message);
     });
