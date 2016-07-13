@@ -1,11 +1,11 @@
 "use strict";
 
-var windDisplay, temperatureDisplay, humidityDisplay, pressureDisplay;
+var windDisplay, tempDisplay, humidityDisplay, pressureDisplay;
 
 function createUI()
 {
     windDisplay         = document.getElementById("windDisplay");
-    temperatureDisplay  = document.getElementById("temperatureDisplay");
+    tempDisplay         = document.getElementById("tempDisplay");
     humidityDisplay     = document.getElementById("humidityDisplay");
     pressureDisplay     = document.getElementById("pressureDisplay");
 }

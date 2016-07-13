@@ -10,7 +10,7 @@
     </engines>
 
     <js-module src="js/wn2nac.js" name="WN2NAC">
-        <clobbers target="wn2nac" />
+        <clobbers target="Windoo" />
     </js-module>
 
     <platform name="android">
