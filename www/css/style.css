@@ -1,35 +1,33 @@
+.windooRow {
+    height: 40vh;
+}
+
 .windooContainer {
-    margin: 25px;
-    width: 40%;
-    height: 40%;
-    position: absolute;
-    display: inline-block;
+    display: flex;
+    flex-flow: column;
+    margin-top:     2vh;
+    margin-bottom:  2vh;
+    margin-right:   2vw;
+    margin-left:    2vw;
 }
-
-#windContainer {
-    left: 0px;
-}
-#temperatureContainer {
-    right: 0px;
-}
-#humidityContainer {
-    bottom:0px;
-    right: 0px;
-}
-#pressureContainer {
-    bottom:0px;
-    left: 0px;
-}
-
 
 .windooTitle {
+    font-size: 120%;
+    line-height: 5vh;
     text-align: center;
 }
 
 .windooUnit {
+    font-size: 100%;
+    line-height: 5vh;
     text-align: right;
 }
 
 .windooDisplay {
-    text-align: center;
+    display: inline-block;
+    font-size: 300%;
+    text-align:center;
+    line-height: 15vh;
+    flex: 1 1 auto;
+    vertical-align: middle;
 }
