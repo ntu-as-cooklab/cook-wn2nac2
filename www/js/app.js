@@ -20,9 +20,6 @@ angular.module('starter', ['ionic'])
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
-
-   main();
-
   });
 })
 
@@ -46,7 +43,8 @@ angular.module('starter', ['ionic'])
       url: '/weather',
       views: {
         'weather-view' : {
-          templateUrl: 'templates/weather_view.html'
+          templateUrl: 'templates/weather_view.html',
+          controller: 'WeatherViewController'
         }
       }
     })
@@ -129,4 +127,10 @@ angular.module('starter', ['ionic'])
       alert('Unable to get location: ' + error.message);
     });
   };
-});
+})
+
+.controller('WeatherViewController', function($scope, $ionicLoading, $compile) {
+    weather_main();
+})
+
+;

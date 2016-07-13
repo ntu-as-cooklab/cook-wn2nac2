@@ -8,7 +8,7 @@ var log = function(message)
     return function() { console.log(message); }
 }
 
-function main()
+function weather_main()
 {
     createUI();
 
@@ -21,7 +21,7 @@ function main()
 
     windooObservation = new WindooObservation();
     windooObservation.enable();
-    windooObservation.enablePurge(60000);
+    //windooObservation.enablePurge(60000);
 
     currentMeasurement = new WindooMeasurement();
     currentMeasurement.start();
