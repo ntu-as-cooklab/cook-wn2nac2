@@ -1,0 +1,17 @@
+<ion-view>
+  <ion-content>
+    <div id="map" data-tap-disabled="true"></div>
+
+    <ul id="temp" class="tab">
+      <li><a ng-click="centerOnMe()"
+        class="button button-icon icon ion-navigate">Find Me</a></li>
+    </ul>
+
+    <select id="map-overlay-select" onchange="filterMarkers(this.value);">
+      <option value="default" selected>Default</option>
+      <option value="test1">test1</option>
+      <option value="test2">test2</option>
+      <option value="test3">test3</option>
+    </select>
+  </ion-content>
+</ion-view>

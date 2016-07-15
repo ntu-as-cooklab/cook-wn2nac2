@@ -13,7 +13,7 @@ var WindooObservation = function(_ = this)
     _.presTime      = [];
     _.duration      = 0;
 
-    WindooObservation.prototype.enable = function()
+    _.enable = function()
     {
         _.observing = true;
     };
@@ -97,7 +97,7 @@ var WindooMeasurement = function(_ = this)
 
     WindooMeasurement.prototype.start = function()
     {
-        enable();
+        _.enable();
         _.timeStarted   = Date.now();
         setTimeout(_.stop, _.duration);
     };

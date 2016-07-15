@@ -20,7 +20,11 @@ angular.module('starter', ['ionic'])
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+
+    initSensor();
+
   });
+
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -52,7 +56,8 @@ angular.module('starter', ['ionic'])
       url: '/map',
       views: {
         'map-view' : {
-          templateUrl: 'templates/map_view.html'
+          templateUrl: 'templates/map_view.html',
+          controller: 'MapViewController'
         }
       }
     })
@@ -97,6 +102,110 @@ angular.module('starter', ['ionic'])
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
 
+  $scope.map = new google.maps.Map(document.getElementById("homemap"), mapOptions);
+
+  google.maps.event.addListenerOnce($scope.map, 'idle', function() {
+    var marker = new google.maps.Marker({
+      map: $scope.map,
+      animation: google.maps.Animation.DROP,
+      position: LatLng
+    });
+
+    var infoWindow = new google.maps.InfoWindow({
+      //ADD DATA READINGS/ETC. HERE
+      content: "Current Position"
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+      infoWindow.open($scope.map, marker);
+    })
+  });
+
+  $scope.centerOnMe = function() {
+    if(!$scope.map) {
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+    }, function(error) {
+      alert('Unable to get location: ' + error.message);
+    });
+  };
+
+  $scope.takeMeasurement = function() {
+    var div = document.createElement("div");
+    div.className = "take-new-measurement";
+    div.appendChild(document.createTextNode("test"));
+    document.body.appendChild(div);
+    unfade(div);
+
+    //TEMPORARY
+    setTimeout(function() {fade(div);}, 5000);
+  };
+})
+
+.controller('WeatherViewController', function($scope, $ionicLoading, $compile) {
+  var LatLng = new google.maps.LatLng(25.015, 121.539);
+  navigator.geolocation.getCurrentPosition(function(pos) {
+    LatLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+  }, function(error) {
+    alert('Unable to get location: ' + error.message);
+  });
+
+  var mapOptions = {
+    center: LatLng,
+    zoom: 15,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+
+  $scope.map = new google.maps.Map(document.getElementById("weathermap"), mapOptions);
+
+  google.maps.event.addListenerOnce($scope.map, 'idle', function() {
+    var marker = new google.maps.Marker({
+      map: $scope.map,
+      animation: google.maps.Animation.DROP,
+      position: LatLng
+    });
+
+    var infoWindow = new google.maps.InfoWindow({
+      //ADD DATA READINGS/ETC. HERE
+      content: "Current Position"
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+      infoWindow.open($scope.map, marker);
+    })
+  });
+
+  $scope.centerOnMe = function() {
+    if(!$scope.map) {
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+    }, function(error) {
+      alert('Unable to get location: ' + error.message);
+    });
+  };
+  weather_main();
+})
+
+.controller('MapViewController', function($scope, $ionicLoading, $compile) {
+  var LatLng = new google.maps.LatLng(25.015, 121.539);
+  navigator.geolocation.getCurrentPosition(function(pos) {
+    LatLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+  }, function(error) {
+    alert('Unable to get location: ' + error.message);
+  });
+
+  var mapOptions = {
+    center: LatLng,
+    zoom: 15,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+
   $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
   google.maps.event.addListenerOnce($scope.map, 'idle', function() {
@@ -127,10 +236,8 @@ angular.module('starter', ['ionic'])
       alert('Unable to get location: ' + error.message);
     });
   };
-})
-
-.controller('WeatherViewController', function($scope, $ionicLoading, $compile) {
-    weather_main();
-})
-
-;
+  passMap($scope.map);
+  for(var x=0; x<glbmrk.markers.length; x++) {
+    addMarker(glbmrk.markers[x]);
+  }
+});

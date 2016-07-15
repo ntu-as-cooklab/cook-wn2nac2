@@ -2,7 +2,7 @@
 
 
 
-var newMeasurement = function()
+var takeMeasurement = function()
 {
     currentMeasurement = new WindooMeasurement();
     currentMeasurement.onFinish = function()

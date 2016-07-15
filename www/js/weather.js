@@ -2,8 +2,13 @@
 
 var windooObservation;
 var currentMeasurement;
+
 var windDisplay, tempDisplay, humdDisplay, presDisplay;
 var windGraphIcon, tempGraphIcon, humdGraphIcon, presGraphIcon;
+var isWeather = false;
+var notConnectedElement = document.getElementById("not-connected-status");
+var connectedElement = document.getElementById("connected-status");
+var calibratedElement = document.getElementById("calibrated-status");
 
 var log = function(message)
 {
@@ -20,20 +25,14 @@ function weather_main()
     tempGraphIcon   = document.getElementById("tempGraphIcon");
     humdGraphIcon   = document.getElementById("humdGraphIcon");
     presGraphIcon   = document.getElementById("presGraphIcon");
-
-    if (typeof Windoo !== 'undefined')
-    {
-        Windoo.init(log("Windoo intialized"));
-        Windoo.start(log("Windoo started"));
-        Windoo.setCallback(onEvent);
-    }
+    isWeather = true;
 
     windooObservation = new WindooObservation();
     windooObservation.enable();
     //windooObservation.enablePurge(60000);
 
-    currentMeasurement = new WindooMeasurement();
-    currentMeasurement.start();
+    //currentMeasurement = new WindooMeasurement();
+    //currentMeasurement.start();
 }
 
 function onEvent(event)
@@ -58,34 +57,39 @@ function onEvent(event)
             break;
 
         case 4: //JDCWindooNewWindValue
-            //console.log("New wind:        " + event.data);
-            if      (event.data < windDisplay.innerHTML)
-            {
-                windGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
-                windGraphIcon.classList.add     ("ion-arrow-graph-down-right");
+            console.log("New wind:        " + event.data);
+            if (isWeather){
+                if      (event.data < windDisplay.innerHTML)
+                {
+                    windGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
+                    windGraphIcon.classList.add     ("ion-arrow-graph-down-right");
+                }
+                else if (event.data > windDisplay.innerHTML)
+                {
+                    windGraphIcon.classList.remove  ("ion-arrow-graph-down-right");
+                    windGraphIcon.classList.add     ("ion-arrow-graph-up-right");
+                }
+                windDisplay.innerHTML = event.data.toFixed(2);
             }
-            else if (event.data > windDisplay.innerHTML)
-            {
-                windGraphIcon.classList.remove  ("ion-arrow-graph-down-right");
-                windGraphIcon.classList.add     ("ion-arrow-graph-up-right");
-            }
-            windDisplay.innerHTML = event.data.toFixed(2);
+
             if (windooObservation.observing)    windooObservation.addWind(event.data);
             if (currentMeasurement.observing)   currentMeasurement.addWind(event.data);
             break;
 
         case 5: //JDCWindooNewTemperatureValue
             //console.log("New temperature: " + event.data);
-            tempDisplay.innerHTML = event.data.toFixed(2);
-            if      (event.data < tempDisplay.innerHTML)
-            {
-                tempGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
-                tempGraphIcon.classList.add     ("ion-arrow-graph-down-right");
-            }
-            else if (event.data > tempDisplay.innerHTML)
-            {
-                tempGraphIcon.classList.remove  ("ion-arrow-graph-down-right");
-                tempGraphIcon.classList.add     ("ion-arrow-graph-up-right");
+            if (isWeather){
+                if      (event.data < tempDisplay.innerHTML)
+                {
+                    tempGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
+                    tempGraphIcon.classList.add     ("ion-arrow-graph-down-right");
+                }
+                else if (event.data > tempDisplay.innerHTML)
+                {
+                    tempGraphIcon.classList.remove  ("ion-arrow-graph-down-right");
+                    tempGraphIcon.classList.add     ("ion-arrow-graph-up-right");
+                }
+                tempDisplay.innerHTML = event.data.toFixed(2);
             }
             if (windooObservation.observing)    windooObservation.addTemp(event.data);
             if (currentMeasurement.observing)   currentMeasurement.addTemp(event.data);
@@ -93,16 +97,18 @@ function onEvent(event)
 
         case 6: //JDCWindooNewHumidityValue
             //console.log("New humidity:    " + event.data);
-            humdDisplay.innerHTML = event.data.toFixed(2);
-            if      (event.data < humdDisplay.innerHTML)
-            {
-                humdGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
-                humdGraphIcon.classList.add     ("ion-arrow-graph-down-right");
-            }
-            else if (event.data > humdDisplay.innerHTML)
-            {
-                humdGraphIcon.classList.remove  ("ion-arrow-graph-down-right");
-                humdGraphIcon.classList.add     ("ion-arrow-graph-up-right");
+            if (isWeather) {
+                if      (event.data < humdDisplay.innerHTML)
+                {
+                    humdGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
+                    humdGraphIcon.classList.add     ("ion-arrow-graph-down-right");
+                }
+                else if (event.data > humdDisplay.innerHTML)
+                {
+                    humdGraphIcon.classList.remove  ("ion-arrow-graph-down-right");
+                    humdGraphIcon.classList.add     ("ion-arrow-graph-up-right");
+                }
+                humdDisplay.innerHTML = event.data.toFixed(2);
             }
             if (windooObservation.observing)    windooObservation.addHumd(event.data);
             if (currentMeasurement.observing)   currentMeasurement.addHumd(event.data);
@@ -110,16 +116,18 @@ function onEvent(event)
 
         case 7: //JDCWindooNewPressureValue:
             //console.log("New pressure:    " + event.data);
-            presDisplay.innerHTML = event.data.toFixed(1);
-            if      (event.data < presDisplay.innerHTML)
-            {
-                presGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
-                presGraphIcon.classList.add     ("ion-arrow-graph-down-right");
-            }
-            else if (event.data > presDisplay.innerHTML)
-            {
-                presGraphIcon.classList.remove  ("ion-arrow-graph-down-right");
-                presGraphIcon.classList.add     ("ion-arrow-graph-up-right");
+            if (isWeather) {
+                if      (event.data < presDisplay.innerHTML)
+                {
+                    presGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
+                    presGraphIcon.classList.add     ("ion-arrow-graph-down-right");
+                }
+                else if (event.data > presDisplay.innerHTML)
+                {
+                    presGraphIcon.classList.remove  ("ion-arrow-graph-down-right");
+                    presGraphIcon.classList.add     ("ion-arrow-graph-up-right");
+                }
+                presDisplay.innerHTML = event.data.toFixed(1);
             }
             if (windooObservation.observing)    windooObservation.addPres(event.data);
             if (currentMeasurement.observing)   currentMeasurement.addPres(event.data);
