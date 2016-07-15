@@ -1,5 +1,13 @@
 <ion-view>
   <ion-content>
+    <div id="weathermap" data-tap-disabled="true"></div>
+
+    <ul id="temp" class="tab">
+      <li><a ng-click="centerOnMe()"
+        class="button button-icon icon ion-navigate">Find Me</a></li>
+    </ul>
+
+    <div id="sensor-readings">
         <div class="row windooRow">
             <div class="col windooContainer">
                 <div class="windooTitle">Wind speed</div>
@@ -24,5 +32,6 @@
                 <div class="windooDisplay" id="pressureDisplay">N/A</div>
             </div>
         </div>
+      </div>
     </ion-content>
 </ion-view>

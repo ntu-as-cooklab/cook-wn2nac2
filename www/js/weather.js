@@ -3,6 +3,10 @@
 var windooObservation;
 var currentMeasurement;
 var windDisplay, tempDisplay, humidityDisplay, pressureDisplay;
+var isWeather = false;
+var notConnectedElement = document.getElementById("not-connected-status");
+var connectedElement = document.getElementById("connected-status");
+var calibratedElement = document.getElementById("calibrated-status");
 
 var log = function(message)
 {
@@ -11,17 +15,11 @@ var log = function(message)
 
 function weather_main()
 {
+    isWeather = true;
     windDisplay         = document.getElementById("windDisplay");
     tempDisplay         = document.getElementById("tempDisplay");
     humidityDisplay     = document.getElementById("humidityDisplay");
     pressureDisplay     = document.getElementById("pressureDisplay");
-
-    if (typeof Windoo !== 'undefined')
-    {
-        Windoo.init(log("Windoo intialized"));
-        Windoo.start(log("Windoo started"));
-        Windoo.setCallback(onEvent);
-    }
 
     windooObservation = new WindooObservation();
     windooObservation.enable();
@@ -54,28 +52,36 @@ function onEvent(event)
 
         case 4: //JDCWindooNewWindValue
             //console.log("New wind:        " + event.data);
-            windDisplay.innerHTML = event.data.toFixed(2);
+            if (isWeather){
+              windDisplay.innerHTML = event.data.toFixed(2);
+            }
             if (windooObservation.observing)    windooObservation.addWind(event.data);
             if (currentMeasurement.observing)   currentMeasurement.addWind(event.data);
             break;
 
         case 5: //JDCWindooNewTemperatureValue
             //console.log("New temperature: " + event.data);
-            tempDisplay.innerHTML = event.data.toFixed(2);
+            if (isWeather){
+              tempDisplay.innerHTML = event.data.toFixed(2);
+            }
             if (windooObservation.observing)    windooObservation.addTemp(event.data);
             if (currentMeasurement.observing)   currentMeasurement.addTemp(event.data);
             break;
 
         case 6: //JDCWindooNewHumidityValue
             //console.log("New humidity:    " + event.data);
-            humidityDisplay.innerHTML = event.data.toFixed(2);
+            if (isWeather) {
+              humidityDisplay.innerHTML = event.data.toFixed(2);
+            }
             if (windooObservation.observing)    windooObservation.addHumd(event.data);
             if (currentMeasurement.observing)   currentMeasurement.addHumd(event.data);
             break;
 
         case 7: //JDCWindooNewPressureValue:
             //console.log("New pressure:    " + event.data);
-            pressureDisplay.innerHTML = event.data.toFixed(1);
+            if (isWeather) {
+              pressureDisplay.innerHTML = event.data.toFixed(1);
+            }
             if (windooObservation.observing)    windooObservation.addPres(event.data);
             if (currentMeasurement.observing)   currentMeasurement.addPres(event.data);
             break;
