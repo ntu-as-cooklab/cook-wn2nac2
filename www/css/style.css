@@ -163,6 +163,12 @@
     vertical-align: middle;
 }
 
+.windooGraphIcon {
+    margin-top: 5vh;
+    font-size: 4vh;
+    text-align: center;
+}
+
 /*--- Map Tab ---*/
 #map{
   position: relative;

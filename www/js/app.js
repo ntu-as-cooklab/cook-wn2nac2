@@ -20,8 +20,11 @@ angular.module('starter', ['ionic'])
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+
+    initSensor();
+
   });
-  initSensor();
+
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
