@@ -39,7 +39,7 @@ function weather_main()
     windooObservation.enable();
     //windooObservation.enablePurge(60000);
 
-    //currentMeasurement = new WindooMeasurement();
+    currentMeasurement = new WindooMeasurement();
     //currentMeasurement.start();
 }
 
