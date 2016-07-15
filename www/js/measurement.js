@@ -13,7 +13,7 @@ var WindooObservation = function(_ = this)
     _.presTime      = [];
     _.duration      = 0;
 
-    _.enable = function()
+    WindooObservation.prototype.enable = function()
     {
         _.observing = true;
     };
@@ -93,10 +93,11 @@ var WindooMeasurement = function(_ = this)
     _.maxTemp            = 0;
     _.maxHumd            = 0;
     _.maxPres            = 0;
+    _.onFinish;
 
-    _.start = function()
+    WindooMeasurement.prototype.start = function()
     {
-        _.enable();
+        enable();
         _.timeStarted   = Date.now();
         setTimeout(_.stop, _.duration);
     };
@@ -106,6 +107,7 @@ var WindooMeasurement = function(_ = this)
         _.disable();
         _.timeFinished  = Date.now();
         _.finalize();
+        if (typeof _.onFinish == 'function') _.onFinish();
     };
 
     var finalize = function(val, time, avg, min, max)
