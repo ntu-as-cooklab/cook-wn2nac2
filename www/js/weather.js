@@ -13,9 +13,16 @@ var log = function(message)
     return function() { console.log(message); }
 }
 
+function setIsWeather(boolean) {
+  if (boolean) {
+    isWeather = boolean;
+  } else {
+    isWeather = boolean;
+  }
+}
+
 function weather_main()
 {
-    isWeather = true;
     windDisplay         = document.getElementById("windDisplay");
     tempDisplay         = document.getElementById("tempDisplay");
     humidityDisplay     = document.getElementById("humidityDisplay");
@@ -35,14 +42,26 @@ function onEvent(event)
     {
         case 0: //JDCWindooNotAvailable
             console.log("Windoo not available");
+            if (!isWeather) {
+              unfade(document.getElementById("not-connected-status"));
+              setTimeout(function() {fade(document.getElementById("not-connected-status"));}, 3000);
+            }
             break;
 
         case 1: //JDCWindooAvailable
             console.log("Windoo available");
+            if (!isWeather) {
+              unfade(document.getElementById("connected-status"));
+              setTimeout(function() {fade(document.getElementById("connected-status"));}, 3000);
+            }
             break;
 
         case 2: //JDCWindooCalibrated
             console.log("Windoo calibrated");
+            if (!isWeather) {
+              unfade(document.getElementById("calibrated-status"));
+              setTimeout(function() {fade(document.getElementById("calibrated-status"));}, 3000);
+            }
             break;
 
         case 3: //JDCWindooVolumeNotAtItsMaximum

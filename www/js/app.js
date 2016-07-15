@@ -135,11 +135,16 @@ angular.module('starter', ['ionic'])
     div.className = "take-new-measurement";
     div.appendChild(document.createTextNode("test"));
     document.body.appendChild(div);
+    document.getElementById("float-button").style.visibility = "hidden";
     unfade(div);
 
     //TEMPORARY
-    setTimeout(function() {fade(div);}, 5000);
+    setTimeout(function() {fade(div); document.getElementById("float-button").style.visibility = "visible";}, 5000);
   };
+
+  $scope.$on('$ionicView.enter', function() {
+    setIsWeather(false);
+  });
 })
 
 .controller('WeatherViewController', function($scope, $ionicLoading, $compile) {
@@ -186,7 +191,12 @@ angular.module('starter', ['ionic'])
       alert('Unable to get location: ' + error.message);
     });
   };
+  
   weather_main();
+
+  $scope.$on('$ionicView.enter', function() {
+    setIsWeather(true);
+  });
 })
 
 .controller('MapViewController', function($scope, $ionicLoading, $compile) {
