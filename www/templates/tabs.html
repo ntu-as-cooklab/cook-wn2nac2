@@ -1,5 +1,5 @@
-<ion-tabs class="tabs-top tabs-icon-top tabs-dark">
-  <ion-tab title="Home" icon="icon ion-home" href="#/tab/home">
+<ion-tabs id="content-tabs" class="tabs-top tabs-icon-top tabs-dark">
+  <ion-tab title="Home" icon="icon ion-android-map" href="#/tab/home">
     <ion-nav-view name="home-view"></ion-nav-view>
   </ion-tab>
 
@@ -7,12 +7,8 @@
     <ion-nav-view name="weather-view"></ion-nav-view>
   </ion-tab>
 
-  <ion-tab title="Map" icon="icon ion-android-map" href="#/tab/map">
-    <ion-nav-view name="map-view"></ion-nav-view>
-  </ion-tab>
-
-  <ion-tab title="History" icon="icon ion-ios-paper" href="#/tab/history">
-    <ion-nav-view name="history-view"></ion-nav-view>
+  <ion-tab title="Measure" icon="icon ion-android-stopwatch" href="#/tab/measure">
+    <ion-nav-view name="measure-view"></ion-nav-view>
   </ion-tab>
 
   <ion-tab title="Settings" icon="icon ion-ios-gear" href="#/tab/settings">
@@ -23,3 +19,6 @@
     <ion-nav-view name="user-view"></ion-nav-view>
   </ion-tab>
 </ion-tabs>
+
+<div is="map"></div>
+<script async defersrc="http://maps.googleapis.com/maps/api/js?callback=initMap"></script>

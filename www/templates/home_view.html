@@ -1,20 +1,74 @@
 <ion-view>
   <ion-content id="content">
-    <div id="homemap" data-tap-disabled="true"></div>
+    <div id="map" data-tap-disabled="true"></div>
+    <div><button id="info-list-button-history" class="info-list-button" onclick="openNav(0)"><b>History</b></button></div>
+    <div><button id="info-list-button-measurement" class="info-list-button" onclick="openNav(1)"><b>Measurements</b></button></div>
 
     <div id="float-button" class="float-button" ng-click="takeMeasurement()">
-      <a href="#" class="float-button-content"><i class="ion-plus"></i></a>
+      <a href="#/tab/measure" class="float-button-content"><i class="ion-plus"></i></a>
       <div id="float-button-message" class="float-button-message">New Measurement</div>
     </div>
 
-    <ul id="temp" class="tab">
-      <li><a ng-click="centerOnMe()"
-        class="button button-icon icon ion-navigate">Find Me</a></li>
-    </ul>
+    <div id="center-on-me">
+      <a ng-click="centerOnMe()"
+        class="button button-icon icon ion-navigate">Find Me</a>
+    </div>
+
+    <select id="map-overlay-select" onchange="filterMarkers(this.value);">
+      <option value="default" selected>Default</option>
+      <option value="cwb">Central Weather Bureau</option>
+      <option value="hist">History</option>
+      <option value="test3">test3</option>
+
+      <!-- TEST -->
+      <option value="all">all</option>
+    </select>
 
     <div id="not-connected-status" class="sensor-status-box"><b>Windoo Sensor Not Connected</b></div>
     <div id="connected-status" class="sensor-status-box"><b>Windoo Sensor Connected (Calibration Required)</b></div>
     <div id="calibrated-status" class="sensor-status-box"><b>Windoo Sensor Calibrated</b></div>
 
+    <!-- HISTORY LIST - SLIDE RIGHT -->
+    <div id="info-list-history" class="info-list">
+      <a href="javascript:void(0)" class="info-list-close" onclick="closeNav(0)"><button class="info-list-close-button"><b>Close</b></button></a>
+      <div id="history-list">
+        <!-- <a href="#" class="history-list-item">placeholder<button class="delete-pt-button" onclick="deletePt(this.id)"><b>Delete</b></button></a>
+        <a href="#" id="example" class="history-list-item" onclick="placeOldPt(this.id)">test placeholder</a>
+        <a href="#" id="4" class="history-list-item" onclick="placeOldPt(this.id)">placeholder</a>
+        <a href="#" id="history-list-last" class="history-list-item">placeholder</a> -->
+      </div>
+    </div>
+
+    <!-- MEASUREMENTS LIST - SLIDE LEFT -->
+    <div id="info-list-measurement" class="info-list">
+      <a href="javascript:void(0)" class="info-list-close" onclick="closeNav(1)"><button class="info-list-close-button"><b>Close</b></button></a>
+      <div id="measurement-list-first" class="measurement-list-reading">
+        <div class="windooTitleHome">Wind speed</div>
+        <div class="windooUnitHome">m/s</div>
+        <div id="windDisplayHome" class="windooDisplayHome">N/A</div>
+        <i id="windGraphIconHome" class="windooGraphIconHome icon ion-arrow-graph-up-right"></i>
+      </div>
+      <div class="measurement-list-reading">
+        <div class="windooTitleHome">Temperature</div>
+        <div class="windooUnitHome">°C</div>
+        <div id="tempDisplayHome" class="windooDisplayHome">N/A</div>
+        <i id="tempGraphIconHome" class="windooGraphIconHome icon ion-arrow-graph-up-right"></i>
+      </div>
+      <div class="measurement-list-reading">
+        <div class="windooTitleHome">Humidity</div>
+        <div class="windooUnitHome">%RH</div>
+        <div id="humdDisplayHome" class="windooDisplayHome">N/A</div>
+        <i id="humdGraphIconHome" class="windooGraphIconHome icon ion-arrow-graph-up-right"></i>
+      </div>
+      <div class="measurement-list-reading">
+        <div class="windooTitleHome">Pressure</div>
+        <div class="windooUnitHome">hPA</div>
+        <div id="presDisplayHome" class="windooDisplayHome">N/A</div>
+        <i id="presGraphIconHome" class="windooGraphIconHome icon ion-arrow-graph-up-right"></i>
+      </div>
+    </div>
+
+    <!-- LIST MASKS -->
+    <div id="list-mask" class="list-mask"></div>
   </ion-content>
 </ion-view>
