@@ -1,3 +1,16 @@
+#sensor-status-box {
+    text-align: center;
+}
+
+#sensor-status {
+    display: inline-block;
+    margin-top:1ex;
+    font-size:150%;
+    padding: 1ex;
+    border-radius: 1ex;
+    border: solid 2px #0c0;
+}
+
 .measure-container {
     /*margin: 1vw;*/
     /*width: 100%;*/
@@ -15,11 +28,17 @@
     padding: 0em;
 }
 
+#timer-status {
+    font-size: 120%;
+    margin-top:1ex;
+    text-align: center;
+}
+
 #start-button {
     display: block;
     margin: auto;
-    margin-top:1ex;
     margin-bottom:1ex;
+    font-size: 150%;
 }
 
 .measure-title {
@@ -28,11 +47,11 @@
 }
 
 .ion-checkmark-circled {
-    color: #00cc00;
+    color: #0c0;
 }
 
 .ion-alert-circled {
-    color: #ffbb00;
+    color: #fb0;
 }
 
 .measure_view-icon {
@@ -48,6 +67,27 @@
 }
 
 .measure-title-icon {
+}
+
+#calib-boxes {
+    text-align: center;
+}
+
+.calib-box {
+    width: 40%;
+    display: inline-block;
+    text-align: center;
+}
+
+.calib-title {
+    font-size: 120%;
+}
+
+.calib-status {
+}
+
+.calib-status-icon {
+    font-size: 120%;
 }
 
 #wind-img-box {
@@ -81,11 +121,28 @@
 #degrees-display {
     width: 100%;
     text-align: center;
-    font-size: 200%;
+    font-size: 150%;
     margin-top:1ex;
 }
 
-#wind-dir-info-box {
+.info-box {
     margin: 3vw;
     text-align: justify;
+}
+
+.weather-button-bar {
+    width: 80%;
+    margin: auto;
+}
+
+.weather-button {
+    padding: 0px;
+    font-size: 100%;
+    line-height: 20px;
+    text-align: center;
+}
+
+.weather-icon {
+    font-size: 400%;
+    text-align: center;
 }

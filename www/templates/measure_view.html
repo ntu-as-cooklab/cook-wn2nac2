@@ -3,11 +3,54 @@
 
       <div class="card">
           <div class="measure_view-bar">
+              <i class="icon measure_view-icon measure-status-icon ion-checkmark-circled"></i>
+              <i class="icon measure_view-icon measure-title-icon ion-thermometer"></i>
+              <span class="measure-title">Sensor</span>
+          </div>
+          <div id="sensor-status-box">
+              <span id="sensor-status">Sensor calibrated</span>
+          </div>
+          <div class="info-box">
+              <i class="icon measure_view-icon ion-ios-information-outline"></i>
+              <div>Plug in the sensor and wait for it to calibrate.</div>
+          </div>
+      </div>
+
+      <div class="card">
+          <div class="measure_view-bar">
+              <i class="icon measure_view-icon measure-status-icon ion-alert-circled"></i>
+              <i class="icon measure_view-icon measure-title-icon ion-ios-pulse-strong"></i>
+              <span class="measure-title">Equilibrium</span>
+          </div>
+          <div id="calib-boxes">
+              <div class="calib-box">
+                 <div class="calib-title">Temperature</div>
+                 <div class="calib-status">
+                     <i class="icon calib-status-icon ion-alert-circled"></i>
+                     <span>Not Ready</span>
+                 </div>
+              </div>
+              <div class="calib-box">
+                 <div class="calib-title">Humidity</div>
+                 <div class="calib-status">
+                     <i class="icon calib-status-icon ion-alert-circled"></i>
+                     <span>Not Ready</span>
+                 </div>
+              </div>
+          </div>
+          <div class="info-box">
+              <i class="icon measure_view-icon ion-ios-information-outline"></i>
+              <div>Wait for the sensor to reach equilibrium with its surroundings.</div>
+          </div>
+      </div>
+
+      <div class="card">
+          <div class="measure_view-bar">
               <i class="icon measure_view-icon measure-status-icon ion-alert-circled"></i>
               <i class="icon measure_view-icon measure-title-icon ion-ios-stopwatch-outline"></i>
-              <span class="measure-title">Measurement duration</span>
+              <span class="measure-title">Timed Measurement</span>
           </div>
-          <div "measure-time-button-bar-box">
+          <div id="timer-box">
               <div class="button-bar measure-time-button-bar ">
                 <a class="button measure-time-button">15 s</a>
                 <a class="button measure-time-button">30 s</a>
@@ -18,9 +61,16 @@
                 <a class="button measure-time-button">5 min</a>
                 <a class="button measure-time-button">Other...</a>
               </div>
-              <button id="start-button" class="button">START</button>
+              <div id="timer-status">Ready to START</div>
+              <button id="start-button" class="button button-balanced">
+                  <i class="icon ion-ios-stopwatch-outline"></i>
+                  START
+              </button>
           </div>
-
+          <div class="info-box">
+              <i class="icon measure_view-icon ion-ios-information-outline"></i>
+              <div>Select measurement duration and press START to begin measurement.</div>
+          </div>
       </div>
 
       <div class="card">
@@ -39,12 +89,28 @@
           <div id="degrees-display">
               0° N
           </div>
-          <div id="wind-dir-info-box">
+          <div class="info-box">
               <i class="icon measure_view-icon ion-ios-information-outline"></i>
               <div>Since the Windoo sensor has no ability of sensing the wind direction, the recording of wind direction relies on user input. Please orient your phone in face of the wind.</div>
           </div>
+      </div>
 
-
+      <div class="card">
+          <div class="measure_view-bar">
+              <i class="icon measure_view-icon measure-status-icon ion-checkmark-circled"></i>
+              <i class="icon measure_view-icon measure-title-icon ion-ios-partlysunny-outline"></i>
+              <span class="measure-title">Weather type</span>
+          </div>
+          <div class="button-bar weather-button-bar">
+            <a class="button weather-button"><div><i class="weather-icon ion-ios-sunny-outline"></i></br>Sunny</div></a>
+            <a class="button weather-button"><div><i class="weather-icon ion-ios-partlysunny-outline"></i></br>Partly</br>cloudy</div></a>
+            <a class="button weather-button button-calm"><div><i class="weather-icon ion-ios-cloudy-outline"></i></br>Cloudy</div></a>
+            <a class="button weather-button"><div><i class="weather-icon ion-ios-rainy-outline"></i></br>Rainy</div></a>
+          </div>
+          <div class="info-box">
+              <i class="icon measure_view-icon ion-ios-information-outline"></i>
+              <div>Choose a weather type according to your observation. Optionally, attach a photo.</div>
+          </div>
       </div>
 
   </ion-content>
