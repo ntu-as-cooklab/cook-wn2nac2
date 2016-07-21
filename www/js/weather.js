@@ -96,7 +96,7 @@ function onEvent(event)
 
         case 4: //JDCWindooNewWindValue
             console.log("New wind:        " + event.data);
-            if (isWeather){
+            //if (isWeather){
                 if      (event.data < windDisplay.innerHTML)
                 {
                     windGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
@@ -108,7 +108,7 @@ function onEvent(event)
                     windGraphIcon.classList.add     ("ion-arrow-graph-up-right");
                 }
                 windDisplay.innerHTML = event.data.toFixed(2);
-            }
+            //}
 
             if (windooObservation.observing)    windooObservation.addWind(event.data);
             if (currentMeasurement.observing)   currentMeasurement.addWind(event.data);
@@ -116,7 +116,7 @@ function onEvent(event)
 
         case 5: //JDCWindooNewTemperatureValue
             //console.log("New temperature: " + event.data);
-            if (isWeather){
+            //if (isWeather){
                 if      (event.data < tempDisplay.innerHTML)
                 {
                     tempGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
@@ -128,14 +128,14 @@ function onEvent(event)
                     tempGraphIcon.classList.add     ("ion-arrow-graph-up-right");
                 }
                 tempDisplay.innerHTML = event.data.toFixed(2);
-            }
+            //}
             if (windooObservation.observing)    windooObservation.addTemp(event.data);
             if (currentMeasurement.observing)   currentMeasurement.addTemp(event.data);
             break;
 
         case 6: //JDCWindooNewHumidityValue
             //console.log("New humidity:    " + event.data);
-            if (isWeather) {
+            //if (isWeather) {
                 if      (event.data < humdDisplay.innerHTML)
                 {
                     humdGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
@@ -147,14 +147,14 @@ function onEvent(event)
                     humdGraphIcon.classList.add     ("ion-arrow-graph-up-right");
                 }
                 humdDisplay.innerHTML = event.data.toFixed(2);
-            }
+            //}
             if (windooObservation.observing)    windooObservation.addHumd(event.data);
             if (currentMeasurement.observing)   currentMeasurement.addHumd(event.data);
             break;
 
         case 7: //JDCWindooNewPressureValue:
             //console.log("New pressure:    " + event.data);
-            if (isWeather) {
+            //if (isWeather) {
                 if      (event.data < presDisplay.innerHTML)
                 {
                     presGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
@@ -166,7 +166,7 @@ function onEvent(event)
                     presGraphIcon.classList.add     ("ion-arrow-graph-up-right");
                 }
                 presDisplay.innerHTML = event.data.toFixed(1);
-            }
+            //}
             if (windooObservation.observing)    windooObservation.addPres(event.data);
             if (currentMeasurement.observing)   currentMeasurement.addPres(event.data);
             break;
