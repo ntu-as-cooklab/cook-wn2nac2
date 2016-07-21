@@ -1,0 +1,51 @@
+<ion-view>
+  <ion-content class="measure-container">
+
+      <div class="card">
+          <div class="measure_view-bar">
+              <i class="icon measure_view-icon measure-status-icon ion-alert-circled"></i>
+              <i class="icon measure_view-icon measure-title-icon ion-ios-stopwatch-outline"></i>
+              <span class="measure-title">Measurement duration</span>
+          </div>
+          <div "measure-time-button-bar-box">
+              <div class="button-bar measure-time-button-bar ">
+                <a class="button measure-time-button">15 s</a>
+                <a class="button measure-time-button">30 s</a>
+                <a class="button measure-time-button button-calm ">1 min</a>
+              </div>
+              <div class="button-bar measure-time-button-bar ">
+                <a class="button measure-time-button">3 min</a>
+                <a class="button measure-time-button">5 min</a>
+                <a class="button measure-time-button">Other...</a>
+              </div>
+              <button id="start-button" class="button">START</button>
+          </div>
+
+      </div>
+
+      <div class="card">
+          <div class="measure_view-bar">
+              <i class="icon measure_view-icon measure-status-icon ion-checkmark-circled"></i>
+              <i class="icon measure_view-icon measure-title-icon ion-flag"></i>
+              <span class="measure-title">Wind direction</span>
+          </div>
+          <div id="wind-img-box">
+              <img id="wind-img" src="img/wind.png" alt="Wind">
+          </div>
+          <div id="compass-box">
+              <img id="compass" src="img/compass.png" alt="Compass">
+              <img id="compass-arrow" src="img/compass-arrow.png" alt="Compass Arrow">
+          </div>
+          <div id="degrees-display">
+              0° N
+          </div>
+          <div id="wind-dir-info-box">
+              <i class="icon measure_view-icon ion-ios-information-outline"></i>
+              <div>Since the Windoo sensor has no ability of sensing the wind direction, the recording of wind direction relies on user input. Please orient your phone in face of the wind.</div>
+          </div>
+
+
+      </div>
+
+  </ion-content>
+</ion-view>

@@ -1,0 +1,91 @@
+.measure-container {
+    /*margin: 1vw;*/
+    /*width: 100%;*/
+    /*text-align: center;*/
+}
+
+.measure-time-button-bar {
+    width: 80%;
+    margin: auto;
+    /*font-size: 70%;*/
+}
+
+.measure-time-button {
+    font-size: 100%;
+    padding: 0em;
+}
+
+#start-button {
+    display: block;
+    margin: auto;
+    margin-top:1ex;
+    margin-bottom:1ex;
+}
+
+.measure-title {
+    margin: 3vw;
+    font-size: 135%;
+}
+
+.ion-checkmark-circled {
+    color: #00cc00;
+}
+
+.ion-alert-circled {
+    color: #ffbb00;
+}
+
+.measure_view-icon {
+    font-size: 200%;
+}
+
+.measure_view-bar {
+    margin: 1ex;
+}
+
+.measure-status-icon {
+    margin-right: 1em;
+}
+
+.measure-title-icon {
+}
+
+#wind-img-box {
+    width: 4em;
+    margin: auto;
+    position:relative;
+}
+
+#wind-img {
+    width: 100%;
+}
+
+#compass-box {
+    width: 10em;
+    margin: auto;
+    position:relative;
+}
+
+#compass {
+    width: 100%;
+    position: relative;
+    margin-top:0ex;
+}
+
+#compass-arrow {
+    width: 100%;
+    position: absolute;
+    top:0ex;
+}
+
+#degrees-display {
+    width: 100%;
+    text-align: center;
+    font-size: 200%;
+    margin-top:1ex;
+}
+
+#wind-dir-info-box {
+    margin: 3vw;
+    text-align: justify;
+}

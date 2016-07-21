@@ -52,6 +52,15 @@ angular.module('starter', ['ionic'])
         }
       }
     })
+    .state('tabs.measure', {
+      url: '/measure',
+      views: {
+        'measure-view' : {
+          templateUrl: 'templates/measure_view.html'
+          //controller: 'WeatherViewController'
+        }
+      }
+    })
     .state('tabs.map', {
       url: '/map',
       views: {
@@ -194,7 +203,7 @@ angular.module('starter', ['ionic'])
       alert('Unable to get location: ' + error.message);
     });
   };
-  
+
   weather_main();
 
   $scope.$on('$ionicView.enter', function() {
