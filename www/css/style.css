@@ -1,4 +1,3 @@
-
 /*--- tabs at very top hack ---*/
 .tabs-top > .tabs, .tabs.tabs-top{
   top: 0 !important;
@@ -12,25 +11,48 @@
   background-color: #23272d;
 }
 
-/*--- Home Tab ---*/
-#homemap{
+.tabs-color, .tabs{
+  background-color: #23272d !important;
+  color: #5085c8 !important;
+}
+
+#map{
   width: 100%;
   height: 100%;
 }
 
+/*--- Home Tab ---*/
+#map-overlay-select{
+  position: absolute;
+  left: 10px;
+  top: 50px;
+  border: 1px solid #ccc;
+  background: white
+  opacity: 0.9;
+  width: auto;
+  height: 30px;
+  padding: 5px 35px 5px 5px;
+  font-size: 15px;
+}
+
 .float-button{
-  background-color: #f0f0f0;
+  position: relative;
+  background-color: #23272d;
   opacity: 0.9;
   border-radius: 50%;
   padding: 8px;
   position: fixed;
   bottom: 15%;
   right: 2%;
+  z-index: 200;
 }
 
 .float-button .float-button-content{
-  color: black;
+  color: #5085c8;
   font-size: 30px;
+}
+.float-button:active{
+  transform: translateY(1px);
 }
 
 .float-button-message{
@@ -55,35 +77,17 @@
   visibility: visible;
   opacity: 1;
   transition: all 0.3s ease;
-  transition-delay: 0s;
 }
 
-#temp{
-  position: absolute;
-  bottom: 17px;
-}
-
-#temp li a{
+#center-on-me{
+  position: relative;
+  bottom: 7%;
   color: black;
   font-size: 15px;
-}
-
-.take-new-measurement{
-  position: fixed;
-  height: 80%;
-  width: 80%;
-  left: 10%;
-  top: 12%;
-  background-color: #23272d;
-  opacity: 0;
-  text-align: center;
-  color: #5085c8;
-  font-size: 20px;
-  z-index: 1000;
+  z-index: 200;
 }
 
 .sensor-status-box{
-  visibility: hidden;
   position: fixed;
   left: 37.5%;
   bottom: 7%;
@@ -94,12 +98,186 @@
   padding-top: 5px;
   padding-bottom: 5px;
   background: #eff0f1;
-  opacity: 0.8;
+  opacity: 0;
   border: 1px solid black;
   text-align: center;
   vertical-align: middle;
   font-size: 15px;
+  z-index: 300;
+}
+
+.info-list-button{
+  color: #5085c8;
+  background-color: #23272d;
+  border: none;
+}
+
+.info-list-button:active{
+  transform: translateY(1px);
+}
+
+#info-list-button-history{
+  position: fixed;
+  left: 10px;
+  top: 9px;
+  height: 37px;
+  width: 94px;
+  font-size: 12px;
+  z-index: 100;
+}
+
+#info-list-button-measurement{
+  position: fixed;
+  right: 10px;
+  top: 9px;
+  height: 37px;
+  width: 94px;
+  font-size: 12px;
+  z-index: 100;
+}
+
+#info-list-history{
+  height: 100%;
+  width: 0;
+  position: fixed;
   z-index: 1000;
+  top: 0;
+  left: 0;
+  background-color: #23272d;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+}
+
+#info-list-measurement{
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  background-color: #23272d;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+}
+
+.list-mask{
+  position: fixed;
+  z-index: 500;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 0;
+  height: 0;
+  background-color: #000;
+  opacity: 0;
+  transition: opacity 0.3s, width 0s 0.3s, height 0s 0.3s;
+}
+
+.list-mask.is-active{
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.history-list-item{
+  padding: 8px 8px 8px 8px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #5085c8;
+  border-top: 1px solid black;
+  display: block;
+  transition: 0.3s;
+}
+
+.history-list-item:hover{
+  color: #f1f1f1;
+}
+
+.history-item:last-child{
+  border-bottom: 1px solid black;
+}
+
+.delete-pt-button{
+  position: relative;
+  background-color: #d82525;
+  border: none;
+  font-size: 15px;
+  margin-left: 45px;
+  bottom: 2px;
+}
+
+.delete-pt-button:active{
+  transform: translateY(1px);
+}
+
+.info-list-item:hover, .offcanvas a:focus{
+  color: #f1f1f1;
+}
+
+.info-list-close{
+  position: absolute;
+  text-decoration: none;
+  top: 10px;
+  right: 10px;
+  padding: 4px 3px 3px 3px;
+  margin-left: 50px;
+}
+
+.info-list-close-button{
+  background-color: #91c653;
+  border: none;
+  font-size: 20px !important;
+}
+
+.info-list-close-button:active{
+  transform: translateY(1px);
+}
+
+@media screen and (max-height: 450px){
+  .info-list-history{padding-top: 15px;}
+  .indo-list-item{font-size: 18px;}
+}
+
+.measurement-list-reading{
+  width: 100%;
+  height: 25%;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom: 1px solid black;
+  background-color: white;
+}
+
+#measurement-list-first{
+  border-top: 1px solid black;
+}
+
+.windooTitleHome {
+    font-size: 120%;
+    line-height: 3vh;
+    text-align: center;
+}
+
+.windooUnitHome {
+    font-size: 100%;
+    line-height: 3vh;
+    text-align: right;
+}
+
+.windooDisplayHome {
+    font-size: 300%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 12vh;
+    flex: 1 1 auto;
+}
+
+.windooGraphIconHome {
+    margin-top: 5vh;
+    font-size: 4vh;
+    text-align: center;
 }
 
 .scroll{
@@ -111,12 +289,6 @@
 }
 
 /*--- Weather Tab ---*/
-#weathermap{
-  position: relative;
-  height: 100%;
-  width: 100%;
-}
-
 #sensor-readings{
   position: absolute;
   top: 1%;
@@ -169,56 +341,22 @@
     text-align: center;
 }
 
-/*--- Map Tab ---*/
-#map{
-  position: relative;
-  width: 100%;
-  height: 100%;
+/*--- Measure Tab ---*/
+.nav-measure-button{
+  background-color: #91c653;
+  border: none;
+  margin: 3px;
+  font-size: 17px;
 }
 
-#map-overlay-select{
-  position: absolute;
-  left: 10px;
-  top: 50px;
-  border: 1px solid #ccc;
-  background: white
-  opacity: 0.9;
-  width: 150px;
-  height: 30px;
-  padding: 5px 35px 5px 5px;
-  font-size: 15px;
-}
-s
-/*--- History Tab ---*/
-#history-list{
-  width: 100%;
-  height: 100%;
-  background-color: #23272d;
+.nav-measure-button:active{
+  transform: translateY(1px);
 }
 
-#first-history-item{
-  width: 100%;
-  height: 50px;
-  border-bottom: 1px solid black;
-  border-top: 1px solid black;
-}
-#history-list li{
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 50px;
-  border-bottom: 1px solid black;
-  color: #5085c8;
-  font-size: 20px;
-}
-
-.history-item{
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 50px;
-  color: #5085c8;
+.card{
+  left: 2.5%;
+  width: 95%;
+  height: auto;
 }
 
 /*--- Settings Tab ---*/
@@ -258,7 +396,7 @@ s
   display: inline-block;
   width: 60px;
   height: 25px;
-
+  left: 3px;
 }
 
 .toggle-switch input{display: none;}
@@ -302,3 +440,21 @@ input:checked + .slider:before{
 }
 
 /*--- User Tab ---*/
+.item-input{
+  background-color: #f0f0f0;
+  border: 1px solid #23272d;
+}
+
+.input-label{
+  color: #23272d;
+}
+
+.form-button{
+  background-color: #91c653;
+  border: none;
+  margin: 3px
+}
+
+.form-button:active{
+  transform: translateY(1px);
+}

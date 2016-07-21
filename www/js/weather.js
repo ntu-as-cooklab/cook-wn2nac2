@@ -23,6 +23,24 @@ function setIsWeather(boolean) {
   }
 }
 
+function home_weather_main() {
+  windDisplay     = document.getElementById("windDisplayHome");
+  tempDisplay     = document.getElementById("tempDisplayHome");
+  humdDisplay     = document.getElementById("humdDisplayHome");
+  presDisplay     = document.getElementById("presDisplayHome");
+  windGraphIcon   = document.getElementById("windGraphIconHome");
+  tempGraphIcon   = document.getElementById("tempGraphIconHome");
+  humdGraphIcon   = document.getElementById("humdGraphIconHome");
+  presGraphIcon   = document.getElementById("presGraphIconHome");
+
+  windooObservation = new WindooObservation();
+  windooObservation.enable();
+  //windooObservation.enablePurge(60000);
+
+  currentMeasurement = new WindooMeasurement();
+  //currentMeasurement.start();
+}
+
 function weather_main()
 {
     windDisplay     = document.getElementById("windDisplay");
@@ -35,12 +53,12 @@ function weather_main()
     presGraphIcon   = document.getElementById("presGraphIcon");
     isWeather = true;
 
-    windooObservation = new WindooObservation();
-    windooObservation.enable();
-    //windooObservation.enablePurge(60000);
-
-    currentMeasurement = new WindooMeasurement();
-    //currentMeasurement.start();
+    // windooObservation = new WindooObservation();
+    // windooObservation.enable();
+    // //windooObservation.enablePurge(60000);
+    //
+    // currentMeasurement = new WindooMeasurement();
+    // //currentMeasurement.start();
 }
 
 function onEvent(event)
