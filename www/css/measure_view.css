@@ -146,3 +146,10 @@
     font-size: 400%;
     text-align: center;
 }
+
+#send-button {
+    display: block;
+    margin: auto;
+    margin-bottom:1ex;
+    font-size: 150%;
+}
