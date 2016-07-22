@@ -26,6 +26,9 @@ function measure_main()
     onWindooStatusChanged(windooStatus);
     onTempEquilStatusChanged(tempEquilStatus);
     onHumdEquilStatusChanged(humdEquilStatus);
+
+    // Testing
+    $('.ppc-progress-fill').css('transform','rotate('+ 178 +'deg)');
 }
 
 function setIconStatus(icon, status)
