@@ -93,17 +93,21 @@ var WindooMeasurement = function(_ = this)
     _.maxTemp            = 0;
     _.maxHumd            = 0;
     _.maxPres            = 0;
-    _.onFinish;
+    _.onFinish           = null;
+    _.onTick             = null;
+    _.interval           = null;
 
-    WindooMeasurement.prototype.start = function()
+    _.start = function()
     {
         _.enable();
         _.timeStarted   = Date.now();
+        interval = setInterval(_.onTick, 1000);
         setTimeout(_.stop, _.duration);
     };
 
     _.stop = function()
     {
+        clearInterval(_.interval);
         _.disable();
         _.timeFinished  = Date.now();
         _.finalize();
