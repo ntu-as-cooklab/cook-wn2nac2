@@ -1,3 +1,60 @@
+.measure-title {
+    margin: 3vw;
+    font-size: 135%;
+}
+
+.measure_view-icon {
+    font-size: 200%;
+}
+
+.measure_view-bar {
+    position:relative;
+    margin: 1ex;
+    margin-bottom: 3ex;
+}
+
+.measure-status-icon {
+    margin-right: 1em;
+}
+
+.measure-title-icon {
+}
+
+.toggle-button {
+    position:absolute;
+    right: 0%;
+    /*min-height: 3ex;
+    min-width: 3ex;
+    height: 3ex;
+    width: 3ex;*/
+}
+
+.toggle-icon {
+    /*font-size: 100%;
+    text-align: center;
+    vertical-align: middle;*/
+}
+
+/***** Status icons *****/
+
+.ion-checkmark-circled {
+    color: #0c0;
+}
+
+.ion-alert-circled {
+    color: #fb0;
+}
+
+/***** Info boxes *****/
+
+.info-box {
+    margin: 3vw 2vw 3vw 2vw;
+    text-align: justify;
+    position: relative;
+}
+
+/***** Sensor card *****/
+
 #sensor-status-box {
     text-align: center;
 }
@@ -10,6 +67,43 @@
     border-radius: 1ex;
     border: solid 2px #0c0;
 }
+
+/***** Equilibrium catrd *****/
+
+#equil-boxes {
+    text-align: center;
+}
+
+.equil-box {
+    width: 40%;
+    display: inline-block;
+    text-align: center;
+}
+
+.equil-title {
+    font-size: 120%;
+}
+
+.equil-status {
+    display: inline-block;
+    margin-top:1ex;
+    padding: 1ex;
+    border-radius: 1ex;
+    border: solid 2px #0c0;
+}
+
+.equil-status-icon {
+    
+}
+
+#skip-equil-button {
+    display: inline-block;
+    right:0%;
+    bottom: 0%;
+    position: absolute;
+}
+
+/***** Measurement card *****/
 
 .measure-container {
     /*margin: 1vw;*/
@@ -41,54 +135,7 @@
     font-size: 150%;
 }
 
-.measure-title {
-    margin: 3vw;
-    font-size: 135%;
-}
-
-.ion-checkmark-circled {
-    color: #0c0;
-}
-
-.ion-alert-circled {
-    color: #fb0;
-}
-
-.measure_view-icon {
-    font-size: 200%;
-}
-
-.measure_view-bar {
-    margin: 1ex;
-}
-
-.measure-status-icon {
-    margin-right: 1em;
-}
-
-.measure-title-icon {
-}
-
-#calib-boxes {
-    text-align: center;
-}
-
-.calib-box {
-    width: 40%;
-    display: inline-block;
-    text-align: center;
-}
-
-.calib-title {
-    font-size: 120%;
-}
-
-.calib-status {
-}
-
-.calib-status-icon {
-    font-size: 120%;
-}
+/***** Wind direction card *****/
 
 #wind-img-box {
     width: 4em;
@@ -125,10 +172,7 @@
     margin-top:1ex;
 }
 
-.info-box {
-    margin: 3vw;
-    text-align: justify;
-}
+/***** Weather card *****/
 
 .weather-button-bar {
     width: 80%;
@@ -146,6 +190,8 @@
     font-size: 400%;
     text-align: center;
 }
+
+/***** Send card *****/
 
 #send-button {
     display: block;

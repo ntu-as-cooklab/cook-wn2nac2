@@ -151,5 +151,5 @@ angular.module('starter', ['ionic'])
 })
 
 .controller('MeasureViewController', function($scope, $ionicLoading, $compile) {
-
+    measure_main();
 });
