@@ -1,0 +1,265 @@
+#map-overlay-select{
+  position: absolute;
+  left: 10px;
+  top: 50px;
+  border: 1px solid #ccc;
+  background: white
+  opacity: 0.9;
+  width: auto;
+  height: 30px;
+  padding: 5px 35px 5px 5px;
+  font-size: 15px;
+}
+
+.float-button{
+  position: relative;
+  background-color: #23272d;
+  opacity: 0.9;
+  border-radius: 50%;
+  padding: 8px;
+  position: fixed;
+  bottom: 15%;
+  right: 2%;
+  z-index: 200;
+}
+
+.float-button .float-button-content{
+  color: #5085c8;
+  font-size: 30px;
+}
+.float-button:active{
+  transform: translateY(1px);
+}
+
+.float-button-message{
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.3s, opacity 0.3s linear;
+  transition: all 0.4s ease;
+  transition-delay: .1s;
+}
+
+#float-button-message{
+  background: none;
+  overflow: hidden;
+  left: -175px;
+  line-height: 20px;
+  position: absolute;
+  top: 15px;
+  font-size: 20px;
+}
+
+.float-button:hover > .float-button-message{
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+#center-on-me{
+  position: relative;
+  bottom: 7%;
+  color: black;
+  font-size: 15px;
+  z-index: 200;
+}
+
+.sensor-status-box{
+  position: fixed;
+  left: 37.5%;
+  bottom: 7%;
+  width: 25%;
+  height: auto;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: #eff0f1;
+  opacity: 0.001;
+  border: 1px solid black;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 15px;
+  z-index: 300;
+}
+
+.info-list-button{
+  color: #5085c8;
+  background-color: #23272d;
+  border: none;
+}
+
+.info-list-button:active{
+  transform: translateY(1px);
+}
+
+#info-list-button-history{
+  position: fixed;
+  left: 10px;
+  top: 9px;
+  height: 37px;
+  width: 94px;
+  font-size: 12px;
+  z-index: 100;
+}
+
+#info-list-button-measurement{
+  position: fixed;
+  right: 10px;
+  top: 9px;
+  height: 37px;
+  width: 94px;
+  font-size: 12px;
+  z-index: 100;
+}
+
+#info-list-history{
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  background-color: #23272d;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+}
+
+#info-list-measurement{
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  background-color: #23272d;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+}
+
+.list-mask{
+  position: fixed;
+  z-index: 500;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 0;
+  height: 0;
+  background-color: #000;
+  opacity: 0;
+  transition: opacity 0.3s, width 0s 0.3s, height 0s 0.3s;
+}
+
+.list-mask.is-active{
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.history-list-item{
+  padding: 8px 8px 8px 8px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #5085c8;
+  border-top: 1px solid black;
+  display: block;
+  transition: 0.3s;
+}
+
+.history-list-item:hover{
+  color: #f1f1f1;
+}
+
+.history-item:last-child{
+  border-bottom: 1px solid black;
+}
+
+.delete-pt-button{
+  position: relative;
+  background-color: #d82525;
+  border: none;
+  font-size: 15px;
+  margin-left: 45px;
+  bottom: 2px;
+}
+
+.delete-pt-button:active{
+  transform: translateY(1px);
+}
+
+.info-list-item:hover, .offcanvas a:focus{
+  color: #f1f1f1;
+}
+
+.info-list-close{
+  position: absolute;
+  text-decoration: none;
+  top: 10px;
+  right: 10px;
+  padding: 4px 3px 3px 3px;
+  margin-left: 50px;
+}
+
+.info-list-close-button{
+  background-color: #91c653;
+  border: none;
+  font-size: 20px !important;
+}
+
+.info-list-close-button:active{
+  transform: translateY(1px);
+}
+
+@media screen and (max-height: 450px){
+  .info-list-history{padding-top: 15px;}
+  .indo-list-item{font-size: 18px;}
+}
+
+.measurement-list-reading{
+  width: 100%;
+  height: 25%;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom: 1px solid black;
+  background-color: white;
+}
+
+#measurement-list-first{
+  border-top: 1px solid black;
+}
+
+.windooTitleHome {
+    font-size: 120%;
+    line-height: 3vh;
+    text-align: center;
+}
+
+.windooUnitHome {
+    font-size: 100%;
+    line-height: 3vh;
+    text-align: right;
+}
+
+.windooDisplayHome {
+    font-size: 300%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 12vh;
+    flex: 1 1 auto;
+}
+
+.windooGraphIconHome {
+    margin-top: 5vh;
+    font-size: 4vh;
+    text-align: center;
+}
+
+.scroll{
+  height: 100%;
+}
+
+.content{
+  overflow: visible !important;
+}

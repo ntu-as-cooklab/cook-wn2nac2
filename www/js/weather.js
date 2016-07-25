@@ -16,11 +16,7 @@ var log = function(message)
 }
 
 function setIsWeather(boolean) {
-  if (boolean) {
-    isWeather = boolean;
-  } else {
-    isWeather = boolean;
-  }
+  isWeather = boolean;
 }
 
 function home_weather_main() {
@@ -39,6 +35,7 @@ function home_weather_main() {
 
   currentMeasurement = new WindooMeasurement();
   //currentMeasurement.start();
+
 }
 
 function weather_main()
@@ -68,6 +65,8 @@ function onEvent(event)
         case 0: //JDCWindooNotAvailable
             console.log("Windoo not available");
             if (!isWeather) {
+              if (document.getElementById("connected-status").style.visibility == "visible") fade(document.getElementById("connected-status"));
+              if (document.getElementById("calibrated-status").style.visibility == "visible") fade(document.getElementById("calibrated-status"));
               unfade(document.getElementById("not-connected-status"));
               setTimeout(function() {fade(document.getElementById("not-connected-status"));}, 3000);
             }
@@ -76,6 +75,8 @@ function onEvent(event)
         case 1: //JDCWindooAvailable
             console.log("Windoo available");
             if (!isWeather) {
+              if (document.getElementById("not-connected-status").style.visibility == "visible") fade(document.getElementById("not-connected-status"));
+              if (document.getElementById("calibrated-status").style.visibility == "visible") fade(document.getElementById("calibrated-status"));
               unfade(document.getElementById("connected-status"));
               setTimeout(function() {fade(document.getElementById("connected-status"));}, 3000);
             }
@@ -84,6 +85,8 @@ function onEvent(event)
         case 2: //JDCWindooCalibrated
             console.log("Windoo calibrated");
             if (!isWeather) {
+              if (document.getElementById("not-connected-status").style.visibility == "visible") fade(document.getElementById("not-connected-status"));
+              if (document.getElementById("connected-status").style.visibility == "visible") fade(document.getElementById("connected-status"));
               unfade(document.getElementById("calibrated-status"));
               setTimeout(function() {fade(document.getElementById("calibrated-status"));}, 3000);
             }
@@ -96,7 +99,6 @@ function onEvent(event)
 
         case 4: //JDCWindooNewWindValue
             console.log("New wind:        " + event.data);
-            //if (isWeather){
                 if      (event.data < windDisplay.innerHTML)
                 {
                     windGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
@@ -108,15 +110,15 @@ function onEvent(event)
                     windGraphIcon.classList.add     ("ion-arrow-graph-up-right");
                 }
                 windDisplay.innerHTML = event.data.toFixed(2);
-            //}
-
             if (windooObservation.observing)    windooObservation.addWind(event.data);
-            if (currentMeasurement.observing)   currentMeasurement.addWind(event.data);
+            if (currentMeasurement.observing)   {
+              currentMeasurement.addWind(event.data);
+              plotPtOnGraph(currentMeasurement, event.type - 4);
+            }
             break;
 
         case 5: //JDCWindooNewTemperatureValue
             //console.log("New temperature: " + event.data);
-            //if (isWeather){
                 if      (event.data < tempDisplay.innerHTML)
                 {
                     tempGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
@@ -128,14 +130,15 @@ function onEvent(event)
                     tempGraphIcon.classList.add     ("ion-arrow-graph-up-right");
                 }
                 tempDisplay.innerHTML = event.data.toFixed(2);
-            //}
             if (windooObservation.observing)    windooObservation.addTemp(event.data);
-            if (currentMeasurement.observing)   currentMeasurement.addTemp(event.data);
+            if (currentMeasurement.observing)   {
+              currentMeasurement.addTemp(event.data);
+              plotPtOnGraph(currentMeasurement, event.type - 4);
+            }
             break;
 
         case 6: //JDCWindooNewHumidityValue
             //console.log("New humidity:    " + event.data);
-            //if (isWeather) {
                 if      (event.data < humdDisplay.innerHTML)
                 {
                     humdGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
@@ -147,14 +150,15 @@ function onEvent(event)
                     humdGraphIcon.classList.add     ("ion-arrow-graph-up-right");
                 }
                 humdDisplay.innerHTML = event.data.toFixed(2);
-            //}
             if (windooObservation.observing)    windooObservation.addHumd(event.data);
-            if (currentMeasurement.observing)   currentMeasurement.addHumd(event.data);
+            if (currentMeasurement.observing)   {
+              currentMeasurement.addHumd(event.data);
+              plotPtOnGraph(currentMeasurement, event.type - 4);
+            }
             break;
 
         case 7: //JDCWindooNewPressureValue:
             //console.log("New pressure:    " + event.data);
-            //if (isWeather) {
                 if      (event.data < presDisplay.innerHTML)
                 {
                     presGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
@@ -166,9 +170,11 @@ function onEvent(event)
                     presGraphIcon.classList.add     ("ion-arrow-graph-up-right");
                 }
                 presDisplay.innerHTML = event.data.toFixed(1);
-            //}
             if (windooObservation.observing)    windooObservation.addPres(event.data);
-            if (currentMeasurement.observing)   currentMeasurement.addPres(event.data);
+            if (currentMeasurement.observing)   {
+              currentMeasurement.addPres(event.data);
+              plotPtOnGraph(currentMeasurement, event.type - 4);
+            }
             break;
 
         case 8: //JDCWindooPublishSuccess

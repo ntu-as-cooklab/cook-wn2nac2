@@ -1,3 +1,7 @@
+.card{
+  background-color: #f0f0f0;
+}
+
 #sensor-status-box {
     text-align: center;
 }
@@ -11,16 +15,9 @@
     border: solid 2px #0c0;
 }
 
-.measure-container {
-    /*margin: 1vw;*/
-    /*width: 100%;*/
-    /*text-align: center;*/
-}
-
 .measure-time-button-bar {
     width: 80%;
     margin: auto;
-    /*font-size: 70%;*/
 }
 
 .measure-time-button {

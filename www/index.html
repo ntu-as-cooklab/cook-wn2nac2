@@ -1,20 +1,22 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
         <title>WN2NAC2</title>
 
-        <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-        <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <!-- compiled css output -->
         <link href="css/ionic.app.css" rel="stylesheet">
-        -->
         <script src="lib/ionic/js/ionic.bundle.js"></script> <!-- ionic/angularjs js -->
         <script src="cordova.js"></script>  <!-- cordova script (this will be a 404 during development) -->
 
         <!-- WN2NAC sources -->
         <link href="css/style.css" rel="stylesheet">
+        <link href="css/home_view.css" rel="stylesheet">
         <link href="css/measure_view.css" rel="stylesheet">
+        <link href="css/weather_view.css" rel="stylesheet">
+        <link href="css/settings_view.css" rel="stylesheet">
+        <link href="css/user_view.css" rel="stylesheet">
         <script src="js/app.js"></script>
         <script src="http://maps.googleapis.com/maps/api/js"></script>
         <script src="js/utilities.js"></script>
@@ -22,7 +24,11 @@
         <script src="js/measurement.js"></script>
         <script src="js/measure.js"></script>
         <script src="js/history.js"></script>
+        <script src="js/user.js"></script>
+        <script src="js/graphmgt.js"></script>
         <script src="js/markerclusterer.js"></script>
+        <script src="js/Chart.min.js"></script>
+        <script src="js/angular-chart.min.js"></script>
     </head>
 
     <body ng-app="starter">

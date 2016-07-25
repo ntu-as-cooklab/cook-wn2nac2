@@ -23,12 +23,6 @@ glb.markers = [
   ['5', 'bla', 25.0351236, 121.5113226, 'test3'],
   ['6', 'bla', 25.0359836, 121.5399926, 'test3'],
 ];
-//NOTE THESE NAMES AND THE IDS OF HISTORY ITEMS SHOULD MATCH
-// glb.history_source = [
-//   [0, 43.0735848, -89.4112561, 'random info/title', false],
-//   [1, 45.4323528, -122.4187675, 'random info/title', false],
-//   [5, 42.4347181, -84.0025096, 'random info/title', false]
-// ];
 
 var infoWindow = new google.maps.InfoWindow({
   content: ''
@@ -80,26 +74,27 @@ function addMarker(marker) {
   newMarker.setVisible(false);
 }
 
-function filterMarkers(category) {
+function filterMarkers(category)
+{
   glb.tempMarkers = [];
-  for(var x = 0; x < glb.markers.length; x++) {
+  for(var x = 0; x < glb.gmarkers.length; x++) {
     var marker = glb.gmarkers[x];
-    if(marker.category == category || category == 'all') {
+    if(marker.category == category || category == 'all' || marker.category == 'history') {
       glb.tempMarkers.push(marker);
       marker.setVisible(true);
     } else marker.setVisible(false);
   }
 
-  //FOR EMPTY CATEGORY CASE, PERHAPS SEND PLACEHOLDER PT (USER LOCATION) TO FORCE NO DISPLAY
   glb.markerCluster.clearMarkers();
   if (category != 'default') glb.markerCluster.addMarkers(glb.tempMarkers);
 }
 
-function unfade(element) {
+function unfade(element)
+{
   element.style.visibility = "visible";
   var op = 0.1;
   var timer = setInterval(function() {
-    if(op >= 1) {
+    if (op >= 1) {
       clearInterval(timer);
     }
     element.style.opacity = op;
@@ -111,7 +106,7 @@ function unfade(element) {
 function fade(element) {
   var op = 0.9;
   var timer = setInterval(function() {
-    if(op <= 0.1) {
+    if (op <= 0.1) {
       clearInterval(timer);
       element.style.opacity = 0.001;
     }
@@ -153,52 +148,4 @@ function closeNav(menuID) {
       document.getElementById("list-mask").classList.remove('is-active');
       break;
   }
-}
-
-function placeOldPt(ID) {
-  if (glb.doPlaceOldPt) {
-    for (var x = 0; x < glb.history_source.length; x++) {
-      if (glb.history_source[x][0] == ID) {
-        var oldLatLng = new google.maps.LatLng(glb.history_source[x][1], glb.history_source[x][2]);
-        map.panTo(oldLatLng);
-        if (!glb.history_source[x][4]) {
-          var newMarker = new google.maps.Marker({
-            title: glb.history_source[x][3],
-            position: oldLatLng,
-            category: 'history',
-            map: map,
-            animation: google.maps.Animation.DROP
-          });
-          glb.gmarkers.push(newMarker);
-          glb.tempMarkers.push(newMarker);
-          glb.markerCluster.clearMarkers();
-          glb.markerCluster.addMarkers(glb.tempMarkers);
-          glb.history_source[x][4] = true;
-        }
-        closeNav(0);
-        break;
-      }
-    }
-  }
-  glb.doPlaceOldPt = true;
-}
-
-
-//TODO: FIX FOR DELETING MARKER FROM TEMP ARRAY AND RECREATING MARKERCLUSTER
-function deletePt(ID) {
-  for (var x = 0; x < glb.history_source.length; x++) {
-    if (glb.history_source[x][0] == ID) {
-      var histLatLng = new google.maps.LatLng(glb.history_source[x][1], glb.history_source[x][2]);
-      for (var y = 0; y < glb.gmarkers.length; y++) {
-        if (glb.gmarkers[y].getPosition().equals(histLatLng)) {
-          glb.gmarkers[y].setMap(null);
-          glb.gmarkers.splice(y, 1);
-        }
-      }
-      glb.history_source.splice(x, 1);
-    }
-  }
-  document.getElementById(String(ID)).remove();
-  glb.doPlaceOldPt = false;
-  closeNav(0);
 }

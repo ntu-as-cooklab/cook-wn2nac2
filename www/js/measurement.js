@@ -77,6 +77,8 @@ var WindooMeasurement = function(_ = this)
     _.userId             = 0;
     _.timeStarted        = 0;
     _.timeFinished       = 0;
+    _.latitude           = 0;
+    _.longitude          = 0;
     _.windDirection      = -1;
     _.weatherType        = 0;
     _.comment            = "";

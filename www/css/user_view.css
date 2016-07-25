@@ -1,0 +1,18 @@
+.item-input{
+  background-color: #f0f0f0;
+  border: 1px solid #23272d;
+}
+
+.input-label{
+  color: #23272d;
+}
+
+.form-button{
+  background-color: #91c653;
+  border: none;
+  margin: 3px
+}
+
+.form-button:active{
+  transform: translateY(1px);
+}
