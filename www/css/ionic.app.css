@@ -9863,7 +9863,7 @@ a.button {
   display: table; }
   .ppc-percents span {
     display: block;
-    font-size: 2.6em;
+    font-size: 200%;
     font-weight: bold;
     color: #81CE97; }
 

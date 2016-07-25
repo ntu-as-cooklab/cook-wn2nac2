@@ -97,7 +97,7 @@ function onEvent(event)
             break;
 
         case 4: //JDCWindooNewWindValue
-            console.log("New wind:        " + event.data);
+            //console.log("New wind:        " + event.data);
             //if (isWeather){
                 if      (event.data < windDisplay.innerHTML)
                 {
@@ -113,7 +113,11 @@ function onEvent(event)
             //}
 
             if (windooObservation.observing)    windooObservation.addWind(event.data);
-            if (currentMeasurement.observing)   currentMeasurement.addWind(event.data);
+            if (currentMeasurement.observing)
+            {
+                currentMeasurement.addWind(event.data);
+                console.log("Mesaurement +Wind: " + event.data);
+            }
             break;
 
         case 5: //JDCWindooNewTemperatureValue
@@ -132,7 +136,11 @@ function onEvent(event)
                 tempDisplay.innerHTML = event.data.toFixed(2);
             //}
             if (windooObservation.observing)    windooObservation.addTemp(event.data);
-            if (currentMeasurement.observing)   currentMeasurement.addTemp(event.data);
+            if (currentMeasurement.observing)
+            {
+                currentMeasurement.addTemp(event.data);
+                console.log("Mesaurement +Temp: " + event.data);
+            }
             break;
 
         case 6: //JDCWindooNewHumidityValue
@@ -151,7 +159,11 @@ function onEvent(event)
                 humdDisplay.innerHTML = event.data.toFixed(2);
             //}
             if (windooObservation.observing)    windooObservation.addHumd(event.data);
-            if (currentMeasurement.observing)   currentMeasurement.addHumd(event.data);
+            if (currentMeasurement.observing)
+            {
+                currentMeasurement.addHumd(event.data);
+                console.log("Mesaurement +Humd: " + event.data);
+            }
             break;
 
         case 7: //JDCWindooNewPressureValue:
@@ -170,7 +182,11 @@ function onEvent(event)
                 presDisplay.innerHTML = event.data.toFixed(1);
             //}
             if (windooObservation.observing)    windooObservation.addPres(event.data);
-            if (currentMeasurement.observing)   currentMeasurement.addPres(event.data);
+            if (currentMeasurement.observing)
+            {
+                currentMeasurement.addPres(event.data);
+                console.log("Mesaurement +Pres: " + event.data);
+            }
             break;
 
         case 8: //JDCWindooPublishSuccess

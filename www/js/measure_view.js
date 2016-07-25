@@ -101,3 +101,13 @@ function onHumdEquilStatusChanged()
     }
     setIconStatus(sensor_status_icon, tempEquilStatus && humdEquilStatus);
 }
+
+var duration;
+
+function chooseDuration(element)
+{
+    console.log(element.dataset.duration);
+    duration = element.dataset.duration;
+    $(".measure-time-button").removeClass  ("button-calm");
+    element.classList.add     ("button-calm");
+}

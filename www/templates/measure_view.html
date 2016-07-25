@@ -49,24 +49,24 @@
 
       <div class="card">
           <div class="measure_view-bar">
-              <i class="icon measure_view-icon measure-status-icon ion-alert-circled"></i>
+              <i id="measure-status-icon" class="icon measure_view-icon measure-status-icon ion-alert-circled"></i>
               <i class="icon measure_view-icon measure-title-icon ion-android-stopwatch"></i>
               <span class="measure-title">Timed Measurement</span>
               <a class="toggle-button button button-small button-dark"><div><i class="icon toggle-icon ion-arrow-shrink"></i></div></a>
           </div>
           <div id="timer-box">
               <div class="button-bar measure-time-button-bar ">
-                <a class="button measure-time-button">15 s</a>
-                <a class="button measure-time-button">30 s</a>
-                <a class="button measure-time-button button-calm ">1 min</a>
+                <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="15000">15 s</a>
+                <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="30000">30 s</a>
+                <a class="button measure-time-button button-calm " onclick="chooseDuration(this)" data-duration="60000">1 min</a>
               </div>
               <div class="button-bar measure-time-button-bar ">
-                <a class="button measure-time-button">3 min</a>
-                <a class="button measure-time-button">5 min</a>
-                <a class="button measure-time-button">Other...</a>
+                <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="180000">3 min</a>
+                <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="300000">5 min</a>
+                <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="0">Other...</a>
               </div>
               <div id="timer-status">Ready to START</div>
-              <button id="start-button" class="button button-balanced">
+              <button id="start-button" class="button button-balanced" onclick="takeMeasurement()">
                   <i class="icon ion-android-stopwatch"></i>
                   START
               </button>

@@ -5,14 +5,34 @@ var newLat, newLong, newDesc;
 
 var takeMeasurement = function()
 {
+    if ('undefined' !== typeof currentMeasurement) if (currentMeasurement.observing) currentMeasurement.stop();
     currentMeasurement = new WindooMeasurement();
     currentMeasurement.onFinish = function()
     {
+        setIconStatusChecked(document.getElementById("measure-status-icon"));
         newMeasurementDone(currentMeasurement);
     };
-    currentMeasurement.duration = 1000;
+    currentMeasurement.onTick = function()
+    {
+        onMeasurementTick();
+    };
+    currentMeasurement.duration = duration;
     currentMeasurement.start();
 };
+
+function onMeasurementTick()
+{
+    var elapsed = Date.now() - currentMeasurement.timeStarted;
+    var progress = elapsed/currentMeasurement.duration;
+    var deg = 360 * progress;
+
+    console.log("Measurement: " + (progress * 100) + "%");
+    $('.ppc-progress-fill').css('transform','rotate('+ deg +'deg)');
+
+    progress > 0.5 ? $('.progress-pie-chart').addClass('gt-50') : $('.progress-pie-chart').removeClass('gt-50');
+
+    $('.ppc-percents span').html((progress*100).toFixed(0) + '%' + "<br><br>" + (elapsed/1000).toFixed(0) + "/" + currentMeasurement.duration/1000 + "s");
+}
 
 function recordPt(lat, lng, desc) {
   var newRecord = [historyCounter, lat, lng, desc, false];

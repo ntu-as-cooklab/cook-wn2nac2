@@ -101,7 +101,7 @@ var WindooMeasurement = function(_ = this)
     {
         _.enable();
         _.timeStarted   = Date.now();
-        interval = setInterval(_.onTick, 1000);
+        _.interval = setInterval(_.onTick, 1000);
         setTimeout(_.stop, _.duration);
     };
 
