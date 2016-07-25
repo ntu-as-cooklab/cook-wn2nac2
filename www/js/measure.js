@@ -5,26 +5,34 @@ var newLat, newLong, newDesc;
 
 var takeMeasurement = function()
 {
-    if ('undefined' !== typeof currentMeasurement) if (currentMeasurement.observing) currentMeasurement.stop();
-    currentMeasurement = new WindooMeasurement();
-    setMeasureButtonStatus(2);
-    currentMeasurement.onFinish = function()
-    {
-        setIconStatusChecked(document.getElementById("measure-status-icon"));
-        setMeasureButtonStatus(3);
-
-        alert("Wind: " + currentMeasurement.avgWind + " Temp: " + currentMeasurement.avgTemp +
-        " Humd: " + currentMeasurement.avgHumd + " Pres: " + currentMeasurement.avgPres);
-
-        newMeasurementDone(currentMeasurement);
-    };
-    currentMeasurement.onTick = function()
-    {
-        onMeasurementTick();
-    };
-    currentMeasurement.duration = duration;
-    currentMeasurement.start();
+    if ('undefined' !== typeof currentMeasurement)
+     { if (currentMeasurement.observing) currentMeasurement.stop(); else takeNewMeasurement(); }
+    else {
+        takeNewMeasurement();
+    }
 };
+
+function takeNewMeasurement()
+{
+    currentMeasurement = new WindooMeasurement();
+        setMeasureButtonStatus(2);
+        currentMeasurement.onFinish = function()
+        {
+            setIconStatusChecked(document.getElementById("measure-status-icon"));
+            setMeasureButtonStatus(3);
+
+            alert("Wind: " + currentMeasurement.avgWind.toFixed(2) + "\nTemp: " + currentMeasurement.avgTemp.toFixed(2) +
+            "\nHumd: " + currentMeasurement.avgHumd.toFixed(2) + "\nPres: " + currentMeasurement.avgPres.toFixed(2));
+
+            newMeasurementDone(currentMeasurement);
+        };
+        currentMeasurement.onTick = function()
+        {
+            onMeasurementTick();
+        };
+        currentMeasurement.duration = duration;
+        currentMeasurement.start();
+}
 
 function onMeasurementTick()
 {

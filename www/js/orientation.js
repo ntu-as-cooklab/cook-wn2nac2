@@ -7,7 +7,8 @@ var watchID;
 
 function startCompass()
 {
-    watchID = navigator.compass.watchHeading(onCompassSuccess, onCompassError);
+    if (typeof(navigator.compass) !== 'undefined')
+        watchID = navigator.compass.watchHeading(onCompassSuccess, onCompassError);
 }
 
 function onCompassSuccess(heading)

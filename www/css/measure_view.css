@@ -131,7 +131,7 @@
 #start-button {
     display: block;
     margin: auto;
-    margin-bottom:1ex;
+    margin-bottom:0ex;
     font-size: 150%;
 }
 

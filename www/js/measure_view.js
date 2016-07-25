@@ -128,24 +128,37 @@ function chooseWeather(element)
 function setMeasureButtonStatus(status)
 {
     measureButton           = document.getElementById("start-button");
+    var measureButtonText   = document.getElementById("start-button-text");
     timer_status            = document.getElementById("timer-status");
     switch (status)
     {
         case 0: // Not ready
             timer_status.innerHTML = "Not ready";
             measureButton.disabled = true;
+            measureButton.classList.remove  ("button-assertive");
+            measureButton.classList.add     ("button-balanced");
+            measureButtonText.innerHTML = "START";
             break;
         case 1: // Ready to start
             timer_status.innerHTML = "Ready to start";
             measureButton.disabled = false;
+            measureButton.classList.remove  ("button-assertive");
+            measureButton.classList.add     ("button-balanced");
+            measureButtonText.innerHTML = "START";
             break;
         case 2: // Measuring
             timer_status.innerHTML = "Measuring...";
-            measureButton.disabled = true;
+            measureButton.disabled = false;
+            measureButton.classList.remove  ("button-balanced");
+            measureButton.classList.add     ("button-assertive");
+            measureButtonText.innerHTML = "ABORT";
             break;
         case 3: // Finished
             timer_status.innerHTML = "Finished";
-            measureButton.disabled = true;
+            measureButton.disabled = false;
+            measureButton.classList.remove  ("button-assertive");
+            measureButton.classList.add     ("button-balanced");
+            measureButtonText.innerHTML = "START";
             break;
     }
 }
