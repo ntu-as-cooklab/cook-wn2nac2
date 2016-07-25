@@ -156,9 +156,8 @@ angular.module('starter', ['ionic', 'chart.js'])
 })
 
 .controller('MeasureViewController', function($scope, $ionicLoading, $compile) {
-
+  measure_main();
 })
 
 .controller('UserViewController', function($scope, $ionicLoading, $compile) {
-
 });

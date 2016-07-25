@@ -63,6 +63,8 @@ function onEvent(event)
     switch(event.type)
     {
         case 0: //JDCWindooNotAvailable
+            windooStatus = 0;
+            onWindooStatusChanged();
             console.log("Windoo not available");
             if (!isWeather) {
               if (document.getElementById("connected-status").style.visibility == "visible") fade(document.getElementById("connected-status"));
@@ -73,6 +75,8 @@ function onEvent(event)
             break;
 
         case 1: //JDCWindooAvailable
+            windooStatus = 1;
+            onWindooStatusChanged();
             console.log("Windoo available");
             if (!isWeather) {
               if (document.getElementById("not-connected-status").style.visibility == "visible") fade(document.getElementById("not-connected-status"));
@@ -83,6 +87,8 @@ function onEvent(event)
             break;
 
         case 2: //JDCWindooCalibrated
+            windooStatus = 2;
+            onWindooStatusChanged();
             console.log("Windoo calibrated");
             if (!isWeather) {
               if (document.getElementById("not-connected-status").style.visibility == "visible") fade(document.getElementById("not-connected-status"));
@@ -98,7 +104,8 @@ function onEvent(event)
             break;
 
         case 4: //JDCWindooNewWindValue
-            console.log("New wind:        " + event.data);
+            //console.log("New wind:        " + event.data);
+            //if (isWeather){
                 if      (event.data < windDisplay.innerHTML)
                 {
                     windGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
