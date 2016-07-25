@@ -93,7 +93,7 @@
 }
 
 .equil-status-icon {
-    
+
 }
 
 #skip-equil-button {
@@ -138,7 +138,7 @@
 /***** Wind direction card *****/
 
 #wind-img-box {
-    width: 4em;
+    width: 8em;
     margin: auto;
     position:relative;
 }
@@ -148,7 +148,7 @@
 }
 
 #compass-box {
-    width: 10em;
+    width: 6em;
     margin: auto;
     position:relative;
 }

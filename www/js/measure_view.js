@@ -6,7 +6,7 @@ var windooStatus    = 0;
 var tempEquilStatus = 0;
 var humdEquilStatus = 0;
 var equilStatus     = 0;
-var duration        = 60;
+var duration        = 60000;
 
 // DOM elements
 
@@ -15,6 +15,7 @@ var sensor_status_icon;
 var temp_equil_status;
 var humd_equil_status;
 var equil_status_icon;
+var measureButton, timer_status;
 
 function measure_main()
 {
@@ -23,12 +24,15 @@ function measure_main()
     temp_equil_status       = document.getElementById("temp-equil-status");
     humd_equil_status       = document.getElementById("humd-equil-status");
     equil_status_icon       = document.getElementById("equil-status-icon");
+    measureButton           = document.getElementById("start-button");
+    timer_status            = document.getElementById("timer-status");
     onWindooStatusChanged(windooStatus);
     onTempEquilStatusChanged(tempEquilStatus);
     onHumdEquilStatusChanged(humdEquilStatus);
 
-    // Testing
-    $('.ppc-progress-fill').css('transform','rotate('+ 178 +'deg)');
+    startCompass();
+
+    $('.ppc-progress-fill').css('transform','rotate('+ 0 +'deg)');
 }
 
 function setIconStatus(icon, status)
@@ -103,11 +107,45 @@ function onHumdEquilStatusChanged()
 }
 
 var duration;
+var weather;
 
 function chooseDuration(element)
 {
-    console.log(element.dataset.duration);
+    //console.log(element.dataset.duration);
     duration = element.dataset.duration;
     $(".measure-time-button").removeClass  ("button-calm");
     element.classList.add     ("button-calm");
+}
+
+function chooseWeather(element)
+{
+    //console.log(element.dataset.duration);
+    weather = element.dataset.weather;
+    $(".weather-button").removeClass  ("button-calm");
+    element.classList.add     ("button-calm");
+}
+
+function setMeasureButtonStatus(status)
+{
+    measureButton           = document.getElementById("start-button");
+    timer_status            = document.getElementById("timer-status");
+    switch (status)
+    {
+        case 0: // Not ready
+            timer_status.innerHTML = "Not ready";
+            measureButton.disabled = true;
+            break;
+        case 1: // Ready to start
+            timer_status.innerHTML = "Ready to start";
+            measureButton.disabled = false;
+            break;
+        case 2: // Measuring
+            timer_status.innerHTML = "Measuring...";
+            measureButton.disabled = true;
+            break;
+        case 3: // Finished
+            timer_status.innerHTML = "Finished";
+            measureButton.disabled = true;
+            break;
+    }
 }

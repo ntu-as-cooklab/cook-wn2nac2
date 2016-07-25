@@ -7,9 +7,15 @@ var takeMeasurement = function()
 {
     if ('undefined' !== typeof currentMeasurement) if (currentMeasurement.observing) currentMeasurement.stop();
     currentMeasurement = new WindooMeasurement();
+    setMeasureButtonStatus(2);
     currentMeasurement.onFinish = function()
     {
         setIconStatusChecked(document.getElementById("measure-status-icon"));
+        setMeasureButtonStatus(3);
+
+        alert("Wind: " + currentMeasurement.avgWind + " Temp: " + currentMeasurement.avgTemp +
+        " Humd: " + currentMeasurement.avgHumd + " Pres: " + currentMeasurement.avgPres);
+
         newMeasurementDone(currentMeasurement);
     };
     currentMeasurement.onTick = function()

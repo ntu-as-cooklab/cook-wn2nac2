@@ -116,7 +116,7 @@ function onEvent(event)
             if (currentMeasurement.observing)
             {
                 currentMeasurement.addWind(event.data);
-                console.log("Mesaurement +Wind: " + event.data);
+                //console.log("Mesaurement +Wind: " + event.data);
             }
             break;
 
@@ -139,7 +139,7 @@ function onEvent(event)
             if (currentMeasurement.observing)
             {
                 currentMeasurement.addTemp(event.data);
-                console.log("Mesaurement +Temp: " + event.data);
+                //console.log("Mesaurement +Temp: " + event.data);
             }
             break;
 
@@ -162,7 +162,7 @@ function onEvent(event)
             if (currentMeasurement.observing)
             {
                 currentMeasurement.addHumd(event.data);
-                console.log("Mesaurement +Humd: " + event.data);
+                //console.log("Mesaurement +Humd: " + event.data);
             }
             break;
 
@@ -185,7 +185,7 @@ function onEvent(event)
             if (currentMeasurement.observing)
             {
                 currentMeasurement.addPres(event.data);
-                console.log("Mesaurement +Pres: " + event.data);
+                //console.log("Mesaurement +Pres: " + event.data);
             }
             break;
 

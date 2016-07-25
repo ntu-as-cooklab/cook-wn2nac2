@@ -72,13 +72,13 @@
               </button>
           </div>
           <div id="progress-box">
-              <div class="progress-pie-chart" data-percent="43">
+              <div class="progress-pie-chart" data-percent="0">
                   <div class="ppc-progress">
                       <div class="ppc-progress-fill"></div>
                   </div>
                   <div class="ppc-percents">
                       <div class="pcc-percents-wrapper">
-                          <span>%</span>
+                          <span>N/A</span>
                       </div>
                   </div>
               </div>
@@ -91,7 +91,7 @@
 
       <div class="card">
           <div class="measure_view-bar">
-              <i class="icon measure_view-icon measure-status-icon ion-checkmark-circled"></i>
+              <i class="icon measure_view-icon measure-status-icon ion-alert-circled"></i>
               <i class="icon measure_view-icon measure-title-icon ion-flag"></i>
               <span class="measure-title">Wind direction</span>
               <a class="toggle-button button button-small button-dark"><div><i class="icon toggle-icon ion-arrow-shrink"></i></div></a>
@@ -114,16 +114,16 @@
 
       <div class="card">
           <div class="measure_view-bar">
-              <i class="icon measure_view-icon measure-status-icon ion-checkmark-circled"></i>
+              <i class="icon measure_view-icon measure-status-icon ion-alert-circled"></i>
               <i class="icon measure_view-icon measure-title-icon ion-ios-partlysunny-outline"></i>
               <span class="measure-title">Weather type</span>
               <a class="toggle-button button button-small button-dark"><div><i class="icon toggle-icon ion-arrow-shrink"></i></div></a>
           </div>
           <div class="button-bar weather-button-bar">
-            <a class="button weather-button"><div><i class="weather-icon ion-ios-sunny-outline"></i></br>Sunny</div></a>
-            <a class="button weather-button button-calm"><div><i class="weather-icon ion-ios-partlysunny-outline"></i></br>Partly</br>cloudy</div></a>
-            <a class="button weather-button"><div><i class="weather-icon ion-ios-cloudy-outline"></i></br>Cloudy</div></a>
-            <a class="button weather-button"><div><i class="weather-icon ion-ios-rainy-outline"></i></br>Rainy</div></a>
+            <a class="button weather-button" onclick="chooseWeather(this)" data-weather="1"><div><i class="weather-icon ion-ios-sunny-outline"></i></br>Sunny</div></a>
+            <a class="button weather-button" onclick="chooseWeather(this)" data-weather="2"><div><i class="weather-icon ion-ios-partlysunny-outline"></i></br>Partly</br>cloudy</div></a>
+            <a class="button weather-button" onclick="chooseWeather(this)" data-weather="3"><div><i class="weather-icon ion-ios-cloudy-outline"></i></br>Cloudy</div></a>
+            <a class="button weather-button" onclick="chooseWeather(this)" data-weather="4"><div><i class="weather-icon ion-ios-rainy-outline"></i></br>Rainy</div></a>
           </div>
           <div class="info-box">
               <i class="icon measure_view-icon ion-ios-information-outline"></i>
@@ -133,7 +133,7 @@
 
       <div class="card">
           <div class="measure_view-bar">
-              <i class="icon measure_view-icon measure-status-icon ion-checkmark-circled"></i>
+              <i class="icon measure_view-icon measure-status-icon ion-alert-circled"></i>
               <i class="icon measure_view-icon measure-title-icon ion-ios-paperplane-outline"></i>
               <span class="measure-title">Send</span>
               <a class="toggle-button button button-small button-dark"><div><i class="icon toggle-icon ion-arrow-shrink"></i></div></a>
