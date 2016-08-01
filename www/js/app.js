@@ -3,9 +3,9 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'chart.js'])
+angular.module('starter', ['ionic', 'ngCordova','chart.js'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, GoogleMaps) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -22,6 +22,7 @@ angular.module('starter', ['ionic', 'chart.js'])
     }
 
     initSensor();
+    GoogleMaps.init();
 
   });
 
@@ -65,7 +66,8 @@ angular.module('starter', ['ionic', 'chart.js'])
       url: '/settings',
       views: {
         'settings-view' : {
-          templateUrl: 'templates/settings_view.html'
+          templateUrl: 'templates/settings_view.html',
+          controller: 'SettingsViewController'
         }
       }
     })
@@ -81,82 +83,206 @@ angular.module('starter', ['ionic', 'chart.js'])
   $urlRouterProvider.otherwise('/tab/home');
 })
 
+.factory('ConnectivityMonitor', function($rootScope, $cordovaNetwork){
+  return {
+    isOnline: function() {
+      if (ionic.Platform.isWebView()) {
+        return $cordovaNetwork.isOnline();
+      } else {
+        return navigator.onLine;
+      }
+    },
+    ifOffline: function() {
+      if (ionic.Platform.isWebView()) {
+        return !$cordovaNetwork.isOnline();
+      } else {
+        return !navigator.onLine;
+      }
+    }
+  }
+})
+
+.factory('GoogleMaps', function ($ionicLoading, $rootScope, $cordovaNetwork, ConnectivityMonitor) {
+  var baseMap = null;
+
+  function initMap()
+  {
+    var LatLng = new google.maps.LatLng(25.015, 121.539);
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      LatLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+    }, function(error) {
+      alert('Unable to get location: ' + error.message);
+    });
+
+    var mapOptions = {
+      center: LatLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      zoomControl: true
+    };
+
+    baseMap = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+    google.maps.event.addListenerOnce(baseMap, 'idle', function() {
+      var marker = new google.maps.Marker({
+        map: baseMap,
+        animation: google.maps.Animation.DROP,
+        position: LatLng
+      });
+
+      var infoWindow = new google.maps.InfoWindow({
+        content: "Current Position"
+      });
+
+      google.maps.event.addListener(marker, 'click', function() {
+        infoWindow.open(baseMap, marker);
+      })
+
+      enableMap();
+    });
+  }
+
+  function enableMap()
+  {
+    $ionicLoading.hide();
+    mapSetup();
+  }
+
+  function disableMap()
+  {
+    $ionicLoading.show({
+      template: "You must be connected to the Internet to view the map."
+    });
+  }
+
+  function loadGoogleMaps()
+  {
+    $ionicLoading.show({
+      template: "Loading Google Maps"
+    });
+
+    window.mapInit = function() {
+      initMap();
+    }
+
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.id = "googleMaps";
+    script.src = "http://maps.google.com/maps/api/js?callback=mapInit";
+    document.body.appendChild(script);
+  }
+
+  function checkLoaded()
+  {
+    if (typeof google == "undefined" || typeof google.maps == "undefined") {
+      loadGoogleMaps();
+    } else {
+      enableMap();
+    }
+  }
+
+  function addConnectivityListeners()
+  {
+    if (ionic.Platform.isWebView()) {
+      $rootScope.$on('$cordovaNetwork:online', function(event, networkState) {
+        checkLoaded();
+      });
+      $rootScope.$on('$cordovaNetwork:offline', function(event, networkState) {
+        disableMap();
+      });
+    } else {
+      window.addEventListener('online', function() {
+        checkLoaded();
+      }, false);
+      window.addEventListener('offline', function() {
+        disableMap();
+      }, false);
+    }
+  }
+
+  function mapSetup()
+  {
+    glb.markerCluster = new MarkerClusterer(baseMap, glb.clusterOptions);
+
+    setMap(baseMap);
+
+    //TEMPORARY
+    for(var x = 0; x < glb.markers.length; x++) {
+      addMarker(glb.markers[x]);
+    }
+  }
+
+  return {
+    init: function() {
+      if (typeof google == "undefined" || typeof google.maps == "undefined") {
+        console.warn("Google Maps SDK needs to be loaded.");
+
+        disableMap();
+
+        if (ConnectivityMonitor.isOnline()) {
+          loadGoogleMaps();
+        }
+      } else {
+        if (ConnectivityMonitor.isOnline()) {
+          initMap();
+          enableMap();
+        } else {
+          disableMap();
+        }
+      }
+
+      addConnectivityListeners();
+    }
+  }
+})
+
+//ADD NETWORK HANDLING LATER
 .controller('HomeViewController', function($scope, $ionicLoading, $compile) {
-  var LatLng = new google.maps.LatLng(25.015, 121.539);
-  navigator.geolocation.getCurrentPosition(function(pos) {
-    LatLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-  }, function(error) {
-    alert('Unable to get location: ' + error.message);
-  });
-
-  var mapOptions = {
-    center: LatLng,
-    zoom: 15,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-
-  $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-  google.maps.event.addListenerOnce($scope.map, 'idle', function() {
-    var marker = new google.maps.Marker({
-      map: $scope.map,
-      animation: google.maps.Animation.DROP,
-      position: LatLng
-    });
-
-    var infoWindow = new google.maps.InfoWindow({
-      content: "Current Position"
-    });
-
-    google.maps.event.addListener(marker, 'click', function() {
-      infoWindow.open($scope.map, marker);
-    })
-  });
+  // loadGoogleMaps();
 
   $scope.centerOnMe = function() {
-    if(!$scope.map) {
+    if(!glb.mapRef) {
       return;
     }
 
     navigator.geolocation.getCurrentPosition(function(pos) {
-      $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-      $scope.map.setZoom(15);
+      glb.mapRef.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+      glb.mapRef.setZoom(15);
     }, function(error) {
       alert('Unable to get location: ' + error.message);
     });
   };
 
-  $scope.$on('$ionicView.enter', function() {
-    setIsWeather(false);
-  });
-
-  glb.markerCluster = new MarkerClusterer($scope.map, glb.clusterOptions);
-
-  setMap($scope.map);
-
-  //TEMPORARY
-  for(var x = 0; x < glb.markers.length; x++) {
-    addMarker(glb.markers[x]);
-  }
-
   home_weather_main();
+
+  $scope.$on('$ionicView.enter', function() {
+    setWeatherChecks(true, false, false);
+  });
 })
 
 .controller('WeatherViewController', function($scope, $ionicLoading, $compile) {
 
-  helperInitGraphs();
+  // //TEST
+  // sendSpoofMeasurements(50);
 
   weather_main();
 
   $scope.$on('$ionicView.enter', function() {
-    setIsWeather(true);
-    setGraphSizes();
-    initGraphs();
+    setWeatherChecks(false, true, false);
+    helperInitGraphs();
   });
 })
 
 .controller('MeasureViewController', function($scope, $ionicLoading, $compile) {
   measure_main();
+
+  $scope.$on('$ionicView.enter', function() {
+    setWeatherChecks(false, false, true);
+  });
+})
+
+.controller('SettingsViewController', function($scope, $ionicLoading, $compile) {
+  settings_main();
 })
 
 .controller('UserViewController', function($scope, $ionicLoading, $compile) {

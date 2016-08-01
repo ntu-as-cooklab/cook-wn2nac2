@@ -1,12 +1,58 @@
 <ion-view>
   <ion-content>
-    <div id="settings-list" class="list">
-      <ul>
-        <li id="first-settings-item"><a href="#/tab/settings" class="settings-item"><b>placeholder</b></a></li>
-        <li><label class="toggle-switch"><input type="checkbox"><div class="slider"></div></label><b>&nbsp;&nbsp;&nbsp;placeholder</b></li>
-        <li><label class="toggle-switch"><input type="checkbox"><div class="slider"></div></label><b>&nbsp;&nbsp;&nbsp;placeholder</b></li>
-        <li><a href="#/tab/settings" class="settings-item"><b>placeholder</b></a></li>
+
+    <div class="list">
+      <ul id="settings-list">
+
+        <li id="first-settings-item"><a id="import-data-sett" class="settings-item" style="color: #cccccc;"><b>Import Data From: </b></a><a id="import-data-sett-icon" class="sett-button button button-icon icon ion-chevron-left" style="color: #cccccc;"></a></li>
+        <div>
+          <ul id="data-source-dropdown" class="dropdown-content">
+            <li style="color: #cccccc;"><label class="toggle-switch"><input type="checkbox"><div class="slider"><div class="slider-before"></div></div></label><b>&nbsp;&nbsp;&nbsp;Central Weather Bureau</b></li>
+            <li style="color: #cccccc;"><label class="toggle-switch"><input type="checkbox"><div class="slider"><div class="slider-before"></div></div></label><b>&nbsp;&nbsp;&nbsp;placeholder</b></li>
+            <li style="color: #cccccc;"><label class="toggle-switch"><input type="checkbox"><div class="slider"><div class="slider-before"></div></div></label><b>&nbsp;&nbsp;&nbsp;placeholder</b></li>
+          </ul>
+        </div>
+
+        <li><label id="show-max-all-check" class="toggle-switch"><input type="checkbox"><div class="slider"><div class="slider-before"></div></div></label>
+          <a id="show-max-sett" class="settings-item" style="color: #cccccc;"><b>&nbsp;&nbsp;&nbsp;Show Max - All Graphs</b></a>
+          <a id="show-max-sett-icon" class="sett-button button button-icon icon ion-chevron-left" style="color: #cccccc;"></a></li>
+        <div>
+          <ul id="show-max-dropdown" class="dropdown-content">
+            <li style="color: #cccccc;"><label id="max-wind-check" class="toggle-switch"><input id="max-wind-graph-check" type="checkbox"><div class="slider"><div id="max-wind-before" class="slider-before"></div></div></label><b>&nbsp;&nbsp;&nbsp;Wind Speed</b></li>
+            <li style="color: #cccccc;"><label id="max-temp-check" class="toggle-switch"><input id="max-temp-graph-check" type="checkbox"><div class="slider"><div id="max-temp-before" class="slider-before"></div></div></label><b>&nbsp;&nbsp;&nbsp;Temperature</b></li>
+            <li style="color: #cccccc;"><label id="max-humd-check" class="toggle-switch"><input id="max-humd-graph-check" type="checkbox"><div class="slider"><div id="max-humd-before" class="slider-before"></div></div></label><b>&nbsp;&nbsp;&nbsp;Humidity</b></li>
+            <li style="color: #cccccc;"><label id="max-pres-check" class="toggle-switch"><input id="max-pres-graph-check" type="checkbox"><div class="slider"><div id="max-pres-before" class="slider-before"></div></div></label><b>&nbsp;&nbsp;&nbsp;Pressure</b></li>
+          </ul>
+        </div>
+
+        <li><label id="show-min-all-check" class="toggle-switch"><input type="checkbox"><div class="slider"><div class="slider-before"></div></div></label>
+          <a id="show-min-sett" class="settings-item" style="color: #cccccc;"><b>&nbsp;&nbsp;&nbsp;Show Min - All Graphs</b></a>
+          <a id="show-min-sett-icon" class="sett-button button button-icon icon ion-chevron-left" style="color: #cccccc;"></a></li>
+        <div>
+          <ul id="show-min-dropdown" class="dropdown-content">
+            <li style="color: #cccccc;"><label id="min-wind-check" class="toggle-switch"><input id="min-wind-graph-check" type="checkbox"><div class="slider"><div id="min-wind-before" class="slider-before"></div></div></label><b>&nbsp;&nbsp;&nbsp;Wind Speed</b></li>
+            <li style="color: #cccccc;"><label id="min-temp-check" class="toggle-switch"><input id="min-temp-graph-check" type="checkbox"><div class="slider"><div id="min-temp-before" class="slider-before"></div></div></label><b>&nbsp;&nbsp;&nbsp;Temperature</b></li>
+            <li style="color: #cccccc;"><label id="min-humd-check" class="toggle-switch"><input id="min-humd-graph-check" type="checkbox"><div class="slider"><div id="min-humd-before" class="slider-before"></div></div></label><b>&nbsp;&nbsp;&nbsp;Humidity</b></li>
+            <li style="color: #cccccc;"><label id="min-pres-check" class="toggle-switch"><input id="min-pres-graph-check" type="checkbox"><div class="slider"><div id="min-pres-before" class="slider-before"></div></div></label><b>&nbsp;&nbsp;&nbsp;Pressure</b></li>
+          </ul>
+        </div>
+
+        <li><label id="show-avg-all-check" class="toggle-switch"><input type="checkbox"><div class="slider"><div class="slider-before"></div></div></label>
+          <a id="show-avg-sett" class="settings-item" style="color: #cccccc;"><b>&nbsp;&nbsp;&nbsp;Show Avg - All Graphs</b></a>
+          <a id="show-avg-sett-icon" class="sett-button button button-icon icon ion-chevron-left" style="color: #cccccc;"></a></li>
+        <div>
+          <ul id="show-avg-dropdown" class="dropdown-content">
+            <li style="color: #cccccc;"><label id="avg-wind-check" class="toggle-switch"><input id="avg-wind-graph-check" type="checkbox"><div class="slider"><div id="avg-wind-before" class="slider-before"></div></div></label><b>&nbsp;&nbsp;&nbsp;Wind Speed</b></li>
+            <li style="color: #cccccc;"><label id="avg-temp-check" class="toggle-switch"><input id="avg-temp-graph-check" type="checkbox"><div class="slider"><div id="avg-temp-before" class="slider-before"></div></div></label><b>&nbsp;&nbsp;&nbsp;Temperature</b></li>
+            <li style="color: #cccccc;"><label id="avg-humd-check" class="toggle-switch"><input id="avg-humd-graph-check" type="checkbox"><div class="slider"><div id="avg-humd-before" class="slider-before"></div></div></label><b>&nbsp;&nbsp;&nbsp;Humidity</b></li>
+            <li style="color: #cccccc;"><label id="avg-pres-check" class="toggle-switch"><input id="avg-pres-graph-check" type="checkbox"><div class="slider"><div id="avg-pres-before" class="slider-before"></div></div></label><b>&nbsp;&nbsp;&nbsp;Pressure</b></li>
+          </ul>
+        </div>
+
+        <li><a href="#/tab/weather" id="clear-graphs-sett" class="settings-item"><b>Clear Graphs</b></a></li>
+
       </ul>
     </div>
+
   </ion-content>
 </ion-view>

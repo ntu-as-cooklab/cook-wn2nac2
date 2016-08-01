@@ -9,7 +9,8 @@ var glb = {
   clusterOptions : {
     imagePath: 'images/m'
   },
-  markerCluster : null
+  markerCluster : null,
+  mapRef : null
 };
 
 //NOTE ARRAYS MARKERS AND GMARKERS SHOULD ALWAYS HAVE THE SAME CONTENTS AND THE SAME ORDER
@@ -24,9 +25,7 @@ glb.markers = [
   ['6', 'bla', 25.0359836, 121.5399926, 'test3'],
 ];
 
-var infoWindow = new google.maps.InfoWindow({
-  content: ''
-});
+var infoWindow;
 var map;
 var measureScreenIndex = 0;
 
@@ -39,14 +38,18 @@ function initSensor()
   }
 }
 
-function setMap(use) {
-  map = use;
+function setMap(a_map_moron) {
+  map = a_map_moron;
+  glb.mapRef = map;
 }
 
 //BUTTON/OTHER LISTENERS
 
 
 function addMarker(marker) {
+  infoWindow = new google.maps.InfoWindow({
+    content: ''
+  });
   var category = marker[4];
   var title = marker[1];
   var pos = new google.maps.LatLng(marker[2], marker[3]);
@@ -102,7 +105,6 @@ function unfade(element)
     op += op * 0.1;
   }, 10);
 }
-
 function fade(element) {
   var op = 0.9;
   var timer = setInterval(function() {

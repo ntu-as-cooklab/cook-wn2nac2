@@ -12,7 +12,7 @@ var WeatherHistory = [];
 
 function newMeasurementDone(measurement)
 {
-    WeatherHistory.push(currentMeasurement);
+    WeatherHistory.push(glbsens.currentMeasurement);
     var newRecordedPt = [historyCounter, measurement, false];
     glb.history_source.push(newRecordedPt);
     recordPt(newRecordedPt);
@@ -34,7 +34,9 @@ function placeOldPt(ID) {
     for (var x = 0; x < glb.history_source.length; x++) {
       if (glb.history_source[x][0] == ID) {
         var oldPtSrc = glb.history_source[x][1];
-        var oldLatLng = new google.maps.LatLng(oldPtSrc.latitute, oldPtSrc.longitude);
+        var oldLat = oldPtSrc.latitude;
+        var oldLng = oldPtSrc.longitude;
+        var oldLatLng = new google.maps.LatLng(oldLat, oldLng);
         map.panTo(oldLatLng);
         if (!glb.history_source[x][2]) {
           var newMarker = new google.maps.Marker({
@@ -62,9 +64,11 @@ function deletePt(ID) {
   for (var x = 0; x < glb.history_source.length; x++) {
     if (glb.history_source[x][0] == ID) {
       var oldPtSrc = glb.history_source[x][1];
-      var histLatLng = new google.maps.LatLng(oldPtSrc.latitute, oldPtSrc.longitude);
+      var oldLat = oldPtSrc.latitude;
+      var oldLng = oldPtSrc.longitude;
+      var oldLatLng = new google.maps.LatLng(oldLat, oldLng);
       for (var y = 0; y < glb.gmarkers.length; y++) {
-        if (glb.gmarkers[y].getPosition().equals(histLatLng)) {
+        if (glb.gmarkers[y].getPosition().equals(oldLatLng)) {
           glb.markerCluster.removeMarker(glb.gmarkers[y]);
           glb.gmarkers[y].setMap(null);
           glb.gmarkers.splice(y, 1);

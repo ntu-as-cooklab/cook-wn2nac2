@@ -4,8 +4,8 @@ var newLat, newLong, newDesc;
 
 var takeMeasurement = function()
 {
-    if ('undefined' !== typeof currentMeasurement)
-     { if (currentMeasurement.observing) currentMeasurement.stop(); else takeNewMeasurement(); }
+    if ('undefined' !== typeof glbsens.currentMeasurement)
+     { if (glbsens.currentMeasurement.observing) currentMeasurement.stop(); else takeNewMeasurement(); }
     else {
         takeNewMeasurement();
     }
@@ -13,30 +13,30 @@ var takeMeasurement = function()
 
 function takeNewMeasurement()
 {
-    currentMeasurement = new WindooMeasurement();
+    glbsens.currentMeasurement = new WindooMeasurement();
         setMeasureButtonStatus(2);
-        currentMeasurement.onFinish = function()
+        glbsens.currentMeasurement.onFinish = function()
         {
             setIconStatusChecked(document.getElementById("measure-status-icon"));
             setMeasureButtonStatus(3);
 
-            alert("Wind: " + currentMeasurement.avgWind.toFixed(2) + "\nTemp: " + currentMeasurement.avgTemp.toFixed(2) +
-            "\nHumd: " + currentMeasurement.avgHumd.toFixed(2) + "\nPres: " + currentMeasurement.avgPres.toFixed(2));
+            alert("Wind: " + glbsens.currentMeasurement.avgWind.toFixed(2) + "\nTemp: " + glbsens.currentMeasurement.avgTemp.toFixed(2) +
+            "\nHumd: " + glbsens.currentMeasurement.avgHumd.toFixed(2) + "\nPres: " + glbsens.currentMeasurement.avgPres.toFixed(2));
 
-            newMeasurementDone(currentMeasurement);
+            newMeasurementDone(glbsens.currentMeasurement);
         };
-        currentMeasurement.onTick = function()
+        glbsens.currentMeasurement.onTick = function()
         {
             onMeasurementTick();
         };
-        currentMeasurement.duration = duration;
-        currentMeasurement.start();
+        glbsens.currentMeasurement.duration = duration;
+        glbsens.currentMeasurement.start();
 }
 
 function onMeasurementTick()
 {
-    var elapsed = Date.now() - currentMeasurement.timeStarted;
-    var progress = elapsed/currentMeasurement.duration;
+    var elapsed = Date.now() - glbsens.currentMeasurement.timeStarted;
+    var progress = elapsed/glbsens.currentMeasurement.duration;
     var deg = 360 * progress;
 
     console.log("Measurement: " + (progress * 100) + "%");
@@ -44,14 +44,5 @@ function onMeasurementTick()
 
     progress > 0.5 ? $('.progress-pie-chart').addClass('gt-50') : $('.progress-pie-chart').removeClass('gt-50');
 
-    $('.ppc-percents span').html((progress*100).toFixed(0) + '%' + "<br><br>" + (elapsed/1000).toFixed(0) + "/" + currentMeasurement.duration/1000 + "s");
-}
-
-
-//TEMPORARY STUFF
-function moreTempStuff() {
-  var tempInfo = document.getElementById("user-form");
-  var username = tempInfo.elements[0].value;
-  var password = tempInfo.elements[1].value;
-  alert("username: " + username + "\npassword: " + password);
+    $('.ppc-percents span').html((progress*100).toFixed(0) + '%' + "<br><br>" + (elapsed/1000).toFixed(0) + "/" + glbsens.currentMeasurement.duration/1000 + "s");
 }

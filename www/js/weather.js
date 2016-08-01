@@ -1,11 +1,15 @@
 "use strict";
 
-var windooObservation;
-var currentMeasurement;
+var glbsens = {
+  windooObservation : null,
+  currentMeasurement : null
+}
 
 var windDisplay, tempDisplay, humdDisplay, presDisplay;
 var windGraphIcon, tempGraphIcon, humdGraphIcon, presGraphIcon;
+var isHome = true;
 var isWeather = false;
+var isMeasure = false;
 var notConnectedElement = document.getElementById("not-connected-status");
 var connectedElement = document.getElementById("connected-status");
 var calibratedElement = document.getElementById("calibrated-status");
@@ -15,8 +19,10 @@ var log = function(message)
     return function() { console.log(message); }
 }
 
-function setIsWeather(boolean) {
-  isWeather = boolean;
+function setWeatherChecks(home, weather, measure) {
+  isHome = home;
+  isWeather = weather;
+  isMeasure = measure;
 }
 
 function home_weather_main() {
@@ -29,12 +35,12 @@ function home_weather_main() {
   humdGraphIcon   = document.getElementById("humdGraphIconHome");
   presGraphIcon   = document.getElementById("presGraphIconHome");
 
-  windooObservation = new WindooObservation();
-  windooObservation.enable();
-  //windooObservation.enablePurge(60000);
+  glbsens.windooObservation = new WindooObservation();
+  glbsens.windooObservation.enable();
+  //glbsens.windooObservation.enablePurge(60000);
 
-  currentMeasurement = new WindooMeasurement();
-  //currentMeasurement.start();
+  glbsens.currentMeasurement = new WindooMeasurement();
+  //glbsens.currentMeasurement.start();
 
 }
 
@@ -50,12 +56,12 @@ function weather_main()
     presGraphIcon   = document.getElementById("presGraphIcon");
     isWeather = true;
 
-    // windooObservation = new WindooObservation();
-    // windooObservation.enable();
-    // //windooObservation.enablePurge(60000);
+    // glbsens.windooObservation = new WindooObservation();
+    // glbsens.windooObservation.enable();
+    // //glbsens.windooObservation.enablePurge(60000);
     //
-    // currentMeasurement = new WindooMeasurement();
-    // //currentMeasurement.start();
+    // glbsens.currentMeasurement = new WindooMeasurement();
+    // //glbsens.currentMeasurement.start();
 }
 
 function onEvent(event)
@@ -66,7 +72,7 @@ function onEvent(event)
             windooStatus = 0;
             onWindooStatusChanged();
             console.log("Windoo not available");
-            if (!isWeather) {
+            if (isHome) {
               if (document.getElementById("connected-status").style.visibility == "visible") fade(document.getElementById("connected-status"));
               if (document.getElementById("calibrated-status").style.visibility == "visible") fade(document.getElementById("calibrated-status"));
               unfade(document.getElementById("not-connected-status"));
@@ -78,7 +84,7 @@ function onEvent(event)
             windooStatus = 1;
             onWindooStatusChanged();
             console.log("Windoo available");
-            if (!isWeather) {
+            if (isHome) {
               if (document.getElementById("not-connected-status").style.visibility == "visible") fade(document.getElementById("not-connected-status"));
               if (document.getElementById("calibrated-status").style.visibility == "visible") fade(document.getElementById("calibrated-status"));
               unfade(document.getElementById("connected-status"));
@@ -90,7 +96,7 @@ function onEvent(event)
             windooStatus = 2;
             onWindooStatusChanged();
             console.log("Windoo calibrated");
-            if (!isWeather) {
+            if (isHome) {
               if (document.getElementById("not-connected-status").style.visibility == "visible") fade(document.getElementById("not-connected-status"));
               if (document.getElementById("connected-status").style.visibility == "visible") fade(document.getElementById("connected-status"));
               unfade(document.getElementById("calibrated-status"));
@@ -117,10 +123,11 @@ function onEvent(event)
                     windGraphIcon.classList.add     ("ion-arrow-graph-up-right");
                 }
                 windDisplay.innerHTML = event.data.toFixed(2);
-            if (windooObservation.observing)    windooObservation.addWind(event.data);
-            if (currentMeasurement.observing)   {
-              currentMeasurement.addWind(event.data);
-              plotPtOnGraph(currentMeasurement, event.type - 4);
+            if (glbsens.windooObservation.observing)    glbsens.windooObservation.addWind(event.data);
+            if (glbsens.currentMeasurement.observing)   {
+              glbsens.currentMeasurement.addWind(event.data);
+              plotPtOnGraph(event.type - 4, isWeather);
+              initGraphLines();
             }
             break;
 
@@ -137,10 +144,11 @@ function onEvent(event)
                     tempGraphIcon.classList.add     ("ion-arrow-graph-up-right");
                 }
                 tempDisplay.innerHTML = event.data.toFixed(2);
-            if (windooObservation.observing)    windooObservation.addTemp(event.data);
-            if (currentMeasurement.observing)   {
-              currentMeasurement.addTemp(event.data);
-              plotPtOnGraph(currentMeasurement, event.type - 4);
+            if (glbsens.windooObservation.observing)    glbsens.windooObservation.addTemp(event.data);
+            if (glbsens.currentMeasurement.observing)   {
+              glbsens.currentMeasurement.addTemp(event.data);
+              plotPtOnGraph(event.type - 4, isWeather);
+              initGraphLines();
             }
             break;
 
@@ -157,10 +165,11 @@ function onEvent(event)
                     humdGraphIcon.classList.add     ("ion-arrow-graph-up-right");
                 }
                 humdDisplay.innerHTML = event.data.toFixed(2);
-            if (windooObservation.observing)    windooObservation.addHumd(event.data);
-            if (currentMeasurement.observing)   {
-              currentMeasurement.addHumd(event.data);
-              plotPtOnGraph(currentMeasurement, event.type - 4);
+            if (glbsens.windooObservation.observing)    glbsens.windooObservation.addHumd(event.data);
+            if (glbsens.currentMeasurement.observing)   {
+              glbsens.currentMeasurement.addHumd(event.data);
+              plotPtOnGraph(event.type - 4, isWeather);
+              initGraphLines();
             }
             break;
 
@@ -177,10 +186,11 @@ function onEvent(event)
                     presGraphIcon.classList.add     ("ion-arrow-graph-up-right");
                 }
                 presDisplay.innerHTML = event.data.toFixed(1);
-            if (windooObservation.observing)    windooObservation.addPres(event.data);
-            if (currentMeasurement.observing)   {
-              currentMeasurement.addPres(event.data);
-              plotPtOnGraph(currentMeasurement, event.type - 4);
+            if (glbsens.windooObservation.observing)    glbsens.windooObservation.addPres(event.data);
+            if (glbsens.currentMeasurement.observing)   {
+              glbsens.currentMeasurement.addPres(event.data);
+              plotPtOnGraph(event.type - 4, isWeather);
+              initGraphLines();
             }
             break;
 
