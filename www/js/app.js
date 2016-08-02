@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('starter', ['ionic', 'ngCordova','chart.js'])
 
-.run(function($ionicPlatform, GoogleMaps) {
+.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -22,7 +22,6 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
     }
 
     initSensor();
-    //GoogleMaps.init();
 
   });
 
@@ -96,6 +95,16 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
     //      console.log(navigator.onLine);
     //    return navigator.onLine;
     //  }
+    //   } else {
+    //     return navigator.onLine;
+    //   }
+    // },
+    // isOffline: function() {
+    //   if (ionic.Platform.isWebView()) {
+    //     return !$cordovaNetwork.isOnline();
+    //   } else {
+    //     return !navigator.onLine;
+    //   }
     }
   }
 })
@@ -249,6 +258,20 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
             loadGoogleMaps();
         }
 
+        // document.addEventListener('deviceready', function() {
+        //   if (window.cordova) {
+        //     if (ConnectivityMonitor.isOnline()) {
+        //       loadGoogleMaps();
+        //     } else {
+        //       if (ConnectivityMonitor.isOnline()) {
+        //         initMap();
+        //         enableMap();
+        //       } else {
+        //         disableMap();
+        //       }
+        //     }
+        //   }
+        // }, false);
 
       addConnectivityListeners();
     }
@@ -257,8 +280,8 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
 
 //ADD NETWORK HANDLING LATER
 .controller('HomeViewController', function($scope, $ionicLoading, $compile, GoogleMaps) {
-  // loadGoogleMaps();
-GoogleMaps.init();
+
+  GoogleMaps.init();
 
   $scope.centerOnMe = function() {
     if(!glb.mapRef) {
