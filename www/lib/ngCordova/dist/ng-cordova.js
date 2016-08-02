@@ -1310,7 +1310,7 @@ angular.module('ngCordova.plugins.brightness', [])
 angular.module('ngCordova.plugins.calendar', [])
 
   .factory('$cordovaCalendar', ['$q', '$window', function ($q, $window) {
-    
+
     return {
       createCalendar: function (options) {
         var d = $q.defer(),
@@ -1924,7 +1924,7 @@ angular.module('ngCordova.plugins.contacts', [])
 angular.module('ngCordova.plugins.datePicker', [])
 
   .factory('$cordovaDatePicker', ['$window', '$q', function ($window, $q) {
-    
+
     return {
       show: function (options) {
         var q = $q.defer();
@@ -2089,7 +2089,7 @@ angular.module('ngCordova.plugins.deviceOrientation', [])
     var defaultOptions = {
       frequency: 3000 // every 3s
     };
-    
+
     return {
       getCurrentHeading: function () {
         var q = $q.defer();
@@ -2214,7 +2214,7 @@ angular.module('ngCordova.plugins.dialogs', [])
         } else {
           q.reject(message, title);
         }
-      
+
         return q.promise;
       },
 
@@ -2227,7 +2227,7 @@ angular.module('ngCordova.plugins.dialogs', [])
         } else {
           q.reject();
         }
-      
+
         return q.promise;
       },
 
@@ -2240,7 +2240,7 @@ angular.module('ngCordova.plugins.dialogs', [])
         } else {
           q.reject(message, title);
         }
-      
+
         return q.promise;
       },
 
@@ -2253,7 +2253,7 @@ angular.module('ngCordova.plugins.dialogs', [])
         } else {
           q.reject();
         }
-      
+
         return q.promise;
       },
 
@@ -2266,7 +2266,7 @@ angular.module('ngCordova.plugins.dialogs', [])
         } else {
           q.reject(value);
         }
-      
+
         return q.promise;
       }
     };
@@ -4251,7 +4251,7 @@ angular.module('ngCordova.plugins.googlePlus', [])
             q.reject(available);
           }
         });
-        
+
         return q.promise;
       }
     };
@@ -5949,8 +5949,10 @@ angular.module('ngCordova.plugins.network', [])
       * Fires offline a event
       */
     var offlineEvent = function () {
+        //console.log(navigator);
       var networkState = navigator.connection.type;
       $timeout(function () {
+          //console.log(navigator);
         $rootScope.$broadcast('$cordovaNetwork:offline', networkState);
       });
     };
@@ -5959,8 +5961,10 @@ angular.module('ngCordova.plugins.network', [])
       * Fires online a event
       */
     var onlineEvent = function () {
+        //console.log(navigator);
       var networkState = navigator.connection.type;
       $timeout(function () {
+          //console.log(navigator);
         $rootScope.$broadcast('$cordovaNetwork:online', networkState);
       });
     };
@@ -5978,6 +5982,8 @@ angular.module('ngCordova.plugins.network', [])
       },
 
       isOnline: function () {
+        //console.log(navigator);
+        //console.log(navigator.connection);
         var networkState = navigator.connection.type;
         return networkState !== Connection.UNKNOWN && networkState !== Connection.NONE;
       },
@@ -6030,9 +6036,9 @@ angular.module('ngCordova.plugins.preferences', [])
   .factory('$cordovaPreferences', ['$window', '$q', function ($window, $q) {
 
      return {
-         
+
          pluginNotEnabledMessage: 'Plugin not enabled',
-    	
+
     	/**
     	 * Decorate the promise object.
     	 * @param promise The promise object.
@@ -6048,7 +6054,7 @@ angular.module('ngCordova.plugins.preferences', [])
 	            return promise;
 	        };
     	},
-    	
+
     	/**
     	 * Store the value of the given dictionary and key.
     	 * @param key The key of the preference.
@@ -6059,15 +6065,15 @@ angular.module('ngCordova.plugins.preferences', [])
 	    store: function (key, value, dict) {
 	    	var deferred = $q.defer();
 	    	var promise = deferred.promise;
-            
+
             function ok(value){
                 deferred.resolve(value);
             }
-            
+
             function errorCallback(error){
                 deferred.reject(new Error(error));
             }
-            
+
             if($window.plugins){
                 var storeResult;
                 if(arguments.length === 3){
@@ -6075,16 +6081,16 @@ angular.module('ngCordova.plugins.preferences', [])
                 } else {
                     storeResult = $window.plugins.appPreferences.store(key, value);
                 }
-                
+
                 storeResult.then(ok, errorCallback);
             } else {
                 deferred.reject(new Error(this.pluginNotEnabledMessage));
             }
-            
+
 	    	this.decoratePromise(promise);
 	    	return promise;
 	    },
-	    
+
 	    /**
 	     * Fetch the value by the given dictionary and key.
 	     * @param key The key of the preference to retrieve.
@@ -6094,15 +6100,15 @@ angular.module('ngCordova.plugins.preferences', [])
 	    fetch: function (key, dict) {
 	    	var deferred = $q.defer();
 	    	var promise = deferred.promise;
-            
+
             function ok(value){
                 deferred.resolve(value);
             }
-            
+
             function errorCallback(error){
                 deferred.reject(new Error(error));
             }
-            
+
             if($window.plugins){
                 var fetchResult;
                 if(arguments.length === 2){
@@ -6114,11 +6120,11 @@ angular.module('ngCordova.plugins.preferences', [])
             } else {
                 deferred.reject(new Error(this.pluginNotEnabledMessage));
             }
-            
+
 	    	this.decoratePromise(promise);
 	    	return promise;
 	    },
-        
+
         /**
 	     * Remove the value by the given key.
 	     * @param key The key of the preference to retrieve.
@@ -6128,15 +6134,15 @@ angular.module('ngCordova.plugins.preferences', [])
 	    remove: function (key, dict) {
 	    	var deferred = $q.defer();
 	    	var promise = deferred.promise;
-            
+
             function ok(value){
                 deferred.resolve(value);
             }
-            
+
             function errorCallback(error){
                 deferred.reject(new Error(error));
             }
-            
+
             if($window.plugins){
                 var removeResult;
                 if(arguments.length === 2){
@@ -6148,11 +6154,11 @@ angular.module('ngCordova.plugins.preferences', [])
             } else {
                 deferred.reject(new Error(this.pluginNotEnabledMessage));
             }
-	    	
+
 	    	this.decoratePromise(promise);
 	    	return promise;
 	    },
-        
+
         /**
 	     * Show the application preferences.
          * @returns Returns a promise.
@@ -6160,22 +6166,22 @@ angular.module('ngCordova.plugins.preferences', [])
 	    show: function () {
 	    	var deferred = $q.defer();
 	    	var promise = deferred.promise;
-            
+
             function ok(value){
                 deferred.resolve(value);
             }
-            
+
             function errorCallback(error){
                 deferred.reject(new Error(error));
             }
-            
+
             if($window.plugins){
                 $window.plugins.appPreferences.show()
                     .then(ok, errorCallback);
             } else {
                 deferred.reject(new Error(this.pluginNotEnabledMessage));
             }
-	    	
+
 	    	this.decoratePromise(promise);
 	    	return promise;
 	    }

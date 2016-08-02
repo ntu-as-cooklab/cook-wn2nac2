@@ -98,6 +98,7 @@ var WindooMeasurement = function(_ = this)
     _.onFinish           = null;
     _.onTick             = null;
     _.interval           = null;
+    console.log("in measurement");
 
     _.start = function()
     {

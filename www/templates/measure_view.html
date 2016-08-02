@@ -56,7 +56,7 @@
           </div>
           <div id="timer-box">
               <div class="button-bar measure-time-button-bar ">
-                <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="15000">15 s</a>
+                <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="2000">2 s</a>
                 <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="30000">30 s</a>
                 <a class="button measure-time-button button-calm " onclick="chooseDuration(this)" data-duration="60000">1 min</a>
               </div>
@@ -138,9 +138,13 @@
               <span class="measure-title">Send</span>
               <a class="toggle-button button button-small button-dark"><div><i class="icon toggle-icon ion-arrow-shrink"></i></div></a>
           </div>
-          <button id="send-button" class="button button-balanced">
+          <button id="send-button" class="button button-balanced" onclick="sendMeasurement()">
               <i class="icon ion-ios-paperplane-outline"></i>
               SEND
+          </button>
+          <button id="send-button" class="button button-balanced" onclick="getLastMeasurement()">
+              <i class="icon ion-ios-paperplane-outline"></i>
+              GET LAST
           </button>
           <div class="info-box">
               <i class="icon measure_view-icon ion-ios-information-outline"></i>

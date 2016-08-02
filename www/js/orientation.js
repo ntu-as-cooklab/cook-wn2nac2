@@ -13,7 +13,7 @@ function startCompass()
 
 function onCompassSuccess(heading)
 {
-    //console.log("TrueHeading: " + heading.trueHeading);
+    console.log("TrueHeading: " + heading.trueHeading);
     document.getElementById("degrees-display").innerHTML = heading.trueHeading.toFixed(0) + "°";
     document.getElementById("compass-arrow").style.transform = "rotate("+(heading.trueHeading+180)+"deg)";
 }
