@@ -122,6 +122,8 @@ function initGraphs()
 
 function plotPtOnGraph(graphType, check)
 {
+     measureRef = glbsens.currentMeasurement;
+    //console.log("plotPtOnGraph");
   if (check || activated) {
     switch (graphType) {
       case 0: var graphRef = glbgraph.graphs[graphType];

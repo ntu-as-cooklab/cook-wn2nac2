@@ -31,10 +31,26 @@ var WindooObservation = function(_ = this)
             time.push(newTime)
         };
     };
-    _.addWind = add(_.wind, _.windTime);
-    _.addTemp = add(_.temp, _.tempTime);
-    _.addHumd = add(_.humd, _.humdTime);
-    _.addPres = add(_.pres, _.presTime);
+    _.addWind = function(newVal, newTime = Date.now())
+    {
+        _.wind.push(newVal)
+        _.windTime.push(newTime)
+    };
+    _.addTemp = function(newVal, newTime = Date.now())
+    {
+        _.temp.push(newVal)
+        _.tempTime.push(newTime)
+    };
+    _.addHumd = function(newVal, newTime = Date.now())
+    {
+        _.humd.push(newVal)
+        _.humdTime.push(newTime)
+    };
+    _.addPres = function(newVal, newTime = Date.now())
+    {
+        _.pres.push(newVal)
+        _.presTime.push(newTime)
+    };
 
     var purge = function(val, time)
     {
