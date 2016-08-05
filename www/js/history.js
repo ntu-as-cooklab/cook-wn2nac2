@@ -8,11 +8,11 @@ var historyCounter = 0;
 //   [5, *some windooMeasurement object, false]
 // ];
 
-var WeatherHistory = [];
+var weatherHistory = [];
 
 function newMeasurementDone(measurement)
 {
-    WeatherHistory.push(glbsens.currentMeasurement);
+    weatherHistory.push(glbsens.currentMeasurement);
     var newRecordedPt = [historyCounter, measurement, false];
     glb.history_source.push(newRecordedPt);
     recordPt(newRecordedPt);
@@ -26,7 +26,21 @@ function recordPt(ptInfo) {
   historyCounter++;
   frag.appendChild(temp.firstChild);
   var historyList = document.getElementById("history-list");
-  historyList.insertBefore(frag, historyList.firstChild);
+  if (historyList == null) {
+    glb.history_buff.push(frag);
+  } else {
+    historyList.insertBefore(frag, historyList.firstChild);
+  }
+}
+
+function loadBufferedHistory() {
+  var historyList = document.getElementById("history-list");
+  var length = glb.history_buff.length;
+  for (var x = 0; x < length; x++) {
+    var frag = glb.history_buff.splice(0,1)[0];
+    historyList.insertBefore(frag, historyList.firstChild);
+  }
+  glb.history_buff = [];
 }
 
 function placeOldPt(ID) {
@@ -48,8 +62,7 @@ function placeOldPt(ID) {
           });
           glb.gmarkers.push(newMarker);
           glb.tempMarkers.push(newMarker);
-          glb.markerCluster.clearMarkers();
-          glb.markerCluster.addMarkers(glb.tempMarkers);
+          glb.markerCluster.addMarker(newMarker);
           glb.history_source[x][2] = true;
         }
         closeNav(0);
@@ -71,10 +84,13 @@ function deletePt(ID) {
         if (glb.gmarkers[y].getPosition().equals(oldLatLng)) {
           glb.markerCluster.removeMarker(glb.gmarkers[y]);
           glb.gmarkers[y].setMap(null);
+          glb.markers.splice(y, 1);
           glb.gmarkers.splice(y, 1);
+          break;
         }
       }
       glb.history_source.splice(x, 1);
+      break;
     }
   }
   document.getElementById(String(ID)).remove();
