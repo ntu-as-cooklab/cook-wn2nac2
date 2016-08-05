@@ -35,16 +35,10 @@ function home_weather_main() {
   humdGraphIcon   = document.getElementById("humdGraphIconHome");
   presGraphIcon   = document.getElementById("presGraphIconHome");
 
-  //alert("home_weather_main");
-
   glbsens.windooObservation = new WindooObservation();
   glbsens.windooObservation.enable();
-  //glbsens.windooObservation.enablePurge(60000);
 
   glbsens.currentMeasurement = new WindooMeasurement();
-  glbsens.currentMeasurement.enable();
-  //glbsens.currentMeasurement.start();
-
 }
 
 function weather_main()
@@ -62,8 +56,7 @@ function weather_main()
     glbsens.windooObservation = new WindooObservation();
     glbsens.windooObservation.enable();
 
-    //glbsens.currentMeasurement = new WindooMeasurement();
-    //glbsens.currentMeasurement.enable();
+    glbsens.currentMeasurement = new WindooMeasurement();
 }
 
 function onEvent(event)

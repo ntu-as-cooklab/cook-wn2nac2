@@ -1,4 +1,5 @@
 document.addEventListener("deviceready", initCompass, false);
+
 function initCompass()
 {
     //console.log(navigator.compass);
