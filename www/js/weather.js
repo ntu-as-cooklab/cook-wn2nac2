@@ -35,6 +35,8 @@ function home_weather_main() {
   humdGraphIcon   = document.getElementById("humdGraphIconHome");
   presGraphIcon   = document.getElementById("presGraphIconHome");
 
+  //alert("home_weather_main");
+
   glbsens.windooObservation = new WindooObservation();
   glbsens.windooObservation.enable();
   //glbsens.windooObservation.enablePurge(60000);

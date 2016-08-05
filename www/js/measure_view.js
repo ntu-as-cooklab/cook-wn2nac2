@@ -19,6 +19,7 @@ var measureButton, timer_status;
 
 function measure_main()
 {
+    console.log("measure_main")
     sensor_status           = document.getElementById("sensor-status");
     sensor_status_icon      = document.getElementById("sensor-status-icon");
     temp_equil_status       = document.getElementById("temp-equil-status");

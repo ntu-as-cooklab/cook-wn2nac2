@@ -155,6 +155,8 @@ function initGraphs()
 //TODO: FIX THIS ON DEVICES (NEED SHI-EN)
 function plotPtOnGraph(graphType, check)
 {
+     measureRef = glbsens.currentMeasurement;
+    //console.log("plotPtOnGraph");
   if (check || activated) {
     switch (graphType) {
       case 0: var graphRef = glbgraph.graphs[graphType];
