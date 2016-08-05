@@ -28,7 +28,7 @@ function takeNewMeasurement()
         };
         glbsens.currentMeasurement.onTick = function()
         {
-            console.log("before measurement tick")
+            //console.log("before measurement tick")
             onMeasurementTick();
         };
         glbsens.currentMeasurement.duration = duration;
@@ -41,7 +41,7 @@ function onMeasurementTick()
     var progress = elapsed/glbsens.currentMeasurement.duration;
     var deg = 360 * progress;
 
-    console.log("Measurement: " + (progress * 100) + "%");
+    //console.log("Measurement: " + (progress * 100) + "%");
     $('.ppc-progress-fill').css('transform','rotate('+ deg +'deg)');
 
     progress > 0.5 ? $('.progress-pie-chart').addClass('gt-50') : $('.progress-pie-chart').removeClass('gt-50');

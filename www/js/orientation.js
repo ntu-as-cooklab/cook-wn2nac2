@@ -1,5 +1,6 @@
-document.addEventListener("deviceready", onDeviceReady, false);
-function onDeviceReady() {
+document.addEventListener("deviceready", initCompass, false);
+function initCompass()
+{
     //console.log(navigator.compass);
 }
 
@@ -14,8 +15,8 @@ function startCompass()
 function onCompassSuccess(heading)
 {
     //console.log("TrueHeading: " + heading.trueHeading);
-    //document.getElementById("degrees-display").innerHTML = heading.trueHeading.toFixed(0) + "°";
-    //document.getElementById("compass-arrow").style.transform = "rotate("+(heading.trueHeading+180)+"deg)";
+    document.getElementById("degrees-display").innerHTML = heading.trueHeading.toFixed(0) + "°";
+    document.getElementById("compass-arrow").style.transform = "rotate("+(heading.trueHeading+180)+"deg)";
 }
 
 function onCompassError()

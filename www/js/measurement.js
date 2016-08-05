@@ -1,188 +1,167 @@
 "use strict";
 
-var WindooObservation = function(_ = this)
+var WindooObservation = function()
 {
-    _.observing     = false;
-    _.wind          = [];
-    _.temp          = [];
-    _.humd          = [];
-    _.pres          = [];
-    _.windTime      = [];
-    _.tempTime      = [];
-    _.humdTime      = [];
-    _.presTime      = [];
-    _.duration      = 0;
-
-    _.enable = function()
-    {
-        _.observing = true;
-    };
-
-    _.disable = function()
-    {
-        _.observing     = false;
-    };
-
-    var add = function(val, time)
-    {
-        return function(newVal, newTime = Date.now())
-        {
-            val.push(newVal)
-            time.push(newTime)
-        };
-    };
-    _.addWind = function(newVal, newTime = Date.now())
-    {
-        _.wind.push(newVal)
-        _.windTime.push(newTime)
-    };
-    _.addTemp = function(newVal, newTime = Date.now())
-    {
-        _.temp.push(newVal)
-        _.tempTime.push(newTime)
-    };
-    _.addHumd = function(newVal, newTime = Date.now())
-    {
-        _.humd.push(newVal)
-        _.humdTime.push(newTime)
-    };
-    _.addPres = function(newVal, newTime = Date.now())
-    {
-        _.pres.push(newVal)
-        _.presTime.push(newTime)
-    };
-
-    var purge = function(val, time)
-    {
-        return function()
-        {
-            var noEarlierThan = Date.now() - _.duration;
-            while (time[0] < noEarlierThan)
-            {
-                val.shift();
-                time.shift();
-            }
-        };
-    };
-    _.purgeWind = purge(_.wind, _.windTime);
-    _.purgeTemp = purge(_.temp, _.tempTime);
-    _.purgeHumd = purge(_.humd, _.humdTime);
-    _.purgePres = purge(_.pres, _.presTime);
-    _.purge = function()
-    {
-        _.purgeWind();
-        _.purgeTemp();
-        _.purgeHumd();
-        _.purgePres();
-    };
-    var purger;
-    _.enablePurge = function(purgeInterval)
-    {
-        purger = setInterval(_.purge, purgeInterval);
-    };
-    _.disablePurge = function()
-    {
-        clearInterval(purger);
-    };
+    this.observing     = false;
+    this.wind          = [];
+    this.temp          = [];
+    this.humd          = [];
+    this.pres          = [];
+    this.windTime      = [];
+    this.tempTime      = [];
+    this.humdTime      = [];
+    this.presTime      = [];
+    this.duration      = 0;
 };
 
-var WindooMeasurement = function(_ = this)
+WindooObservation.prototype.enable = function()
 {
-    WindooObservation(_);
-    _.id                 = 0;
-    _.userId             = 0;
-    _.timeStarted        = 0;
-    _.timeFinished       = 0;
-    _.latitude           = 0;
-    _.longitude          = 0;
-    _.windDirection      = -1;
-    _.weatherType        = 0;
-    _.comment            = "";
-    _.photo              = null;
-    _.avgWind            = 0;
-    _.avgTemp            = 0;
-    _.avgHumd            = 0;
-    _.avgPres            = 0;
-    _.minWind            = 0;
-    _.minTemp            = 0;
-    _.minHumd            = 0;
-    _.minPres            = 0;
-    _.maxWind            = 0;
-    _.maxTemp            = 0;
-    _.maxHumd            = 0;
-    _.maxPres            = 0;
-    _.onFinish           = null;
-    _.onTick             = null;
-    _.interval           = null;
-    console.log("in measurement");
+    //console.log("Enabling...");
+    this.observing = true;
+};
 
-    _.start = function()
-    {
-        _.enable();
-        _.timeStarted   = Date.now();
-        _.interval = setInterval(_.onTick, 1000);
-        setTimeout(_.stop, _.duration);
-    };
+WindooObservation.prototype.disable = function()
+{
+    //console.log("Disabling...");
+    this.observing = false;
+};
 
-    _.stop = function()
-    {
-        clearInterval(_.interval);
-        _.disable();
-        _.timeFinished  = Date.now();
-        _.finalize();
-        if (typeof _.onFinish == 'function') _.onFinish();
-    };
+WindooObservation.prototype.addWind = function(newVal, newTime = Date.now())
+{
+    this.wind.push(newVal)
+    this.windTime.push(newTime)
+};
+WindooObservation.prototype.addTemp = function(newVal, newTime = Date.now())
+{
+    this.temp.push(newVal)
+    this.tempTime.push(newTime)
+};
+WindooObservation.prototype.addHumd = function(newVal, newTime = Date.now())
+{
+    this.humd.push(newVal)
+    this.humdTime.push(newTime)
+};
+WindooObservation.prototype.addPres = function(newVal, newTime = Date.now())
+{
+    this.pres.push(newVal)
+    this.presTime.push(newTime)
+};
 
-    _.finalizeWind = function()
-    {
-        _.minWind = _.wind[0]; _.maxWind = _.wind[0];
-        for (var i=0; i<_.wind.length; i++)
-        {
-            if (_.wind[i] < _.minWind) _.minWind = _.wind[i];
-            if (_.wind[i] > _.maxWind) _.maxWind = _.wind[i];
-            _.avgWind += _.wind[i];
-        }
-        _.avgWind /= _.wind.length;
-    };
-    _.finalizeTemp = function()
-    {
-        _.minTemp = _.temp[0]; _.maxTemp = _.temp[0];
-        for (var i=0; i<_.temp.length; i++)
-        {
-            if (_.temp[i] < _.minTemp) _.minTemp = _.temp[i];
-            if (_.temp[i] > _.maxTemp) _.maxTemp = _.temp[i];
-            _.avgTemp += _.temp[i];
-        }
-        _.avgTemp /= _.temp.length;
-    };
-    _.finalizeHumd = function()
-    {
-        _.minHumd = _.humd[0]; _.maxHumd = _.humd[0];
-        for (var i=0; i<_.humd.length; i++)
-        {
-            if (_.humd[i] < _.minHumd) _.minHumd = _.humd[i];
-            if (_.humd[i] > _.maxHumd) _.maxHumd = _.humd[i];
-            _.avgHumd += _.humd[i];
-        }
-        _.avgHumd /= _.humd.length;
-    };
-    _.finalizePres = function()
-    {
-        _.minPres = _.pres[0]; _.maxPres = _.pres[0];
-        for (var i=0; i<_.pres.length; i++)
-        {
-            if (_.pres[i] < _.minPres) _.minPres = _.pres[i];
-            if (_.pres[i] > _.maxPres) _.maxPres = _.pres[i];
-            _.avgPres += _.pres[i];
-        }
-        _.avgPres /= _.pres.length;
-    };
+/////////////////// WindooMeasurement class ///////////////////
 
-    _.finalize = function()
+var WindooMeasurement = function()
+{
+    WindooObservation.call(this);
+    this.id                 = 0;
+    this.userId             = 0;
+    this.timeStarted        = 0;
+    this.timeFinished       = 0;
+    this.latitude           = 0;
+    this.longitude          = 0;
+    this.windDirection      = -1;
+    this.weatherType        = 0;
+    this.comment            = "";
+    this.photo              = null;
+    this.avgWind            = 0;
+    this.avgTemp            = 0;
+    this.avgHumd            = 0;
+    this.avgPres            = 0;
+    this.minWind            = 0;
+    this.minTemp            = 0;
+    this.minHumd            = 0;
+    this.minPres            = 0;
+    this.maxWind            = 0;
+    this.maxTemp            = 0;
+    this.maxHumd            = 0;
+    this.maxPres            = 0;
+    this.onFinish           = null;
+    this.onTick             = null;
+    this.interval           = null;
+};
+
+WindooMeasurement.prototype = Object.create(WindooObservation.prototype);
+WindooMeasurement.prototype.constructor = WindooMeasurement;
+
+WindooMeasurement.prototype.start = function()
+{
+    //console.log("Starting...");
+    this.enable();
+    this.timeStarted   = Date.now();
+    this.interval = setInterval(this.onTick, 1000);
+    setTimeout( (function(measurement) { return function(){ measurement.stop(); }; })(this) , this.duration);
+};
+
+WindooMeasurement.prototype.stop = function()
+{
+    //console.log("Stopping...")
+    //console.log(this);
+    clearInterval(this.interval);
+    this.disable();
+    this.timeFinished  = Date.now();
+    this.finalize();
+    if (this.onFinish) this.onFinish();
+};
+
+WindooMeasurement.prototype.finalizeWind = function()
+{
+    this.minWind = this.wind[0];
+    this.maxWind = this.wind[0];
+    this.avgWind = 0;
+    for (var i=0; i<this.wind.length; i++)
     {
-        _.finalizeWind();
-        _.finalizeTemp();
-        _.finalizeHumd();
-        _.finalizePres();
-    };
-}
+        if (this.wind[i] < this.minWind) this.minWind = this.wind[i];
+        if (this.wind[i] > this.maxWind) this.maxWind = this.wind[i];
+        this.avgWind += this.wind[i];
+    }
+    this.avgWind /= this.wind.length;
+};
+
+WindooMeasurement.prototype.finalizeTemp = function()
+{
+    this.minTemp = this.temp[0];
+    this.maxTemp = this.temp[0];
+    this.avgTemp = 0;
+    for (var i=0; i<this.temp.length; i++)
+    {
+        if (this.temp[i] < this.minTemp) this.minTemp = this.temp[i];
+        if (this.temp[i] > this.maxTemp) this.maxTemp = this.temp[i];
+        this.avgTemp += this.temp[i];
+    }
+    this.avgTemp /= this.temp.length;
+};
+
+WindooMeasurement.prototype.finalizeHumd = function()
+{
+    this.minHumd = this.humd[0];
+    this.maxHumd = this.humd[0];
+    this.avgHumd = 0;
+    for (var i=0; i<this.humd.length; i++)
+    {
+        if (this.humd[i] < this.minHumd) this.minHumd = this.humd[i];
+        if (this.humd[i] > this.maxHumd) this.maxHumd = this.humd[i];
+        this.avgHumd += this.humd[i];
+    }
+    this.avgHumd /= this.humd.length;
+};
+
+WindooMeasurement.prototype.finalizePres = function()
+{
+    this.minPres = this.pres[0];
+    this.maxPres = this.pres[0];
+    this.avgPres = 0;
+    for (var i=0; i<this.pres.length; i++)
+    {
+        if (this.pres[i] < this.minPres) this.minPres = this.pres[i];
+        if (this.pres[i] > this.maxPres) this.maxPres = this.pres[i];
+        this.avgPres += this.pres[i];
+    }
+    this.avgPres /= this.pres.length;
+};
+
+WindooMeasurement.prototype.finalize = function()
+{
+    this.finalizeWind();
+    this.finalizeTemp();
+    this.finalizeHumd();
+    this.finalizePres();
+};

@@ -22,7 +22,10 @@ function recordPt(ptInfo) {
   var frag = document.createDocumentFragment(),
       temp = document.createElement("div");
   var ptTitle = ptInfo[1].timeStarted;
-  temp.innerHTML = '<div class="history-item"><a href="#" id=' + String(historyCounter) + ' class="history-list-item" onclick="placeOldPt(this.id)">' + ptTitle + '<button id=' + String(historyCounter) + ' class="delete-pt-button" onclick="deletePt(this.id)"><b>Delete</b></button></a></div>';
+  temp.innerHTML = '<div class="history-item">'
+  + '<a href="#" id=' + String(historyCounter) + ' class="history-list-item" onclick="placeOldPt(this.id)">' + ptTitle
+  + '<button id=' + String(historyCounter) + ' class="delete-pt-button" onclick="deletePt(this.id)"><b>Delete</b></button>'
+  + '</a></div>';
   historyCounter++;
   frag.appendChild(temp.firstChild);
   var historyList = document.getElementById("history-list");
