@@ -27,6 +27,13 @@ function measure_main()
     equil_status_icon       = document.getElementById("equil-status-icon");
     measureButton           = document.getElementById("start-button");
     timer_status            = document.getElementById("timer-status");
+
+    glbsens.windooObservation = new WindooObservation();
+    glbsens.windooObservation.enable();
+
+    glbsens.currentMeasurement = new WindooMeasurement();
+    glbsens.currentMeasurement.enable();
+
     onWindooStatusChanged(windooStatus);
     onTempEquilStatusChanged(tempEquilStatus);
     onHumdEquilStatusChanged(humdEquilStatus);

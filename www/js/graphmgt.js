@@ -7,6 +7,21 @@ var glbgraph = {
   graphData : []
 }
 
+//--- IMPORTANT ---
+//STORAGE ARRAYS AFTER CLEARING OF GRAPHS (AND RESPECTIVE DATA)
+var storeLabels = [
+  [], //WIND SPEED LABELS
+  [], //TEMPERATURE LABELS
+  [], //HUMIDITY LABELS
+  []  //PRESSURE LABELS
+];
+var storeData = [
+  [], //WIND SPEED DATA
+  [], //TEMPERATURE DATA
+  [], //HUMIDITY DATA
+  []  //PRESSURE DATA
+];
+
 var ctx;
 var measureRef;
 var alreadyInit = false;
@@ -14,6 +29,7 @@ var activated = false;
 var showMax = [false, false, false, false];
 var showMin = [false, false, false, false];
 var showAvg = [false, false, false, false];
+var clearedDataReady = false;
 
 function helperInitGraphs()
 {
@@ -32,7 +48,7 @@ function helperInitGraphs()
       []  //PRESSURE MEASUREMENT
     ];
     var origLineDraw = Chart.controllers.line.prototype.draw;
-    //RUNS 172 TIMES FOR SOME REASON...
+    //RUNS 172 OR SO TIMES FOR SOME REASON...
     //TODO: FIX ABOVE PROBLEM (IF NECESSARY)
     Chart.helpers.extend(Chart.controllers.line.prototype, {
       draw: function() {
@@ -113,13 +129,30 @@ function initGraphs()
       data: data,
       options: {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [{
+            display: true,
+            ticks: {
+              suggestedMin: 0,
+              beginAtZero: true
+            }
+          }],
+          xAxes: [{
+            display: true,
+            ticks: {
+              suggestedMin: 0,
+              beginAtZero: true
+            }
+          }]
+        }
       }
     });
   }
   initGraphLines();
 }
 
+//TODO: FIX THIS ON DEVICES (NEED SHI-EN)
 function plotPtOnGraph(graphType, check)
 {
      measureRef = glbsens.currentMeasurement;
@@ -164,12 +197,15 @@ function clearGraphs()
 {
   for (var x = 0; x < glbgraph.graphs.length; x++) {
     var graphRef = glbgraph.graphs[x];
+    storeLabels[x] = glbgraph.graphLabels[x];
     glbgraph.graphLabels[x] = [];
     graphRef.labels = glbgraph.graphLabels[x];
+    storeData[x] = glbgraph.graphData[x];
     glbgraph.graphData[x] = [];
     graphRef.data.datasets[0].data = glbgraph.graphData[x];
     graphRef.update();
   }
+  clearedDataReady = true;
 }
 
 function toggleMax(graphNum, show)
@@ -291,7 +327,23 @@ function drawSigPts(graphNum, sigPt)
     data: data,
     options: {
       responsive: true,
-      maintainAspectRatio: false
+      maintainAspectRatio: false,
+      scales: {
+        yAxes: [{
+          display: true,
+          ticks: {
+            suggestedMin: 0,
+            beginAtZero: true
+          }
+        }],
+        xAxes: [{
+          display: true,
+          ticks: {
+            suggestedMin: 0,
+            beginAtZero: true
+          }
+        }]
+      }
     }
   });
 }

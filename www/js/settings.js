@@ -1,8 +1,12 @@
 "use strict";
 
+var connectivityMonitor;
+//VARS FOR INCLUDED DATA SETS
 var settDataSource;
 var settDataSourceIsOpen = false;
-//VARS FOR INCLUDED DATA SETS
+var settSourceCwb;
+var settSourceCwbUse = false;
+//VARS FOR DATA VIEWS
 var settShowMax;
 var settShowMaxIsOpen = false;
 var settMaxWind;
@@ -21,6 +25,7 @@ var settAvgWind;
 var settAvgTemp;
 var settAvgHumd;
 var settAvgPres;
+var settReloadData;
 var settClearGraphs;
 var allMaxCheck = false;
 var allMinCheck = false;
@@ -28,9 +33,12 @@ var allAvgCheck = false;
 var toggleSwitches;
 var sliderBefores;
 
-function settings_main() {
-  settDataSource = document.getElementById("import-data-sett");
+function settings_main(ConnectivityMonitor) {
+  connectivityMonitor = ConnectivityMonitor;
   //VARS FOR INCLUDED DATA SETS
+  settDataSource = document.getElementById("import-data-sett");
+  settSourceCwb = document.getElementById("data-source-cwb");
+  //VARS FOR DATA VIEWS
   settShowMax = document.getElementById("show-max-sett");
   settMaxWind = document.getElementById("max-wind-check");
   settMaxTemp = document.getElementById("max-temp-check");
@@ -46,6 +54,7 @@ function settings_main() {
   settAvgTemp = document.getElementById("avg-temp-check");
   settAvgHumd = document.getElementById("avg-humd-check");
   settAvgPres = document.getElementById("avg-pres-check");
+  settReloadData = document.getElementById("reload-data-sett");
   settClearGraphs = document.getElementById("clear-graphs-sett");
   toggleSwitches = document.getElementsByClassName("toggle-switch");
   sliderBefores = document.getElementsByClassName("slider-before");
@@ -102,6 +111,21 @@ function settings_main() {
     document.getElementById("show-avg-dropdown").classList.toggle("show-dropdown");
   });
 
+  settReloadData.addEventListener('click', function()
+  {
+    try {
+      loadServerData(connectivityMonitor);
+      glb.loadDataSucc = true;
+    } catch(err) {
+      if (err == "noInternet") {
+        alert("Not connected to Internet, data loading failed.");
+      } else {
+        alert("An error occurred. Data not loaded.");
+      }
+      glb.loadDataSucc = false;
+    }
+  });
+
   settClearGraphs.addEventListener('click', function()
   {
     clearGraphs();
@@ -110,7 +134,8 @@ function settings_main() {
   manageToggleSwitches();
 }
 
-function manageToggleSwitches() {
+function manageToggleSwitches()
+{
   for (var x = 0; x < toggleSwitches.length; x++) {
     (function() {
       var idx = x;
@@ -119,6 +144,57 @@ function manageToggleSwitches() {
       });
     }());
   }
+
+  //LOADING OLD DATA POINTS (IN PLACE OF INCOMPLETE/NULL/ETC. NEW ONES) FUNCTIONALITY POSSIBLY HERE
+  settSourceCwb.addEventListener('click', function()
+  {
+    if (!glb.loadDataSucc) {
+      try {
+        loadServerData(connectivityMonitor);
+        glb.loadDataSucc = true;
+      } catch(err) {
+        if (err == "noInternet") {
+          alert("Not connected to Internet, data loading failed.");
+        } else {
+          alert("An error occurred. Data not loaded.");
+        }
+        glb.loadDataSucc = false;
+        document.getElementById("source-cwb-check").checked = false;
+        document.getElementById("source-cwb-before").classList.remove("slider-after");
+        return;
+      }
+    }
+
+    settSourceCwbUse = !settSourceCwbUse;
+    if (settSourceCwbUse) {
+      for (var x = 0; x < cwbDataLocations.length; x++) {
+        //NOTE USE cwbDataLocations FOR LOCATIONS AND cmbServerData FOR DATA VALUES
+        var newMarkerInfo = [glb.markerCounter, cwbDataLocations[x][0], cwbDataLocations[x][1], cwbDataLocations[x][2], 'cwb'];
+        glb.markerCounter++;
+        glb.markers.push(newMarkerInfo);
+        addMarker(newMarkerInfo);
+      }
+      var selectElem = document.getElementById("map-overlay-select");
+      var newOption = document.createElement("option");
+      newOption.class = "select-data-option";
+      newOption.value = "cwb";
+      newOption.text = "Central Weather Bureau";
+      selectElem.add(newOption);
+    } else {
+      for (var x = 0; x < cwbDataLocations.length; x++) {
+        removeMarker('cwb');
+      }
+      var selectElem = document.getElementById("map-overlay-select");
+      selectElem.selectedIndex = 0;
+      filterMarkers('default');
+      for (var y = 0; y < selectElem.length; y++) {
+        if (selectElem.options[y].value == "cwb") {
+          selectElem.remove(y);
+          break;
+        }
+      }
+    }
+  });
 
   //NOTE 0 = WIND SPEED, 1 = TEMPERATURE, 2 = HUMIDITY, 3 = PRESSURE
   document.getElementById("show-max-all-check").addEventListener('click', function()
@@ -218,42 +294,54 @@ function manageToggleSwitches() {
   });
 
   //NOTE 0 = WIND SPEED, 1 = TEMPERATURE, 2 = HUMIDITY, 3 = PRESSURE
-  settMaxWind.addEventListener('click', function() {
+  settMaxWind.addEventListener('click', function()
+  {
     toggleMax(0);
   });
-  settMaxTemp.addEventListener('click', function() {
+  settMaxTemp.addEventListener('click', function()
+  {
     toggleMax(1);
   });
-  settMaxHumd.addEventListener('click', function() {
+  settMaxHumd.addEventListener('click', function()
+  {
     toggleMax(2);
   });
-  settMaxPres.addEventListener('click', function() {
+  settMaxPres.addEventListener('click', function()
+  {
     toggleMax(3);
   });
 
-  settMinWind.addEventListener('click', function() {
+  settMinWind.addEventListener('click', function()
+  {
     toggleMin(0);
   });
-  settMinTemp.addEventListener('click', function() {
+  settMinTemp.addEventListener('click', function()
+  {
     toggleMin(1);
   });
-  settMinHumd.addEventListener('click', function() {
+  settMinHumd.addEventListener('click', function()
+  {
     toggleMin(2);
   });
-  settMinPres.addEventListener('click', function() {
+  settMinPres.addEventListener('click', function()
+  {
     toggleMin(3);
   });
 
-  settAvgWind.addEventListener('click', function() {
+  settAvgWind.addEventListener('click', function()
+  {
     toggleAvg(0);
   });
-  settAvgTemp.addEventListener('click', function() {
+  settAvgTemp.addEventListener('click', function()
+  {
     toggleAvg(1);
   });
-  settAvgHumd.addEventListener('click', function() {
+  settAvgHumd.addEventListener('click', function()
+  {
     toggleAvg(2);
   });
-  settAvgPres.addEventListener('click', function() {
+  settAvgPres.addEventListener('click', function()
+  {
     toggleAvg(3);
   });
 

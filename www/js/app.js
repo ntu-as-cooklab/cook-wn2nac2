@@ -85,31 +85,23 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
 .factory('ConnectivityMonitor', function($rootScope, $cordovaNetwork){
   return {
     isOnline: function() {
-      //if (ionic.Platform.isWebView()) {
-         //console.log("webView");
-         //console.log($cordovaNetwork);
-         // console.log($cordovaNetwork.isOnline());
+      if (ionic.Platform.isWebView()) {
         return $cordovaNetwork.isOnline();
-      //} else {
-    //      console.log("notwebView");
-    //      console.log(navigator.onLine);
-    //    return navigator.onLine;
-    //  }
-    //   } else {
-    //     return navigator.onLine;
-    //   }
-    // },
-    // isOffline: function() {
-    //   if (ionic.Platform.isWebView()) {
-    //     return !$cordovaNetwork.isOnline();
-    //   } else {
-    //     return !navigator.onLine;
-    //   }
+      } else {
+       return navigator.onLine;
+     }
+    },
+    isOffline: function() {
+      if (ionic.Platform.isWebView()) {
+        return !$cordovaNetwork.isOnline();
+      } else {
+        return !navigator.onLine;
+      }
     }
   }
 })
 
-.factory('GoogleMaps', function ($ionicLoading, $rootScope, $cordovaNetwork, ConnectivityMonitor) {
+.factory('GoogleMaps', function ($rootScope, $ionicLoading, $cordovaNetwork, ConnectivityMonitor) {
   var baseMap = null;
 
   function initMap()
@@ -125,7 +117,8 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
       center: LatLng,
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
-      zoomControl: true
+      zoomControl: true,
+      streetViewControl: false
     };
 
     baseMap = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -192,20 +185,16 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
   {
     if (ionic.Platform.isWebView()) {
       $rootScope.$on('$cordovaNetwork:online', function(event, networkState) {
-          //console.log(navigator);
         checkLoaded();
       });
       $rootScope.$on('$cordovaNetwork:offline', function(event, networkState) {
-          //console.log(navigator);
         disableMap();
       });
     } else {
       window.addEventListener('online', function() {
-          //console.log(navigator);
         checkLoaded();
       }, false);
       window.addEventListener('offline', function() {
-          //console.log(navigator);
         disableMap();
       }, false);
     }
@@ -229,49 +218,24 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
         console.warn("Google Maps SDK needs to be loaded.");
 
         disableMap();
-}
-        //loadGoogleMaps();
+      }
 
-        //console.log(ConnectivityMonitor);
-        //if (ConnectivityMonitor.isOnline()) ;
-
- if (window.cordova) {
-
-        document.addEventListener("deviceready", function () {
-         // work only on device
-
-
-         //console.log("deviceready");
-
-
-             //console.log("deviceready and window.cordova");
-
-             if (ConnectivityMonitor.isOnline()) {
-               loadGoogleMaps();
-             } else {
-               disableMap();
-             }
-        }, false);
-
-}
-        else {
+      if (window.cordova) {
+        document.addEventListener('deviceready', function() {
+          if (ConnectivityMonitor.isOnline()) {
             loadGoogleMaps();
-        }
-
-        // document.addEventListener('deviceready', function() {
-        //   if (window.cordova) {
-        //     if (ConnectivityMonitor.isOnline()) {
-        //       loadGoogleMaps();
-        //     } else {
-        //       if (ConnectivityMonitor.isOnline()) {
-        //         initMap();
-        //         enableMap();
-        //       } else {
-        //         disableMap();
-        //       }
-        //     }
-        //   }
-        // }, false);
+          } else {
+            if (ConnectivityMonitor.isOnline()) {
+              initMap();
+              enableMap();
+            } else {
+              disableMap();
+            }
+          }
+        }, false);
+      } else {
+        loadGoogleMaps();
+      }
 
       addConnectivityListeners();
     }
@@ -279,7 +243,7 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
 })
 
 //ADD NETWORK HANDLING LATER
-.controller('HomeViewController', function($scope, $ionicLoading, $compile, GoogleMaps) {
+.controller('HomeViewController', function($rootScope, $scope, $ionicLoading, $cordovaNetwork, $compile, GoogleMaps, ConnectivityMonitor) {
 
   GoogleMaps.init();
 
@@ -296,10 +260,39 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
     });
   };
 
+  if (ionic.Platform.isWebView()) {
+    $rootScope.$on('$cordovaNetwork:online', function(event, networkState) {
+      glb.loadDataSucc = true;
+    });
+    $rootScope.$on('$cordovaNetwork:offline', function(event, networkState) {
+      glb.loadDataSucc = false;
+    });
+  } else {
+    window.addEventListener('online', function() {
+      glb.loadDataSucc = true;
+    }, false);
+    window.addEventListener('offline', function() {
+      glb.loadDataSucc = false;
+    }, false);
+  }
+
+  try {
+    loadServerData(ConnectivityMonitor);
+    glb.loadDataSucc = true;
+  } catch(err) {
+    if (err == "noInternet") {
+      alert("Not connected to Internet, data loading failed. Please retry from Settings tab under 'Import Data From:'.");
+    } else {
+      alert("An error occurred. Data not loaded.");
+    }
+    glb.loadDataSucc = false;
+  }
+
   home_weather_main();
 
   $scope.$on('$ionicView.enter', function() {
     setWeatherChecks(true, false, false);
+    loadBufferedHistory();
   });
 })
 
@@ -317,6 +310,7 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
 })
 
 .controller('MeasureViewController', function($scope, $ionicLoading, $compile) {
+
   measure_main();
 
   $scope.$on('$ionicView.enter', function() {
@@ -324,8 +318,10 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
   });
 })
 
-.controller('SettingsViewController', function($scope, $ionicLoading, $compile) {
-  settings_main();
+.controller('SettingsViewController', function($scope, $ionicLoading, $compile, ConnectivityMonitor) {
+
+  settings_main(ConnectivityMonitor);
+
 })
 
 .controller('UserViewController', function($scope, $ionicLoading, $compile) {
