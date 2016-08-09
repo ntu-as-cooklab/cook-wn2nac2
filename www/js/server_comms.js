@@ -28,6 +28,7 @@ function getLastMeasurement()
         });
 }
 
+//TODO: FURTHER TESTING WITH SERVER DATA AND CHANGE TO FINAL VERSION
 function loadServerData(ConnectivityMonitor)
 {
   document.addEventListener('deviceready', function() {
@@ -42,7 +43,13 @@ function loadServerData(ConnectivityMonitor)
       alert("at right before post");
       $.post( "http://mospc.cook.as.ntu.edu.tw/getspecdata.php", {label : dataSet}, function( data ) {
         alert(data);
-        // tempData = JSON.parse(data);
+        tempData = JSON.parse(data);
+
+        alert(tempData);
+
+        tempData = filterCwbData(tempData);
+        alert(tempData[0]);
+
         if (cwbServerData != []) {
           oldCwbServerData = cwbServerData;
         }
@@ -69,4 +76,40 @@ function loadServerData(ConnectivityMonitor)
   //   console.log(tempData);
   // });
 
+}
+
+function filterCwbData(directData)
+{
+  var arr = [];
+  var pointer = 0;
+  var lap = 0;
+  var name;
+  for (var x = 0; x < cwbDataLocations.length; x++) {
+    var currPointer = pointer;
+    name = cwbDataLocations[x][0];
+    var cont = true;
+    while (cont) {
+      if (pointer == currPointer) lap++;
+      if (lap == 2) {
+        arr.push([name, cwbDataLocations[x][1], cwbDataLocations[x][2], 'cwb', -1, -1, -1, -1, -1, -1, -1]);
+        lap = 0;
+        break;
+      }
+      if (directData[pointer][1] == name) {
+        var combinedInfo = [name, cwbDataLocations[x][1], cwbDataLocations[x][2], 'cwb',
+          directData[pointer][5], directData[pointer][3], directData[pointer][4], directData[pointer][2],
+          directData[pointer][6], -1, directData[pointer][0]];
+        arr.push(combinedInfo);
+        pointer = currPointer;
+        lap = 0;
+        cont = false;
+      }
+      if (pointer == (directData.length - 1)) {
+        pointer = 0;
+      } else {
+        pointer++;
+      }
+    }
+  }
+  return arr;
 }

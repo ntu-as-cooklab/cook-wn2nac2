@@ -207,8 +207,18 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
     setMap(baseMap);
 
     //TEMPORARY
-    for(var x = 0; x < glb.markers.length; x++) {
-      addMarker(glb.markers[x]);
+    var testMarkers = [
+      ['bla', 25.0350836, 121.5343226, 'test1', 0, 0, 0, 0, 0, 0, 0],
+      ['bla', 25.1050836, 121.5233226, 'test2', 0, 0, 0, 0, 0, 0, 0],
+      ['bla', 25.0750836, 121.5353445, 'test2', 0, 0, 0, 0, 0, 0, 0],
+      ['bla', 25.0345836, 121.6353226, 'test1', 0, 0, 0, 0, 0, 0, 0],
+      ['bla', 25.0350996, 121.5352226, 'test3', 0, 0, 0, 0, 0, 0, 0],
+      ['bla', 25.0351236, 121.5113226, 'test3', 0, 0, 0, 0, 0, 0, 0],
+      ['bla', 25.0359836, 121.5399926, 'test3', 0, 0, 0, 0, 0, 0, 0]
+    ];
+
+    for(var x = 0; x < testMarkers.length; x++) {
+      addAppMarker(testMarkers[x]);
     }
   }
 

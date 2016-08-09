@@ -1,8 +1,6 @@
 "use strict";
 
 var glb = {
-  //TODO: CHANGE THIS TO CORRESPONDING NUMBER REGARDING glb.markers ARRAY
-  markerCounter : 7,
   markers : [],
   gmarkers : [],
   history_source : [],
@@ -74,20 +72,11 @@ var cwbDataLocations = [
   ["C0D390", 24.8001, 121.1657],
   ["C0C480", 24.9943, 121.3150]
 ];
+//TODO: GET RID OF THIS TEST GARBAGE
 var cwbServerData = [];
 var oldCwbServerData = [];
 
-//NOTE ARRAYS MARKERS AND GMARKERS SHOULD ALWAYS HAVE THE SAME CONTENTS AND THE SAME ORDER
-//TODO: REFILL WITH RELEASE PLACEHOLDER MARKERS AND ACTUAL DATA MARKERS
-glb.markers = [
-  ['0', 'bla', 25.0350836, 121.5343226, 'test1'],
-  ['1', 'bla', 25.1050836, 121.5233226, 'test2'],
-  ['2', 'bla', 25.0750836, 121.5353445, 'test2'],
-  ['3', 'bla', 25.0345836, 121.6353226, 'test1'],
-  ['4', 'bla', 25.0350996, 121.5352226, 'test3'],
-  ['5', 'bla', 25.0351236, 121.5113226, 'test3'],
-  ['6', 'bla', 25.0359836, 121.5399926, 'test3'],
-];
+//------------------------------------------------------------------------------
 
 var infoWindow;
 var map;
@@ -109,16 +98,34 @@ function setMap(a_map_moron) {
 
 /*
 NOTE ONLY ADDS TO glb.gmarkers
-param: array for glb.markers
+param: array with necessary info (see below)
+
+NOTE ARRAYS MARKERS AND GMARKERS SHOULD ALWAYS HAVE THE SAME CONTENTS AND THE SAME ORDER
+NOTE ARRAY INDEX: 0 - DESCRIPTION
+                  1 - LATITUDE
+                  2 - LONGITUDE
+                  3 - CATEGORY
+                  4 - WIND SPEED DATA
+                  5 - TEMPERATURE DATA
+                  6 - HUMIDITY DATA
+                  7 - PRESSURE DATA
+                  8 - WIND DIRECTION DATA
+                  9 - WEATHER TYPE
+                  10 - TIMESTAMP
 */
-function addMarker(marker) {
+function addAppMarker(marker, show) {
   infoWindow = new google.maps.InfoWindow({
     content: ''
   });
-  var category = marker[4];
-  var title = marker[1];
-  var pos = new google.maps.LatLng(marker[2], marker[3]);
-  var content = marker[1];
+  var category = marker[3];
+  var title = marker[0];
+  var pos = new google.maps.LatLng(marker[1], marker[2]);
+  var windDirStr = parseWindDir(marker[8]);
+  var weatherStr = parseWeather(marker[9]);
+  var content = "<p>WindSpd: " + marker[4] + ", Temp: " + marker[5] + ",<br/>" +
+    "Humd: " + marker[6] + ", Pres: " + marker[7] + ",<br/>" +
+    "WindDir: " + windDirStr + ", Weather: " + weatherStr + ",<br/>" +
+    "taken at: " + marker[10] + "</p>";
 
   var newMarker = new google.maps.Marker({
     title: title,
@@ -139,30 +146,27 @@ function addMarker(marker) {
     }
   })(newMarker, content));
 
-  newMarker.setVisible(false);
+  if (!show) {
+    newMarker.setVisible(false);
+  } else {
+    newMarker.setVisible(true);
+  }
+
+  return newMarker;
 }
 /*
-NOTE REMOVES FROM BOTH glb.markers AND glb.gmarkers
+NOTE REMOVES FROM glb.gmarkers
 param: identifier for element to be removed
 */
-function removeMarker(selectValue)
+function removeAppMarker(lat, lon)
 {
-  switch (selectValue) {
-    case 'cwb': for (var x = 0; x < glb.markers.length; x++) {
-                  if (glb.markers[x][4] == selectValue) {
-                    var pos = new google.maps.LatLng(glb.markers[x][2], glb.markers[x][3]);
-                    for (var y = 0; y < glb.gmarkers.length; y++) {
-                      if (glb.gmarkers[y].getPosition().equals(pos)) {
-                        glb.gmarkers[y].setMap(null);
-                        glb.gmarkers.splice(y, 1);
-                        break;
-                      }
-                    }
-                    glb.markers.splice(x, 1);
-                    break;
-                  }
-                }
-                break;
+  var pos = new google.maps.LatLng(lat, lon);
+  for (var y = 0; y < glb.gmarkers.length; y++) {
+    if (glb.gmarkers[y].getPosition().equals(pos)) {
+      glb.gmarkers[y].setMap(null);
+      glb.gmarkers.splice(y, 1);
+      break;
+    }
   }
 }
 
@@ -179,6 +183,72 @@ function filterMarkers(category)
 
   glb.markerCluster.clearMarkers();
   if (category != 'default') glb.markerCluster.addMarkers(glb.tempMarkers);
+}
+
+function parseWindDir(windDir)
+{
+  var wdStr;
+  if (windDir > 348 || windDir < 11) {
+    wdStr = "N";
+    return wdStr;
+  } else if (windDir > 11 && windDir < 33) {
+    wdStr = "NNE";
+    return wdStr;
+  } else if (windDir > 33 && windDir < 56) {
+    wdStr = "NE";
+    return wdStr;
+  } else if (windDir > 56 && windDir < 78) {
+    wdStr = "ENE";
+    return wdStr;
+  } else if (windDir > 78 && windDir < 101) {
+    wdStr = "E";
+    return wdStr;
+  } else if (windDir > 101 && windDir < 123) {
+    wdStr = "ESE";
+    return wdStr;
+  } else if (windDir > 123 && windDir < 146) {
+    wdStr = "SE";
+    return wdStr;
+  } else if (windDir > 146 && windDir < 168) {
+    wdStr = "SSE";
+    return wdStr;
+  } else if (windDir > 168 && windDir < 191) {
+    wdStr = "S";
+    return wdStr;
+  } else if (windDir > 191 && windDir < 213) {
+    wdStr = "SSW";
+    return wdStr;
+  } else if (windDir > 213 && windDir < 236) {
+    wdStr = "SW";
+    return wdStr;
+  } else if (windDir > 236 && windDir < 258) {
+    wdStr = "WSW";
+    return wdStr;
+  } else if (windDir > 258 && windDir < 281) {
+    wdStr = "W";
+    return wdStr;
+  } else if (windDir > 281 && windDir < 303) {
+    wdStr = "WNW";
+    return wdStr;
+  } else if (windDir > 303 && windDir < 326) {
+    wdStr = "NW";
+    return wdStr;
+  } else {
+    wdStr = "NNW";
+    return wdStr;
+  }
+}
+function parseWeather(weather)
+{
+  var wStr;
+  switch (weather) {
+    case 0: wStr = "Sunny";
+    case 1: wStr = "Partly Cloudy";
+    case 2: wStr = "Cloudy";
+    case 3: wStr = "Rainy";
+    default: return "N/A";
+  }
+  return wStr;
 }
 
 function unfade(element)
