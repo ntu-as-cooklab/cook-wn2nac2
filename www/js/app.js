@@ -56,7 +56,7 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
       url: '/measure',
       views: {
         'measure-view' : {
-          templateUrl: 'templates/measure_view.html',
+          templateUrl: 'templates/measure_view_2.html',
           controller: 'MeasureViewController'
         }
       }
