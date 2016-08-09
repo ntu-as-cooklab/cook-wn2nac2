@@ -9,14 +9,23 @@ function sendMeasurement()
         });
 }
 
-var lastMeasurement;
+function getMeasurement(begin, end)
+{
+    $.get( "http://mospc.cook.as.ntu.edu.tw/get4.php", { begin: begin, end: end },
+        function( data ) {
+            var measurement = JSON.parse(data);
+            console.log(measurement);
+        });
+}
 
+var lastMeasurement;
 function getLastMeasurement()
 {
-    $.get( "http://mospc.cook.as.ntu.edu.tw/getlast.php", null, function( data ) {
-  lastMeasurement = JSON.parse(data);
-  console.log(lastMeasurement);
-});
+    $.get( "http://mospc.cook.as.ntu.edu.tw/getlast.php", null,
+        function( data ) {
+            lastMeasurement = JSON.parse(data);
+            console.log(lastMeasurement);
+        });
 }
 
 function loadServerData(ConnectivityMonitor)
