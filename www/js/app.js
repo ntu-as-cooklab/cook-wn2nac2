@@ -288,10 +288,9 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
     glb.loadDataSucc = false;
   }
 
-  home_weather_main();
-
   $scope.$on('$ionicView.enter', function() {
     setWeatherChecks(true, false, false);
+    home_weather_main();
     loadBufferedHistory();
   });
 })
@@ -301,10 +300,9 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
   // //TEST
   // sendSpoofMeasurements(50);
 
-  weather_main();
-
   $scope.$on('$ionicView.enter', function() {
     setWeatherChecks(false, true, false);
+    weather_main();
     helperInitGraphs();
   });
 })

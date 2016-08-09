@@ -1,24 +1,68 @@
+<template id="weather_frame">
+    <div class="measure_view-bar">
+        <i class="icon measure_view-icon measure-status-icon ion-alert-circled"></i>
+        <i class="icon measure_view-icon measure-title-icon ion-ios-partlysunny-outline"></i>
+        <span class="measure-title">Weather type</span>
+        <a class="toggle-button button button-small button-dark"><div><i class="icon toggle-icon ion-arrow-shrink"></i></div></a>
+    </div>
+    <div class="button-bar weather-button-bar">
+      <a class="button weather-button" onclick="chooseWeather(this)" data-weather="1"><div><i class="weather-icon ion-ios-sunny-outline"></i></br>Sunny</div></a>
+      <a class="button weather-button" onclick="chooseWeather(this)" data-weather="2"><div><i class="weather-icon ion-ios-partlysunny-outline"></i></br>Partly</br>cloudy</div></a>
+      <a class="button weather-button" onclick="chooseWeather(this)" data-weather="3"><div><i class="weather-icon ion-ios-cloudy-outline"></i></br>Cloudy</div></a>
+      <a class="button weather-button" onclick="chooseWeather(this)" data-weather="4"><div><i class="weather-icon ion-ios-rainy-outline"></i></br>Rainy</div></a>
+    </div>
+    <div class="info-box">
+        <i class="icon measure_view-icon ion-ios-information-outline"></i>
+        <div>Choose a weather type according to your observation. Optionally, attach a photo.</div>
+    </div>
+</template>
+
 <ion-view>
     <ion-content class="measure_view_content has-tabs-top">
         <div class="measure_view_container">
             <div class="sensor_bar row">
-
                 <a class="col button measure_view_button">
                     <span id="sensor-status">Sensor calibrated</span>
                 </a>
-                
                 <a class="col button measure_view_button">Equilibrium</a>
             </div>
             <div class="timed_measurement_bar row">
-                <a class="col button measure_view_button">Timed measurement</a>
+                <a class="col button measure_view_button">
+                    <span class="row">
+                    <span class="col">
+                        <div class="measure_small_title">Wind speed</div>
+                        <div class="measure_small_disp" id="humdDisplay">N/A</div>
+                        <div class="measure_small_unit">m/s</div>
+                    </span>
+                    <span class="col">
+                        <div class="measure_small_title">Temperature</div>
+                        <div class="measure_small_disp" id="humdDisplay">N/A</div>
+                        <div class="measure_small_unit">°C</div>
+                    </span>
+                    <span class="col">
+                        <div class="measure_small_title">Humidity</div>
+                        <div class="measure_small_disp" id="humdDisplay">N/A</div>
+                        <div class="measure_small_unit">%RH</div>
+                    </span>
+                    <span class="col">
+                        <div class="measure_small_title">Pressure</div>
+                        <div class="measure_small_disp" id="humdDisplay">N/A</div>
+                        <div class="measure_small_unit">hPA</div>
+                    </span>
+                </span>
+                </a>
             </div>
             <div class="measurement_bar row">
-                <a class="col button measure_view_button">Wind direction</a>
-                <a class="col button measure_view_button">Weather type</a>
+                <a class="col button measure_view_button">
+                    Wind direction
+                    <div id="degrees-display">
+                        0° N
+                    </div>
+                </a>
+                <a class="col button measure_view_button" onclick="measure_tab_weather()">Weather type</a>
                 <a class="col button measure_view_button">Send</a>
             </div>
-            <div class="measure_view_disp">
-                AAAAA
+            <div id="measure_view_disp" class="measure_view_disp">
             </div>
         </div>
     </ion-content>

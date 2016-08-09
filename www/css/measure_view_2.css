@@ -13,6 +13,7 @@
 
 .sensor_bar {
     height: 10vh;
+    margin-bottom: 10px;
 }
 
 .timed_measurement_bar {
@@ -43,4 +44,23 @@
     font-size:80%;
     border-radius: 1ex;
     border: solid 2px #0c0;
+}
+
+.measure_small_title
+{
+    font-size:80%;
+    line-height: 100%;
+}
+
+.measure_small_disp
+{
+    margin-top: 1ex;
+    margin-bottom: 0.5ex;
+    font-size:100%;
+    line-height: 100%;
+}
+
+.measure_small_unit {
+    font-size:80%;
+    line-height: 100%;
 }

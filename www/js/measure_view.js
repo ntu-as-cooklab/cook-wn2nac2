@@ -169,3 +169,12 @@ function setMeasureButtonStatus(status)
             break;
     }
 }
+
+function measure_tab_weather()
+{
+    var t = document.querySelector('#weather_frame');
+
+    var clone = document.importNode(t.content, true);
+    var measure_view_disp = document.getElementById("measure_view_disp");
+    measure_view_disp.parentNode.replaceChild(clone);
+}
