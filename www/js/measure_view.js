@@ -32,7 +32,7 @@ function measure_main()
     glbsens.windooObservation.enable();
 
     glbsens.currentMeasurement = new WindooMeasurement();
-    glbsens.currentMeasurement.enable();
+    //glbsens.currentMeasurement.enable();
 
     onWindooStatusChanged(windooStatus);
     onTempEquilStatusChanged(tempEquilStatus);

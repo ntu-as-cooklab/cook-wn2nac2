@@ -169,10 +169,12 @@ function manageToggleSwitches()
     if (settSourceCwbUse) {
       for (var x = 0; x < cwbDataLocations.length; x++) {
         //NOTE USE cwbDataLocations FOR LOCATIONS AND cmbServerData FOR DATA VALUES
-        var newMarkerInfo = [glb.markerCounter, cwbDataLocations[x][0], cwbDataLocations[x][1], cwbDataLocations[x][2], 'cwb'];
-        glb.markerCounter++;
-        glb.markers.push(newMarkerInfo);
-        addMarker(newMarkerInfo);
+        var newMarkerInfo = [cwbDataLocations[x][0], cwbDataLocations[x][1], cwbDataLocations[x][2], 'cwb',
+          cwbServerData[x][5], cwbServerData[x][3], cwbServerData[x][4], cwbServerData[x][2], cwbServerData[x][6], 0, cwbServerData[x][0]];
+        // //TEST
+        // var newMarkerInfo = [cwbDataLocations[x][0], cwbDataLocations[x][1], cwbDataLocations[x][2], 'cwb',
+        //   1, 2, 3, 4, 5, 0, "2016-01-01 01:00:00"];
+        addAppMarker(newMarkerInfo);
       }
       var selectElem = document.getElementById("map-overlay-select");
       var newOption = document.createElement("option");
@@ -182,7 +184,7 @@ function manageToggleSwitches()
       selectElem.add(newOption);
     } else {
       for (var x = 0; x < cwbDataLocations.length; x++) {
-        removeMarker('cwb');
+        removeAppMarker(cwbDataLocations[x][1], cwbDataLocations[x][2]);
       }
       var selectElem = document.getElementById("map-overlay-select");
       selectElem.selectedIndex = 0;

@@ -75,8 +75,8 @@ function helperInitGraphs()
     alreadyInit = true;
   }
 
-  initGraphs();
   setGraphSizes();
+  initGraphs();
 }
 
 function setGraphSizes()
@@ -152,38 +152,38 @@ function initGraphs()
   initGraphLines();
 }
 
-//TODO: FIX THIS ON DEVICES (NEED SHI-EN)
+//TODO: FIX THIS ON DEVICES (NEED SHIH-EN)
 function plotPtOnGraph(graphType, check)
 {
-     measureRef = glbsens.currentMeasurement;
-    //console.log("plotPtOnGraph");
+  measureRef = glbsens.currentMeasurement;
+  //console.log("plotPtOnGraph");
   if (check || activated) {
     switch (graphType) {
       case 0: var graphRef = glbgraph.graphs[graphType];
-              glbgraph.graphLabels[graphType].push(measureRef.windTime[--measureRef.windTime.length]);
+              glbgraph.graphLabels[graphType].push(measureRef.windTime[measureRef.windTime.length - 1]);
               graphRef.labels = glbgraph.graphLabels[graphType];
-              glbgraph.graphData[graphType].push(measureRef.wind[--measureRef.wind.length]);
+              glbgraph.graphData[graphType].push(measureRef.wind[measureRef.wind.length - 1]);
               graphRef.data.datasets[0].data = glbgraph.graphData[graphType];
               graphRef.update();
               break;
       case 1: var graphRef = glbgraph.graphs[graphType];
-              glbgraph.graphLabels[graphType].push(measureRef.tempTime[--measureRef.tempTime.length]);
+              glbgraph.graphLabels[graphType].push(measureRef.tempTime[measureRef.tempTime.length - 1]);
               graphRef.labels = glbgraph.graphLabels[graphType];
-              glbgraph.graphData[graphType].push(measureRef.temp[--measureRef.temp.length]);
+              glbgraph.graphData[graphType].push(measureRef.temp[measureRef.temp.length - 1]);
               graphRef.data.datasets[0].data = glbgraph.graphData[graphType];
               graphRef.update();
               break;
       case 2: var graphRef = glbgraph.graphs[graphType];
-              glbgraph.graphLabels[graphType].push(measureRef.humdTime[--measureRef.humdTime.length]);
+              glbgraph.graphLabels[graphType].push(measureRef.humdTime[measureRef.humdTime.length - 1]);
               graphRef.labels = glbgraph.graphLabels[graphType];
-              glbgraph.graphData[graphType].push(measureRef.humd[--measureRef.humd.length]);
+              glbgraph.graphData[graphType].push(measureRef.humd[measureRef.humd.length - 1]);
               graphRef.data.datasets[0].data = glbgraph.graphData[graphType];
               graphRef.update();
               break;
       case 3: var graphRef = glbgraph.graphs[graphType];
-              glbgraph.graphLabels[graphType].push(measureRef.presTime[--measureRef.presTime.length]);
+              glbgraph.graphLabels[graphType].push(measureRef.presTime[measureRef.presTime.length - 1]);
               graphRef.labels = glbgraph.graphLabels[graphType];
-              glbgraph.graphData[graphType].push(measureRef.pres[--measureRef.pres.length]);
+              glbgraph.graphData[graphType].push(measureRef.pres[measureRef.pres.length - 1]);
               graphRef.data.datasets[0].data = glbgraph.graphData[graphType];
               graphRef.update();
               break;

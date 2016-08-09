@@ -46,6 +46,7 @@ function loadBufferedHistory() {
   glb.history_buff = [];
 }
 
+//TODO: CHANGE/FIX THIS (USE addAppMarker)
 function placeOldPt(ID) {
   if (glb.doPlaceOldPt) {
     for (var x = 0; x < glb.history_source.length; x++) {
@@ -56,14 +57,18 @@ function placeOldPt(ID) {
         var oldLatLng = new google.maps.LatLng(oldLat, oldLng);
         map.panTo(oldLatLng);
         if (!glb.history_source[x][2]) {
-          var newMarker = new google.maps.Marker({
-            title: oldPtSrc.comment,
-            position: oldLatLng,
-            category: 'history',
-            map: map,
-            animation: google.maps.Animation.DROP
-          });
-          glb.gmarkers.push(newMarker);
+          var newHistMarkData = [oldPtSrc.timeStarted.toString(), oldLat, oldLng, 'history',
+            oldPtSrc.wind[oldPtSrc.wind.length - 1], oldPtSrc.temp[oldPtSrc.temp.length - 1],
+            oldPtSrc.humd[oldPtSrc.humd.length - 1], oldPtSrc.pres[oldPtSrc.pres.length - 1],
+            parseWindDir(oldPtSrc.windDirection), parseWeather(oldPtSrc.weatherType), oldPtSrc.timeStarted];
+          var newMarker = addAppMarker(newHistMarkData, true);
+          // var newMarker = new google.maps.Marker({
+          //   title: oldPtSrc.comment,
+          //   position: oldLatLng,
+          //   category: 'history',
+          //   map: map,
+          //   animation: google.maps.Animation.DROP
+          // });
           glb.tempMarkers.push(newMarker);
           glb.markerCluster.addMarker(newMarker);
           glb.history_source[x][2] = true;
@@ -87,7 +92,6 @@ function deletePt(ID) {
         if (glb.gmarkers[y].getPosition().equals(oldLatLng)) {
           glb.markerCluster.removeMarker(glb.gmarkers[y]);
           glb.gmarkers[y].setMap(null);
-          glb.markers.splice(y, 1);
           glb.gmarkers.splice(y, 1);
           break;
         }
