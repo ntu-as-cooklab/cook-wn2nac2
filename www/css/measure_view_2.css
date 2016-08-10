@@ -6,9 +6,9 @@
     width: 100%;
     height: 100%;
     background-color: #eee;
-    display: flex;
-    flex-flow: column;
-    align-items: stretch;
+    /*display: flex;
+    flex-flow: column;*/
+    /*align-items: stretch;*/
 }
 
 .sensor_bar {
@@ -30,11 +30,13 @@
 }
 
 .measure_view_disp {
-    flex: 1 1 auto;
+    /*flex-grow: 0;*/
+    /*flex: 1 1 auto;*/
     margin: 2%;
     background-color: #f9f9f9;
     border: 1px solid #bbb;
     padding: 2%;
+    overflow-y: scroll;
 }
 
 #sensor-status {
@@ -63,4 +65,8 @@
 .measure_small_unit {
     font-size:80%;
     line-height: 100%;
+}
+
+.measure_view_disp_content {
+    overflow-y: scroll;
 }
