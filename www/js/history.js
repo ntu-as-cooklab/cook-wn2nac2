@@ -46,7 +46,6 @@ function loadBufferedHistory() {
   glb.history_buff = [];
 }
 
-//TODO: CHANGE/FIX THIS (USE addAppMarker)
 function placeOldPt(ID) {
   if (glb.doPlaceOldPt) {
     for (var x = 0; x < glb.history_source.length; x++) {

@@ -1,6 +1,7 @@
 "use strict";
 
 var glb = {
+  inMeasureView : false,
   markers : [],
   gmarkers : [],
   history_source : [],
@@ -188,55 +189,42 @@ function filterMarkers(category)
 function parseWindDir(windDir)
 {
   var wdStr;
-  if (windDir > 348 || windDir < 11) {
+  if (windDir >= 348 || windDir < 11) {
     wdStr = "N";
-    return wdStr;
-  } else if (windDir > 11 && windDir < 33) {
+  } else if (windDir >= 11 && windDir < 33) {
     wdStr = "NNE";
-    return wdStr;
-  } else if (windDir > 33 && windDir < 56) {
+  } else if (windDir >= 33 && windDir < 56) {
     wdStr = "NE";
-    return wdStr;
-  } else if (windDir > 56 && windDir < 78) {
+  } else if (windDir >= 56 && windDir < 78) {
     wdStr = "ENE";
-    return wdStr;
-  } else if (windDir > 78 && windDir < 101) {
+  } else if (windDir >= 78 && windDir < 101) {
     wdStr = "E";
-    return wdStr;
-  } else if (windDir > 101 && windDir < 123) {
+  } else if (windDir >= 101 && windDir < 123) {
     wdStr = "ESE";
-    return wdStr;
-  } else if (windDir > 123 && windDir < 146) {
+  } else if (windDir >= 123 && windDir < 146) {
     wdStr = "SE";
-    return wdStr;
-  } else if (windDir > 146 && windDir < 168) {
+  } else if (windDir >= 146 && windDir < 168) {
     wdStr = "SSE";
-    return wdStr;
-  } else if (windDir > 168 && windDir < 191) {
+  } else if (windDir >= 168 && windDir < 191) {
     wdStr = "S";
-    return wdStr;
-  } else if (windDir > 191 && windDir < 213) {
+  } else if (windDir >= 191 && windDir < 213) {
     wdStr = "SSW";
-    return wdStr;
-  } else if (windDir > 213 && windDir < 236) {
+  } else if (windDir >= 213 && windDir < 236) {
     wdStr = "SW";
-    return wdStr;
-  } else if (windDir > 236 && windDir < 258) {
+  } else if (windDir >= 236 && windDir < 258) {
     wdStr = "WSW";
-    return wdStr;
-  } else if (windDir > 258 && windDir < 281) {
+  } else if (windDir >= 258 && windDir < 281) {
     wdStr = "W";
-    return wdStr;
-  } else if (windDir > 281 && windDir < 303) {
+  } else if (windDir >= 281 && windDir < 303) {
     wdStr = "WNW";
-    return wdStr;
-  } else if (windDir > 303 && windDir < 326) {
+  } else if (windDir >= 303 && windDir < 326) {
     wdStr = "NW";
-    return wdStr;
-  } else {
+  } else if (windDir >= 326 && windDir < 348) {
     wdStr = "NNW";
-    return wdStr;
+  } else {
+    wdStr = "N/A";
   }
+  return wdStr;
 }
 function parseWeather(weather)
 {

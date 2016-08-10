@@ -49,7 +49,7 @@ function helperInitGraphs()
     ];
     var origLineDraw = Chart.controllers.line.prototype.draw;
     //RUNS 172 OR SO TIMES FOR SOME REASON...
-    //TODO: FIX ABOVE PROBLEM (IF NECESSARY)
+    //TODO: FIX THIS (SEE BELOW)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     Chart.helpers.extend(Chart.controllers.line.prototype, {
       draw: function() {
         origLineDraw.apply(this, arguments);
@@ -59,8 +59,16 @@ function helperInitGraphs()
         var index = graph.config.data.datasets[0].data.lastIndexOf(graph.config.data.datasets[0].lineAtIndex);
 
         if (graph.config.data.datasets[0].data.length > 0) {
-          var y = graph.config.data.datasets[0].metaData[index]._model.y;
-          if (y) {
+
+          //TODO: CHECK THIS, ATTEMPTED FIX
+          var y;
+          if (index < 0) {
+            y = 0;
+          } else {
+            y = graph.config.data.datasets[0].metaData[index]._model.y;
+          }
+
+          if (typeof y !== "undefined") {
             ctx.save();
             ctx.strokeStyle = "#ff0000";
             ctx.beginPath();
@@ -118,10 +126,18 @@ function initGraphs()
       case 3: ctx = document.getElementById("pres-graph").getContext("2d");
               break;
     }
+    // var data = {
+    //   labels: glbgraph.graphLabels[x],
+    //   datasets: [{
+    //     data: glbgraph.graphData[x]
+    //   }]
+    // };
+    //TEST
     var data = {
-      labels: glbgraph.graphLabels[x],
+      labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       datasets: [{
-        data: glbgraph.graphData[x]
+        data: [5, 4, 11, 11, 2, 30, 11, 12, 9, 1, 23],
+        lineAtIndex: 23
       }]
     };
     glbgraph.graphs[x] = new Chart(ctx, {
@@ -152,7 +168,6 @@ function initGraphs()
   initGraphLines();
 }
 
-//TODO: FIX THIS ON DEVICES (NEED SHIH-EN)
 function plotPtOnGraph(graphType, check)
 {
   measureRef = glbsens.currentMeasurement;
