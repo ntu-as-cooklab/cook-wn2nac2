@@ -299,6 +299,8 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
   }
 
   $scope.$on('$ionicView.enter', function() {
+    glb.inMeasureView = false;
+    console.log(glb.inMeasureView);
     setWeatherChecks(true, false, false);
     home_weather_main();
     loadBufferedHistory();
@@ -311,6 +313,8 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
   // sendSpoofMeasurements(50);
 
   $scope.$on('$ionicView.enter', function() {
+    glb.inMeasureView = false;
+    console.log(glb.inMeasureView);
     setWeatherChecks(false, true, false);
     weather_main();
     helperInitGraphs();
@@ -322,7 +326,12 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
   measure_main();
 
   $scope.$on('$ionicView.enter', function() {
+    glb.inMeasureView = true;
+    console.log(glb.inMeasureView);
     setWeatherChecks(false, false, true);
+    onTempEquilStatusChanged(0);
+    onHumdEquilStatusChanged(0);
+    checkEqm();
   });
 })
 
@@ -330,7 +339,16 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
 
   settings_main(ConnectivityMonitor);
 
+  $scope.$on('$ionicView.enter', function() {
+    glb.inMeasureView = false;
+    console.log(glb.inMeasureView);
+  });
 })
 
 .controller('UserViewController', function($scope, $ionicLoading, $compile) {
+
+  $scope.$on('$ionicView.enter', function() {
+    glb.inMeasureView = false;
+    console.log(glb.inMeasureView);
+  });
 });

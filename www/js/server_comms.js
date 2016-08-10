@@ -57,7 +57,7 @@ function loadServerData(ConnectivityMonitor)
       });
       alert("at right after post");
 
-      //TODO: REPLACE null WITH NEXT DATA SET NAME
+      //NOTE REPLACE null WITH NEXT DATA SET NAME
       //dataSet = null;
 
       //*OTHER DATA
@@ -68,7 +68,6 @@ function loadServerData(ConnectivityMonitor)
   }, false);
 
   //NOTE FOR BROWSER TESTING
-  //TODO: REMOVE THIS
   // dataSet = 'cwb';
   // $.post( "http://mospc.cook.as.ntu.edu.tw/getspecdata.php", {label : dataSet}, function( data ) {
   //   console.log(data);
