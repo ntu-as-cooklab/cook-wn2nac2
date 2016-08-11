@@ -17,7 +17,7 @@
           </div>
       </div>
 
-      <div class="card">
+      <div class="card" hidden>
           <div class="measure_view-bar">
               <i class="icon measure_view-icon measure-status-icon equil-status-icon ion-alert-circled"></i>
               <i class="icon measure_view-icon measure-title-icon ion-ios-pulse-strong"></i>
@@ -66,6 +66,7 @@
                 <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="0">Other...</a>
               </div>
               <div id="timer-status">Ready to START</div>
+
               <button id="start-button" class="button button-balanced" onclick="takeMeasurement()">
                   <i class="icon ion-android-stopwatch"></i>
                   <span id="start-button-text">START</span>

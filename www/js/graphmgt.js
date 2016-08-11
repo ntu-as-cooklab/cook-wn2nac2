@@ -25,6 +25,7 @@ var storeData = [
 var ctx;
 var measureRef;
 var alreadyInit = false;
+var alreadyInitGraphs = false;
 var activated = false;
 var showMax = [false, false, false, false];
 var showMin = [false, false, false, false];
@@ -49,33 +50,44 @@ function helperInitGraphs()
     ];
     var origLineDraw = Chart.controllers.line.prototype.draw;
     //RUNS 172 OR SO TIMES FOR SOME REASON...
-    //TODO: FIX THIS (SEE BELOW)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     Chart.helpers.extend(Chart.controllers.line.prototype, {
       draw: function() {
         origLineDraw.apply(this, arguments);
 
         var graph = this.chart;
         var ctx = graph.chart.ctx;
-        var index = graph.config.data.datasets[0].data.lastIndexOf(graph.config.data.datasets[0].lineAtIndex);
+        for (var i = 0; i < 3; i++) {
+          var origVal = graph.config.data.datasets[0].lineAtIndex[i];
+          var index = graph.scales["y-axis-0"].getPixelForValue(origVal);
+          origVal = Math.round(origVal * 100) / 100;
 
-        if (graph.config.data.datasets[0].data.length > 0) {
-
-          //TODO: CHECK THIS, ATTEMPTED FIX
-          var y;
-          if (index < 0) {
-            y = 0;
-          } else {
-            y = graph.config.data.datasets[0].metaData[index]._model.y;
-          }
-
-          if (typeof y !== "undefined") {
-            ctx.save();
-            ctx.strokeStyle = "#ff0000";
-            ctx.beginPath();
-            ctx.moveTo(0, y);
-            ctx.lineTo(graph.chart.width, y);
-            ctx.stroke();
-            ctx.restore();
+          if (graph.config.data.datasets[0].data.length > 0) {
+            var y;
+            if (index < 0) {
+              y = 0;
+            } else {
+              //y = graph.config.data.datasets[0].metaData[index]._model.y;
+              y = index;
+            }
+            if (typeof y !== "undefined") {
+              ctx.save();
+              ctx.strokeStyle = "#ff0000";
+              ctx.beginPath();
+              ctx.moveTo(0, y);
+              ctx.lineTo(graph.chart.width, y);
+              ctx.stroke();
+              ctx.textAlign = "center";
+              ctx.font = "bold 10pt Courier";
+              ctx.fillStyle = "black";
+              if (i == 0) {
+                ctx.fillText("Max:" + origVal, graph.chart.width - 37, y - 2);
+              } else if (i == 1) {
+                ctx.fillText("Min:" + origVal, graph.chart.width - 37, y - 2);
+              } else if (i == 2) {
+                ctx.fillText("Avg:" + origVal, graph.chart.width - 37, y - 2);
+              }
+              ctx.restore();
+            }
           }
         }
       }
@@ -114,7 +126,12 @@ function setGraphSizes()
 
 function initGraphs()
 {
-  measureRef = glbsens.currentMeasurement;
+  if (!alreadyInitGraphs) {
+    measureRef = glbsens.currentMeasurement;
+    alreadyInitGraphs = true;
+  } else {
+    updateMeasureRef();
+  }
   for (var x = 0; x < glbgraph.graphs.length; x++) {
     switch (x) {
       case 0: ctx = document.getElementById("wind-graph").getContext("2d");
@@ -126,20 +143,21 @@ function initGraphs()
       case 3: ctx = document.getElementById("pres-graph").getContext("2d");
               break;
     }
-    // var data = {
-    //   labels: glbgraph.graphLabels[x],
-    //   datasets: [{
-    //     data: glbgraph.graphData[x]
-    //   }]
-    // };
-    //TEST
     var data = {
-      labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      labels: glbgraph.graphLabels[x],
       datasets: [{
-        data: [5, 4, 11, 11, 2, 30, 11, 12, 9, 1, 23],
-        lineAtIndex: 23
+        data: glbgraph.graphData[x],
+        lineAtIndex: [0, 0, 0]
       }]
     };
+    //TEST
+    // var data = {
+    //   labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    //   datasets: [{
+    //     data: [5, 4, 11, 11, 2, 30, 11, 12, 9, 1, 23],
+    //     lineAtIndex: [2, 4, 12]
+    //   }]
+    // };
     glbgraph.graphs[x] = new Chart(ctx, {
       type: 'line',
       data: data,
@@ -164,39 +182,45 @@ function initGraphs()
         }
       }
     });
+    //TODO: FIX THIS (IF NECESSARY)
+    // glbgraph.graphs[x].data.datasets[0].lineAtIndex = glbgraph.graphs[x].chart.height;
+    // glbgraph.graphs[x].update();
   }
   initGraphLines();
 }
 
 function plotPtOnGraph(graphType, check)
 {
-  measureRef = glbsens.currentMeasurement;
-  //console.log("plotPtOnGraph");
+  updateMeasureRef();
   if (check || activated) {
     switch (graphType) {
       case 0: var graphRef = glbgraph.graphs[graphType];
-              glbgraph.graphLabels[graphType].push(measureRef.windTime[measureRef.windTime.length - 1]);
+              limitGraph(graphType);
+              glbgraph.graphLabels[graphType].push(parseDate(measureRef.windTime[measureRef.windTime.length - 1]));
               graphRef.labels = glbgraph.graphLabels[graphType];
               glbgraph.graphData[graphType].push(measureRef.wind[measureRef.wind.length - 1]);
               graphRef.data.datasets[0].data = glbgraph.graphData[graphType];
               graphRef.update();
               break;
       case 1: var graphRef = glbgraph.graphs[graphType];
-              glbgraph.graphLabels[graphType].push(measureRef.tempTime[measureRef.tempTime.length - 1]);
+              limitGraph(graphType);
+              glbgraph.graphLabels[graphType].push(parseDate(measureRef.tempTime[measureRef.tempTime.length - 1]));
               graphRef.labels = glbgraph.graphLabels[graphType];
               glbgraph.graphData[graphType].push(measureRef.temp[measureRef.temp.length - 1]);
               graphRef.data.datasets[0].data = glbgraph.graphData[graphType];
               graphRef.update();
               break;
       case 2: var graphRef = glbgraph.graphs[graphType];
-              glbgraph.graphLabels[graphType].push(measureRef.humdTime[measureRef.humdTime.length - 1]);
+              limitGraph(graphType);
+              glbgraph.graphLabels[graphType].push(parseDate(measureRef.humdTime[measureRef.humdTime.length - 1]));
               graphRef.labels = glbgraph.graphLabels[graphType];
               glbgraph.graphData[graphType].push(measureRef.humd[measureRef.humd.length - 1]);
               graphRef.data.datasets[0].data = glbgraph.graphData[graphType];
               graphRef.update();
               break;
       case 3: var graphRef = glbgraph.graphs[graphType];
-              glbgraph.graphLabels[graphType].push(measureRef.presTime[measureRef.presTime.length - 1]);
+              limitGraph(graphType);
+              glbgraph.graphLabels[graphType].push(parseDate(measureRef.presTime[measureRef.presTime.length - 1]));
               graphRef.labels = glbgraph.graphLabels[graphType];
               glbgraph.graphData[graphType].push(measureRef.pres[measureRef.pres.length - 1]);
               graphRef.data.datasets[0].data = glbgraph.graphData[graphType];
@@ -205,6 +229,65 @@ function plotPtOnGraph(graphType, check)
     }
     activated = true;
   }
+}
+
+function limitGraph(graphType)
+{
+  switch (graphType) {
+    case 0: if (glbgraph.graphLabels[graphType].length >= 10 || glbgraph.graphData[graphType].length >= 10) {
+              var tempLabels = [];
+              var tempData = [];
+              for (var x = 9; x > 0; x--) {
+                tempLabels.push(parseDate(measureRef.windTime[measureRef.windTime.length - x]));
+                tempData.push(measureRef.wind[measureRef.wind.length - x]);
+              }
+              glbgraph.graphLabels[graphType] = tempLabels;
+              glbgraph.graphData[graphType] = tempData;
+            }
+            break;
+    case 1: if (glbgraph.graphLabels[graphType].length >= 10 || glbgraph.graphData[graphType].length >= 10) {
+              var tempLabels = [];
+              var tempData = [];
+              for (var x = 9; x > 0; x--) {
+                tempLabels.push(parseDate(measureRef.tempTime[measureRef.tempTime.length - x]));
+                tempData.push(measureRef.temp[measureRef.temp.length - x]);
+              }
+              glbgraph.graphLabels[graphType] = tempLabels;
+              glbgraph.graphData[graphType] = tempData;
+            }
+            break;
+    case 2: if (glbgraph.graphLabels[graphType].length >= 10 || glbgraph.graphData[graphType].length >= 10) {
+              var tempLabels = [];
+              var tempData = [];
+              for (var x = 9; x > 0; x--) {
+                tempLabels.push(parseDate(measureRef.humdTime[measureRef.humdTime.length - x]));
+                tempData.push(measureRef.humd[measureRef.humd.length - x]);
+              }
+              glbgraph.graphLabels[graphType] = tempLabels;
+              glbgraph.graphData[graphType] = tempData;
+            }
+            break;
+    case 3: if (glbgraph.graphLabels[graphType].length >= 10 || glbgraph.graphData[graphType].length >= 10) {
+              var tempLabels = [];
+              var tempData = [];
+              for (var x = 9; x > 0; x--) {
+                tempLabels.push(parseDate(measureRef.presTime[measureRef.presTime.length - x]));
+                tempData.push(measureRef.pres[measureRef.pres.length - x]);
+              }
+              glbgraph.graphLabels[graphType] = tempLabels;
+              glbgraph.graphData[graphType] = tempData;
+            }
+            break;
+  }
+}
+
+function parseDate(dateString)
+{
+  var date = new Date(dateString);
+  var readableDate = null;
+
+  readableDate = date.getUTCHours() + ":" + date.getUTCMinutes() + ":" + date.getUTCSeconds();
+  return readableDate;
 }
 
 //FIND OUT IF NEED TO SEND DATA BEFORE CLEARING
@@ -264,6 +347,7 @@ function initGraphLines() {
 
 function drawSigPts(graphNum, sigPt)
 {
+  measureRef.finalize();
   switch (graphNum) {
     case 0: ctx = document.getElementById("wind-graph").getContext("2d");
             break;
@@ -304,25 +388,25 @@ function drawSigPts(graphNum, sigPt)
       var tempVal;
       switch (graphNum) {
         case 0: if (glbgraph.graphData[graphNum].length > 0) {
-                  lineVal = getClosest(glbgraph.graphData(graphNum), measureRef.avgWind);
+                  lineVal = measureRef.avgWind;
                 } else {
                   lineVal = 0;
                 }
                 break;
         case 1: if (glbgraph.graphData[graphNum].length > 0) {
-                  lineVal = getClosest(glbgraph.graphData(graphNum), measureRef.avgTemp);
+                  lineVal = measureRef.avgTemp;
                 } else {
                   lineVal = 0;
                 }
                 break;
         case 2: if (glbgraph.graphData[graphNum].length > 0) {
-                  lineVal = getClosest(glbgraph.graphData(graphNum), measureRef.avgHumd);
+                  lineVal = measureRef.avgHumd;
                 } else {
                   lineVal = 0;
                 }
                 break;
         case 3: if (glbgraph.graphData[graphNum].length > 0) {
-                  lineVal = getClosest(glbgraph.graphData(graphNum), measureRef.avgPres);
+                  lineVal = measureRef.avgPres;
                 } else {
                   lineVal = 0;
                 }
@@ -330,64 +414,58 @@ function drawSigPts(graphNum, sigPt)
       }
       break;
   }
-  var data = {
-    labels: glbgraph.graphLabels[graphNum],
-    datasets: [{
-      data: glbgraph.graphData[graphNum],
-      lineAtIndex: lineVal
-    }]
-  };
-  glbgraph.graphs[graphNum] = new Chart(ctx, {
-    type: 'line',
-    data: data,
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        yAxes: [{
-          display: true,
-          ticks: {
-            suggestedMin: 0,
-            beginAtZero: true
-          }
-        }],
-        xAxes: [{
-          display: true,
-          ticks: {
-            suggestedMin: 0,
-            beginAtZero: true
-          }
-        }]
-      }
-    }
-  });
-}
-
-function getClosest(arr, num)
-{
-  var curr = arr[0];
-  var diff = Math.abs(num - curr);
-  for (var x = 0; x < arr.length; x++) {
-    var newDiff = Math.abs(num - arr[x]);
-    if (newDiff < diff) {
-      diff = newDiff;
-      curr = arr[x];
-    }
+  // var data = {
+  //   labels: glbgraph.graphLabels[graphNum],
+  //   datasets: [{
+  //     data: glbgraph.graphData[graphNum],
+  //     lineAtIndex: lineVal
+  //   }]
+  // };
+  // glbgraph.graphs[graphNum] = new Chart(ctx, {
+  //   type: 'line',
+  //   data: data,
+  //   options: {
+  //     responsive: true,
+  //     maintainAspectRatio: false,
+  //     scales: {
+  //       yAxes: [{
+  //         display: true,
+  //         ticks: {
+  //           suggestedMin: 0,
+  //           beginAtZero: true
+  //         }
+  //       }],
+  //       xAxes: [{
+  //         display: true,
+  //         ticks: {
+  //           suggestedMin: 0,
+  //           beginAtZero: true
+  //         }
+  //       }]
+  //     }
+  //   }
+  // });
+  switch (sigPt) {
+    case "max": glbgraph.graphs[graphNum].data.datasets[0].lineAtIndex[0] = lineVal;
+                break;
+    case "min": glbgraph.graphs[graphNum].data.datasets[0].lineAtIndex[1] = lineVal;
+                break;
+    case "avg": glbgraph.graphs[graphNum].data.datasets[0].lineAtIndex[2] = lineVal;
+                break;
   }
-  return curr;
+  glbgraph.graphs[graphNum].update();
 }
 
-// //FOR TESTING
-// var SpoofMeasurement = function(data) {
-//   this.type = 1;
-//   this.data = data;
-//   this.timeStarted = 123123;
-//   this.wind = data;
-// }
-//
-// function sendSpoofMeasurements(x) {
-//   if (x == 0) return;
-//   console.log("sent spoof measurement");
-//   onEvent(new SpoofMeasurement(x));
-//   setTimeout(function() {sendSpoofMeasurements(--x);}, 3000);
-// }
+function updateMeasureRef()
+{
+  measureRef.wind = measureRef.wind.concat(glbsens.currentMeasurement.wind);
+  measureRef.temp = measureRef.temp.concat(glbsens.currentMeasurement.temp);
+  measureRef.humd = measureRef.humd.concat(glbsens.currentMeasurement.humd);
+  measureRef.pres = measureRef.pres.concat(glbsens.currentMeasurement.pres);
+  measureRef.windTime = measureRef.windTime.concat(glbsens.currentMeasurement.windTime);
+  measureRef.tempTime = measureRef.tempTime.concat(glbsens.currentMeasurement.tempTime);
+  measureRef.humdTime = measureRef.humdTime.concat(glbsens.currentMeasurement.humdTime);
+  measureRef.presTime = measureRef.presTime.concat(glbsens.currentMeasurement.presTime);
+}
+
+//TEST WITH fakeWindoo.start()

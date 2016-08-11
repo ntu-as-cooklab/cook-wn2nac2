@@ -35,16 +35,10 @@ function home_weather_main() {
   humdGraphIcon   = document.getElementById("humdGraphIconHome");
   presGraphIcon   = document.getElementById("presGraphIconHome");
 
-  //alert("home_weather_main");
-
   glbsens.windooObservation = new WindooObservation();
   glbsens.windooObservation.enable();
-  //glbsens.windooObservation.enablePurge(60000);
 
   glbsens.currentMeasurement = new WindooMeasurement();
-  //glbsens.currentMeasurement.enable();
-  //glbsens.currentMeasurement.start();
-
 }
 
 function weather_main()
@@ -61,11 +55,8 @@ function weather_main()
 
     glbsens.windooObservation = new WindooObservation();
     glbsens.windooObservation.enable();
-    //glbsens.windooObservation.enablePurge(60000);
 
     glbsens.currentMeasurement = new WindooMeasurement();
-    //glbsens.currentMeasurement.enable();
-    //glbsens.currentMeasurement.start();
 }
 
 function onEvent(event)
@@ -95,11 +86,11 @@ function onEvent(event)
               setTimeout(function() {fade(document.getElementById("connected-status"));}, 3000);
             }
             break;
+            console.log("Windoo calibrated");
 
         case 2: //JDCWindooCalibrated
             windooStatus = 2;
             onWindooStatusChanged();
-            console.log("Windoo calibrated");
             if (isHome) {
               if (document.getElementById("not-connected-status").style.visibility == "visible") fade(document.getElementById("not-connected-status"));
               if (document.getElementById("connected-status").style.visibility == "visible") fade(document.getElementById("connected-status"));
@@ -127,8 +118,8 @@ function onEvent(event)
                     windGraphIcon.classList.add     ("ion-arrow-graph-up-right");
                 }
                 windDisplay.innerHTML = event.data.toFixed(2);
-            if (glbsens.windooObservation.observing)    glbsens.windooObservation.addWind(event.data);
-            if (glbsens.currentMeasurement.observing)   {
+            if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addWind(event.data);
+            if (glbsens.windooObservation.observing)   {
               glbsens.currentMeasurement.addWind(event.data);
               plotPtOnGraph(event.type - 4, isWeather);
               initGraphLines();
@@ -148,8 +139,8 @@ function onEvent(event)
                     tempGraphIcon.classList.add     ("ion-arrow-graph-up-right");
                 }
                 tempDisplay.innerHTML = event.data.toFixed(2);
-            if (glbsens.windooObservation.observing)    glbsens.windooObservation.addTemp(event.data);
-            if (glbsens.currentMeasurement.observing)   {
+            if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addTemp(event.data);
+            if (glbsens.windooObservation.observing)   {
               glbsens.currentMeasurement.addTemp(event.data);
               plotPtOnGraph(event.type - 4, isWeather);
               initGraphLines();
@@ -169,8 +160,8 @@ function onEvent(event)
                     humdGraphIcon.classList.add     ("ion-arrow-graph-up-right");
                 }
                 humdDisplay.innerHTML = event.data.toFixed(2);
-            if (glbsens.windooObservation.observing)    glbsens.windooObservation.addHumd(event.data);
-            if (glbsens.currentMeasurement.observing)   {
+            if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addHumd(event.data);
+            if (glbsens.windooObservation.observing)   {
               glbsens.currentMeasurement.addHumd(event.data);
               plotPtOnGraph(event.type - 4, isWeather);
               initGraphLines();
@@ -190,8 +181,8 @@ function onEvent(event)
                     presGraphIcon.classList.add     ("ion-arrow-graph-up-right");
                 }
                 presDisplay.innerHTML = event.data.toFixed(1);
-            if (glbsens.windooObservation.observing)    glbsens.windooObservation.addPres(event.data);
-            if (glbsens.currentMeasurement.observing)   {
+            if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addPres(event.data);
+            if (glbsens.windooObservation.observing)   {
               glbsens.currentMeasurement.addPres(event.data);
               plotPtOnGraph(event.type - 4, isWeather);
               initGraphLines();

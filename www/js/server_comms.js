@@ -3,18 +3,29 @@ var listenersActive = false;
 
 function sendMeasurement()
 {
-  $.post( "http://mospc.cook.as.ntu.edu.tw/post4.php", JSON.parse(JSON.stringify(glbsens.currentMeasurement)),
-    function( data ) {
-      console.log(data);
-    });
+    $.post( "http://mospc.cook.as.ntu.edu.tw/post4.php", JSON.parse(JSON.stringify(glbsens.currentMeasurement)),
+        function( data ) {
+            console.log(data);
+        });
 }
 
+function getMeasurement(begin, end)
+{
+    $.get( "http://mospc.cook.as.ntu.edu.tw/get4.php", { begin: begin, end: end },
+        function( data ) {
+            var measurement = JSON.parse(data);
+            console.log(measurement);
+        });
+}
+
+var lastMeasurement;
 function getLastMeasurement()
 {
-  $.get( "http://mospc.cook.as.ntu.edu.tw/getlast.php", null, function( data ) {
-      lastMeasurement = JSON.parse(data);
-      console.log(lastMeasurement);
-    });
+    $.get( "http://mospc.cook.as.ntu.edu.tw/getlast.php", null,
+        function( data ) {
+            lastMeasurement = JSON.parse(data);
+            console.log(lastMeasurement);
+        });
 }
 
 //TODO: FURTHER TESTING WITH SERVER DATA AND CHANGE TO FINAL VERSION

@@ -56,7 +56,7 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
       url: '/measure',
       views: {
         'measure-view' : {
-          templateUrl: 'templates/measure_view.html',
+          templateUrl: 'templates/measure_view_2.html',
           controller: 'MeasureViewController'
         }
       }
@@ -298,12 +298,11 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
     glb.loadDataSucc = false;
   }
 
-  home_weather_main();
-
   $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = false;
     console.log(glb.inMeasureView);
     setWeatherChecks(true, false, false);
+    home_weather_main();
     loadBufferedHistory();
   });
 })
@@ -313,12 +312,11 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
   // //TEST
   // sendSpoofMeasurements(50);
 
-  weather_main();
-
   $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = false;
     console.log(glb.inMeasureView);
     setWeatherChecks(false, true, false);
+    weather_main();
     helperInitGraphs();
   });
 })

@@ -32,7 +32,6 @@ function measure_main()
     glbsens.windooObservation.enable();
 
     glbsens.currentMeasurement = new WindooMeasurement();
-    //glbsens.currentMeasurement.enable();
 
     onWindooStatusChanged(windooStatus);
     onTempEquilStatusChanged(tempEquilStatus);
@@ -114,7 +113,7 @@ function onHumdEquilStatusChanged()
     setIconStatus(sensor_status_icon, tempEquilStatus && humdEquilStatus);
 }
 
-var tDif = 5;
+var tDif = 3;
 var tReady = false;
 var hDif = 20;
 var hReady = false;
@@ -227,4 +226,13 @@ function setMeasureButtonStatus(status)
             measureButtonText.innerHTML = "START";
             break;
     }
+}
+
+function measure_tab_weather()
+{
+    var t = document.querySelector('#weather_frame');
+
+    var clone = document.importNode(t.content, true);
+    var measure_view_disp = document.getElementById("measure_view_disp");
+    measure_view_disp.parentNode.replaceChild(clone);
 }
