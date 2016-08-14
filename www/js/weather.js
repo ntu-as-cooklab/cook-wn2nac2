@@ -119,7 +119,7 @@ function onEvent(event)
                 }
                 windDisplay.innerHTML = event.data.toFixed(2);
             if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addWind(event.data);
-            if (glbsens.windooObservation.observing)   {
+            if (glbsens.currentMeasurement.observing)   {
               glbsens.currentMeasurement.addWind(event.data);
               plotPtOnGraph(event.type - 4, isWeather);
               initGraphLines();
@@ -140,7 +140,7 @@ function onEvent(event)
                 }
                 tempDisplay.innerHTML = event.data.toFixed(2);
             if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addTemp(event.data);
-            if (glbsens.windooObservation.observing)   {
+            if (glbsens.currentMeasurement.observing)   {
               glbsens.currentMeasurement.addTemp(event.data);
               plotPtOnGraph(event.type - 4, isWeather);
               initGraphLines();
@@ -182,7 +182,7 @@ function onEvent(event)
                 }
                 presDisplay.innerHTML = event.data.toFixed(1);
             if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addPres(event.data);
-            if (glbsens.windooObservation.observing)   {
+            if (glbsens.currentMeasurement.observing)   {
               glbsens.currentMeasurement.addPres(event.data);
               plotPtOnGraph(event.type - 4, isWeather);
               initGraphLines();
