@@ -113,7 +113,7 @@ function onHumdEquilStatusChanged()
     setIconStatus(sensor_status_icon, tempEquilStatus && humdEquilStatus);
 }
 
-var tDif = 5;
+var tDif = 3;
 var tReady = false;
 var hDif = 20;
 var hReady = false;

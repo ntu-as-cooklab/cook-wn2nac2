@@ -6,6 +6,7 @@
 .measure_view_container {
     width: 100%;
     height: 100%;
+    background-color: #23272d;
     /*display: flex;
     flex-flow: column;*/
     /*align-items: stretch;*/
@@ -41,7 +42,6 @@
     background-color: #f9f9f9;
     border: 1px solid #bbb;
     padding: 2%;
-    overflow-y: scroll;
 }
 
 #sensor-status {
