@@ -121,7 +121,7 @@ function onEvent(event)
             if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addWind(event.data);
             if (glbsens.windooObservation.observing)   {
               glbsens.windooObservation.addWind(event.data);
-              console.log("Hi");
+              //console.log("Hi");
               plotPtOnGraph(event.type - 4, isWeather);
               initGraphLines();
             }

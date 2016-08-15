@@ -1,11 +1,11 @@
 .measure_view_content {
-
+    overflow-y: scroll;
+    background-color: #eee;
 }
 
 .measure_view_container {
     width: 100%;
     height: 100%;
-    background-color: #eee;
     /*display: flex;
     flex-flow: column;*/
     /*align-items: stretch;*/
@@ -25,6 +25,11 @@
 }
 
 .measure_view_button {
+    border-radius: 0px;
+    border: 1px solid #bbb;
+}
+
+.measure-time-button, .weather-button {
     border-radius: 0px;
     border: 1px solid #bbb;
 }
@@ -68,5 +73,5 @@
 }
 
 .measure_view_disp_content {
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
 }

@@ -40,22 +40,22 @@ function loadServerData(ConnectivityMonitor)
 
       //CENTRAL WEATHER BUREAU DATA
       dataSet = 'cwb';
-      alert("at right before post");
+      //alert("at right before post");
       $.post( "http://mospc.cook.as.ntu.edu.tw/getspecdata.php", {label : dataSet}, function( data ) {
-        alert(data);
+        //alert(data);
         tempData = JSON.parse(data);
 
-        alert(tempData);
+        //alert(tempData);
 
         tempData = filterCwbData(tempData);
-        alert(tempData[0]);
+        //alert(tempData[0]);
 
         if (cwbServerData != []) {
           oldCwbServerData = cwbServerData;
         }
         cwbServerData = tempData;
       });
-      alert("at right after post");
+      //alert("at right after post");
 
       //NOTE REPLACE null WITH NEXT DATA SET NAME
       //dataSet = null;
