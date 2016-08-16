@@ -23,7 +23,7 @@ var storeData = [
 ];
 
 var ctx;
-var measureRef;
+var measureRef = {};
 var alreadyInit = false;
 var alreadyInitGraphs = false;
 var activated = false;
@@ -458,6 +458,7 @@ function drawSigPts(graphNum, sigPt)
 
 function updateMeasureRef()
 {
+    console.log(measureRef);
   measureRef.wind = measureRef.wind.concat(glbsens.windooObservation.wind);
   measureRef.temp = measureRef.temp.concat(glbsens.windooObservation.temp);
   measureRef.humd = measureRef.humd.concat(glbsens.windooObservation.humd);

@@ -54,8 +54,8 @@ fakeWindoo.start = function()
     fakeWindoo.windInterval = setInterval(
         function() {
             if (windooStatus == 0) fakeSensorEvent(1);
-            if (windooStatus == 1) fakeSensorEvent(2);
-            if (windooStatus == 2) fakeWind(Math.random() * 10);
+            else if (windooStatus == 1) fakeSensorEvent(2);
+            else if (windooStatus == 2) fakeWind(Math.random() * 10);
         }
         , 1000);
 }

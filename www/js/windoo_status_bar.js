@@ -30,7 +30,7 @@ WindooStatusBar.prototype.setStatus = function (status)
 
 WindooStatusBar.prototype.createdCallback = function() {
 
-    this.setStatus(0);
+    this.setStatus(windooStatus);
     document.addEventListener('windooStatusChanged',
         (function (instance) { return function (e) { instance.setStatus(e.detail); } })(this)
     )

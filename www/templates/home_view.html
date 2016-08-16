@@ -38,30 +38,10 @@
     <!-- MEASUREMENTS LIST - SLIDE LEFT -->
     <div id="info-list-measurement" class="info-list">
       <a href="javascript:void(0)" class="info-list-close" onclick="closeNav(1)"><button class="info-list-close-button"><b>Close</b></button></a>
-      <div id="measurement-list-first" class="measurement-list-reading">
-        <div class="windooTitleHome">Wind speed</div>
-        <div class="windooUnitHome">m/s</div>
-        <div id="windDisplayHome" class="windooDisplayHome">N/A</div>
-        <i id="windGraphIconHome" class="windooGraphIconHome icon ion-arrow-graph-up-right"></i>
-      </div>
-      <div class="measurement-list-reading">
-        <div class="windooTitleHome">Temperature</div>
-        <div class="windooUnitHome">°C</div>
-        <div id="tempDisplayHome" class="windooDisplayHome">N/A</div>
-        <i id="tempGraphIconHome" class="windooGraphIconHome icon ion-arrow-graph-up-right"></i>
-      </div>
-      <div class="measurement-list-reading">
-        <div class="windooTitleHome">Humidity</div>
-        <div class="windooUnitHome">%RH</div>
-        <div id="humdDisplayHome" class="windooDisplayHome">N/A</div>
-        <i id="humdGraphIconHome" class="windooGraphIconHome icon ion-arrow-graph-up-right"></i>
-      </div>
-      <div class="measurement-list-reading">
-        <div class="windooTitleHome">Pressure</div>
-        <div class="windooUnitHome">hPA</div>
-        <div id="presDisplayHome" class="windooDisplayHome">N/A</div>
-        <i id="presGraphIconHome" class="windooGraphIconHome icon ion-arrow-graph-up-right"></i>
-      </div>
+      <wind-disp id="measurement-list-first" class="measurement-list-reading"></wind-disp>
+      <temp-disp class="measurement-list-reading"></temp-disp>
+      <humd-disp class="measurement-list-reading"></humd-disp>
+      <pres-disp class="measurement-list-reading"></pres-disp>
     </div>
 
     <!-- LIST MASKS -->
