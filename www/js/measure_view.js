@@ -33,9 +33,9 @@ function measure_main()
 
     glbsens.currentMeasurement = new WindooMeasurement();
 
-    onWindooStatusChanged(windooStatus);
-    onTempEquilStatusChanged(tempEquilStatus);
-    onHumdEquilStatusChanged(humdEquilStatus);
+    //onWindooStatusChanged(windooStatus);
+    //onTempEquilStatusChanged(tempEquilStatus);
+    //onHumdEquilStatusChanged(humdEquilStatus);
 
     startCompass();
 
@@ -61,39 +61,6 @@ function setIconStatusChecked(icon)
 
 function onWindooStatusChanged()
 {
-    switch(windooStatus)
-    {
-        case 0:
-            sensor_status.innerHTML = "Sensor not connected";
-            sensor_status.style.border = "solid 2px #d00";
-            setIconStatusAlert(sensor_status_icon);
-            break;
-        case 1:
-            sensor_status.innerHTML = "Sensor calibrating...";
-            sensor_status.style.border = "solid 2px #fb0";
-            setIconStatusAlert(sensor_status_icon);
-            break;
-        case 2:
-            sensor_status.innerHTML = "Sensor calibrated";
-            sensor_status.style.border = "solid 2px #0c0";
-            setIconStatusChecked(sensor_status_icon);
-            break;
-    }
-}
-
-function onTempEquilStatusChanged()
-{
-    switch(tempEquilStatus)
-    {
-        case 0:
-            temp_equil_status.innerHTML = "Not ready";
-            temp_equil_status.style.border = "solid 2px #fb0";
-            break;
-        case 1:
-            temp_equil_status.innerHTML = "Ready";
-            temp_equil_status.style.border = "solid 2px #0c0";
-            break;
-    }
     setIconStatus(sensor_status_icon, tempEquilStatus && humdEquilStatus);
 }
 

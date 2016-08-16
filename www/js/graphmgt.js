@@ -127,7 +127,7 @@ function setGraphSizes()
 function initGraphs()
 {
   if (!alreadyInitGraphs) {
-    measureRef = glbsens.currentMeasurement;
+    measureRef = glbsens.windooObservation;
     alreadyInitGraphs = true;
   } else {
     updateMeasureRef();
@@ -458,14 +458,14 @@ function drawSigPts(graphNum, sigPt)
 
 function updateMeasureRef()
 {
-  measureRef.wind = measureRef.wind.concat(glbsens.currentMeasurement.wind);
-  measureRef.temp = measureRef.temp.concat(glbsens.currentMeasurement.temp);
-  measureRef.humd = measureRef.humd.concat(glbsens.currentMeasurement.humd);
-  measureRef.pres = measureRef.pres.concat(glbsens.currentMeasurement.pres);
-  measureRef.windTime = measureRef.windTime.concat(glbsens.currentMeasurement.windTime);
-  measureRef.tempTime = measureRef.tempTime.concat(glbsens.currentMeasurement.tempTime);
-  measureRef.humdTime = measureRef.humdTime.concat(glbsens.currentMeasurement.humdTime);
-  measureRef.presTime = measureRef.presTime.concat(glbsens.currentMeasurement.presTime);
+  measureRef.wind = measureRef.wind.concat(glbsens.windooObservation.wind);
+  measureRef.temp = measureRef.temp.concat(glbsens.windooObservation.temp);
+  measureRef.humd = measureRef.humd.concat(glbsens.windooObservation.humd);
+  measureRef.pres = measureRef.pres.concat(glbsens.windooObservation.pres);
+  measureRef.windTime = measureRef.windTime.concat(glbsens.windooObservation.windTime);
+  measureRef.tempTime = measureRef.tempTime.concat(glbsens.windooObservation.tempTime);
+  measureRef.humdTime = measureRef.humdTime.concat(glbsens.windooObservation.humdTime);
+  measureRef.presTime = measureRef.presTime.concat(glbsens.windooObservation.presTime);
 }
 
 //TEST WITH fakeWindoo.start()

@@ -63,10 +63,12 @@ function onEvent(event)
 {
     switch(event.type)
     {
-        case 0: //JDCWindooNotAvailable
+        case 0: // Windoo Not Available
             windooStatus = 0;
-            onWindooStatusChanged();
-            console.log("Windoo not available");
+            document.dispatchEvent(new CustomEvent("windooStatusChanged", { "detail": 0 }));
+
+            isHome = false;
+
             if (isHome) {
               if (document.getElementById("connected-status").style.visibility == "visible") fade(document.getElementById("connected-status"));
               if (document.getElementById("calibrated-status").style.visibility == "visible") fade(document.getElementById("calibrated-status"));
@@ -75,10 +77,12 @@ function onEvent(event)
             }
             break;
 
-        case 1: //JDCWindooAvailable
+        case 1: // Windoo Available
             windooStatus = 1;
-            onWindooStatusChanged();
-            console.log("Windoo available");
+            document.dispatchEvent(new CustomEvent("windooStatusChanged", { "detail": 1 }));
+
+            isHome = false;
+
             if (isHome) {
               if (document.getElementById("not-connected-status").style.visibility == "visible") fade(document.getElementById("not-connected-status"));
               if (document.getElementById("calibrated-status").style.visibility == "visible") fade(document.getElementById("calibrated-status"));
@@ -86,11 +90,13 @@ function onEvent(event)
               setTimeout(function() {fade(document.getElementById("connected-status"));}, 3000);
             }
             break;
-            console.log("Windoo calibrated");
 
-        case 2: //JDCWindooCalibrated
+        case 2: // Windoo Calibrated
             windooStatus = 2;
-            onWindooStatusChanged();
+            document.dispatchEvent(new CustomEvent("windooStatusChanged", { "detail": 2 }));
+
+            isHome = false;
+
             if (isHome) {
               if (document.getElementById("not-connected-status").style.visibility == "visible") fade(document.getElementById("not-connected-status"));
               if (document.getElementById("connected-status").style.visibility == "visible") fade(document.getElementById("connected-status"));
@@ -99,14 +105,11 @@ function onEvent(event)
             }
             break;
 
-        case 3: //JDCWindooVolumeNotAtItsMaximum
-            console.log("Volume not at maximum");
-            alert("Please turn volume up to maximum")
+        case 3: // VolumeNotAtItsMaximum
+            // TODO
             break;
 
-        case 4: //JDCWindooNewWindValue
-            //console.log("New wind:        " + event.data);
-            //if (isWeather){
+        case 4: // Wind
                 if      (event.data < windDisplay.innerHTML)
                 {
                     windGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
@@ -119,17 +122,14 @@ function onEvent(event)
                 }
                 windDisplay.innerHTML = event.data.toFixed(2);
             if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addWind(event.data);
-
-            if (glbsens.currentMeasurement.observing)   {
-              glbsens.currentMeasurement.addWind(event.data);
-
+            if (glbsens.windooObservation.observing)   {
+              glbsens.windooObservation.addWind(event.data);
               plotPtOnGraph(event.type - 4, isWeather);
               initGraphLines();
             }
             break;
 
-        case 5: //JDCWindooNewTemperatureValue
-            //console.log("New temperature: " + event.data);
+        case 5: // Temperature
                 if      (event.data < tempDisplay.innerHTML)
                 {
                     tempGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
@@ -142,15 +142,14 @@ function onEvent(event)
                 }
                 tempDisplay.innerHTML = event.data.toFixed(2);
             if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addTemp(event.data);
-            if (glbsens.currentMeasurement.observing)   {
-              glbsens.currentMeasurement.addTemp(event.data);
+            if (glbsens.windooObservation.observing)   {
+              glbsens.windooObservation.addTemp(event.data);
               plotPtOnGraph(event.type - 4, isWeather);
               initGraphLines();
             }
             break;
 
-        case 6: //JDCWindooNewHumidityValue
-            //console.log("New humidity:    " + event.data);
+        case 6: // Humidity
                 if      (event.data < humdDisplay.innerHTML)
                 {
                     humdGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
@@ -164,14 +163,13 @@ function onEvent(event)
                 humdDisplay.innerHTML = event.data.toFixed(2);
             if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addHumd(event.data);
             if (glbsens.windooObservation.observing)   {
-              glbsens.currentMeasurement.addHumd(event.data);
+              glbsens.windooObservation.addHumd(event.data);
               plotPtOnGraph(event.type - 4, isWeather);
               initGraphLines();
             }
             break;
 
-        case 7: //JDCWindooNewPressureValue:
-            //console.log("New pressure:    " + event.data);
+        case 7: // Pressure:
                 if      (event.data < presDisplay.innerHTML)
                 {
                     presGraphIcon.classList.remove  ("ion-arrow-graph-up-right");
@@ -184,8 +182,8 @@ function onEvent(event)
                 }
                 presDisplay.innerHTML = event.data.toFixed(1);
             if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addPres(event.data);
-            if (glbsens.currentMeasurement.observing)   {
-              glbsens.currentMeasurement.addPres(event.data);
+            if (glbsens.windooObservation.observing)   {
+              glbsens.windooObservation.addPres(event.data);
               plotPtOnGraph(event.type - 4, isWeather);
               initGraphLines();
             }

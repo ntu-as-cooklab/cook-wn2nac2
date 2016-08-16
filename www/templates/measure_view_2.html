@@ -140,14 +140,13 @@
 </template>
 
 <ion-view>
-    <ion-content class="measure_view_content has-tabs-top">
-        <div class="measure_view_container">
-            <div class="sensor_bar row">
-                <a class="col button measure_view_button">
-                    <span id="sensor-status">Sensor calibrated</span>
-                </a>
-                <a class="col button measure_view_button" onclick="measure_tab_switch('#equil_frame')">Equilibrium</a>
-            </div>
+
+    <ion-content id="measure_view_content" class="has-tabs-top">
+
+        <windoo-status-bar id="windoo-status-bar" class="button button-full"></windoo-status-bar>
+
+        <div id="measure_view_container">
+
             <div class="timed_measurement_bar row">
                 <a class="col button measure_view_button" onclick="measure_tab_switch('#timer_frame')">
                     <span class="row">

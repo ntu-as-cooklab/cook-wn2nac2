@@ -1,46 +1,56 @@
 <ion-view>
-  <ion-content>
-    <div id="sensor-readings">
-        <div class="row windooRow">
-            <div class="col windooContainer">
-                <div class="windooTitle">Wind speed</div>
-                <div class="windooUnit">m/s</div>
-                <div class="windooDisplay" id="windDisplay">N/A</div>
-                <div id="wind-graph-container" class="windoo-graph-container">
-                  <canvas id="wind-graph" class"windoo-graph"></canvas>
+
+    <ion-content id="weather-content">
+
+        <div id="sensor-readings-container">
+
+            <windoo-status-bar id="windoo-status-bar" class="button button-full button-assertive"></windoo-status-bar>
+
+            <div id="sensor-readings">
+                <div class="row windooRow">
+                    <div class="col windooContainer">
+                        <div class="windooTitle">Wind speed</div>
+                        <div class="windooUnit">m/s</div>
+                        <div class="windooDisplay" id="windDisplay">N/A</div>
+                        <div id="wind-graph-container" class="windoo-graph-container">
+                          <canvas id="wind-graph" class"windoo-graph"></canvas>
+                        </div>
+                        <i class="windooGraphIcon icon ion-arrow-graph-up-right" id="windGraphIcon"></i>
+                    </div>
+                    <div class="col windooContainer">
+                        <div class="windooTitle">Temperature</div>
+                        <div class="windooUnit">°C</div>
+                        <div class="windooDisplay" id="tempDisplay">N/A</div>
+                        <div id="temp-graph-container" class="windoo-graph-container">
+                          <canvas id="temp-graph" class"windoo-graph"></canvas>
+                        </div>
+                        <i class="windooGraphIcon icon ion-arrow-graph-up-right" id="tempGraphIcon"></i>
+                    </div>
                 </div>
-                <i class="windooGraphIcon icon ion-arrow-graph-up-right" id="windGraphIcon"></i>
-            </div>
-            <div class="col windooContainer">
-                <div class="windooTitle">Temperature</div>
-                <div class="windooUnit">°C</div>
-                <div class="windooDisplay" id="tempDisplay">N/A</div>
-                <div id="temp-graph-container" class="windoo-graph-container">
-                  <canvas id="temp-graph" class"windoo-graph"></canvas>
+                <div class="row windooRow">
+                    <div class="col windooContainer">
+                        <div class="windooTitle">Humidity</div>
+                        <div class="windooUnit">%RH</div>
+                        <div class="windooDisplay" id="humdDisplay">N/A</div>
+                        <div id="humd-graph-container" class="windoo-graph-container">
+                          <canvas id="humd-graph" class"windoo-graph"></canvas>
+                        </div>
+                        <i class="windooGraphIcon icon ion-arrow-graph-up-right" id="humdGraphIcon"></i>
+                    </div>
+                    <div class="col windooContainer">
+                        <div class="windooTitle">Pressure</div>
+                        <div class="windooUnit">hPA</div>
+                        <div class="windooDisplay" id="presDisplay">N/A</div>
+                        <div id="pres-graph-container" class="windoo-graph-container">
+                          <canvas id="pres-graph" class"windoo-graph"></canvas>
+                        </div>
+                        <i class="windooGraphIcon icon ion-arrow-graph-up-right" id="presGraphIcon"></i>
+                    </div>
                 </div>
-                <i class="windooGraphIcon icon ion-arrow-graph-up-right" id="tempGraphIcon"></i>
             </div>
+
         </div>
-        <div class="row windooRow">
-            <div class="col windooContainer">
-                <div class="windooTitle">Humidity</div>
-                <div class="windooUnit">%RH</div>
-                <div class="windooDisplay" id="humdDisplay">N/A</div>
-                <div id="humd-graph-container" class="windoo-graph-container">
-                  <canvas id="humd-graph" class"windoo-graph"></canvas>
-                </div>
-                <i class="windooGraphIcon icon ion-arrow-graph-up-right" id="humdGraphIcon"></i>
-            </div>
-            <div class="col windooContainer">
-                <div class="windooTitle">Pressure</div>
-                <div class="windooUnit">hPA</div>
-                <div class="windooDisplay" id="presDisplay">N/A</div>
-                <div id="pres-graph-container" class="windoo-graph-container">
-                  <canvas id="pres-graph" class"windoo-graph"></canvas>
-                </div>
-                <i class="windooGraphIcon icon ion-arrow-graph-up-right" id="presGraphIcon"></i>
-            </div>
-        </div>
-      </div>
+
     </ion-content>
+
 </ion-view>

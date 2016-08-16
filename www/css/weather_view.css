@@ -1,13 +1,24 @@
-#sensor-readings{
-  position: absolute;
-  top: 1%;
-  left: 1%;
-  height: 98%;
-  width: 98%;
-  z-index: 1000;
-  background-color: white;
-  border: 1px solid black;
-  opacity: 0.95;
+#weather-content {
+
+}
+
+#sensor-readings-container {
+    position: absolute;
+    width: 100%;
+    top: 0%;
+    bottom: 0%;
+}
+
+#sensor-readings {
+    position: absolute;
+    top: calc(1% + 2em);
+    left: 1%;
+    right: 1%;
+    bottom: 1%;
+    z-index: 1000;
+    background-color: white;
+    border: 1px solid black;
+    opacity: 0.95;
 }
 
 .windooRow{

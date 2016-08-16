@@ -16,13 +16,11 @@ var WindooObservation = function()
 
 WindooObservation.prototype.enable = function()
 {
-    //console.log("Enabling...");
     this.observing = true;
 };
 
 WindooObservation.prototype.disable = function()
 {
-    //console.log("Disabling...");
     this.observing = false;
 };
 
@@ -84,7 +82,6 @@ WindooMeasurement.prototype.constructor = WindooMeasurement;
 
 WindooMeasurement.prototype.start = function()
 {
-    //console.log("Starting...");
     this.enable();
     this.timeStarted   = Date.now();
     this.interval = setInterval(this.onTick, 1000);
@@ -93,8 +90,6 @@ WindooMeasurement.prototype.start = function()
 
 WindooMeasurement.prototype.stop = function()
 {
-    //console.log("Stopping...")
-    //console.log(this);
     clearInterval(this.interval);
     this.disable();
     this.timeFinished  = Date.now();
