@@ -1,5 +1,11 @@
 "use strict"
 
+var glbsens =
+{
+    windooObservation : null,
+    currentMeasurement : null
+}
+
 function onEvent(event)
 {
     switch(event.type)
@@ -56,7 +62,7 @@ function onEvent(event)
             if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addWind(event.data);
             if (glbsens.windooObservation.observing)   {
               glbsens.windooObservation.addWind(event.data);
-              //plotPtOnGraph(event.type - 4, isWeather);
+              plotPtOnGraph(event.type - 4, isWeather);
               initGraphLines();
             }
             break;
@@ -68,7 +74,7 @@ function onEvent(event)
             if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addTemp(event.data);
             if (glbsens.windooObservation.observing)   {
               glbsens.windooObservation.addTemp(event.data);
-              //plotPtOnGraph(event.type - 4, isWeather);
+              plotPtOnGraph(event.type - 4, isWeather);
               initGraphLines();
             }
             break;
@@ -80,7 +86,7 @@ function onEvent(event)
             if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addHumd(event.data);
             if (glbsens.windooObservation.observing)   {
               glbsens.windooObservation.addHumd(event.data);
-              //plotPtOnGraph(event.type - 4, isWeather);
+              plotPtOnGraph(event.type - 4, isWeather);
               initGraphLines();
             }
             break;
@@ -92,7 +98,7 @@ function onEvent(event)
             if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addPres(event.data);
             if (glbsens.windooObservation.observing)   {
               glbsens.windooObservation.addPres(event.data);
-              //plotPtOnGraph(event.type - 4, isWeather);
+              plotPtOnGraph(event.type - 4, isWeather);
               initGraphLines();
             }
             break;

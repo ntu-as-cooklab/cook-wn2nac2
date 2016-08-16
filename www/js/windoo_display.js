@@ -29,6 +29,7 @@ TempDisp.prototype = Object.create(WindooDisp.prototype);
 HumdDisp.prototype = Object.create(WindooDisp.prototype);
 PresDisp.prototype = Object.create(WindooDisp.prototype);
 
+// TODO
 // if      (event.data < tempDisplay.innerHTML)
 // {
 //     tempGraphIcon.classList.remove  ("ion-arrow-graph-up-right");

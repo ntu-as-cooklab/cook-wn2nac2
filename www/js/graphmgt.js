@@ -1,4 +1,4 @@
-"use strict";
+"use strict"
 
 //NOTE 0 = WIND SPEED, 1 = TEMPERATURE, 2 = HUMIDITY, 3 = PRESSURE
 var glbgraph = {
@@ -34,7 +34,12 @@ var clearedDataReady = false;
 
 function helperInitGraphs()
 {
+    console.log("helperInitGraphs");
+
+    var times = 0;
+
   if (!alreadyInit) {
+
     glbgraph.graphLabels = [
       [], //WIND SPEED LABELS
       [], //TEMPERATURE LABELS
@@ -48,10 +53,16 @@ function helperInitGraphs()
       [], //HUMIDITY MEASUREMENT
       []  //PRESSURE MEASUREMENT
     ];
+
     var origLineDraw = Chart.controllers.line.prototype.draw;
+
     //RUNS 172 OR SO TIMES FOR SOME REASON...
+
     Chart.helpers.extend(Chart.controllers.line.prototype, {
       draw: function() {
+
+        //   console.log(this);
+
         origLineDraw.apply(this, arguments);
 
         var graph = this.chart;
@@ -90,10 +101,21 @@ function helperInitGraphs()
             }
           }
         }
+
+        times++;
+        //console.log(times);
+        //console.log(this.chart);
+
       }
     });
+
+    // console.log(times);
+    // console.log("A");
     alreadyInit = true;
   }
+
+
+
 
   setGraphSizes();
   initGraphs();
@@ -104,19 +126,19 @@ function setGraphSizes()
   var c;
   for (var x = 0; x < glbgraph.graphs.length; x++) {
     switch (x) {
-        case 0: c = document.getElementById("wind-graph");
+        case 0: c = $("#wind-graph")[0];
                 c.width = c.parentElement.offsetWidth;
                 c.height = c.parentElement.offsetHeight;
                 break;
-        case 1: c = document.getElementById("temp-graph");
+        case 1: c = $("#temp-graph")[0];
                 c.width = c.parentElement.offsetWidth;
                 c.height = c.parentElement.offsetHeight;
                 break;
-        case 2: c = document.getElementById("humd-graph");
+        case 2: c = $("#humd-graph")[0];
                 c.width = c.parentElement.offsetWidth;
                 c.height = c.parentElement.offsetHeight;
                 break;
-        case 3: c = document.getElementById("pres-graph");
+        case 3: c = $("#pres-graph")[0];
                 c.width = c.parentElement.offsetWidth;
                 c.height = c.parentElement.offsetHeight;
                 break;
@@ -126,21 +148,30 @@ function setGraphSizes()
 
 function initGraphs()
 {
+
   if (!alreadyInitGraphs) {
     measureRef = glbsens.windooObservation;
     alreadyInitGraphs = true;
-  } else {
-    updateMeasureRef();
   }
+
+  // console.log(glbgraph.graphs.length);
+
   for (var x = 0; x < glbgraph.graphs.length; x++) {
+
+    //   console.log(glbgraph.graphs);
+
+
+
+
+
     switch (x) {
-      case 0: ctx = document.getElementById("wind-graph").getContext("2d");
+      case 0: ctx = $("#wind-graph")[0].getContext("2d");
               break;
-      case 1: ctx = document.getElementById("temp-graph").getContext("2d");
+      case 1: ctx = $("#temp-graph")[0].getContext("2d");
               break;
-      case 2: ctx = document.getElementById("humd-graph").getContext("2d");
+      case 2: ctx = $("#humd-graph")[0].getContext("2d");
               break;
-      case 3: ctx = document.getElementById("pres-graph").getContext("2d");
+      case 3: ctx = $("#pres-graph")[0].getContext("2d");
               break;
     }
     var data = {
@@ -182,6 +213,13 @@ function initGraphs()
         }
       }
     });
+
+
+
+
+
+
+
     //TODO: FIX THIS (IF NECESSARY)
     // glbgraph.graphs[x].data.datasets[0].lineAtIndex = glbgraph.graphs[x].chart.height;
     // glbgraph.graphs[x].update();
@@ -191,7 +229,6 @@ function initGraphs()
 
 function plotPtOnGraph(graphType, check)
 {
-  updateMeasureRef();
   if (check || activated) {
     switch (graphType) {
       case 0: var graphRef = glbgraph.graphs[graphType];
@@ -347,7 +384,7 @@ function initGraphLines() {
 
 function drawSigPts(graphNum, sigPt)
 {
-  measureRef.finalize();
+  //measureRef.finalize();
   switch (graphNum) {
     case 0: ctx = document.getElementById("wind-graph").getContext("2d");
             break;
@@ -454,19 +491,6 @@ function drawSigPts(graphNum, sigPt)
                 break;
   }
   glbgraph.graphs[graphNum].update();
-}
-
-function updateMeasureRef()
-{
-    console.log(measureRef);
-  measureRef.wind = measureRef.wind.concat(glbsens.windooObservation.wind);
-  measureRef.temp = measureRef.temp.concat(glbsens.windooObservation.temp);
-  measureRef.humd = measureRef.humd.concat(glbsens.windooObservation.humd);
-  measureRef.pres = measureRef.pres.concat(glbsens.windooObservation.pres);
-  measureRef.windTime = measureRef.windTime.concat(glbsens.windooObservation.windTime);
-  measureRef.tempTime = measureRef.tempTime.concat(glbsens.windooObservation.tempTime);
-  measureRef.humdTime = measureRef.humdTime.concat(glbsens.windooObservation.humdTime);
-  measureRef.presTime = measureRef.presTime.concat(glbsens.windooObservation.presTime);
 }
 
 //TEST WITH fakeWindoo.start()

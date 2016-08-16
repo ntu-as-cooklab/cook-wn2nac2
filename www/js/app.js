@@ -313,11 +313,9 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
   // sendSpoofMeasurements(50);
 
   $scope.$on('$ionicView.enter', function() {
-    glb.inMeasureView = false;
-    console.log(glb.inMeasureView);
-    setWeatherChecks(false, true, false);
+
     weather_main();
-    helperInitGraphs();
+    
   });
 })
 
