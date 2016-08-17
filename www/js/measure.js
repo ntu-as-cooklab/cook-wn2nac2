@@ -5,7 +5,7 @@ var newLat, newLong, newDesc;
 var takeMeasurement = function()
 {
     if ('undefined' !== typeof glbsens.currentMeasurement)
-     { if (glbsens.currentMeasurement.observing) glbsens.currentMeasurement.stop(); else takeNewMeasurement(); }
+     { glbsens.currentMeasurement.observing ? glbsens.currentMeasurement.stop() : takeNewMeasurement(); }
     else
         takeNewMeasurement();
 };

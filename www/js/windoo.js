@@ -1,9 +1,21 @@
 "use strict"
 
+var windooStatus = 0;
+
 var glbsens =
 {
     windooObservation : null,
     currentMeasurement : null
+}
+
+function initSensor()
+{
+      if (typeof Windoo !== 'undefined')
+      {
+          Windoo.init(console.log("Windoo intialized"));
+          Windoo.start(console.log("Windoo started"));
+          Windoo.setCallback(onEvent);
+      }
 }
 
 function onEvent(event)
@@ -13,8 +25,6 @@ function onEvent(event)
         case 0: // Windoo Not Available
             windooStatus = 0;
             document.dispatchEvent(new CustomEvent("windooStatusChanged", { "detail": 0 }));
-
-            isHome = false;
 
             if (isHome) {
               if (document.getElementById("connected-status").style.visibility == "visible") fade(document.getElementById("connected-status"));
@@ -28,8 +38,6 @@ function onEvent(event)
             windooStatus = 1;
             document.dispatchEvent(new CustomEvent("windooStatusChanged", { "detail": 1 }));
 
-            isHome = false;
-
             if (isHome) {
               if (document.getElementById("not-connected-status").style.visibility == "visible") fade(document.getElementById("not-connected-status"));
               if (document.getElementById("calibrated-status").style.visibility == "visible") fade(document.getElementById("calibrated-status"));
@@ -41,8 +49,6 @@ function onEvent(event)
         case 2: // Windoo Calibrated
             windooStatus = 2;
             document.dispatchEvent(new CustomEvent("windooStatusChanged", { "detail": 2 }));
-
-            isHome = false;
 
             if (isHome) {
               if (document.getElementById("not-connected-status").style.visibility == "visible") fade(document.getElementById("not-connected-status"));

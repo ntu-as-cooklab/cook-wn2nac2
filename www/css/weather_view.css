@@ -1,69 +1,29 @@
 #weather-content {
-
-}
-
-#sensor-readings-container {
     position: absolute;
-    width: 100%;
-    top: 0%;
-    bottom: 0%;
+    top: 0;
+    bottom: 0;
 }
 
-#sensor-readings {
-    position: absolute;
-    top: calc(1% + 2em);
-    left: 1%;
-    right: 1%;
-    bottom: 1%;
-    z-index: 1000;
-    background-color: white;
-    border: 1px solid black;
-    opacity: 0.95;
-}
+    #weather-container {
+        position: absolute;
+        /*height: 100%;*/
+        width: 100%;
+        top: 0;
+        bottom: 0;
+    }
 
-.windooRow{
-  height: 49%;
-}
+        #sensor-readings {
+            position: absolute;
+            top: calc(1% + 2em);
+            left: 1%;
+            right: 1%;
+            bottom: 1%;
+            z-index: 1000;
+            background-color: white;
+            border: 1px solid black;
+            opacity: 0.95;
+        }
 
-.windooContainer {
-    display: flex;
-    flex-flow: column;
-    margin-top:     5px;
-    margin-bottom:  5px;
-    margin-right:   5px;
-    margin-left:    5px;
-    width: 48%;
-}
-
-.windooTitle {
-    font-size: 17px;
-    height: 10%;
-    text-align: center;
-}
-
-.windooUnit {
-    font-size: 15px;
-    height: 10%;
-    text-align: right;
-}
-
-.windooDisplay {
-    display: inline-block;
-    font-size: 45px;
-    text-align: center;
-    height: 30%;
-    flex: 1 1 auto;
-    padding-top: 7px;
-}
-
-.windoo-graph-container {
-  height: 40%;
-  width: 100%;
-}
-
-.windooGraphIcon {
-    margin-top: 1vh;
-    font-size: 4vh;
-    height: 10%;
-    text-align: center;
-}
+            .windooRow{
+              height: 49%;
+            }

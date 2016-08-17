@@ -2,7 +2,6 @@
 
 // Status
 
-var windooStatus    = 0;
 var tempEquilStatus = 0;
 var humdEquilStatus = 0;
 var equilStatus     = 0;
@@ -19,6 +18,7 @@ var measureButton, timer_status;
 
 function measure_main()
 {
+    isHome = false;
     console.log("measure_main")
     sensor_status           = document.getElementById("sensor-status");
     sensor_status_icon      = document.getElementById("sensor-status-icon");

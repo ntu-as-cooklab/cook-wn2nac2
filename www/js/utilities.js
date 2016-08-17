@@ -83,15 +83,6 @@ var infoWindow;
 var map;
 var measureScreenIndex = 0;
 
-function initSensor()
-{
-  if (typeof Windoo !== 'undefined'){
-      Windoo.init(log("Windoo intialized"));
-      Windoo.start(log("Windoo started"));
-      Windoo.setCallback(onEvent);
-  }
-}
-
 function setMap(a_map_moron) {
   map = a_map_moron;
   glb.mapRef = map;

@@ -232,32 +232,6 @@
   border-top: 1px solid black;
 }
 
-.windooTitleHome {
-    font-size: 120%;
-    line-height: 3vh;
-    text-align: center;
-}
-
-.windooUnitHome {
-    font-size: 100%;
-    line-height: 3vh;
-    text-align: right;
-}
-
-.windooDisplayHome {
-    font-size: 300%;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 12vh;
-    flex: 1 1 auto;
-}
-
-.windooGraphIconHome {
-    margin-top: 5vh;
-    font-size: 4vh;
-    text-align: center;
-}
-
 .scroll{
   height: 100%;
 }

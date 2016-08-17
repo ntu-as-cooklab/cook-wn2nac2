@@ -1,9 +1,12 @@
 "use strict"
 
+//////////////// Windoo display base class /////////////////////////////////////
+
 var WindooDisp = {};
 WindooDisp.prototype = Object.create(HTMLElement.prototype);
 
-WindooDisp.prototype.createdCallback = function() {
+WindooDisp.prototype.createdCallback = function()
+{
     this.classList.add("windooContainer");
     (this.titleDiv      = document.createElement('div')).className = "windooTitle";
     (this.unitDiv       = document.createElement('div')).className = "windooUnit";
@@ -19,6 +22,8 @@ WindooDisp.prototype.createdCallback = function() {
     (this.graphIcon = document.createElement('i')).className = "windooGraphIcon icon";
     this.appendChild(this.graphIcon);
 }
+
+//////////////// Wind, temp, humd, pres derived display classes ////////////////
 
 var WindDisp = {};
 var TempDisp = {};
@@ -41,8 +46,8 @@ PresDisp.prototype = Object.create(WindooDisp.prototype);
 //     tempGraphIcon.classList.add     ("ion-arrow-graph-up-right");
 // }
 
-WindDisp.prototype.createdCallback = function() {
-
+WindDisp.prototype.createdCallback = function()
+{
     WindooDisp.prototype.createdCallback.call(this);
     this.graphDiv.id    = "wind-graph-container";
     this.canvas.id      = "wind-graph";
@@ -55,8 +60,8 @@ WindDisp.prototype.createdCallback = function() {
     )
 };
 
-TempDisp.prototype.createdCallback = function() {
-
+TempDisp.prototype.createdCallback = function()
+{
     WindooDisp.prototype.createdCallback.call(this);
     this.graphDiv.id    = "temp-graph-container";
     this.canvas.id      = "temp-graph";
@@ -69,8 +74,8 @@ TempDisp.prototype.createdCallback = function() {
     )
 };
 
-HumdDisp.prototype.createdCallback = function() {
-
+HumdDisp.prototype.createdCallback = function()
+{
     WindooDisp.prototype.createdCallback.call(this);
     this.graphDiv.id    = "humd-graph-container";
     this.canvas.id      = "humd-graph";
@@ -83,8 +88,8 @@ HumdDisp.prototype.createdCallback = function() {
     )
 };
 
-PresDisp.prototype.createdCallback = function() {
-
+PresDisp.prototype.createdCallback = function()
+{
     WindooDisp.prototype.createdCallback.call(this);
     this.graphDiv.id    = "pres-graph-container";
     this.canvas.id      = "pres-graph";

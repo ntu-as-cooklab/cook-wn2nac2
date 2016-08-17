@@ -1,0 +1,31 @@
+.windooContainer {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+}
+
+    .windooTitle {
+        font-size: 17px;
+        height: 10%;
+        text-align: center;
+    }
+
+    .windooUnit {
+        font-size: 15px;
+        height: 10%;
+        text-align: right;
+    }
+
+    .windooDisplay {
+        display: inline-block;
+        font-size: 45px;
+        text-align: center;
+        height: 30%;
+        flex: 1 1 auto;
+        padding-top: 7px;
+    }
+
+    .windoo-graph-container {
+      height: 40%;
+      width: 100%;
+    }
