@@ -1,35 +1,37 @@
-#measure_view_content {
+#measure-view-content {
     overflow-y: scroll;
     background-color: #23272d;
 }
 
-#measure_view_container {
-    width: 100%;
-    height: 100%;
-}
+    #measure-view-container {
+        width: 100%;
+        height: 100%;
+    }
 
-.sensor_bar {
-    height: 10vh;
-    margin-bottom: 10px;
-}
+        /*.timed_measurement_bar {
+            height: 15vh;
+        }
 
-.timed_measurement_bar {
-    height: 15vh;
-}
+        .measurement_bar {
+            height: 15vh;
+        }*/
 
-.measurement_bar {
-    height: 15vh;
-}
+            #measurement-summary {
+                font-size: 90%;
+                line-height: 120%;
+                text-align: left;
+                margin-bottom: 1ex;
+            }
 
-.measure_view_button {
-    border-radius: 0px;
-    border: 1px solid #bbb;
-}
+            .measure_view_button {
+                border-radius: 0px;
+                border: 1px solid #bbb;
+            }
 
-.measure-time-button, .weather-button {
-    border-radius: 0px;
-    border: 1px solid #bbb;
-}
+            .measure-time-button, .weather-button {
+                border-radius: 0px;
+                border: 1px solid #bbb;
+            }
 
 .measure_view_disp {
     /*flex-grow: 0;*/
@@ -38,15 +40,6 @@
     background-color: #f9f9f9;
     border: 1px solid #bbb;
     padding: 2%;
-}
-
-#sensor-status {
-    display: inline-block;
-    padding-left: 3px;
-    padding-right: 3px;
-    font-size:80%;
-    border-radius: 1ex;
-    border: solid 2px #0c0;
 }
 
 .measure_small_title

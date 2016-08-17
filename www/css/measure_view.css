@@ -25,21 +25,6 @@
 .measure-title-icon {
 }
 
-.toggle-button {
-    position:absolute;
-    right: 0%;
-    /*min-height: 3ex;
-    min-width: 3ex;
-    height: 3ex;
-    width: 3ex;*/
-}
-
-.toggle-icon {
-    /*font-size: 100%;
-    text-align: center;
-    vertical-align: middle;*/
-}
-
 /***** Status icons *****/
 
 .ion-checkmark-circled {
@@ -90,13 +75,6 @@
 
 .equil-status-icon {
 
-}
-
-#skip-equil-button {
-    display: inline-block;
-    right:0%;
-    bottom: 0%;
-    position: absolute;
 }
 
 /***** Measurement card *****/

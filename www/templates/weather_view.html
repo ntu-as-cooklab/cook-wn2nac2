@@ -2,18 +2,18 @@
 
     <ion-content id="weather-content">
 
+        <windoo-status-bar></windoo-status-bar>
+
         <div id="weather-container">
 
-            <windoo-status-bar id="windoo-status-bar" class="button button-full button-assertive"></windoo-status-bar>
-
             <div id="sensor-readings">
-                <div class="row windooRow">
-                    <wind-disp class="col col-50"></wind-disp>
-                    <temp-disp class="col col-50"></temp-disp>
+                <div class="row sensor-readings-row">
+                    <wind-disp class="col col-50"><wind-graph></wind-graph></wind-disp>
+                    <temp-disp class="col col-50"><temp-graph></temp-graph></temp-disp>
                 </div>
-                <div class="row windooRow">
-                    <humd-disp class="col col-50"></humd-disp>
-                    <pres-disp class="col col-50"></pres-disp>
+                <div class="row sensor-readings-row">
+                    <humd-disp class="col col-50"><humd-graph></humd-graph></humd-disp>
+                    <pres-disp class="col col-50"><pres-graph></pres-graph></pres-disp>
                 </div>
             </div>
 

@@ -1,7 +1,8 @@
-#windoo-status-bar {
-    margin: 0;
+.windoo-status-bar {
+    margin: 0 !important;
     padding: 0;
     vertical-align: middle;
     line-height: 1.6em;
     min-height: 1.6em;
+    border-width: 0;
 }

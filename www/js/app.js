@@ -56,7 +56,7 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
       url: '/measure',
       views: {
         'measure-view' : {
-          templateUrl: 'templates/measure_view_2.html',
+          templateUrl: 'templates/measure_view.html',
           controller: 'MeasureViewController'
         }
       }
@@ -315,7 +315,7 @@ angular.module('starter', ['ionic', 'ngCordova','chart.js'])
   $scope.$on('$ionicView.enter', function() {
 
     weather_main();
-    
+
   });
 })
 

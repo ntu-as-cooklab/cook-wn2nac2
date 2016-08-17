@@ -12,18 +12,16 @@ WindooDisp.prototype.createdCallback = function()
     (this.unitDiv       = document.createElement('div')).className = "windooUnit";
     (this.displayDiv    = document.createElement('div')).className = "windooDisplay";
     this.displayDiv.innerHTML = "N/A";
-    (this.graphDiv      = document.createElement('div')).className = "windoo-graph-container";
-    this.appendChild(this.titleDiv);
-    this.appendChild(this.unitDiv);
-    this.appendChild(this.displayDiv);
-    this.appendChild(this.graphDiv);
-    (this.canvas = document.createElement('canvas')).className = "windoo-graph";
-    this.graphDiv.appendChild(this.canvas);
+
     (this.graphIcon = document.createElement('i')).className = "windooGraphIcon icon";
-    this.appendChild(this.graphIcon);
+
+    this.insertBefore(this.graphIcon, this.firstChild);
+    this.insertBefore(this.displayDiv, this.firstChild);
+    this.insertBefore(this.unitDiv, this.firstChild);
+    this.insertBefore(this.titleDiv, this.firstChild);
 }
 
-//////////////// Wind, temp, humd, pres derived display classes ////////////////
+//////////////// Derived display classes: wind, temp, humd, pres ////////////////
 
 var WindDisp = {};
 var TempDisp = {};
@@ -49,11 +47,9 @@ PresDisp.prototype = Object.create(WindooDisp.prototype);
 WindDisp.prototype.createdCallback = function()
 {
     WindooDisp.prototype.createdCallback.call(this);
-    this.graphDiv.id    = "wind-graph-container";
-    this.canvas.id      = "wind-graph";
-    this.graphIcon.id   = "windGraphIcon";
     this.titleDiv.innerHTML = txt.WIND_TITLE;
     this.unitDiv.innerHTML  = txt.WIND_UNIT;
+    this.graphIcon.id   = "windGraphIcon";
 
     document.addEventListener('newWind',
         (function (instance) { return function (e) { instance.displayDiv.innerHTML = e.detail.toFixed(2); } })(this)
@@ -63,11 +59,9 @@ WindDisp.prototype.createdCallback = function()
 TempDisp.prototype.createdCallback = function()
 {
     WindooDisp.prototype.createdCallback.call(this);
-    this.graphDiv.id    = "temp-graph-container";
-    this.canvas.id      = "temp-graph";
-    this.graphIcon.id   = "tempGraphIcon";
     this.titleDiv.innerHTML = txt.TEMP_TITLE;
     this.unitDiv.innerHTML  = txt.TEMP_UNIT;
+    this.graphIcon.id   = "tempGraphIcon";
 
     document.addEventListener('newTemp',
         (function (instance) { return function (e) { instance.displayDiv.innerHTML = e.detail.toFixed(2); } })(this)
@@ -77,11 +71,9 @@ TempDisp.prototype.createdCallback = function()
 HumdDisp.prototype.createdCallback = function()
 {
     WindooDisp.prototype.createdCallback.call(this);
-    this.graphDiv.id    = "humd-graph-container";
-    this.canvas.id      = "humd-graph";
-    this.graphIcon.id   = "humdGraphIcon";
     this.titleDiv.innerHTML = txt.HUMD_TITLE;
     this.unitDiv.innerHTML  = txt.HUMD_UNIT;
+    this.graphIcon.id   = "humdGraphIcon";
 
     document.addEventListener('newHumd',
         (function (instance) { return function (e) { instance.displayDiv.innerHTML = e.detail.toFixed(2); } })(this)
@@ -91,11 +83,9 @@ HumdDisp.prototype.createdCallback = function()
 PresDisp.prototype.createdCallback = function()
 {
     WindooDisp.prototype.createdCallback.call(this);
-    this.graphDiv.id    = "pres-graph-container";
-    this.canvas.id      = "pres-graph";
-    this.graphIcon.id   = "presGraphIcon";
     this.titleDiv.innerHTML = txt.PRES_TITLE;
     this.unitDiv.innerHTML  = txt.PRES_UNIT;
+    this.graphIcon.id   = "presGraphIcon";
 
     document.addEventListener('newPres',
         (function (instance) { return function (e) { instance.displayDiv.innerHTML = e.detail.toFixed(1); } })(this)

@@ -28,13 +28,13 @@ WindooStatusBar.prototype.setStatus = function (status)
     }
 }
 
-WindooStatusBar.prototype.createdCallback = function() {
-
+WindooStatusBar.prototype.createdCallback = function()
+{
+    this.className = "windoo-status-bar button button-full";
     this.setStatus(windooStatus);
     document.addEventListener('windooStatusChanged',
         (function (instance) { return function (e) { instance.setStatus(e.detail); } })(this)
     )
-
 };
 
 WindooStatusBar = document.registerElement('windoo-status-bar', { prototype: WindooStatusBar.prototype });
