@@ -23,39 +23,10 @@ function onEvent(event)
     switch(event.type)
     {
         case 0: // Windoo Not Available
-            windooStatus = 0;
-            document.dispatchEvent(new CustomEvent("windooStatusChanged", { "detail": 0 }));
-
-            if (isHome) {
-              if (document.getElementById("connected-status").style.visibility == "visible") fade(document.getElementById("connected-status"));
-              if (document.getElementById("calibrated-status").style.visibility == "visible") fade(document.getElementById("calibrated-status"));
-              unfade(document.getElementById("not-connected-status"));
-              setTimeout(function() {fade(document.getElementById("not-connected-status"));}, 3000);
-            }
-            break;
-
         case 1: // Windoo Available
-            windooStatus = 1;
-            document.dispatchEvent(new CustomEvent("windooStatusChanged", { "detail": 1 }));
-
-            if (isHome) {
-              if (document.getElementById("not-connected-status").style.visibility == "visible") fade(document.getElementById("not-connected-status"));
-              if (document.getElementById("calibrated-status").style.visibility == "visible") fade(document.getElementById("calibrated-status"));
-              unfade(document.getElementById("connected-status"));
-              setTimeout(function() {fade(document.getElementById("connected-status"));}, 3000);
-            }
-            break;
-
         case 2: // Windoo Calibrated
-            windooStatus = 2;
-            document.dispatchEvent(new CustomEvent("windooStatusChanged", { "detail": 2 }));
-
-            if (isHome) {
-              if (document.getElementById("not-connected-status").style.visibility == "visible") fade(document.getElementById("not-connected-status"));
-              if (document.getElementById("connected-status").style.visibility == "visible") fade(document.getElementById("connected-status"));
-              unfade(document.getElementById("calibrated-status"));
-              setTimeout(function() {fade(document.getElementById("calibrated-status"));}, 3000);
-            }
+            windooStatus = event.type;
+            document.dispatchEvent(new CustomEvent("windooStatusChanged", { "detail": windooStatus }));
             break;
 
         case 3: // VolumeNotAtItsMaximum

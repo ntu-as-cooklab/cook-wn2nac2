@@ -9,19 +9,14 @@ var duration        = 60000;
 
 // DOM elements
 
-var sensor_status;
-var sensor_status_icon;
 var temp_equil_status;
 var humd_equil_status;
-var equil_status_icon;
 var measureButton, timer_status;
 
 function measure_main()
 {
     isHome = false;
     console.log("measure_main")
-    sensor_status           = document.getElementById("sensor-status");
-    sensor_status_icon      = document.getElementById("sensor-status-icon");
     temp_equil_status       = document.getElementById("temp-equil-status");
     humd_equil_status       = document.getElementById("humd-equil-status");
     equil_status_icon       = document.getElementById("equil-status-icon");
@@ -33,51 +28,9 @@ function measure_main()
 
     glbsens.currentMeasurement = new WindooMeasurement();
 
-    //onWindooStatusChanged(windooStatus);
-    //onTempEquilStatusChanged(tempEquilStatus);
-    //onHumdEquilStatusChanged(humdEquilStatus);
-
     startCompass();
 
     $('.ppc-progress-fill').css('transform','rotate('+ 0 +'deg)');
-}
-
-function setIconStatus(icon, status)
-{
-    status ? setIconStatusChecked(icon) : setIconStatusAlert(icon);
-}
-
-function setIconStatusAlert(icon)
-{
-    icon.classList.remove  ("ion-checkmark-circled");
-    icon.classList.add     ("ion-alert-circled");
-}
-
-function setIconStatusChecked(icon)
-{
-    icon.classList.remove  ("ion-alert-circled");
-    icon.classList.add     ("ion-checkmark-circled");
-}
-
-function onWindooStatusChanged()
-{
-    setIconStatus(sensor_status_icon, tempEquilStatus && humdEquilStatus);
-}
-
-function onHumdEquilStatusChanged()
-{
-    switch(humdEquilStatus)
-    {
-        case 0:
-            humd_equil_status.innerHTML = "Not ready";
-            humd_equil_status.style.border = "solid 2px #fb0";
-            break;
-        case 1:
-            humd_equil_status.innerHTML = "Ready";
-            humd_equil_status.style.border = "solid 2px #0c0";
-            break;
-    }
-    setIconStatus(sensor_status_icon, tempEquilStatus && humdEquilStatus);
 }
 
 var tDif = 3;
@@ -195,11 +148,7 @@ function setMeasureButtonStatus(status)
     }
 }
 
-var measure_view_disp = null;
-
 function measure_tab_switch(frameName)
 {
-    var t = document.querySelector(frameName);
-    var clone = document.importNode(t.content, true);
-    $(".measure_view_disp_content").replaceWith(clone);
+    $("#measure_view_disp_content").replaceWith(document.importNode(document.querySelector(frameName).content, true));
 }

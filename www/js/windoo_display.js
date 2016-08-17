@@ -7,18 +7,34 @@ WindooDisp.prototype = Object.create(HTMLElement.prototype);
 
 WindooDisp.prototype.createdCallback = function()
 {
-    this.classList.add("windooContainer");
-    (this.titleDiv      = document.createElement('div')).className = "windooTitle";
-    (this.unitDiv       = document.createElement('div')).className = "windooUnit";
-    (this.displayDiv    = document.createElement('div')).className = "windooDisplay";
-    this.displayDiv.innerHTML = "N/A";
+    this.titleDiv      = document.createElement('div');
+    this.unitDiv       = document.createElement('div');
+    this.dataDiv    = document.createElement('div');
+    this.dataDiv.innerHTML = "N/A";
 
     (this.graphIcon = document.createElement('i')).className = "windooGraphIcon icon";
 
-    this.insertBefore(this.graphIcon, this.firstChild);
-    this.insertBefore(this.displayDiv, this.firstChild);
-    this.insertBefore(this.unitDiv, this.firstChild);
-    this.insertBefore(this.titleDiv, this.firstChild);
+    if (this.classList.contains("windoo-disp-small"))
+    {
+        this.insertBefore(this.graphIcon, this.firstChild);
+        this.insertBefore(this.unitDiv, this.firstChild);
+        this.insertBefore(this.dataDiv, this.firstChild);
+        this.insertBefore(this.titleDiv, this.firstChild);
+        this.titleDiv.classList.add("windoo-disp-title-small");
+        this.unitDiv.classList.add("windoo-disp-unit-small");
+        this.dataDiv.classList.add("windoo-disp-data-small");
+    }
+    else
+    {
+        this.insertBefore(this.graphIcon, this.firstChild);
+        this.insertBefore(this.dataDiv, this.firstChild);
+        this.insertBefore(this.unitDiv, this.firstChild);
+        this.insertBefore(this.titleDiv, this.firstChild);
+        this.classList.add("windoo-disp")
+        this.titleDiv.classList.add("windoo-disp-title");
+        this.unitDiv.classList.add("windoo-disp-unit");
+        this.dataDiv.classList.add("windoo-disp-data");
+    }
 }
 
 //////////////// Derived display classes: wind, temp, humd, pres ////////////////
@@ -52,7 +68,7 @@ WindDisp.prototype.createdCallback = function()
     this.graphIcon.id   = "windGraphIcon";
 
     document.addEventListener('newWind',
-        (function (instance) { return function (e) { instance.displayDiv.innerHTML = e.detail.toFixed(2); } })(this)
+        (function (instance) { return function (e) { instance.dataDiv.innerHTML = e.detail.toFixed(2); } })(this)
     )
 };
 
@@ -64,7 +80,7 @@ TempDisp.prototype.createdCallback = function()
     this.graphIcon.id   = "tempGraphIcon";
 
     document.addEventListener('newTemp',
-        (function (instance) { return function (e) { instance.displayDiv.innerHTML = e.detail.toFixed(2); } })(this)
+        (function (instance) { return function (e) { instance.dataDiv.innerHTML = e.detail.toFixed(2); } })(this)
     )
 };
 
@@ -76,7 +92,7 @@ HumdDisp.prototype.createdCallback = function()
     this.graphIcon.id   = "humdGraphIcon";
 
     document.addEventListener('newHumd',
-        (function (instance) { return function (e) { instance.displayDiv.innerHTML = e.detail.toFixed(2); } })(this)
+        (function (instance) { return function (e) { instance.dataDiv.innerHTML = e.detail.toFixed(2); } })(this)
     )
 };
 
@@ -88,7 +104,7 @@ PresDisp.prototype.createdCallback = function()
     this.graphIcon.id   = "presGraphIcon";
 
     document.addEventListener('newPres',
-        (function (instance) { return function (e) { instance.displayDiv.innerHTML = e.detail.toFixed(1); } })(this)
+        (function (instance) { return function (e) { instance.dataDiv.innerHTML = e.detail.toFixed(1); } })(this)
     )
 };
 

@@ -8,59 +8,32 @@
         height: 100%;
     }
 
-        /*.timed_measurement_bar {
-            height: 15vh;
+        #timed_measurement_bar {
         }
 
-        .measurement_bar {
-            height: 15vh;
-        }*/
+        #measurement_bar {
+        }
 
-            #measurement-summary {
-                font-size: 90%;
-                line-height: 120%;
-                text-align: left;
-                margin-bottom: 1ex;
-            }
-
-            .measure_view_button {
+            .measure_view_button, .measure-time-button, .weather-button {
                 border-radius: 0px;
                 border: 1px solid #bbb;
             }
 
-            .measure-time-button, .weather-button {
-                border-radius: 0px;
-                border: 1px solid #bbb;
-            }
+                .measurement-status {
+                    font-size: 100%;
+                    line-height: 100%;
+                    text-align: left;
+                }
 
-.measure_view_disp {
-    /*flex-grow: 0;*/
-    /*flex: 1 1 auto;*/
-    margin: 2%;
-    background-color: #f9f9f9;
-    border: 1px solid #bbb;
-    padding: 2%;
-}
+                .measurement-summary {
+                    font-size: 95%;
+                    line-height: 95%;
+                    text-align: left;
+                }
 
-.measure_small_title
-{
-    font-size:80%;
-    line-height: 100%;
-}
+    .measure_view_disp {
+    }
 
-.measure_small_disp
-{
-    margin-top: 1ex;
-    margin-bottom: 0.5ex;
-    font-size:100%;
-    line-height: 100%;
-}
-
-.measure_small_unit {
-    font-size:80%;
-    line-height: 100%;
-}
-
-.measure_view_disp_content {
-    /*overflow-y: scroll;*/
-}
+        #measure_view_disp_content {
+            /*overflow-y: scroll;*/
+        }

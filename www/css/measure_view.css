@@ -11,7 +11,6 @@
     font-size: 200%;
 }
 
-
 .measure_view-bar {
     position:relative;
     margin: 1ex;
@@ -23,16 +22,6 @@
 }
 
 .measure-title-icon {
-}
-
-/***** Status icons *****/
-
-.ion-checkmark-circled {
-    color: #0c0;
-}
-
-.ion-alert-circled {
-    color: #fb0;
 }
 
 /***** Info boxes *****/

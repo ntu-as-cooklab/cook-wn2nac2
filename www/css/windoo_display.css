@@ -1,22 +1,22 @@
-.windooContainer {
+.windoo-disp {
     display: flex;
     flex-flow: column;
     width: 100%;
 }
 
-    .windooTitle {
+    .windoo-disp-title {
         font-size: 17px;
         height: 10%;
         text-align: center;
     }
 
-    .windooUnit {
+    .windoo-disp-unit {
         font-size: 15px;
         height: 10%;
         text-align: right;
     }
 
-    .windooDisplay {
+    .windoo-disp-data {
         display: inline-block;
         font-size: 45px;
         text-align: center;
@@ -25,7 +25,23 @@
         padding-top: 7px;
     }
 
-    .windoo-graph-container {
-      height: 40%;
-      width: 100%;
+.windoo-disp-small {
+    /*border: 1px solid #bbb;*/
+}
+
+    .windoo-disp-title-small {
+        font-size: 80%;
+        line-height: 100%;
+    }
+
+    .windoo-disp-data-small {
+        margin-top: 1ex;
+        margin-bottom: 0.5ex;
+        font-size: 100%;
+        line-height: 100%;
+    }
+
+    .windoo-disp-unit-small {
+        font-size: 80%;
+        line-height: 100%;
     }

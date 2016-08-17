@@ -1,0 +1,13 @@
+.status-icon::before {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1ex !important;
+    min-height: 1ex !important;
+    vertical-align: middle !important;
+}
+
+.status-icon {
+    margin-right: 1ex;
+}
+
+/*.status-icon > **/

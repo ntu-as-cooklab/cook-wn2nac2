@@ -134,6 +134,8 @@
     </div>
 </template>
 
+<!-- ####################################################################### -->
+
 <ion-view>
 
     <ion-content id="measure-view-content" class="has-tabs-top">
@@ -142,55 +144,51 @@
 
         <div id="measure-view-container">
 
-            <div class="timed_measurement_bar row">
+            <div id="timed_measurement_bar" class="row">
                 <a class="col button measure_view_button" onclick="measure_tab_switch('#timer_frame')">
 
-                    <span id="measurement-summary" class="row">
-                        Time started: <br>
-                        Time finished: <br>
-                        Location:
+                    <span class="measurement-status row">
+                        <span class="col col-33">Windoo data:</span>
+                        <span class="col col-67"><status-icon></status-icon><span>Not collected</span></span>
                     </span>
+                    <div class="measurement-summary">
+
+                        <span class="row">
+                            <span class="col col-25">Time:</span>
+                            <span class="col col-25">0</span>
+                            <span class="col col-25">0</span>
+                            <span class="col col-25">0</span>
+                        </span>
+                        <span class="row"><span class="col col-25">Location:</span><span class="col col-75">0</span></span>
+                    </div>
 
                     <span class="row">
-                        <span class="col">
-                            <div class="measure_small_title">Wind speed</div>
-                            <div class="measure_small_disp" id="humdDisplay">N/A</div>
-                            <div class="measure_small_unit">m/s</div>
-                        </span>
-                        <span class="col">
-                            <div class="measure_small_title">Temperature</div>
-                            <div class="measure_small_disp" id="humdDisplay">N/A</div>
-                            <div class="measure_small_unit">°C</div>
-                        </span>
-                        <span class="col">
-                            <div class="measure_small_title">Humidity</div>
-                            <div class="measure_small_disp" id="humdDisplay">N/A</div>
-                            <div class="measure_small_unit">%RH</div>
-                        </span>
-                        <span class="col">
-                            <div class="measure_small_title">Pressure</div>
-                            <div class="measure_small_disp" id="humdDisplay">N/A</div>
-                            <div class="measure_small_unit">hPA</div>
-                        </span>
+                        <wind-disp class="windoo-disp-small col"></wind-disp>
+                        <temp-disp class="windoo-disp-small col"></temp-disp>
+                        <humd-disp class="windoo-disp-small col"></humd-disp>
+                        <pres-disp class="windoo-disp-small col"></pres-disp>
                     </span>
                 </a>
             </div>
-            <div class="measurement_bar row">
+
+            <div id="measurement_bar" class="row">
                 <a class="col button measure_view_button" onclick="measure_tab_switch('#wind_frame')">
                     Wind direction
+                    <div><status-icon></status-icon>Not set</div>
                     <div id="degrees-display">
-                        <i class="icon measure_view-icon measure-status-icon equil-status-icon ion-alert-circled"></i>Not set
                     </div>
                 </a>
                 <a class="col button measure_view_button" onclick="measure_tab_switch('#weather_frame')">
                     Weather type
-                    <i class="icon measure_view-icon measure-status-icon equil-status-icon ion-alert-circled"></i>Not set
+                    <div><status-icon></status-icon>Not set</div>
                 </a>
                 <a class="col button measure_view_button" onclick="measure_tab_switch('#send_frame')">Send</a>
             </div>
+
             <div id="measure_view_disp" class="measure_view_disp card">
-                <div class="measure_view_disp_content"></div>
+                <div id="measure_view_disp_content"></div>
             </div>
+
         </div>
     </ion-content>
 </ion-view>
