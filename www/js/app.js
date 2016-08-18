@@ -80,26 +80,6 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
       }
     })
 
-    .state('tabs.welcome', {
-      url: '/welcome',
-      views: {
-        'welcome-view' : {
-          templateUrl: 'templates/welcome.html',
-          controller: 'WelcomeCtrl'
-        }
-      }
-    })
-
-    .state('tabs.fbhome', {
-      url: "/fbhome",
-      views: {
-        'home-view': {
-          templateUrl: "templates/fbhome.html",
-          controller: 'HomeCtrl'
-        }
-      }
-    })
-
   $urlRouterProvider.otherwise('/tab/home');
 })
 

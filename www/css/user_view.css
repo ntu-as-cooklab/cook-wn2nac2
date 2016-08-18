@@ -16,3 +16,11 @@
 .form-button:active{
   transform: translateY(1px);
 }
+
+.facebook-sign-in
+{
+	border-radius: 4px;
+	font-weight: 500;
+	color: #FFF;
+	background-color: #294886;
+}
