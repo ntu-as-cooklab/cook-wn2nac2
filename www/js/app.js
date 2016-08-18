@@ -38,8 +38,8 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
       url: '/home',
       views: {
         'home-view' : {
-          templateUrl: 'templates/home_view.html',
-          controller: 'HomeViewController'
+          templateUrl: 'templates/map_view.html',
+          controller: 'MapViewController'
         }
       }
     })
@@ -349,6 +349,19 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
   $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = false;
     console.log(glb.inMeasureView);
+  });
+})
+
+.controller('MapViewController', function($scope, $ionicLoading, $compile) {
+
+  $scope.$on('$ionicView.enter', function() {
+    //   $.getScript("https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=zh-TW",
+    //     function () {
+    //         $.getScript("http://127.0.0.1:8100/weather/asset/a10aafbd28e4681c288b9743dde5ab36.js");
+    //     });
+
+    //   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=zh-TW" language="javascript" type="text/javascript"></script>
+    //   <script src="http://127.0.0.1/weather/asset/a10aafbd28e4681c288b9743dde5ab36.js" language="javascript" type="text/javascript"></script>
   });
 })
 
