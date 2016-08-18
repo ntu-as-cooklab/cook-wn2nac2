@@ -1,5 +1,5 @@
-<template id="equil_frame">
-    <div class="measure_view_disp_content">
+<!-- <template id="equil_frame">
+    <div class="measure-view-disp-content">
         <div class="measure_view-bar">
             <i class="icon measure_view-icon measure-title-icon ion-ios-pulse-strong"></i>
             <span class="measure-title">Equilibrium</span>
@@ -26,10 +26,11 @@
             <a id="skip-equil-button" class="button button-small button-dark">SKIP</a>
         </div>
     </div>
-</template>
+</template> -->
 
-<template id="timer_frame">
-    <div class="measure_view_disp_content">
+<template id="timer_frame_1">
+    <div class="measure-view-disp-content">
+
         <div class="measure_view-bar">
             <i class="icon measure_view-icon measure-title-icon ion-android-stopwatch"></i>
             <span class="measure-title">Timed Measurement</span>
@@ -52,6 +53,23 @@
                 <span id="start-button-text">START</span>
             </button>
         </div>
+
+        <div class="info-box">
+            <i class="icon measure_view-icon ion-ios-information-outline"></i>
+            <div>Select measurement duration and press START to begin measurement.</div>
+        </div>
+
+    </div>
+</template>
+
+<template id="timer_frame_2">
+    <div class="measure-view-disp-content">
+
+        <button id="start-button" class="button button-balanced" onclick="takeMeasurement()">
+            <i class="icon ion-android-stopwatch"></i>
+            <span id="start-button-text">START</span>
+        </button>
+
         <div id="progress-box">
             <div class="progress-pie-chart" data-percent="0">
                 <div class="ppc-progress">
@@ -64,15 +82,12 @@
                 </div>
             </div>
         </div>
-        <div class="info-box">
-            <i class="icon measure_view-icon ion-ios-information-outline"></i>
-            <div>Select measurement duration and press START to begin measurement.</div>
-        </div>
+
     </div>
 </template>
 
 <template id="weather_frame">
-    <div class="measure_view_disp_content">
+    <div class="measure-view-disp-content">
         <div class="measure_view-bar">
             <i class="icon measure_view-icon measure-title-icon ion-ios-partlysunny-outline"></i>
             <span class="measure-title">Weather type</span>
@@ -91,7 +106,7 @@
 </template>
 
 <template id="wind_frame">
-    <div class="measure_view_disp_content">
+    <div class="measure-view-disp-content">
         <div class="measure_view-bar">
             <i class="icon measure_view-icon measure-title-icon ion-flag"></i>
             <span class="measure-title">Wind direction</span>
@@ -114,7 +129,7 @@
 </template>
 
 <template id="send_frame">
-    <div class="measure_view_disp_content">
+    <div class="measure-view-disp-content">
         <div class="measure_view-bar">
             <i class="icon measure_view-icon measure-title-icon ion-ios-paperplane-outline"></i>
             <span class="measure-title">Send</span>
@@ -138,55 +153,59 @@
 
 <ion-view>
 
-    <ion-content id="measure-view-content" class="has-tabs-top">
+    <ion-content id="measure-view-content">
 
         <windoo-status-bar></windoo-status-bar>
 
-        <div id="measure-view-container">
+        <div id="measure-view-container" class="has-windoo-status-bar-top">
 
-            <div id="timed_measurement_bar" class="row">
-                <a class="col button measure_view_button" onclick="measure_tab_switch('#timer_frame')">
+            <div id="measure-view-bars">
 
-                    <span class="measurement-status row">
-                        <span class="col col-33">Windoo data:</span>
-                        <span class="col col-67"><status-icon></status-icon><span>Not collected</span></span>
-                    </span>
-                    <div class="measurement-summary">
+                <div id="timed_measurement_bar" class="row">
+                    <a class="col button measure_view_button" onclick="measure_tab_switch('#timer_frame_1')">
+
+                        <span class="measurement-status row">
+                            <span class="col col-33">Windoo data:</span>
+                            <span class="col col-67"><status-icon></status-icon><span>Not collected</span></span>
+                        </span>
+                        <div class="measurement-summary">
+
+                            <span class="row">
+                                <span class="col col-25">Time:</span>
+                                <span class="col col-25">0</span>
+                                <span class="col col-25">0</span>
+                                <span class="col col-25">0</span>
+                            </span>
+                            <span class="row"><span class="col col-25">Location:</span><span class="col col-75">0</span></span>
+                        </div>
 
                         <span class="row">
-                            <span class="col col-25">Time:</span>
-                            <span class="col col-25">0</span>
-                            <span class="col col-25">0</span>
-                            <span class="col col-25">0</span>
+                            <wind-disp class="windoo-disp-small col"></wind-disp>
+                            <temp-disp class="windoo-disp-small col"></temp-disp>
+                            <humd-disp class="windoo-disp-small col"></humd-disp>
+                            <pres-disp class="windoo-disp-small col"></pres-disp>
                         </span>
-                        <span class="row"><span class="col col-25">Location:</span><span class="col col-75">0</span></span>
-                    </div>
+                    </a>
+                </div>
 
-                    <span class="row">
-                        <wind-disp class="windoo-disp-small col"></wind-disp>
-                        <temp-disp class="windoo-disp-small col"></temp-disp>
-                        <humd-disp class="windoo-disp-small col"></humd-disp>
-                        <pres-disp class="windoo-disp-small col"></pres-disp>
-                    </span>
-                </a>
+                <div id="measurement_bar" class="row">
+                    <a class="col button measure_view_button" onclick="measure_tab_switch('#wind_frame')">
+                        Wind direction
+                        <div><status-icon></status-icon>Not set</div>
+                        <div id="degrees-display">
+                        </div>
+                    </a>
+                    <a class="col button measure_view_button" onclick="measure_tab_switch('#weather_frame')">
+                        Weather type
+                        <div><status-icon></status-icon>Not set</div>
+                    </a>
+                    <a class="col button measure_view_button" onclick="measure_tab_switch('#send_frame')">Send</a>
+                </div>
+
             </div>
 
-            <div id="measurement_bar" class="row">
-                <a class="col button measure_view_button" onclick="measure_tab_switch('#wind_frame')">
-                    Wind direction
-                    <div><status-icon></status-icon>Not set</div>
-                    <div id="degrees-display">
-                    </div>
-                </a>
-                <a class="col button measure_view_button" onclick="measure_tab_switch('#weather_frame')">
-                    Weather type
-                    <div><status-icon></status-icon>Not set</div>
-                </a>
-                <a class="col button measure_view_button" onclick="measure_tab_switch('#send_frame')">Send</a>
-            </div>
-
-            <div id="measure_view_disp" class="measure_view_disp card">
-                <div id="measure_view_disp_content"></div>
+            <div id="measure-view-disp">
+                <div class="measure-view-disp-content"></div>
             </div>
 
         </div>

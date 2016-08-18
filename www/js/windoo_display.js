@@ -67,9 +67,10 @@ WindDisp.prototype.createdCallback = function()
     this.unitDiv.innerHTML  = txt.WIND_UNIT;
     this.graphIcon.id   = "windGraphIcon";
 
-    document.addEventListener('newWind',
-        (function (instance) { return function (e) { instance.dataDiv.innerHTML = e.detail.toFixed(2); } })(this)
-    )
+    if (this.classList.contains("live-data"))
+        document.addEventListener('newWind',
+            (function (instance) { return function (e) { instance.dataDiv.innerHTML = e.detail.toFixed(2); } })(this)
+        )
 };
 
 TempDisp.prototype.createdCallback = function()
@@ -79,9 +80,10 @@ TempDisp.prototype.createdCallback = function()
     this.unitDiv.innerHTML  = txt.TEMP_UNIT;
     this.graphIcon.id   = "tempGraphIcon";
 
-    document.addEventListener('newTemp',
-        (function (instance) { return function (e) { instance.dataDiv.innerHTML = e.detail.toFixed(2); } })(this)
-    )
+    if (this.classList.contains("live-data"))
+        document.addEventListener('newTemp',
+            (function (instance) { return function (e) { instance.dataDiv.innerHTML = e.detail.toFixed(2); } })(this)
+        )
 };
 
 HumdDisp.prototype.createdCallback = function()
@@ -91,9 +93,10 @@ HumdDisp.prototype.createdCallback = function()
     this.unitDiv.innerHTML  = txt.HUMD_UNIT;
     this.graphIcon.id   = "humdGraphIcon";
 
-    document.addEventListener('newHumd',
-        (function (instance) { return function (e) { instance.dataDiv.innerHTML = e.detail.toFixed(2); } })(this)
-    )
+    if (this.classList.contains("live-data"))
+        document.addEventListener('newHumd',
+            (function (instance) { return function (e) { instance.dataDiv.innerHTML = e.detail.toFixed(2); } })(this)
+        )
 };
 
 PresDisp.prototype.createdCallback = function()
@@ -103,9 +106,10 @@ PresDisp.prototype.createdCallback = function()
     this.unitDiv.innerHTML  = txt.PRES_UNIT;
     this.graphIcon.id   = "presGraphIcon";
 
-    document.addEventListener('newPres',
-        (function (instance) { return function (e) { instance.dataDiv.innerHTML = e.detail.toFixed(1); } })(this)
-    )
+    if (this.classList.contains("live-data"))
+        document.addEventListener('newPres',
+            (function (instance) { return function (e) { instance.dataDiv.innerHTML = e.detail.toFixed(1); } })(this)
+        )
 };
 
 WindDisp = document.registerElement('wind-disp', { prototype: WindDisp.prototype });

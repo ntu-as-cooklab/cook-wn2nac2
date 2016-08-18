@@ -15,11 +15,13 @@ var measureButton, timer_status;
 
 function measure_main()
 {
+    var height = $("#measure-view-container").height() - $("#measure-view-bars").height() - 49; // 49 is tab height
+    $("#measure-view-disp").css({ 'height' : height.toString() });
+
     isHome = false;
     console.log("measure_main")
     temp_equil_status       = document.getElementById("temp-equil-status");
     humd_equil_status       = document.getElementById("humd-equil-status");
-    equil_status_icon       = document.getElementById("equil-status-icon");
     measureButton           = document.getElementById("start-button");
     timer_status            = document.getElementById("timer-status");
 
@@ -150,5 +152,5 @@ function setMeasureButtonStatus(status)
 
 function measure_tab_switch(frameName)
 {
-    $("#measure_view_disp_content").replaceWith(document.importNode(document.querySelector(frameName).content, true));
+    $(".measure-view-disp-content").replaceWith(document.importNode(document.querySelector(frameName).content, true));
 }

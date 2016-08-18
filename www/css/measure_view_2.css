@@ -1,39 +1,49 @@
 #measure-view-content {
-    overflow-y: scroll;
-    background-color: #23272d;
 }
 
+    /*windoo-status-bar*/
+
     #measure-view-container {
+        position: absolute;
         width: 100%;
-        height: 100%;
     }
-
-        #timed_measurement_bar {
+        #measure-view-bars {
+            width: 100%;
         }
 
-        #measurement_bar {
-        }
-
-            .measure_view_button, .measure-time-button, .weather-button {
-                border-radius: 0px;
-                border: 1px solid #bbb;
+            #timed_measurement_bar {
             }
 
-                .measurement-status {
-                    font-size: 100%;
-                    line-height: 100%;
-                    text-align: left;
+            #measurement_bar {
+            }
+
+                .measure_view_button, .measure-time-button, .weather-button {
+                    border-radius: 0px;
+                    border: 1px solid #bbb;
                 }
 
-                .measurement-summary {
-                    font-size: 95%;
-                    line-height: 95%;
-                    text-align: left;
-                }
+                    .measurement-status {
+                        font-size: 100%;
+                        line-height: 100%;
+                        text-align: left;
+                    }
 
-    .measure_view_disp {
-    }
+                    .measurement-summary {
+                        font-size: 95%;
+                        line-height: 95%;
+                        text-align: left;
+                    }
 
-        #measure_view_disp_content {
-            /*overflow-y: scroll;*/
+        #measure-view-disp {
+            padding: 5px;
+            padding-top: 0;
+            width: 100%;
         }
+
+            .measure-view-disp-content {
+                background-color: #f8f8f8;
+                border-radius: 0px;
+                border: 1px solid #bbb;
+                height: 100%;
+                overflow-y: scroll;
+            }

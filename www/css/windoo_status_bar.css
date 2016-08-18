@@ -6,3 +6,7 @@
     min-height: 1.6em;
     border-width: 0;
 }
+
+.has-windoo-status-bar-top {
+    height: calc(100% - 2em);
+}
