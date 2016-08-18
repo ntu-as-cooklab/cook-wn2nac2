@@ -1,7 +1,7 @@
 <ion-view>
   <ion-content>
 
-    <form id="user-form">
+    <!-- <form id="user-form">
       <div class="login-list">
         <label class="item-input">
           <span class="input-label"><b>User ID: </b></span>
@@ -15,11 +15,24 @@
       </div>
 
       <input class="form-button" type="submit" onclick="moreTempStuff()" value="Submit">
-    </form>
+    </form> -->
 
-    <a class="facebook-sign-in button" onclick="facebookLogin()">
-      Log in with Facebook
-    </a>
+    <div id="user-view-container">
+
+        <div id="user-summary">
+            <div class="row">
+                <div class="col col-25">Name:</div><div class="col col-75 user-name">   </div>
+            </div>
+            <div class="row">
+                <div class="col col-25">Email:</div><div class="col col-75 user-email">   </div>
+            </div>
+        </div>
+
+        <a id="facebook-sign-in" class="button" onclick="facebookLogin()">
+            Log in with Facebook
+        </a>
+
+    </div>
 
     <img src="img/snoop_diggity_dogg.gif" />
 

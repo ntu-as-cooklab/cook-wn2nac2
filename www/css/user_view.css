@@ -17,8 +17,20 @@
   transform: translateY(1px);
 }
 
-.facebook-sign-in
+#user-view-container
 {
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+}
+
+#user-summary {
+    background-color: #f0f0f0;
+}
+
+#facebook-sign-in
+{
+    margin-top: 1ex;
 	border-radius: 4px;
 	font-weight: 500;
 	color: #FFF;
