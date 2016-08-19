@@ -355,6 +355,8 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
 .controller('MapViewController', function($scope, $ionicLoading, $compile) {
 
   $scope.$on('$ionicView.enter', function() {
+
+      initMaps();
     //   $.getScript("https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=zh-TW",
     //     function () {
     //         $.getScript("http://127.0.0.1:8100/weather/asset/a10aafbd28e4681c288b9743dde5ab36.js");

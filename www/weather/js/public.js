@@ -53,7 +53,7 @@ $(function () {
   window.vars.$body = $('body');
   window.vars.$body.find ('> header a.icon-m').click (function () { window.vars.$body.toggleClass ('s'); });
   window.vars.$body.find ('> .cover').click (function () { window.vars.$body.toggleClass ('s'); });
-  
+
   $('#share').click (function () { window.open ('https://www.facebook.com/sharer/sharer.php?u=' + window.location.href, '分享', 'scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,top=100,left=' + (window.screen ? Math.round (screen.width / 2 - 275) : 100)); });
 
   window.fns.location = {
