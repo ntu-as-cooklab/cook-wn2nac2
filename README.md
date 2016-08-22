@@ -19,6 +19,7 @@ git clone https://github.com/seanstone/cook-plugin-wn2nac.git
 ```
 cd cook-wn2nac2
 ionic state reset
+ionic setup sass
 cordova platform add android
 cordova plugin add /path/to/cook-plugin-wn2nac
 ```
