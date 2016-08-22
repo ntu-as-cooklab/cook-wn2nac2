@@ -2,7 +2,8 @@
 
 ### Install Cordova and Ionic using npm
 ```
-npm i cordova ionic
+npm install -g cordova ionic
+npm install -g gulp
 ```
 
 ### Clone this repository
