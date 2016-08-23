@@ -1,33 +1,3 @@
-<!-- <template id="equil_frame">
-    <div class="measure-view-disp-content">
-        <div class="measure_view-bar">
-            <i class="icon measure_view-icon measure-title-icon ion-ios-pulse-strong"></i>
-            <span class="measure-title">Equilibrium</span>
-        </div>
-        <div id="equil-boxes">
-            <div class="equil-box">
-               <div class="equil-title">Temperature</div>
-               <div id="temp-equil-status" class="equil-status">
-                   Not Ready
-               </div>
-            </div>
-            <div class="equil-box">
-               <div class="equil-title">Humidity</div>
-               <div id="humd-equil-status" class="equil-status">
-                   Not Ready
-               </div>
-            </div>
-        </div>
-        <div class="info-box">
-            <i class="icon measure_view-icon ion-ios-information-outline"></i>
-            <div>
-                Wait for the sensor to reach equilibrium with its surroundings.<br><br>
-            </div>
-            <a id="skip-equil-button" class="button button-small button-dark">SKIP</a>
-        </div>
-    </div>
-</template> -->
-
 <template id="timer_frame_1">
     <div class="measure-view-disp-content">
 
@@ -48,29 +18,13 @@
             </div>
             <div id="timer-status">Ready to START</div>
 
-            <button id="start-button" class="button button-balanced" onclick="takeMeasurement()">
+            <button id="start-button" class="button button-balanced" onclick="toggleMeasurement()">
                 <i class="icon ion-android-stopwatch"></i>
                 <span id="start-button-text">START</span>
             </button>
         </div>
 
-        <div class="info-box">
-            <i class="icon measure_view-icon ion-ios-information-outline"></i>
-            <div>Select measurement duration and press START to begin measurement.</div>
-        </div>
-
-    </div>
-</template>
-
-<template id="timer_frame_2">
-    <div class="measure-view-disp-content">
-
-        <button id="start-button" class="button button-balanced" onclick="takeMeasurement()">
-            <i class="icon ion-android-stopwatch"></i>
-            <span id="start-button-text">START</span>
-        </button>
-
-        <div id="progress-box">
+        <div id="progress-box" hidden>
             <div class="progress-pie-chart" data-percent="0">
                 <div class="ppc-progress">
                     <div class="ppc-progress-fill"></div>
@@ -81,6 +35,11 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="info-box">
+            <i class="icon measure_view-icon ion-ios-information-outline"></i>
+            <div>Select measurement duration and press START to begin measurement.</div>
         </div>
 
     </div>
