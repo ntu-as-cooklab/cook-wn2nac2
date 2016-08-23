@@ -23,6 +23,9 @@ ionic setup sass
 cordova platform add android
 ```
 
+### For Android, install [Android SDK](https://developer.android.com/studio/index.html)
+You only need the basic Android command line tools
+
 ### Build and run
 ```
 cordova run android
