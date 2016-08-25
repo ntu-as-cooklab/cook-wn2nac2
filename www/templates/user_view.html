@@ -18,14 +18,13 @@
               </label>
               <button class="button button-positive  button-block"
                       ng-disabled=
-                  "myForm.user.$dirty && myForm.user.$invalid
-                   || myForm.email.$dirty && myForm.email.$invalid
-                   || myForm.passwd.$dirty && myForm.passwd.$invalid"
+                  "myForm.user.$dirty || myForm.user.$invalid
+                   || myForm.passwd.$dirty || myForm.passwd.$invalid"
                    ng-click="submitLogIn()"
                       >送出</button>
           </form>
-          <!--
-          //TEST FORM
+
+          <!-- //TEST FORM
           <p>username = {{username}}</p>
           <p>password = {{password}}</p> -->
       </div>

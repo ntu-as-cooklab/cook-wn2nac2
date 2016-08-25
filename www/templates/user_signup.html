@@ -24,9 +24,9 @@
               </label>
               <button class="button button-positive  button-block"
                       ng-disabled=
-                  "myForm.user.$dirty && myForm.user.$invalid
-                   || myForm.email.$dirty && myForm.email.$invalid
-                   || myForm.passwd.$dirty && myForm.passwd.$invalid"
+                  "myForm.user.$dirty || myForm.user.$invalid
+                   || myForm.email.$dirty || myForm.email.$invalid
+                   || myForm.passwd.$dirty || myForm.passwd.$invalid"
                    ng-click="submitSignUp()"
                       >註冊</button>
           </form>
