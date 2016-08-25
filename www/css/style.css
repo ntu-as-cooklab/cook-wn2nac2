@@ -21,4 +21,7 @@
   height: 100%;
 }
 
+body{
+    overflow:hidden;
+}
 /*--- SEE EACH CSS FILE FOR INDIVIDUAL TAB STYLES ---*/
