@@ -80,10 +80,14 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
       }
     })
 
-    .state('signUp',{
-    url: '/signUp',
-    templateUrl: 'templates/user_signup.html',
-    controller: 'UserSingUpController'
+    .state('tabs.signUp',{
+        url: '/signUp',
+        views: {
+          'user-view' : {
+            templateUrl: 'templates/user_signup.html',
+            controller: 'UserSingUpController'
+          }
+        }
     })
 
   $urlRouterProvider.otherwise('/tab/home');
