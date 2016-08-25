@@ -38,8 +38,8 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
       url: '/home',
       views: {
         'home-view' : {
-          templateUrl: 'templates/home_view.html',
-          controller: 'HomeViewController'
+          templateUrl: 'templates/map_view.html',
+          controller: 'MapViewController'
         }
       }
     })
@@ -78,6 +78,16 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
           controller: 'UserViewController'
         }
       }
+    })
+
+    .state('tabs.signUp',{
+        url: '/signUp',
+        views: {
+          'user-view' : {
+            templateUrl: 'templates/user_signup.html',
+            controller: 'UserSingUpController'
+          }
+        }
     })
 
   $urlRouterProvider.otherwise('/tab/home');
@@ -352,5 +362,48 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
   });
 })
 
+.controller('MapViewController', function($scope, $ionicLoading, $compile) {
+
+  $scope.$on('$ionicView.enter', function() {
+
+      initMaps();
+    //   $.getScript("https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=zh-TW",
+    //     function () {
+    //         $.getScript("http://127.0.0.1:8100/weather/asset/a10aafbd28e4681c288b9743dde5ab36.js");
+    //     });
+
+    //   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=zh-TW" language="javascript" type="text/javascript"></script>
+    //   <script src="http://127.0.0.1/weather/asset/a10aafbd28e4681c288b9743dde5ab36.js" language="javascript" type="text/javascript"></script>
+  });
+})
+
+//Sing Up Page
+.controller('UserSingUpController', function($scope, $ionicLoading, $compile) {
+  $scope.$on('$ionicView.enter', function() {
+    glb.inMeasureView = false;
+    console.log(glb.inMeasureView);
+  });
+})
+
+// control the page of signing up
+.controller('signUpFormCtrl',function($scope){
+    $scope.username='';
+    $scope.password='';
+    $scope.email ='';
+    $scope.submitSignUp= function(){
+        //todo
+    };
+    $scope.submitSignUp();
+})
+
+// control the page of logging in
+.controller('logInFormCtrl',function($scope){
+    $scope.username='';
+    $scope.password='';
+    $scope.submitlogIn= function(){
+        //todo
+    };
+    $scope.submitlogIn();
+})
 
 ;
