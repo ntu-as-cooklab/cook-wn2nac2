@@ -1,15 +1,21 @@
 <ion-view align='center'>
     <ion-header-bar class="bar bar-positive" align="center">
-         <h1 class="title" align="center">使用者登錄</h1>
+         <h1 class="title" align="center">使用者註冊</h1>
     </ion-header-bar>
     <ion-content>
-        <div  ng-controller="logInFormCtrl">
-          <div style="padding:22px;"></div>
+        <div  ng-controller="signUpFormCtrl">
+          <!-- <div style="padding:22px;"></div> -->
           <form name="myForm" novalidate>
               <label class="item item-input-inset">
                   <span class="input-label">帳號</span>
                   <input type="text" ng-model="username" name="user" required>
                   <span  class="item-note" ng-show="myForm.user.$error.required">不得為空</span>
+              </label>
+              <label class="item item-input-inset">
+                  <span class="input-label">Email</span>
+                  <input type="email" ng-model="email" name="email" required>
+                  <span class="item-note" ng-show="myForm.email.$error.required">不得為空</span>
+                  <span class="item-note" ng-show="myForm.email.$error.email">Email格式錯誤</span>
               </label>
               <label class="item item-input-inset">
                   <span class="input-label">密碼</span>
@@ -21,24 +27,18 @@
                   "myForm.user.$dirty && myForm.user.$invalid
                    || myForm.email.$dirty && myForm.email.$invalid
                    || myForm.passwd.$dirty && myForm.passwd.$invalid"
-                   ng-click="submitLogIn()"
-                      >送出</button>
+                   ng-click="submitSignUp()"
+                      >註冊</button>
           </form>
-          <div align="right">
-              <a id="facebook-sign-in" class="button button-light button-outline" onclick="facebookLogin()">
-                  Log in with Facebook
-              </a>
-              <a class="button button-light button-outline" href="#/signUp">註冊</a>
-          </div>
 
           <!--
           //TEST FORM
           <p>username = {{username}}</p>
+          <p>email = {{email}}</p>
           <p>password = {{password}}</p> -->
 
       </div>
   </ion-content>
-
 
   </ion-content>
 

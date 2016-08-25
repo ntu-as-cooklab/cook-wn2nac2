@@ -80,6 +80,12 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
       }
     })
 
+    .state('signUp',{
+    url: '/signUp',
+    templateUrl: 'templates/user_signup.html',
+    controller: 'UserSingUpController'
+    })
+
   $urlRouterProvider.otherwise('/tab/home');
 })
 
@@ -367,5 +373,33 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
   });
 })
 
+//Sing Up Page
+.controller('UserSingUpController', function($scope, $ionicLoading, $compile) {
+  $scope.$on('$ionicView.enter', function() {
+    glb.inMeasureView = false;
+    console.log(glb.inMeasureView);
+  });
+})
+
+// control the page of signing up
+.controller('signUpFormCtrl',function($scope){
+    $scope.username='';
+    $scope.password='';
+    $scope.email ='';
+    $scope.submitSignUp= function(){
+        //todo
+    };
+    $scope.submitSignUp();
+})
+
+// control the page of logging in
+.controller('logInFormCtrl',function($scope){
+    $scope.username='';
+    $scope.password='';
+    $scope.submitlogIn= function(){
+        //todo
+    };
+    $scope.submitlogIn();
+})
 
 ;

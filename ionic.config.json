@@ -1,0 +1,12 @@
+{
+  "name": "wn2nac2",
+  "app_id": "cfd89b67",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}
