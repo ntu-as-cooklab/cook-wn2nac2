@@ -1,41 +1,51 @@
 <ion-view align='center'>
     <ion-header-bar class="bar bar-positive" align="center">
-         <h1 class="title" align="center">使用者註冊</h1>
+         <h1 class="title" align="center">User Sign Up</h1>
     </ion-header-bar>
     <ion-content>
         <div  ng-controller="signUpFormCtrl">
           <div style="padding:22px;"></div>
-          <form name="myForm" novalidate>
+          <form name="signUpForm" novalidate>
               <label class="item item-input-inset">
-                  <span class="input-label">帳號</span>
-                  <input type="text" ng-model="username" name="user" required>
-                  <span  class="item-note" ng-show="myForm.user.$error.required">不得為空</span>
+                  <span class="input-label" >User ID</span>
+                  <input type="text" ng-model="username" name="user"  ng-minlength='3' required>
+                  <span  class="item-note" ng-show="signUpForm.user.$error.required">Invalid</span>
+                  <span class="item-note" ng-show="signUpForm.user.$error.minlength">Too Short</span>
               </label>
               <label class="item item-input-inset">
-                  <span class="input-label">Email</span>
-                  <input type="email" ng-model="email" name="email" required>
-                  <span class="item-note" ng-show="myForm.email.$error.required">不得為空</span>
-                  <span class="item-note" ng-show="myForm.email.$error.email">Email格式錯誤</span>
+                  <span class="input-label" >Email</span>
+                  <input type="email" ng-model="email" name="email"  required>
+                  <span class="item-note" ng-show="signUpForm.email.$error.required">Invalid</span>
+                  <span class="item-note" ng-show="signUpForm.email.$error.email">Email Invalid</span>
               </label>
               <label class="item item-input-inset">
-                  <span class="input-label">密碼</span>
-                  <input type="password" ng-model="password" name="passwd" required>
-                  <span class="item-note" ng-show="myForm.passwd.$error.required">不得為空</span>
+                  <span class="input-label" >Password</span>
+                  <input type="password" ng-model="password" name="passwd"  ng-minlength='6' required>
+                  <span class="item-note" ng-show="signUpForm.passwd.$error.required">Invalid</span>
+                  <span class="item-note" ng-show="signUpForm.passwd.$error.minlength">Too Short</span>
+              </label>
+              <label class="item item-input-inset">
+                  <span class="input-label" >Check Password</span>
+                  <input type="password" ng-model="repassword" name="repasswd" ng-match="signUpForm.password" ng-pattern="getPattern()" required >
+                  <span class="item-note" ng-show="signUpForm.repasswd.$error.required">Invalid</span>
+                  <span class="item-note" ng-show="signUpForm.repasswd.$error.pattern">Not Correct</span>
               </label>
               <button class="button button-positive  button-block"
                       ng-disabled=
-                  "myForm.user.$dirty || myForm.user.$invalid
-                   || myForm.email.$dirty || myForm.email.$invalid
-                   || myForm.passwd.$dirty || myForm.passwd.$invalid"
+                     " signUpForm.user.$invalid ||
+                       signUpForm.email.$invalid ||
+                       signUpForm.passwd.$invalid ||
+                       signUpForm.repasswd.$invalid "
                    ng-click="submitSignUp()"
-                      >註冊</button>
+                      >Sign Up</button>
           </form>
 
-          <!--
-          //TEST FORM
+
+          <!-- TEST FORM
           <p>username = {{username}}</p>
           <p>email = {{email}}</p>
-          <p>password = {{password}}</p> -->
+          <p>password = {{password}}</p>
+          <p>repassword = {{repassword}}</p> -->
       </div>
       <div align="right">
 
