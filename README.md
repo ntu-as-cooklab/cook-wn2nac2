@@ -30,6 +30,11 @@ You only need the basic Android command line tools
 ```
 cordova run android
 ```
+### Test the app with the browser
+```
+ionic serve
+```
+Then the browser open app as page
 
 ### For debugging, use Chrome
 [chrome://inspect](chrome://inspect)
