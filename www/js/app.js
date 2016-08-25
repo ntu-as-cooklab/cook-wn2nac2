@@ -389,7 +389,11 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
 .controller('signUpFormCtrl',function($scope){
     $scope.username='';
     $scope.password='';
+    $scope.repassword='';
     $scope.email ='';
+    $scope.getPattern = function(){
+        return $scope.password && $scope.password.replace(/([.*+?^${}()|\[\]\/\\])/g, '\\$1');
+    };
     $scope.submitSignUp= function(){
         //todo
     };
