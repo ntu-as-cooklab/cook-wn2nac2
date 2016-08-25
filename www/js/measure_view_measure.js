@@ -27,9 +27,11 @@ function setMeasureButtonStatus(status)
     var measureButtonText   = document.getElementById("start-button-text");
     timer_status            = document.getElementById("timer-status");
     var progress_box        = document.getElementById("progress-box");
+    var progress_box        = document.getElementById("timer-box");
     switch (status)
     {
         case 0: // Not ready
+            progress_box.style.visibility = "hidden";
             timer_status.innerHTML = "Not ready";
             measureButton.disabled = true;
             measureButton.classList.remove  ("button-assertive");
@@ -37,6 +39,7 @@ function setMeasureButtonStatus(status)
             measureButtonText.innerHTML = "START";
             break;
         case 1: // Ready to start
+            progress_box.style.visibility = "hidden";
             timer_status.innerHTML = "Ready to start";
             measureButton.disabled = false;
             measureButton.classList.remove  ("button-assertive");
@@ -44,6 +47,8 @@ function setMeasureButtonStatus(status)
             measureButtonText.innerHTML = "START";
             break;
         case 2: // Measuring
+            progress_box.style.visibility = "visible";
+            progress_box.style.visibility = "hidden";
             timer_status.innerHTML = "Measuring...";
             measureButton.disabled = false;
             measureButton.classList.remove  ("button-balanced");
@@ -51,6 +56,8 @@ function setMeasureButtonStatus(status)
             measureButtonText.innerHTML = "ABORT";
             break;
         case 3: // Finished
+            progress_box.style.visibility = "hidden";
+            progress_box.style.visibility = "visible";
             timer_status.innerHTML = "Finished";
             measureButton.disabled = false;
             measureButton.classList.remove  ("button-assertive");

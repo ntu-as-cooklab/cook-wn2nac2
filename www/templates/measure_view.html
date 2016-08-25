@@ -17,14 +17,9 @@
               <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="0">Other...</a>
             </div>
             <div id="timer-status">Ready to START</div>
-
-            <button id="start-button" class="button button-balanced" onclick="toggleMeasurement()">
-                <i class="icon ion-android-stopwatch"></i>
-                <span id="start-button-text">START</span>
-            </button>
         </div>
 
-        <div id="progress-box" hidden>
+        <div id="progress-box">
             <div class="progress-pie-chart" data-percent="0">
                 <div class="ppc-progress">
                     <div class="ppc-progress-fill"></div>
@@ -36,6 +31,11 @@
                 </div>
             </div>
         </div>
+
+        <button id="start-button" class="button button-balanced" onclick="toggleMeasurement()">
+            <i class="icon ion-android-stopwatch"></i>
+            <span id="start-button-text">START</span>
+        </button>
 
         <div class="info-box">
             <i class="icon measure_view-icon ion-ios-information-outline"></i>
