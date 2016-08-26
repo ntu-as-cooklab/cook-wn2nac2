@@ -391,6 +391,7 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
     $scope.password='';
     $scope.repassword='';
     $scope.email ='';
+    //check the password
     $scope.getPattern = function(){
         return $scope.password && $scope.password.replace(/([.*+?^${}()|\[\]\/\\])/g, '\\$1');
     };
