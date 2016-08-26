@@ -8,9 +8,15 @@
           <form name="signUpForm" novalidate>
               <label class="item item-input-inset">
                   <span class="input-label" >User ID</span>
-                  <input type="text" ng-model="username" name="user"  ng-minlength='3' required>
-                  <span  class="item-note" ng-show="signUpForm.user.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="signUpForm.user.$error.minlength">Too Short</span>
+                  <input type="text" ng-model="userid" name="userid"  ng-minlength='3' required>
+                  <span  class="item-note" ng-show="signUpForm.userid.$error.required">Invalid</span>
+                  <span class="item-note" ng-show="signUpForm.userid.$error.minlength">Too Short</span>
+              </label>
+              <label class="item item-input-inset">
+                  <span class="input-label" >Your Name</span>
+                  <input type="text" ng-model="username" name="username"  ng-minlength='3' required>
+                  <span  class="item-note" ng-show="signUpForm.username.$error.required">Invalid</span>
+                  <span class="item-note" ng-show="signUpForm.username.$error.minlength">Too Short</span>
               </label>
               <label class="item item-input-inset">
                   <span class="input-label" >Email</span>
@@ -20,36 +26,45 @@
               </label>
               <label class="item item-input-inset">
                   <span class="input-label" >Password</span>
-                  <input type="password" ng-model="password" name="passwd"  ng-minlength='6' required>
+                  <input type="password" ng-model="password" name="passwd"  ng-minlength='6' required
+                    ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,}$/">
                   <span class="item-note" ng-show="signUpForm.passwd.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="signUpForm.passwd.$error.minlength">Too Short</span>
+                  <span class="item-note" ng-show="signUpForm.passwd.$error.pattern">Too Simple</span>
               </label>
               <label class="item item-input-inset">
-                  <span class="input-label" >Check Password</span>
+                  <span class="input-label" >Re-Password</span>
                   <input type="password" ng-model="repassword" name="repasswd" ng-match="signUpForm.password" ng-pattern="getPattern()" required >
                   <span class="item-note" ng-show="signUpForm.repasswd.$error.required">Invalid</span>
                   <span class="item-note" ng-show="signUpForm.repasswd.$error.pattern">Not Correct</span>
               </label>
               <button class="button button-positive  button-block"
                       ng-disabled=
-                     " signUpForm.user.$invalid ||
+                     " signUpForm.userid.$invalid ||
+                       signUpForm.username.$invalid ||
                        signUpForm.email.$invalid ||
                        signUpForm.passwd.$invalid ||
                        signUpForm.repasswd.$invalid "
-                   ng-click="submitSignUp()"
+                     ng-click="submitSignUp()"
                       >Sign Up</button>
           </form>
 
 
           <!-- TEST FORM
+          <p>userid = {{userid}}</p>
           <p>username = {{username}}</p>
           <p>email = {{email}}</p>
           <p>password = {{password}}</p>
           <p>repassword = {{repassword}}</p> -->
       </div>
-      <div align="right">
 
-          <a class="button button-light button-outline" href="#/tab/user">Back</a>
+      <div class='row'>
+          <div>
+              <p>Password should be at least 6 characters long and contain number and special character</p>
+          </div>
+          <div>&nbsp</div>
+          <div>
+              <a class="button button-light button-outline" href="#/tab/user">Back</a>
+          </div>
       </div>
   </ion-content>
 

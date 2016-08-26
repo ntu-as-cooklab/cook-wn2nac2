@@ -387,6 +387,7 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
 
 // control the page of signing up
 .controller('signUpFormCtrl',function($scope){
+    $scope.userid='';
     $scope.username='';
     $scope.password='';
     $scope.repassword='';

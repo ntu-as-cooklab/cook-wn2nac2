@@ -24,4 +24,8 @@
 body{
     overflow:hidden;
 }
+
+p{
+    color: white;
+}
 /*--- SEE EACH CSS FILE FOR INDIVIDUAL TAB STYLES ---*/
