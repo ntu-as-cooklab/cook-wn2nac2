@@ -90,6 +90,16 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
         }
     })
 
+    .state('tabs.signUpCheck',{
+        url: '/signUpCheck',
+        views: {
+          'user-view' : {
+            templateUrl: 'templates/user_signupcheck.html',
+            controller: 'UserSingUpCheckController'
+          }
+        }
+    })
+
   $urlRouterProvider.otherwise('/tab/home');
 })
 
@@ -384,6 +394,13 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
     console.log(glb.inMeasureView);
   });
 })
+//Sign Up Check Page
+.controller('UserSingUpCheckController', function($scope, $ionicLoading, $compile) {
+  $scope.$on('$ionicView.enter', function() {
+    glb.inMeasureView = false;
+    console.log(glb.inMeasureView);
+  });
+})
 
 // control the page of signing up
 .controller('signUpFormCtrl',function($scope){
@@ -397,9 +414,23 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
         return $scope.password && $scope.password.replace(/([.*+?^${}()|\[\]\/\\])/g, '\\$1');
     };
     $scope.submitSignUp= function(){
-        //todo
+        var signUpInfo = {
+            userid: $scope.userid,
+            username: $scope.username,
+            password: $scope.password,
+            repassword: $scope.repassword,
+            email: $scope.email
+        }
+        sendSignUpInfo( signUpInfo );
+        window.location.href = '#/tab/signUpCheck';
     };
-    $scope.submitSignUp();
+    $scope.testInfo= function(){
+        $scope.userid='tigercosmos';
+        $scope.username='Liu An Chi';
+        $scope.password='!qazxsw2';
+        $scope.repassword='!qazxsw2';
+        $scope.email ='b04209032@ntu.edu.tw';
+    }
 })
 
 // control the page of logging in
@@ -409,7 +440,6 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
     $scope.submitlogIn= function(){
         //todo
     };
-    $scope.submitlogIn();
+    // $scope.submitlogIn();
 })
-
 ;

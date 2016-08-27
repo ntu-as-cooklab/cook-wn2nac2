@@ -1,6 +1,25 @@
 var lastMeasurement;
 var listenersActive = false;
 
+function sendSignUpInfo( res )
+{
+    console.log(res);
+    $.ajax({
+        url: 'http://mospc.cook.as.ntu.edu.tw/signUp.php',
+        type: 'POST',
+        data: {signUpInfo: res}, // signUpInfo
+        success: function(data){
+            console.log( data );
+            console.log( 'Send Sign-Up-Info Post Success');
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("Status: " + textStatus + " signUpInfo POST Error: " + errorThrown);
+        }
+    }).done(function(){
+        //todo
+    });
+}
+
 function sendMeasurement()
 {
     $.post( "http://mospc.cook.as.ntu.edu.tw/post4.php", JSON.parse(JSON.stringify(glbsens.currentMeasurement)),
