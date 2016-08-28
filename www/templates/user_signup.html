@@ -8,7 +8,7 @@
           <form name="signUpForm" novalidate>
               <label class="item item-input-inset">
                   <span class="input-label" >User ID</span>
-                  <input type="text" ng-model="userid" name="userid"  ng-minlength='3' required>
+                  <input type="text" ng-model="userid" name="userid"  ng-minlength='3'  required>
                   <span  class="item-note" ng-show="signUpForm.userid.$error.required">Invalid</span>
                   <span class="item-note" ng-show="signUpForm.userid.$error.minlength">Too Short</span>
               </label>
@@ -46,9 +46,8 @@
                        signUpForm.repasswd.$invalid "
                      ng-click="submitSignUp()"
                       >Sign Up</button>
+              <!-- <button class="button" ng-click="testInfo()"> test data</button> -->
           </form>
-
-
           <!-- TEST FORM
           <p>userid = {{userid}}</p>
           <p>username = {{username}}</p>
@@ -56,10 +55,10 @@
           <p>password = {{password}}</p>
           <p>repassword = {{repassword}}</p> -->
       </div>
-
+      <div id="showStatus2"></div>
       <div class='row'>
           <div>
-              <p>Password should be at least 6 characters long and contain number and special character</p>
+              <p>Password should be at least 6 characters long and contain number and special character without space.</p>
           </div>
           <div>&nbsp</div>
           <div>
