@@ -8,25 +8,21 @@
           <form name="myForm" novalidate>
               <label class="item item-input-inset">
                   <span class="input-label" >User ID</span>
-                  <input type="text" ng-model="username" name="user"  ng-minlength='3' required>
-                  <span  class="item-note" ng-show="myForm.user.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="myForm.user.$error.minlength">Too Short</span>
+                  <input type="text" ng-model="userid" name="userid"  ng-minlength='3' required>
               </label>
               <label class="item item-input-inset">
                   <span class="input-label" >Password</span>
                   <input type="password" ng-model="password" name="passwd" ng-minlength='6' required>
-                  <span class="item-note" ng-show="myForm.passwd.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="myForm.passwd.$error.minlength">Too Short</span>
               </label>
               <button class="button button-positive  button-block"
                       ng-disabled=
-                  " myForm.user.$invalid || myForm.passwd.$invalid"
+                  " myForm.userid.$invalid || myForm.passwd.$invalid"
                    ng-click="submitLogIn()"
                       >Submit</button>
           </form>
 
           <!-- //TEST FORM
-          <p>username = {{username}}</p>
+          <p>userid = {{userid}}</p>
           <p>password = {{password}}</p> -->
       </div>
       <div align="right">
@@ -35,6 +31,9 @@
           </a>
           <a class="button button-light button-outline" href="#/tab/signUp">Sign Up</a>
       </div>
+      <br/>
+      <div id="showStatus"></div>
+
   </ion-content>
 
 

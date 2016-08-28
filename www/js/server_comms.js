@@ -1,16 +1,72 @@
 var lastMeasurement;
 var listenersActive = false;
 
+function checkID( res )
+{
+    var condition = 0; //record the sign up condition
+    $.ajax({
+        url: 'http://mospc.cook.as.ntu.edu.tw/checkID.php',
+        type: 'POST',
+        data: {signUpInfo: res}, // signUpInfo
+        success: function(data){
+            console.log(data);
+            condition =  parseInt(data);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("Status: " + textStatus + " signUpInfo POST Error: " + errorThrown);
+        }
+    }).done(function(){
+        if(condition == 0 ){
+            sendSignUpInfo( res );
+            window.location.href = '#/tab/signUpCheck';
+        }else if(condition == 1){
+            $("#showStatus2").html('<p>UserID is Used!</p>');
+        }else if(condition == 2){
+            $("#showStatus2").html('<p>Email is Used!</p>');
+        }else if(condition == 3){
+            $("#showStatus2").html('<p>UserID and Email are Used!</p>');
+        }
+    });
+}
+
+function sendLogInInfo( res )
+{
+    var isLogIn = false;
+    $.ajax({
+        url: 'http://mospc.cook.as.ntu.edu.tw/logIn.php',
+        type: 'POST',
+        data: {logInInfo: res}, // signUpInfo
+        success: function(data){
+            var result = parseInt(data);
+            if(result){
+                 isLogIn = true;
+                 console.log('Log In Success');
+            }else{
+                isLogIn = false;
+                console.log('Log In Failed');
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("Status: " + textStatus + " signUpInfo POST Error: " + errorThrown);
+        }
+    }).done(function(){
+        if(isLogIn){
+            $("#showStatus").html('<p>Log In</p>');
+        }else{
+            $("#showStatus").html('<p>Wrong UserID or Password!</p>');
+        }
+    });
+}
+
 function sendSignUpInfo( res )
 {
-    console.log(res);
+    // console.log(res);
     $.ajax({
         url: 'http://mospc.cook.as.ntu.edu.tw/signUp.php',
         type: 'POST',
         data: {signUpInfo: res}, // signUpInfo
         success: function(data){
-            console.log( data );
-            console.log( 'Send Sign-Up-Info Post Success');
+            // console.log( 'Send Sign-Up-Info Post Success');
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
                     console.log("Status: " + textStatus + " signUpInfo POST Error: " + errorThrown);

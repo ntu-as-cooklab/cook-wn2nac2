@@ -321,7 +321,7 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
 
   $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = false;
-    console.log(glb.inMeasureView);
+    // console.log(glb.inMeasureView);
     setWeatherChecks(true, false, false);
     home_weather_main();
     loadBufferedHistory();
@@ -346,7 +346,7 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
 
   $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = true;
-    console.log(glb.inMeasureView);
+    // console.log(glb.inMeasureView);
     setWeatherChecks(false, false, true);
     onTempEquilStatusChanged(0);
     onHumdEquilStatusChanged(0);
@@ -360,7 +360,7 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
 
   $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = false;
-    console.log(glb.inMeasureView);
+    // console.log(glb.inMeasureView);
   });
 })
 
@@ -368,7 +368,7 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
 
   $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = false;
-    console.log(glb.inMeasureView);
+    // console.log(glb.inMeasureView);
   });
 })
 
@@ -391,14 +391,14 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
 .controller('UserSingUpController', function($scope, $ionicLoading, $compile) {
   $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = false;
-    console.log(glb.inMeasureView);
+    // console.log(glb.inMeasureView);
   });
 })
 //Sign Up Check Page
 .controller('UserSingUpCheckController', function($scope, $ionicLoading, $compile) {
   $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = false;
-    console.log(glb.inMeasureView);
+    // console.log(glb.inMeasureView);
   });
 })
 
@@ -413,6 +413,7 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
     $scope.getPattern = function(){
         return $scope.password && $scope.password.replace(/([.*+?^${}()|\[\]\/\\])/g, '\\$1');
     };
+
     $scope.submitSignUp= function(){
         var signUpInfo = {
             userid: $scope.userid,
@@ -420,26 +421,29 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
             password: $scope.password,
             repassword: $scope.repassword,
             email: $scope.email
-        }
-        sendSignUpInfo( signUpInfo );
-        window.location.href = '#/tab/signUpCheck';
+        };
+        checkID(signUpInfo);
     };
-    $scope.testInfo= function(){
-        $scope.userid='tigercosmos';
-        $scope.username='Liu An Chi';
-        $scope.password='!qazxsw2';
-        $scope.repassword='!qazxsw2';
-        $scope.email ='b04209032@ntu.edu.tw';
-    }
+    // $scope.testInfo= function(){
+    //     $scope.userid='tigercosmos';
+    //     $scope.username='Liu An Chi';
+    //     $scope.password='!qazxsw2';
+    //     $scope.repassword='!qazxsw2';
+    //     $scope.email ='b04209032@ntu.edu.tw';
+    // }
 })
 
 // control the page of logging in
 .controller('logInFormCtrl',function($scope){
-    $scope.username='';
+    $scope.userid='';
     $scope.password='';
-    $scope.submitlogIn= function(){
-        //todo
+    $scope.submitLogIn= function(){
+        var logInInfo = {
+            userid: $scope.userid,
+            password: $scope.password
+        };
+        sendLogInInfo( logInInfo );
     };
-    // $scope.submitlogIn();
 })
+
 ;
