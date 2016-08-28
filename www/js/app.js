@@ -80,22 +80,24 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
       }
     })
 
-    .state('tabs.signUp',{
+    .state('signUp',{
         url: '/signUp',
-        views: {
-          'user-view' : {
-            templateUrl: 'templates/user_signup.html',
-            controller: 'UserSingUpController'
-          }
-        }
+        templateUrl: 'templates/user_signup.html',
+        controller: 'UserSingUpController'
     })
 
-    .state('tabs.signUpCheck',{
+    .state('signUpCheck',{
         url: '/signUpCheck',
+        templateUrl: 'templates/user_signupcheck.html',
+        controller: 'UserSingUpCheckController'
+    })
+
+    .state('tabs.userInfo',{
+        url: '/info',
         views: {
           'user-view' : {
-            templateUrl: 'templates/user_signupcheck.html',
-            controller: 'UserSingUpCheckController'
+            templateUrl: 'templates/user_info.html',
+            controller: 'UserInfoController'
           }
         }
     })
@@ -389,13 +391,15 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
 
 //Sing Up Page
 .controller('UserSingUpController', function($scope, $ionicLoading, $compile) {
-  $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = false;
-    // console.log(glb.inMeasureView);
-  });
 })
 //Sign Up Check Page
 .controller('UserSingUpCheckController', function($scope, $ionicLoading, $compile) {
+    glb.inMeasureView = false;
+})
+
+//After Log In -- User Info Page
+.controller('UserInfoController', function($scope, $ionicLoading, $compile) {
   $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = false;
     // console.log(glb.inMeasureView);
@@ -422,21 +426,29 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
             repassword: $scope.repassword,
             email: $scope.email
         };
-        checkID(signUpInfo);
+        checkID(signUpInfo);  // check if the ID and email are used, and do the next step
     };
-    // $scope.testInfo= function(){
-    //     $scope.userid='tigercosmos';
-    //     $scope.username='Liu An Chi';
-    //     $scope.password='!qazxsw2';
-    //     $scope.repassword='!qazxsw2';
-    //     $scope.email ='b04209032@ntu.edu.tw';
-    // }
 })
 
 // control the page of logging in
 .controller('logInFormCtrl',function($scope){
     $scope.userid='';
     $scope.password='';
+    $scope.submitLogIn= function(){
+        var logInInfo = {
+            userid: $scope.userid,
+            password: $scope.password
+        };
+        sendLogInInfo( logInInfo );
+    };
+})
+
+// control the page of information
+.controller('infoCtrl',function($scope){
+    $scope.userid='tigercosmos';
+    $scope.username='Liu An Chi';
+    $scope.email='tigercosmso@outlook.com';
+    $scope.record= 100;
     $scope.submitLogIn= function(){
         var logInInfo = {
             userid: $scope.userid,

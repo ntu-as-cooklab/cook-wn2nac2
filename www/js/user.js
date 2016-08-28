@@ -1,4 +1,4 @@
 "use strict";
 function resetSignUp(){
-    window.location.href = '#/tab/signUp';
+    window.location.href = '#/signUp';
 }
