@@ -40,5 +40,5 @@ Then the browser open app as page
 [chrome://inspect](chrome://inspect)
 
 ### Referance
-[Taiwan's Weather Maps!](https://github.com/comdan66/weather)
-[Compass Design](http://codepen.io/rlautan/pen/YPzGjo)
+[Taiwan's Weather Maps!](https://github.com/comdan66/weather), 
+[Compass in HTML5 Demo](http://codepen.io/rlautan/pen/YPzGjo)
