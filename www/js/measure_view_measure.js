@@ -102,6 +102,6 @@ function onMeasurementTick()
     // Mean A Data really finished then go to the next step
     if(progress>=1){
         isMeasureDone = true;
-        setTimeout(function(){measure_tab_switch('.measure-view-disp-content','#wind_frame');},2000);
+        setTimeout(function(){measure_tab_switch('.measure-view-disp-content','#wind_frame');},1500);
     }
 }
