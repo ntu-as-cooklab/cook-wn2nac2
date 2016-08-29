@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
        var tiltFB = eventData.beta;
 
        // alpha: The direction the compass of the device aims to in degrees.
-       var dir = eventData.alpha
+       var dir = eventData.alpha - 90 // for android
 
        // Call the function to use the data on the page.
        deviceOrientationHandler(tiltLR, tiltFB, dir);
