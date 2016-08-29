@@ -13,6 +13,7 @@ var toggleMeasurement = function()
 
 function takeNewMeasurement()
 {
+    isMeasureDone = false;
     glbsens.currentMeasurement = new WindooMeasurement();
     glbsens.currentMeasurement.duration = duration;
     glbsens.currentMeasurement.onTick = onMeasurementTick;
