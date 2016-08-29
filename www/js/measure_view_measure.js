@@ -1,5 +1,5 @@
 "use strict";
-
+var isMeasureDone = false;
 var measureButton, timer_status;
 var newLat, newLong, newDesc;
 
@@ -17,8 +17,10 @@ function takeNewMeasurement()
     glbsens.currentMeasurement.duration = duration;
     glbsens.currentMeasurement.onTick = onMeasurementTick;
     glbsens.currentMeasurement.onFinish = onMeasurementFinish;
-    glbsens.currentMeasurement.start();
-    setMeasureButtonStatus(2);
+    if(!isMeasureDone){
+        glbsens.currentMeasurement.start();
+        setMeasureButtonStatus(2);
+    }
 };
 
 function setMeasureButtonStatus(status)
@@ -58,11 +60,20 @@ function setMeasureButtonStatus(status)
         case 3: // Finished
             progress_box.style.visibility = "hidden";
             progress_box.style.visibility = "visible";
-            timer_status.innerHTML = "Finished";
+            timer_status.innerHTML = "Cancelled";
             measureButton.disabled = false;
             measureButton.classList.remove  ("button-assertive");
             measureButton.classList.add     ("button-balanced");
             measureButtonText.innerHTML = "START";
+            break;
+        case 4: // Finished Data and Go Next Step
+            progress_box.style.visibility = "hidden";
+            progress_box.style.visibility = "visible";
+            timer_status.innerHTML = "Finished";
+            measureButton.disabled = true;
+            measureButton.classList.remove  ("button-assertive");
+            measureButton.classList.add     ("button-balanced");
+            measureButtonText.innerHTML = "Finished";
             break;
     }
 }
@@ -70,7 +81,10 @@ function setMeasureButtonStatus(status)
 function onMeasurementFinish()
 {
     newMeasurementDone(glbsens.currentMeasurement);
-    setMeasureButtonStatus(3);
+    if(isMeasureDone)
+        setMeasureButtonStatus(4); // Measure is done
+    else
+        setMeasureButtonStatus(3);  // Measure is Aborted
 };
 
 function onMeasurementTick()
@@ -84,4 +98,10 @@ function onMeasurementTick()
     progress > 0.5 ? $('.progress-pie-chart').addClass('gt-50') : $('.progress-pie-chart').removeClass('gt-50');
 
     $('.ppc-percents span').html((progress*100).toFixed(0) + '%' + "<br><br>" + (elapsed/1000).toFixed(0) + "/" + glbsens.currentMeasurement.duration/1000 + "s");
+
+    // Mean A Data really finished then go to the next step
+    if(progress>=1){
+        isMeasureDone = true;
+        setTimeout(function(){measure_tab_switch('.measure-view-disp-content','#wind_frame');},2000);
+    }
 }

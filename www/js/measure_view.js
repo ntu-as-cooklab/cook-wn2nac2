@@ -12,6 +12,12 @@ var duration        = 60000;
 var temp_equil_status;
 var humd_equil_status;
 
+function startToMeasure(){
+    if(windooStatus==2){
+        measure_tab_switch('#measure-background','#timer_frame_1')
+    }
+}
+
 function measure_main()
 {
     // TODO: improve this hack
@@ -33,9 +39,9 @@ function measure_main()
     $('.ppc-progress-fill').css('transform','rotate('+ 0 +'deg)');
 }
 
-function measure_tab_switch(frameName)
+function measure_tab_switch(frameName1, frameName2)
 {
-    $(".measure-view-disp-content").replaceWith(document.importNode(document.querySelector(frameName).content, true));
+    $(frameName1).replaceWith(document.importNode(document.querySelector(frameName2).content, true));
 }
 
 var duration;
@@ -112,3 +118,37 @@ function checkEqm()
     }
   }
 }
+
+
+// Compass
+document.addEventListener("DOMContentLoaded", function(event) {
+
+    if (window.DeviceOrientationEvent) {
+     window.addEventListener('deviceorientation', function(eventData) {
+       // gamma: Tilting the device from left to right. Tilting the device to the right will result in a positive value.
+       var tiltLR = eventData.gamma;
+
+       // beta: Tilting the device from the front to the back. Tilting the device to the front will result in a positive value.
+       var tiltFB = eventData.beta;
+
+       // alpha: The direction the compass of the device aims to in degrees.
+       var dir = eventData.alpha
+
+       // Call the function to use the data on the page.
+       deviceOrientationHandler(tiltLR, tiltFB, dir);
+     }, false);
+    };
+
+   function deviceOrientationHandler(tiltLR, tiltFB, dir) {
+    //  document.getElementById("tiltLR").innerHTML = Math.ceil(tiltLR);
+    //  document.getElementById("tiltFB").innerHTML = Math.ceil(tiltFB);
+    //  document.getElementById("direction").innerHTML = Math.ceil(dir);
+
+     // Rotate the disc of the compass.
+     var compassDisc = document.getElementById("compassDiscImg");
+     compassDisc.style.webkitTransform = "rotate("+ dir +"deg)";
+     compassDisc.style.MozTransform = "rotate("+ dir +"deg)";
+     compassDisc.style.transform = "rotate("+ dir +"deg)";
+   }
+
+});

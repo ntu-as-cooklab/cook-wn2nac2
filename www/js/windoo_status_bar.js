@@ -12,18 +12,21 @@ WindooStatusBar.prototype.setStatus = function (status)
             this.classList.add("button-assertive");
             this.classList.remove("button-energized");
             this.classList.remove("button-balanced");
+            $("#showMeasureInfo").html('<div class="title">Need to Connect Windoo to Start</div>');
             break;
         case 1:
             this.innerHTML = txt.WINDOO_CALIBRATING
             this.classList.remove("button-assertive");
             this.classList.add("button-energized");
             this.classList.remove("button-balanced");
+            $("#showMeasureInfo").html('<div class="title">Need to Connect Windoo to Start</div>');
             break;
         case 2:
             this.innerHTML = txt.WINDOO_CALIBRATED
             this.classList.remove("button-assertive");
             this.classList.remove("button-energized");
             this.classList.add("button-balanced");
+            $("#showMeasureInfo").html('<div class="title">Click "Start" to Measure the Data</div>');
             break;
     }
 }
