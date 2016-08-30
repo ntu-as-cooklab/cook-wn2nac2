@@ -1,33 +1,75 @@
 // Compass
 console.log('compass work');
+
+// document.addEventListener("deviceready", onDeviceReady, false);
+// function onDeviceReady() {
+//     function onSuccess(heading) {
+//         var compassDisc = document.getElementById("compassDiscImg");
+//         var dir = heading.trueHeading;
+//         console.log(dir);
+//         compassDisc.style.Transform = 'rotate(' + dir + 'deg)';
+//         compassDisc.style.WebkitTransform = 'rotate(' + (dir-270) + 'deg)';
+//         compassDisc.style.MozTransform = 'rotate(-' + dir + 'deg)';
+//     };
+//
+//     function onError(compassError) {
+//         console.log('Compass error: ' + compassError.code);
+//     };
+//
+//     var options = {
+//         frequency: 100
+//     }; // Update every 3 seconds
+
+//     var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+// }
+
+
 document.addEventListener("DOMContentLoaded", function(event) {
 
     if (window.DeviceOrientationEvent) {
-     window.addEventListener('deviceorientation', function(eventData) {
-       // gamma: Tilting the device from left to right. Tilting the device to the right will result in a positive value.
-       var tiltLR = eventData.gamma;
+         window.addEventListener('deviceorientation', function(eventData) {
 
-       // beta: Tilting the device from the front to the back. Tilting the device to the front will result in a positive value.
-       var tiltFB = eventData.beta;
+             document.addEventListener("deviceready", onDeviceReady, false);
+             function onDeviceReady() {
+                 function onSuccess(heading) {
+                     var compassDisc = document.getElementById("compassDiscImg");
+                     var dir = heading.trueHeading;
+                     glb.winDir = dir;
+                     //console.log(dir);
+                     var _dir = 360-dir; // compass disc is reversed to phone
+                     compassDisc.style.Transform = 'rotate(' + _dir + 'deg)';
+                     compassDisc.style.WebkitTransform = 'rotate(' + _dir + 'deg)';
+                     compassDisc.style.MozTransform = 'rotate(' + _dir + 'deg)';
+                 };
 
-       // alpha: The direction the compass of the device aims to in degrees.
-       var dir = eventData.alpha - 90 // for android
+                 function onError(compassError) {
+                     console.log('Compass error: ' + compassError.code);
+                 };
 
-       // Call the function to use the data on the page.
-       deviceOrientationHandler(tiltLR, tiltFB, dir);
-     }, false);
+                 navigator.compass.getCurrentHeading(onSuccess, onError);
+             }
+                // var alpha;
+                // //Check for iOS property
+                // if (eventData.webkitCompassHeading) {
+                //     alpha = eventData.webkitCompassHeading;
+                //     //Rotation is reversed for iOS
+                //     // compassDisc.style.WebkitTransform = 'rotate(-' + alpha + 'deg)';
+                // }
+                // //non iOS
+                // else {
+                //     alpha = eventData.alpha;
+                //     webkitAlpha = alpha;
+                //     if (!window.chrome) {
+                //         //Assume Android stock (this is crude, but good enough for our example) and apply offset
+                //         webkitAlpha = alpha - 270;
+                //     }
+                // }
+                // console.log( alpha+'---');
+                // // compassDisc.style.Transform = 'rotate(' + alpha + 'deg)';
+                // // compassDisc.style.WebkitTransform = 'rotate(' + webkitAlpha + 'deg)';
+                // // //Rotation is reversed for FF
+                // // compassDisc.style.MozTransform = 'rotate(-' + alpha + 'deg)';
+
+         }, false);
     };
-
-   function deviceOrientationHandler(tiltLR, tiltFB, dir) {
-    //  document.getElementById("tiltLR").innerHTML = Math.ceil(tiltLR);
-    //  document.getElementById("tiltFB").innerHTML = Math.ceil(tiltFB);
-    //  document.getElementById("direction").innerHTML = Math.ceil(dir);
-
-     // Rotate the disc of the compass.
-     var compassDisc = document.getElementById("compassDiscImg");
-     compassDisc.style.webkitTransform = "rotate("+ dir +"deg)";
-     compassDisc.style.MozTransform = "rotate("+ dir +"deg)";
-     compassDisc.style.transform = "rotate("+ dir +"deg)";
-   }
-
 });
