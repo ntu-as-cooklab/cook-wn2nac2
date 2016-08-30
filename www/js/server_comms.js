@@ -18,7 +18,7 @@ function checkID( res )
     }).done(function(){
         if(condition == 0 ){
             sendSignUpInfo( res );
-            window.location.href = '#/tab/signUpCheck';
+            window.location.href = '#/signUpCheck';
         }else if(condition == 1){
             $("#showStatus2").html('<p>UserID is Used!</p>');
         }else if(condition == 2){
@@ -51,7 +51,7 @@ function sendLogInInfo( res )
         }
     }).done(function(){
         if(isLogIn){
-            $("#showStatus").html('<p>Log In</p>');
+            window.location.href = '#/tab/info';
         }else{
             $("#showStatus").html('<p>Wrong UserID or Password!</p>');
         }

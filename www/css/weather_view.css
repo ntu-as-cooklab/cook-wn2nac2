@@ -11,10 +11,10 @@
         #sensor-readings {
             position: absolute;
             top: 5px;
-            bottom: 5px;
-            left: 5px;
+            bottom: 1px;
+            left: 4px;
             right: 5px;
-            z-index: 1000;
+            z-index: 100;
             background-color: white;
             border: 1px solid grey;
             opacity: 0.95;

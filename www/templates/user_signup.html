@@ -1,8 +1,8 @@
 <ion-view align='center'>
-    <ion-header-bar class="bar bar-positive" align="center">
-         <h1 class="title" align="center">User Sign Up</h1>
-    </ion-header-bar>
     <ion-content>
+        <ion-bar class="bar bar-positive" align="left">
+             <h1 class="title" align="center">User Log In</h1>
+        </ion-bar>
         <div  ng-controller="signUpFormCtrl">
           <div style="padding:22px;"></div>
           <form name="signUpForm" novalidate>
@@ -10,32 +10,32 @@
                   <span class="input-label" >User ID</span>
                   <input type="text" ng-model="userid" name="userid"  ng-minlength='3'  required>
                   <span  class="item-note" ng-show="signUpForm.userid.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="signUpForm.userid.$error.minlength">Too Short</span>
+                  <span class="item-note" ng-show="signUpForm.userid.$error.minlength">Short</span>
               </label>
               <label class="item item-input-inset">
                   <span class="input-label" >Your Name</span>
                   <input type="text" ng-model="username" name="username"  ng-minlength='3' required>
                   <span  class="item-note" ng-show="signUpForm.username.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="signUpForm.username.$error.minlength">Too Short</span>
+                  <span class="item-note" ng-show="signUpForm.username.$error.minlength">Short</span>
               </label>
               <label class="item item-input-inset">
                   <span class="input-label" >Email</span>
                   <input type="email" ng-model="email" name="email"  required>
                   <span class="item-note" ng-show="signUpForm.email.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="signUpForm.email.$error.email">Email Invalid</span>
+                  <span class="item-note" ng-show="signUpForm.email.$error.email">Invalid</span>
               </label>
               <label class="item item-input-inset">
                   <span class="input-label" >Password</span>
                   <input type="password" ng-model="password" name="passwd"  ng-minlength='6' required
                     ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,}$/">
                   <span class="item-note" ng-show="signUpForm.passwd.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="signUpForm.passwd.$error.pattern">Too Simple</span>
+                  <span class="item-note" ng-show="signUpForm.passwd.$error.pattern">Simple</span>
               </label>
               <label class="item item-input-inset">
                   <span class="input-label" >Re-Password</span>
                   <input type="password" ng-model="repassword" name="repasswd" ng-match="signUpForm.password" ng-pattern="getPattern()" required >
                   <span class="item-note" ng-show="signUpForm.repasswd.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="signUpForm.repasswd.$error.pattern">Not Correct</span>
+                  <span class="item-note" ng-show="signUpForm.repasswd.$error.pattern">Inconsistent</span>
               </label>
               <button class="button button-positive  button-block"
                       ng-disabled=
@@ -46,14 +46,7 @@
                        signUpForm.repasswd.$invalid "
                      ng-click="submitSignUp()"
                       >Sign Up</button>
-              <!-- <button class="button" ng-click="testInfo()"> test data</button> -->
           </form>
-          <!-- TEST FORM
-          <p>userid = {{userid}}</p>
-          <p>username = {{username}}</p>
-          <p>email = {{email}}</p>
-          <p>password = {{password}}</p>
-          <p>repassword = {{repassword}}</p> -->
       </div>
       <div id="showStatus2"></div>
       <div class='row'>

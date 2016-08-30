@@ -1,8 +1,10 @@
+<!--  The Progress: origin > wind_frame > time_frame_1 > weather_frame > send_frame   -->
+<!-- TEMPLATE  -->
 <template id="timer_frame_1">
     <div class="measure-view-disp-content">
 
         <div class="measure_view-bar">
-            <i class="icon measure_view-icon measure-title-icon ion-android-stopwatch"></i>
+            <i class="icon measure_view-icon ion-android-stopwatch"></i>
             <span class="measure-title">Timed Measurement</span>
         </div>
         <div id="timer-box">
@@ -16,11 +18,11 @@
               <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="300000">5 min</a>
               <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="0">Other...</a>
             </div>
-            <div id="timer-status">Ready to START</div>
+            <div id="timer-status">Choose Measure Duration</div>
         </div>
 
         <div id="progress-box">
-            <div class="progress-pie-chart" data-percent="0">
+            <div class="progress-pie-chart-mystyle progress-pie-chart" data-percent="0">
                 <div class="ppc-progress">
                     <div class="ppc-progress-fill"></div>
                 </div>
@@ -36,10 +38,12 @@
             <i class="icon ion-android-stopwatch"></i>
             <span id="start-button-text">START</span>
         </button>
+        <!-- After Measuring then go to the next step (code in measure_view_measure.js line 90 ) -->
 
         <div class="info-box">
             <i class="icon measure_view-icon ion-ios-information-outline"></i>
-            <div>Select measurement duration and press START to begin measurement.</div>
+            <span>Select measurement duration and press START to begin measurement.</span>
+            <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong> Go Back</button>
         </div>
 
     </div>
@@ -52,14 +56,15 @@
             <span class="measure-title">Weather type</span>
         </div>
         <div class="button-bar weather-button-bar">
-          <a class="button weather-button" onclick="chooseWeather(this)" data-weather="1"><div><i class="weather-icon ion-ios-sunny-outline"></i></br>Sunny</div></a>
-          <a class="button weather-button" onclick="chooseWeather(this)" data-weather="2"><div><i class="weather-icon ion-ios-partlysunny-outline"></i></br>Partly</br>cloudy</div></a>
-          <a class="button weather-button" onclick="chooseWeather(this)" data-weather="3"><div><i class="weather-icon ion-ios-cloudy-outline"></i></br>Cloudy</div></a>
-          <a class="button weather-button" onclick="chooseWeather(this)" data-weather="4"><div><i class="weather-icon ion-ios-rainy-outline"></i></br>Rainy</div></a>
+          <a class="button weather-button" onclick="chooseWeather(this, 1)" ><div><i class="weather-icon ion-ios-sunny-outline"></i></br>Sunny</div></a>
+          <a class="button weather-button" onclick="chooseWeather(this, 2)" ><div><i class="weather-icon ion-ios-partlysunny-outline"></i></br>Partly</br>cloudy</div></a>
+          <a class="button weather-button" onclick="chooseWeather(this, 3)" ><div><i class="weather-icon ion-ios-cloudy-outline"></i></br>Cloudy</div></a>
+          <a class="button weather-button" onclick="chooseWeather(this, 4)" ><div><i class="weather-icon ion-ios-rainy-outline"></i></br>Rainy</div></a>
         </div>
         <div class="info-box">
             <i class="icon measure_view-icon ion-ios-information-outline"></i>
-            <div>Choose a weather type according to your observation. Optionally, attach a photo.</div>
+            <span>Choose a weather type according to your observation. Optionally, attach a photo.</span>
+            <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong> Go Back</button>
         </div>
     </div>
 </template>
@@ -70,19 +75,19 @@
             <i class="icon measure_view-icon measure-title-icon ion-flag"></i>
             <span class="measure-title">Wind direction</span>
         </div>
-        <div id="wind-img-box">
-            <img id="wind-img" src="img/wind.png" alt="Wind">
+        <div class="compass">
+    		<div class="arrow"></div>
+    		<div class="disc" id="compassDiscImg"></div>
+            <script src='../js/compass.js'></script>
         </div>
-        <div id="compass-box">
-            <img id="compass" src="img/compass.png" alt="Compass">
-            <img id="compass-arrow" src="img/compass-arrow.png" alt="Compass Arrow">
-        </div>
-        <div id="degrees-display">
-            0° N
-        </div>
+        <button id="windbtn" class="button button-balanced" onclick="recordWind()">
+            <i class="icon ion-android-stopwatch"></i>
+            <span id="start-button-text">Record</span>
+        </button>
         <div class="info-box">
             <i class="icon measure_view-icon ion-ios-information-outline"></i>
-            <div>Since the Windoo sensor has no ability of sensing the wind direction, the recording of wind direction relies on user input. Please orient your phone in face of the wind.</div>
+            <span>Please orient your phone in face of the wind and record the azimuth.</span>
+            <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong> Go Back</button>
         </div>
     </div>
 </template>
@@ -91,82 +96,45 @@
     <div class="measure-view-disp-content">
         <div class="measure_view-bar">
             <i class="icon measure_view-icon measure-title-icon ion-ios-paperplane-outline"></i>
-            <span class="measure-title">Send</span>
+            <span class="measure-title">Send Data to Server</span>
         </div>
-        <button id="send-button" class="button button-balanced" onclick="sendMeasurement()">
-            <i class="icon ion-ios-paperplane-outline"></i>
-            SEND
-        </button>
-        <button id="send-button" class="button button-balanced" onclick="getLastMeasurement()">
-            <i class="icon ion-ios-paperplane-outline"></i>
-            GET LAST
-        </button>
         <div class="info-box">
-            <i class="icon measure_view-icon ion-ios-information-outline"></i>
-            <div>Your measurement is now ready and can be sent to the server.</div>
+            <div class="card ">
+              <div class="item item-text-wrap">
+                  <i class="icon measure_view-icon ion-ios-information-outline"></i>
+                  <span>Thank You!<br>Your measurement is sent to the server.</span>
+              </div>
+            </div>
+            <button class="button button-balanced" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')">
+                <i class="icon ion-android-stopwatch"></i>
+                <span id="start-button-text">Finished</span>
+            </button>
+        </div>
+    </div>
+</template>
+<template id="origin_frame">
+    <div id="measure-background">
+        <button  onclick="startToMeasure()" class="round-button">Start</button>
+        <div class="bar bar-footer bar-positive">
+            <div class="title">Click 'Start' to Measure the Data</div>
         </div>
     </div>
 </template>
 
-<!-- ####################################################################### -->
-
+<!-- TEMPLATE  -->
+<!--   Main    -->
 <ion-view>
-
     <ion-content id="measure-view-content">
-
         <windoo-status-bar></windoo-status-bar>
-
-        <div id="measure-view-container" class="has-windoo-status-bar-top">
-
-            <div id="measure-view-bars">
-
-                <div id="timed_measurement_bar" class="row">
-                    <a class="col button measure_view_button" onclick="measure_tab_switch('#timer_frame_1')">
-
-                        <span class="measurement-status row">
-                            <span class="col col-33">Windoo data:</span>
-                            <span class="col col-67"><status-icon></status-icon><span>Not collected</span></span>
-                        </span>
-                        <div class="measurement-summary">
-
-                            <span class="row">
-                                <span class="col col-25">Time:</span>
-                                <span class="col col-25">0</span>
-                                <span class="col col-25">0</span>
-                                <span class="col col-25">0</span>
-                            </span>
-                            <span class="row"><span class="col col-25">Location:</span><span class="col col-75">0</span></span>
-                        </div>
-
-                        <span class="row">
-                            <wind-disp class="windoo-disp-small col"></wind-disp>
-                            <temp-disp class="windoo-disp-small col"></temp-disp>
-                            <humd-disp class="windoo-disp-small col"></humd-disp>
-                            <pres-disp class="windoo-disp-small col"></pres-disp>
-                        </span>
-                    </a>
+        <div id="measure-container" class="has-windoo-status-bar-top">
+            <div id="measure-background">
+                <button  onclick="startToMeasure()" class="round-button">Start</button>
+                <div id='showMeasureInfo'>
+                    <div  class="bar bar-footer bar-energized">
+                        <div class="title">Need to Connect Windoo to Start</div>
+                    </div>
                 </div>
-
-                <div id="measurement_bar" class="row">
-                    <a class="col button measure_view_button" onclick="measure_tab_switch('#wind_frame')">
-                        Wind direction
-                        <div><status-icon></status-icon>Not set</div>
-                        <div id="degrees-display">
-                        </div>
-                    </a>
-                    <a class="col button measure_view_button" onclick="measure_tab_switch('#weather_frame')">
-                        Weather type
-                        <div><status-icon></status-icon>Not set</div>
-                    </a>
-                    <a class="col button measure_view_button" onclick="measure_tab_switch('#send_frame')">Send</a>
-                </div>
-
             </div>
-
-            <div id="measure-view-disp">
-                <div class="measure-view-disp-content"></div>
-            </div>
-
         </div>
     </ion-content>
 </ion-view>

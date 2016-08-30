@@ -11,6 +11,16 @@ var duration        = 60000;
 
 var temp_equil_status;
 var humd_equil_status;
+function recordWind(){
+    glbsens.currentMeasurement.windDirection = glb.winDir;
+    measure_tab_switch('.measure-view-disp-content','#timer_frame_1')
+}
+
+function startToMeasure(){
+    if(windooStatus==2){
+        measure_tab_switch('#measure-background','#wind_frame')
+    }
+}
 
 function measure_main()
 {
@@ -33,9 +43,9 @@ function measure_main()
     $('.ppc-progress-fill').css('transform','rotate('+ 0 +'deg)');
 }
 
-function measure_tab_switch(frameName)
+function measure_tab_switch(frameName1, frameName2)
 {
-    $(".measure-view-disp-content").replaceWith(document.importNode(document.querySelector(frameName).content, true));
+    $(frameName1).replaceWith(document.importNode(document.querySelector(frameName2).content, true));
 }
 
 var duration;
@@ -48,11 +58,13 @@ function chooseDuration(element)
     element.classList.add     ("button-calm");
 }
 
-function chooseWeather(element)
+function chooseWeather(element, index)
 {
-    weather = element.dataset.weather;
     $(".weather-button").removeClass  ("button-calm");
     element.classList.add     ("button-calm");
+    glbsens.currentMeasurement.weatherType = index;
+    setTimeout(function(){measure_tab_switch('.measure-view-disp-content','#send_frame');},800);
+    sendMeasurement();
 }
 
 var tDif = 3;

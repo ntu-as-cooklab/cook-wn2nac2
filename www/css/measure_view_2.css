@@ -41,9 +41,12 @@
         }
 
             .measure-view-disp-content {
+                position: absolute;
                 background-color: #f8f8f8;
                 border-radius: 0px;
                 border: 1px solid #bbb;
-                height: 100%;
-                overflow-y: scroll;
+                top: 5px;
+                bottom: 1px;
+                left: 4px;
+                right: 5px;
             }
