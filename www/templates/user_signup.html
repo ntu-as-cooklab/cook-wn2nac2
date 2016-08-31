@@ -8,32 +8,32 @@
           <form name="signUpForm" novalidate>
               <label class="item item-input-inset">
                   <span class="input-label" >User ID</span>
-                  <input type="text" ng-model="userid" name="userid"  ng-minlength='3'  required>
+                  <input type="text" class="half" ng-model="userid" name="userid"  ng-minlength='3'  required>
                   <span  class="item-note" ng-show="signUpForm.userid.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="signUpForm.userid.$error.minlength">Short</span>
+                  <span class="item-note" ng-show="signUpForm.userid.$error.minlength">Too Short</span>
               </label>
               <label class="item item-input-inset">
                   <span class="input-label" >Your Name</span>
-                  <input type="text" ng-model="username" name="username"  ng-minlength='3' required>
+                  <input type="text" class="half" ng-model="username" name="username"  ng-minlength='3' required>
                   <span  class="item-note" ng-show="signUpForm.username.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="signUpForm.username.$error.minlength">Short</span>
+                  <span class="item-note" ng-show="signUpForm.username.$error.minlength">Too Short</span>
               </label>
               <label class="item item-input-inset">
                   <span class="input-label" >Email</span>
-                  <input type="email" ng-model="email" name="email"  required>
+                  <input type="email" class="half" ng-model="email" name="email"  required>
                   <span class="item-note" ng-show="signUpForm.email.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="signUpForm.email.$error.email">Invalid</span>
+                  <span class="item-note" ng-show="signUpForm.email.$error.email">Wrong Type</span>
               </label>
               <label class="item item-input-inset">
                   <span class="input-label" >Password</span>
-                  <input type="password" ng-model="password" name="passwd"  ng-minlength='6' required
+                  <input type="password" class="half" ng-model="password" name="passwd"  ng-minlength='6' required
                     ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,}$/">
                   <span class="item-note" ng-show="signUpForm.passwd.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="signUpForm.passwd.$error.pattern">Simple</span>
+                  <span class="item-note" ng-show="signUpForm.passwd.$error.pattern">Too Simple</span>
               </label>
               <label class="item item-input-inset">
                   <span class="input-label" >Re-Password</span>
-                  <input type="password" ng-model="repassword" name="repasswd" ng-match="signUpForm.password" ng-pattern="getPattern()" required >
+                  <input type="password" class="half" ng-model="repassword" name="repasswd" ng-match="signUpForm.password" ng-pattern="getPattern()" required >
                   <span class="item-note" ng-show="signUpForm.repasswd.$error.required">Invalid</span>
                   <span class="item-note" ng-show="signUpForm.repasswd.$error.pattern">Inconsistent</span>
               </label>
