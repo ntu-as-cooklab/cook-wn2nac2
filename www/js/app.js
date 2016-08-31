@@ -28,10 +28,20 @@ app
 
 })
 .config(function($ionicConfigProvider) {
-    $ionicConfigProvider.scrolling.jsScrolling(false);
+    $ionicConfigProvider.scrolling.jsScrolling(true);
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
+    //See If Logged In?
+    if(window.localStorage.getItem("isLogIn") == null){
+        window.localStorage.setItem("isLogIn", false);
+    };
+    var thisPageA = window.localStorage.getItem("isLogIn")=='false'?'templates/user_view.html':'templates/user_info.html';
+    var thisPageB = window.localStorage.getItem("isLogIn")=='true'?'templates/user_view.html':'templates/user_info.html';
+
+    //For choose user page. A=> user_view in #/tab/user; b=> user_view in #/tab/userB
+    glb.AB =  window.localStorage.getItem("isLogIn")=='false'? 'A':'B';
+
   $stateProvider
     .state('tabs', {
       url: '/tab',
@@ -78,7 +88,7 @@ app
       url: '/user',
       views: {
         'user-view' : {
-          templateUrl: 'templates/user_view.html',
+          templateUrl: thisPageA,
           controller: 'UserViewController'
         }
       }
@@ -97,10 +107,10 @@ app
     })
 
     .state('tabs.userInfo',{
-        url: '/info',
+        url: '/userB',
         views: {
           'user-view' : {
-            templateUrl: 'templates/user_info.html',
+            templateUrl: thisPageB,
             controller: 'UserInfoController'
           }
         }
@@ -374,7 +384,6 @@ app
 
   $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = false;
-    // console.log(glb.inMeasureView);
   });
 })
 
@@ -453,13 +462,6 @@ app
     $scope.username='Liu An Chi';
     $scope.email='tigercosmso@outlook.com';
     $scope.record= 100;
-    $scope.submitLogIn= function(){
-        var logInInfo = {
-            userid: $scope.userid,
-            password: $scope.password
-        };
-        sendLogInInfo( logInInfo );
-    };
 })
 
 .controller('MainCtrl',function($scope, $ionicScrollDelegate){
