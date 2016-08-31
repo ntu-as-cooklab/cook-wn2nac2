@@ -1,4 +1,4 @@
-<!--  The Progress: origin > wind_frame > time_frame_1 > weather_frame > send_frame   -->
+<!--  The Progress: origin > wind_frame > time_frame_1 > weather_frame > check_frame > send_frame   -->
 <!-- TEMPLATE  -->
 <template id="timer_frame_1">
     <div class="measure-view-disp-content">
@@ -14,9 +14,9 @@
               <a class="button measure-time-button button-calm " onclick="chooseDuration(this)" data-duration="60000">1 min</a>
             </div>
             <div class="button-bar measure-time-button-bar ">
+              <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="120000">2 min</a>
               <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="180000">3 min</a>
               <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="300000">5 min</a>
-              <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="0">Other...</a>
             </div>
             <div id="timer-status">Choose Measure Duration</div>
         </div>
@@ -43,7 +43,7 @@
         <div class="info-box">
             <i class="icon measure_view-icon ion-ios-information-outline"></i>
             <span>Select measurement duration and press START to begin measurement.</span>
-            <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong> Go Back</button>
+            <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong> Cancel <strong>&gt</strong></button>
         </div>
 
     </div>
@@ -56,15 +56,15 @@
             <span class="measure-title">Weather type</span>
         </div>
         <div class="button-bar weather-button-bar">
-          <a class="button weather-button" onclick="chooseWeather(this, 1)" ><div><i class="weather-icon ion-ios-sunny-outline"></i></br>Sunny</div></a>
-          <a class="button weather-button" onclick="chooseWeather(this, 2)" ><div><i class="weather-icon ion-ios-partlysunny-outline"></i></br>Partly</br>cloudy</div></a>
-          <a class="button weather-button" onclick="chooseWeather(this, 3)" ><div><i class="weather-icon ion-ios-cloudy-outline"></i></br>Cloudy</div></a>
-          <a class="button weather-button" onclick="chooseWeather(this, 4)" ><div><i class="weather-icon ion-ios-rainy-outline"></i></br>Rainy</div></a>
+          <a class="button weather-button" onclick="chooseWeather(this, 0)" ><div><i class="weather-icon ion-ios-sunny-outline"></i></br>Sunny</div></a>
+          <a class="button weather-button" onclick="chooseWeather(this, 1)" ><div><i class="weather-icon ion-ios-partlysunny-outline"></i></br>Partly</br>cloudy</div></a>
+          <a class="button weather-button" onclick="chooseWeather(this, 2)" ><div><i class="weather-icon ion-ios-cloudy-outline"></i></br>Cloudy</div></a>
+          <a class="button weather-button" onclick="chooseWeather(this, 3)" ><div><i class="weather-icon ion-ios-rainy-outline"></i></br>Rainy</div></a>
         </div>
         <div class="info-box">
             <i class="icon measure_view-icon ion-ios-information-outline"></i>
             <span>Choose a weather type according to your observation. Optionally, attach a photo.</span>
-            <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong> Go Back</button>
+            <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong> Cancel <strong>&gt</strong></button>
         </div>
     </div>
 </template>
@@ -80,6 +80,9 @@
     		<div class="disc" id="compassDiscImg"></div>
             <script src='../js/compass.js'></script>
         </div>
+        <div class="measure-title" id='wd'>
+            AZIMUTH: N/A
+        </div>
         <button id="windbtn" class="button button-balanced" onclick="recordWind()">
             <i class="icon ion-android-stopwatch"></i>
             <span id="start-button-text">Record</span>
@@ -87,7 +90,36 @@
         <div class="info-box">
             <i class="icon measure_view-icon ion-ios-information-outline"></i>
             <span>Please orient your phone in face of the wind and record the azimuth.</span>
-            <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong> Go Back</button>
+            <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong> Cancel <strong>&gt</strong></button>
+        </div>
+    </div>
+</template>
+
+<template id="check_frame">
+    <div class="measure-view-disp-content">
+        <div class="measure_view-bar">
+            <i class="icon measure_view-icon measure-title-icon-paperplane-outline"></i>
+            <span class="measure-title">Data Check</span>
+        </div>
+        <div class="list list-inset"  ng-controller="dataInfoCtrl" id="dataInfo">
+            <!-- <div class="row"> -->
+                <div class="item" id="avgHumd"></div>
+                <div class="item" id="avgTemp"></div>
+            <!-- </div> -->
+            <!-- <div class="row"> -->
+                <div class="item" id="avgWind"></div>
+                <div class="item" id="avgPres"></div>
+            <!-- </div> -->
+            <div class="item" id="weather"></div>
+        </div>
+        <button  class="button button-balanced" onclick="checkData()">
+            <i class="icon ion-android-stopwatch"></i>
+            <span id="start-button-text">Send</span>
+        </button>
+        <div class="info-box">
+            <i class="icon measure_view-icon ion-ios-information-outline"></i>
+            <span>Send the data if it is correct.</span>
+            <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong> Cancel <strong>&gt</strong></button>
         </div>
     </div>
 </template>
@@ -104,7 +136,7 @@
                   <i class="icon measure_view-icon ion-ios-information-outline"></i>
                   <span>Thank You!<br>Your measurement is sent to the server.</span>
               </div>
-            </div>
+          </div><br>
             <button class="button button-balanced" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')">
                 <i class="icon ion-android-stopwatch"></i>
                 <span id="start-button-text">Finished</span>
@@ -124,9 +156,9 @@
 <!-- TEMPLATE  -->
 <!--   Main    -->
 <ion-view>
-    <ion-content id="measure-view-content">
+    <ion-content id="measure-view-content" >
         <windoo-status-bar></windoo-status-bar>
-        <div id="measure-container" class="has-windoo-status-bar-top">
+        <div id="measure-container" class="has-windoo-status-bar-top" >
             <div id="measure-background">
                 <button  onclick="startToMeasure()" class="round-button">Start</button>
                 <div id='showMeasureInfo'>

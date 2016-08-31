@@ -13,13 +13,18 @@ var temp_equil_status;
 var humd_equil_status;
 function recordWind(){
     glbsens.currentMeasurement.windDirection = glb.winDir;
-    measure_tab_switch('.measure-view-disp-content','#timer_frame_1')
+    measure_tab_switch('.measure-view-disp-content','#timer_frame_1');
 }
 
 function startToMeasure(){
     if(windooStatus==2){
-        measure_tab_switch('#measure-background','#wind_frame')
+        measure_tab_switch('#measure-background','#wind_frame');
     }
+}
+
+function checkData(){
+    sendMeasurement();
+    measure_tab_switch('.measure-view-disp-content','#send_frame');
 }
 
 function measure_main()
@@ -54,17 +59,25 @@ var weather;
 function chooseDuration(element)
 {
     duration = element.dataset.duration;
-    $(".measure-time-button").removeClass  ("button-calm");
-    element.classList.add     ("button-calm");
+    $(".measure-time-button").removeClass("button-calm");
+    element.classList.add("button-calm");
 }
 
-function chooseWeather(element, index)
-{
-    $(".weather-button").removeClass  ("button-calm");
-    element.classList.add     ("button-calm");
+function chooseWeather(element, index){
+    $(".weather-button").removeClass("button-calm");
+    element.classList.add("button-calm");
     glbsens.currentMeasurement.weatherType = index;
-    setTimeout(function(){measure_tab_switch('.measure-view-disp-content','#send_frame');},800);
-    sendMeasurement();
+    setTimeout(function(){
+        measure_tab_switch('.measure-view-disp-content','#check_frame');
+        $("#avgHumd").html("Humid: "+ Math.ceil(glbsens.currentMeasurement.avgHumd)+" %");
+        $("#avgPres").html("Pressure: "+ Math.ceil(glbsens.currentMeasurement.avgPres)+" hPa");
+        $("#avgTemp").html("Temperature: "+ Math.ceil(glbsens.currentMeasurement.avgTemp)+" °C");
+        $("#avgWind").html(
+            "Wind: "+ Math.ceil(glbsens.currentMeasurement.avgWind)+" m/s "+
+            parseWindDir(glbsens.currentMeasurement.windDirection)
+        );
+        $("#weather").html('Weather: '+parseWeather(glbsens.currentMeasurement.weatherType));
+    },200);
 }
 
 var tDif = 3;

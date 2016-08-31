@@ -3,8 +3,9 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','chart.js'])
+var app = angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','chart.js']);
 
+app
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -25,6 +26,9 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
 
   });
 
+})
+.config(function($ionicConfigProvider) {
+    $ionicConfigProvider.scrolling.jsScrolling(false);
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -458,4 +462,8 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','char
     };
 })
 
+.controller('MainCtrl',function($scope, $ionicScrollDelegate){
+    $scope.$ionicScrollDelegate.freezeAllScrolls(true);
+    $scope.$ionicScrollDelegate.getScrollView().__enableScrollY = false;
+})
 ;

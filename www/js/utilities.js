@@ -221,10 +221,18 @@ function parseWeather(weather)
 {
   var wStr;
   switch (weather) {
-    case 0: wStr = "Sunny";
-    case 1: wStr = "Partly Cloudy";
-    case 2: wStr = "Cloudy";
-    case 3: wStr = "Rainy";
+    case 0:
+        wStr = "Sunny";
+        break;
+    case 1:
+        wStr = "Partly Cloudy";
+        break;
+    case 2:
+        wStr = "Cloudy";
+        break;
+    case 3:
+        wStr = "Rainy";
+        break;
     default: return "N/A";
   }
   return wStr;

@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                      compassDisc.style.Transform = 'rotate(' + _dir + 'deg)';
                      compassDisc.style.WebkitTransform = 'rotate(' + _dir + 'deg)';
                      compassDisc.style.MozTransform = 'rotate(' + _dir + 'deg)';
+                     $("#wd").text('AZIMUTH: '+parseWindDir(dir));
                  };
 
                  function onError(compassError) {

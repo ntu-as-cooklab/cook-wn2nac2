@@ -69,7 +69,6 @@ function setMeasureButtonStatus(status)
             break;
         case 4: // Finished Data and Go Next Step
             progress_box.style.visibility = "hidden";
-            progress_box.style.visibility = "visible";
             timer_status.innerHTML = "Finished";
             measureButton.disabled = true;
             measureButton.classList.remove  ("button-assertive");
@@ -101,8 +100,8 @@ function onMeasurementTick()
     $('.ppc-percents span').html((progress*100).toFixed(0) + '%' + "<br><br>" + (elapsed/1000).toFixed(0) + "/" + glbsens.currentMeasurement.duration/1000 + "s");
 
     // Mean A Data really finished then go to the next step
-    if(progress>=1){
+    if(Math.ceil(progress*100)>=100){
         isMeasureDone = true;
-        setTimeout(function(){measure_tab_switch('.measure-view-disp-content','#weather_frame');},1500);
+        setTimeout(function(){measure_tab_switch('.measure-view-disp-content','#weather_frame');},1000);
     }
 }
