@@ -11,6 +11,8 @@ function logOut(){
         window.location.href = '#/tab/userB';
     }
     window.localStorage.removeItem("userid");
-    window.localStorage.removeItem("password");
+    window.localStorage.removeItem("username");
+    window.localStorage.removeItem("email");
+    window.localStorage.removeItem("record");
     window.localStorage.setItem("isLogIn", false);
 }

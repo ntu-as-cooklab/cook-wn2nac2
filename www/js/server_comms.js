@@ -1,6 +1,31 @@
 var lastMeasurement;
 var listenersActive = false;
 
+function getInfo()
+{
+    $.ajax({
+        url: 'http://mospc.cook.as.ntu.edu.tw/getInfo.php',
+        type: 'POST',
+        data: {userid: window.localStorage.getItem("userid")},
+        success: function(res){
+            var info = JSON.parse(res);
+            //console.log(info);
+            window.localStorage.setItem("username", info.username);
+            window.localStorage.setItem("email", info.email);
+            window.localStorage.setItem("record", info.record);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("Status: " + textStatus + " signUpInfo POST Error: " + errorThrown);
+        }
+    }).done(function(){
+        if(glb.AB=='A'){
+            window.location.href = '#/tab/userB';
+        }else{
+            window.location.href = '#/tab/user';
+        }
+    });
+}
+
 function checkID( res )
 {
     var condition = 0; //record the sign up condition
@@ -53,12 +78,7 @@ function sendLogInInfo( res )
         if(isLogIn){
             window.localStorage.setItem("isLogIn", true);
             window.localStorage.setItem("userid", res.userid);
-            window.localStorage.setItem("password", res.password);
-            if(glb.AB=='A'){
-                window.location.href = '#/tab/userB';
-            }else{
-                window.location.href = '#/tab/user';
-            }
+            getInfo();
         }else{
             $("#showStatus").html('<p>Wrong UserID or Password!</p>');
         }
@@ -83,12 +103,21 @@ function sendSignUpInfo( res )
     });
 }
 
-function sendMeasurement()
-{
-    $.post( "http://mospc.cook.as.ntu.edu.tw/post4.php", JSON.parse(JSON.stringify(glbsens.currentMeasurement)),
-        function( data ) {
+function sendMeasurement(){
+    $.ajax({
+        url: 'http://mospc.cook.as.ntu.edu.tw/post4.php',
+        type: 'POST',
+        data: JSON.parse(JSON.stringify(glbsens.currentMeasurement)),
+        success: function(data){
             console.log(data);
-        });
+            window.localStorage.setItem("record", Number(window.localStorage.getItem("record"))+1);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log("Status: " + textStatus + " signUpInfo POST Error: " + errorThrown);
+        }
+    }).done(function(){
+
+    });
 }
 
 function getMeasurement(begin, end)

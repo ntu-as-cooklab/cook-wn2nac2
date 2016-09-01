@@ -458,10 +458,10 @@ app
 
 // control the page of information
 .controller('infoCtrl',function($scope){
-    $scope.userid='tigercosmos';
-    $scope.username='Liu An Chi';
-    $scope.email='tigercosmso@outlook.com';
-    $scope.record= 100;
+    $scope.userid= window.localStorage.getItem("userid");
+    $scope.username= window.localStorage.getItem("username");
+    $scope.email= window.localStorage.getItem("email");
+    $scope.record=  window.localStorage.getItem("record");
 })
 
 .controller('MainCtrl',function($scope, $ionicScrollDelegate){
