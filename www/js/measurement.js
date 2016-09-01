@@ -75,6 +75,7 @@ var WindooMeasurement = function()
     this.onFinish           = null;
     this.onTick             = null;
     this.interval           = null;
+    this.date               = 0;
 };
 
 WindooMeasurement.prototype = Object.create(WindooObservation.prototype);

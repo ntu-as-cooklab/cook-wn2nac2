@@ -30,6 +30,9 @@ function startToMeasure(){
 
 function checkData(){
     glbsens.currentMeasurement.userId = window.localStorage.getItem("userid");
+    var d = new Date();
+    var nowDate = d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate()+' '+d.getHours()+':'+d.getMinutes();
+    glbsens.currentMeasurement.date = nowDate;
     sendMeasurement();
     measure_tab_switch('.measure-view-disp-content','#send_frame');
 }
