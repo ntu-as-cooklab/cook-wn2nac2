@@ -457,11 +457,18 @@ app
 })
 
 // control the page of information
-.controller('infoCtrl',function($scope){
+.controller('infoCtrl',function($scope, $interval){
+    // dirty update NEED FIXED
     $scope.userid= window.localStorage.getItem("userid");
     $scope.username= window.localStorage.getItem("username");
     $scope.email= window.localStorage.getItem("email");
     $scope.record=  window.localStorage.getItem("record");
+    $interval(function() {
+        $scope.userid= window.localStorage.getItem("userid");
+        $scope.username= window.localStorage.getItem("username");
+        $scope.email= window.localStorage.getItem("email");
+        $scope.record=  window.localStorage.getItem("record");
+    }, 1000);
 })
 
 .controller('MainCtrl',function($scope, $ionicScrollDelegate){
