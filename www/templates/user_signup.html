@@ -8,9 +8,9 @@
           <form name="signUpForm" novalidate>
               <label class="item item-input-inset">
                   <span class="input-label" >User ID</span>
-                  <input type="text" class="half" ng-model="userid" name="userid"  ng-minlength='3'  required>
+                  <input type="text" class="half" ng-model="userid" name="userid"  ng-trim="false" ng-pattern="/^[a-zA-Z0-9]{3,}$/"  required>
                   <span  class="item-note" ng-show="signUpForm.userid.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="signUpForm.userid.$error.minlength">Too Short</span>
+                  <span class="item-note" ng-show="signUpForm.userid.$error.pattern">Invalid</span>
               </label>
               <label class="item item-input-inset">
                   <span class="input-label" >Your Name</span>
@@ -29,7 +29,7 @@
                   <input type="password" class="half" ng-model="password" name="passwd"  ng-minlength='6' required
                     ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,}$/">
                   <span class="item-note" ng-show="signUpForm.passwd.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="signUpForm.passwd.$error.pattern">Too Simple</span>
+                  <span class="item-note" ng-show="signUpForm.passwd.$error.pattern">Invalid</span>
               </label>
               <label class="item item-input-inset">
                   <span class="input-label" >Re-Password</span>
@@ -49,9 +49,10 @@
           </form>
       </div>
       <div id="showStatus2"></div>
-      <div class='row'>
+      <div class='row' align="left">
           <div>
-              <p>Password should be at least 6 characters long and contain number and special character without space.</p>
+              <p>User ID should be at least 3 long and only contain numbers and letters.
+              <p>Password should be at least 6 long and contain numbers and special characters without space.</p>
           </div>
           <div>&nbsp</div>
           <div>
