@@ -10,7 +10,7 @@ function logOut(){
     }else{
         window.location.href = '#/tab/userB';
     }
-    window.localStorage.removeItem("username");
+    window.localStorage.removeItem("userid");
     window.localStorage.removeItem("password");
     window.localStorage.setItem("isLogIn", false);
 }

@@ -52,7 +52,7 @@ function sendLogInInfo( res )
     }).done(function(){
         if(isLogIn){
             window.localStorage.setItem("isLogIn", true);
-            window.localStorage.setItem("username", res.userid);
+            window.localStorage.setItem("userid", res.userid);
             window.localStorage.setItem("password", res.password);
             if(glb.AB=='A'){
                 window.location.href = '#/tab/userB';
