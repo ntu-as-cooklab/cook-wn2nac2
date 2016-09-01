@@ -17,12 +17,19 @@ function recordWind(){
 }
 
 function startToMeasure(){
-    if(windooStatus==2){
+    if(window.localStorage.getItem("isLogIn")=='false'){
+        if(glb.AB=='A'){
+            window.location.href = '#/tab/user';
+        }else{
+            window.location.href = '#/tab/userB';
+        }
+    }else if(windooStatus==2 && window.localStorage.getItem("isLogIn")=='true'){
         measure_tab_switch('#measure-background','#wind_frame');
     }
 }
 
 function checkData(){
+    glbsens.currentMeasurement.userId = window.localStorage.getItem("userid");
     sendMeasurement();
     measure_tab_switch('.measure-view-disp-content','#send_frame');
 }
