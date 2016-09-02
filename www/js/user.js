@@ -10,9 +10,9 @@ function logOut(){
     }else{
         window.location.href = '#/tab/userB';
     }
-    window.localStorage.removeItem("userid");
-    window.localStorage.removeItem("username");
-    window.localStorage.removeItem("email");
-    window.localStorage.removeItem("record");
+    window.localStorage.setItem("userid",'N/A');
+    window.localStorage.setItem("username",'N/A');
+    window.localStorage.setItem("email",'N/A');
+    window.localStorage.setItem("record",'N/A');
     window.localStorage.setItem("isLogIn", false);
 }
