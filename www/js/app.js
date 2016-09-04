@@ -119,6 +119,24 @@ app
   $urlRouterProvider.otherwise('/tab/home');
 })
 
+.factory('ConnectivityMonitor', function($rootScope, $cordovaNetwork){
+   return {
+     isOnline: function() {
+       if (ionic.Platform.isWebView()) {
+         return $cordovaNetwork.isOnline();
+       } else {
+        return navigator.onLine;
+      }
+     },
+     isOffline: function() {
+       if (ionic.Platform.isWebView()) {
+         return !$cordovaNetwork.isOnline();
+       } else {
+         return !navigator.onLine;
+       }
+     }
+   }
+ })
 
 //ADD NETWORK HANDLING LATER
 .controller('MapViewController', function($scope, $ionicLoading, $compile) {
@@ -169,21 +187,6 @@ app
     glb.inMeasureView = false;
   });
 })
-
-// .controller('MapViewController', function($scope, $ionicLoading, $compile) {
-//
-//   $scope.$on('$ionicView.enter', function() {
-//
-//       initMaps();
-//     //   $.getScript("https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=zh-TW",
-//     //     function () {
-//     //         $.getScript("http://127.0.0.1:8100/weather/asset/a10aafbd28e4681c288b9743dde5ab36.js");
-//     //     });
-//
-//     //   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=zh-TW" language="javascript" type="text/javascript"></script>
-//     //   <script src="http://127.0.0.1/weather/asset/a10aafbd28e4681c288b9743dde5ab36.js" language="javascript" type="text/javascript"></script>
-//   });
-// })
 
 //Sing Up Page
 .controller('UserSingUpController', function($scope, $ionicLoading, $compile) {
@@ -257,5 +260,9 @@ app
 .controller('MainCtrl',function($scope, $ionicScrollDelegate){
     $scope.$ionicScrollDelegate.freezeAllScrolls(true);
     $scope.$ionicScrollDelegate.getScrollView().__enableScrollY = false;
+})
+
+.controller('MapCtrl',function($scope, $ionicScrollDelegate){
+    initMaps();
 })
 ;
