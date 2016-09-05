@@ -1,5 +1,11 @@
 <ion-view>
     <ion-content id="content">
+        <div id="mapMenu" class="main-menu" onclick="switchMenu( this, 'SubMenu' )">Data Source&nbsp&#9660
+            <ul id="SubMenu" class="sub-menu" style="display:none;">
+                <li><a onclick="xx()">CWB</a></li>
+                <li><a onclick="xx()">COOK</a></li>
+            </ul>
+        </div>
         <div id='maps' ng-controller="MapCtrl"></div>
     </ion-content>
 </ion-view>

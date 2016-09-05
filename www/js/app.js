@@ -143,7 +143,7 @@ app
 
   $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = false;
-    initMaps();
+    // initMaps();
   });
 
 })

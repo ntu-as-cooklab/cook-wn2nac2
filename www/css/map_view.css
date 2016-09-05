@@ -1,0 +1,32 @@
+#mapMenu{
+    position:absolute;
+    z-index:100;
+    left:10px;
+    top:10px;
+    display: inline-block;
+}
+.main-menu {
+     color:#FFFFFF;
+     background-color:#151515;
+     margin:0px;
+     width: 35vw;
+     padding: 5px;
+     cursor:pointer;
+} 
+.sub-menu {
+    color:#0000FF;
+    background-color:#424242;
+    margin:5px -5px;
+    width: 35vw;
+    padding:0px;
+    position:absolute;
+}
+.sub-menu li {
+    padding: 3px 5px;
+    text-align:center;
+}
+.sub-menu a {
+    text-align:center;
+    display:block;
+    color: white;
+}
