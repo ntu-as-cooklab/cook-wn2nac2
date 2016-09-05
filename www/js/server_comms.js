@@ -15,7 +15,7 @@ function getInfo()
             window.localStorage.setItem("record", info.record);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    console.log("Status: " + textStatus + " signUpInfo POST Error: " + errorThrown);
+                    console.log("Status: " + textStatus + " GetInfo POST Error: " + errorThrown);
         }
     }).done(function(){
         if(glb.AB=='A'){
@@ -62,6 +62,7 @@ function sendLogInInfo( res )
         type: 'POST',
         data: {logInInfo: res}, // signUpInfo
         success: function(data){
+            console.log(data);
             var result = parseInt(data);
             if(result){
                  isLogIn = true;
@@ -72,7 +73,7 @@ function sendLogInInfo( res )
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    console.log("Status: " + textStatus + " signUpInfo POST Error: " + errorThrown);
+                    console.log("Status: " + textStatus + " Log In POST Error: " + errorThrown);
         }
     }).done(function(){
         if(isLogIn){
@@ -113,7 +114,7 @@ function sendMeasurement(){
             window.localStorage.setItem("record", Number(window.localStorage.getItem("record"))+1);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-            console.log("Status: " + textStatus + " signUpInfo POST Error: " + errorThrown);
+            console.log("Status: " + textStatus + " Measurement  POST Error: " + errorThrown);
         }
     }).done(function(){
 
