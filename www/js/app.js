@@ -263,6 +263,6 @@ app
 })
 
 .controller('MapCtrl',function($scope, $ionicScrollDelegate){
-    initMaps();
+    getCWBDATA();
 })
 ;

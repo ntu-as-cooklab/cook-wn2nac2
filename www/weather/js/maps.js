@@ -3,6 +3,8 @@
  * @copyright   Copyright (c) 2016 OA Wu Design
  */
 
+
+/* ---- Map Menu-------*/
  var VisibleMenu = '';	// record now menu ID
 
  // show or hide menu
@@ -30,53 +32,9 @@
  }
 
 
-function initMaps() {
-    window.vars.$maps = $('#maps').empty().append([{
-        "i": "1",
-        "c": "\u53f0\u5317",
-        "p": "100",
-        "n": "\u4e2d\u6b63\u5340",
-        "a": "25.0421407",
-        "g": "121.5198716",
-        "z": "9",
-        "m": "http:\/\/127.0.0.1:8100\/weather\/img\/weathers\/zeusdesign\/36@2x.png",
-        "d": "\u5348\u5f8c\u77ed\u66ab\u96f7\u9663\u96e8",
-        "t": "34",
-        "h": "61",
-        "r": "0.0",
-        "s": null ,
-        "l": "http:\/\/127.0.0.1:8100\/weather\/towns\/%E5%8F%B0%E5%8C%97-%E4%B8%AD%E6%AD%A3%E5%8D%80.html"
-    }, {
-        "i": "10",
-        "c": "\u53f0\u5317",
-        "p": "114",
-        "n": "\u5167\u6e56\u5340",
-        "a": "25.0689422",
-        "g": "121.5909027",
-        "z": "11",
-        "m": "http:\/\/127.0.0.1:8100\/weather\/img\/weathers\/zeusdesign\/36@2x.png",
-        "d": "\u5348\u5f8c\u77ed\u66ab\u96f7\u9663\u96e8",
-        "t": "34",
-        "h": "53",
-        "r": "0.0",
-        "s": null ,
-        "l": "http:\/\/127.0.0.1:8100\/weather\/towns\/%E5%8F%B0%E5%8C%97-%E5%85%A7%E6%B9%96%E5%8D%80.html"
-    }, {
-        "i": "100",
-        "c": "\u82d7\u6817",
-        "p": "357",
-        "n": "\u901a\u9704\u93ae",
-        "a": "24.485028",
-        "g": "120.7234992",
-        "z": "11",
-        "m": "http:\/\/127.0.0.1:8100\/weather\/img\/weathers\/zeusdesign\/02@2x.png",
-        "d": "\u591a\u96f2",
-        "t": "32",
-        "h": "74",
-        "r": "0.0",
-        "s": null ,
-        "l": "http:\/\/127.0.0.1:8100\/weather\/towns\/%E8%8B%97%E6%A0%97-%E9%80%9A%E9%9C%84%E9%8E%AE.html"
-    }].map(function(t) {
+/* ---- Map -------*/
+function initMaps( ASData ) {
+    window.vars.$maps = $('#maps').empty().append(ASData.map(function(t) {
         return $('<a />').attr('data-val', JSON.stringify(t)).attr('data-code', t.p).attr('title', t.c + ' ' + t.n);
     }));
     window.vars.$mapsA = $('#maps > a');
@@ -94,7 +52,7 @@ function initMaps() {
             lng = window.vars.$maps.data('position').g;
         }
         window.vars.maps = new google.maps.Map(window.vars.$maps.get(0),{
-            zoom: zoom,
+            zoom: 10,
             zoomControl: true,
             scrollwheel: true,
             scaleControl: true,
@@ -167,10 +125,10 @@ function initMaps() {
                 window.vars.maps.setCenter(new google.maps.LatLng($tmp.data('val').a,$tmp.data('val').g));
             });
         window.vars.info = new MarkerWithLabel({
-            position: new google.maps.LatLng(25.056678157775092,121.53488159179688),
+            position: new google.maps.LatLng(25.0621407,122.0198716),
             draggable: false,
             raiseOnDrag: false,
-            clickable: true,
+            clickable: false,
             labelContent: '',
             labelAnchor: new google.maps.Point(300 / 2,-25),
             icon: {
@@ -214,7 +172,7 @@ function initMaps() {
                 window.vars.info.setOptions({
                     labelClass: 'info' + (t.s ? ' s' : '')
                 });
-                window.vars.info.link = t.l;
+                // window.vars.info.link = t.l;
                 window.vars.infoTimer = null ;
                 clearTimeout(window.vars.infoTimer);
                 window.vars.infoTimer = setTimeout(function() {
@@ -228,7 +186,7 @@ function initMaps() {
         function infoContent(t) {
             return '<div>' + '<h3>' + t.n + '</h3>' + '<div>' + '<div><span>濕度</span><span>：</span><span>' + t.h + '%</span></div>' + '<div><span>雨量</span><span>：</span><span>' + t.r + 'mm</span></div>' + '</div>' + (t.s ? '<span>' + t.s.imgs.map(function(t) {
                 return '<img src=' + t + ' />';
-            }).join('') + t.s.desc + '</span>' : '') + '<a>詳細內容</a>' + '</div>';
+            }).join('') + t.s.desc + '</span>' : '') + '</div>';
         }
         function loadWeathers() {
             var ne = window.vars.maps.getBounds().getNorthEast()

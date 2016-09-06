@@ -1,6 +1,23 @@
 var lastMeasurement;
 var listenersActive = false;
 
+function getCWBDATA()
+{
+    glb.CWBDATA;
+    $.ajax({
+        url: 'http://mospc.cook.as.ntu.edu.tw/getCWBdata.php',
+        type: 'POST',
+        success: function(data){
+            glb.CWBDATA = JSON.parse(data);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("Status: " + textStatus + " getCWBDATA POST Error: " + errorThrown);
+        }
+    }).done(function(){
+        initMaps(glb.CWBDATA);
+    });
+}
+
 function getInfo()
 {
     $.ajax({
