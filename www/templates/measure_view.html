@@ -1,5 +1,33 @@
-<!--  The Progress: origin > wind_frame > time_frame_1 > weather_frame > check_frame > send_frame   -->
+<!--  The Progress: origin > geo_frame > wind_frame > time_frame_1 > weather_frame > check_frame > send_frame   -->
 <!-- TEMPLATE  -->
+<template id="geo_frame">
+    <div class="measure-view-disp-content">
+
+        <div class="measure_view-bar">
+            <i class="icon measure_view-icon icon ion-location"></i>
+            <span class="measure-title">Get Geolocation</span>
+        </div>
+
+        <div>
+            <img class="geolocation" src="img/geolocation.png" alt="Geolacation">
+        </div>
+
+        <div id="geoInfo" class="measure-title"></div>
+
+        <button id="geobtn" class="button button-balanced" onclick="getGeo()">
+            <i class="icon ion-android-stopwatch"></i>
+            <span>GET</span>
+        </button>
+
+        <div class="info-box">
+            <i class="icon measure_view-icon ion-ios-information-outline"></i>
+            <span>Press the button and allow the APP to use your Geolocation.</span>
+            <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong> Cancel <strong>&gt</strong></button>
+        </div>
+
+    </div>
+</template>
+
 <template id="timer_frame_1">
     <div class="measure-view-disp-content">
 

@@ -223,3 +223,13 @@
     font-size: 160%;
     padding:0px 0px 5px;
 }
+
+/***** geoloaction *****/
+.geolocation {
+    padding:8px 0px 18px;
+    left: 5vw;
+    z-index: 200;
+    width: 90vw;
+    height: 63vw;
+    background-size: 100%;
+}

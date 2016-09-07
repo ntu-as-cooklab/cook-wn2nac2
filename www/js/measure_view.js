@@ -11,8 +11,45 @@ var duration        = 60000;
 
 var temp_equil_status;
 var humd_equil_status;
+
+function getGeo(){
+    $("#geobtn").disabled = true;
+    if (navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    }else{
+        $("#geoInfo").html("Geolocation is not supported by this device. The measurement is aborded.");
+        measure_tab_switch('.measure-view-disp-content','#origin_frame');
+    }
+    function showPosition(position){
+        $("#geoInfo").html('( '+position.coords.latitude.toFixed(2)+ ", " +
+        + position.coords.longitude.toFixed(2) + ')');
+        glb.latitude = position.coords.latitude;
+        glb.longitude = position.coords.longitude;
+        setTimeout(function(){measure_tab_switch('.measure-view-disp-content','#wind_frame');}, 800);
+    }
+    function showError(error){
+        switch(error.code){
+            case error.PERMISSION_DENIED:
+                $("#geoInfo").html("User denied the request for Geolocation. The measurement is aborded.");
+                measure_tab_switch('.measure-view-disp-content','#origin_frame');
+                break;
+            case error.POSITION_UNAVAILABLE:
+                $("#geoInfo").html("Location information is unavailable. The measurement is aborded.");
+                measure_tab_switch('.measure-view-disp-content','#origin_frame');
+                break;
+            case error.TIMEOUT:
+                $("#geoInfo").html("The request to get user location timed out. The measurement is aborded.");
+                measure_tab_switch('.measure-view-disp-content','#origin_frame');
+                break;
+            case error.UNKNOWN_ERROR:
+                $("#geoInfo").html("An unknown error occurred. The measurement is aborded.");
+                measure_tab_switch('.measure-view-disp-content','#origin_frame');
+                break;
+          }
+    }
+}
+
 function recordWind(){
-    glbsens.currentMeasurement.windDirection = glb.winDir;
     measure_tab_switch('.measure-view-disp-content','#timer_frame_1');
 }
 
@@ -24,14 +61,16 @@ function startToMeasure(){
             window.location.href = '#/tab/userB';
         }
     }else if(windooStatus==2 && window.localStorage.getItem("isLogIn")=='true'){
-        measure_tab_switch('#measure-background','#wind_frame');
+        measure_tab_switch('#measure-background','#geo_frame');
     }
 }
 
 function checkData(){
+    glbsens.currentMeasurement.latitude = glb.latitude;
+    glbsens.currentMeasurement.longitude = glb.longitude;
     glbsens.currentMeasurement.userId = window.localStorage.getItem("userid");
     var d = new Date();
-    var nowDate = d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate()+' '+d.getHours()+':'+d.getMinutes();
+    var nowDate = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()+' '+d.getHours()+':'+d.getMinutes();
     glbsens.currentMeasurement.date = nowDate;
     sendMeasurement();
     measure_tab_switch('.measure-view-disp-content','#send_frame');
@@ -77,6 +116,7 @@ function chooseWeather(element, index){
     $(".weather-button").removeClass("button-calm");
     element.classList.add("button-calm");
     glbsens.currentMeasurement.weatherType = index;
+    glbsens.currentMeasurement.windDirection = glb.winDir;
     setTimeout(function(){
         measure_tab_switch('.measure-view-disp-content','#check_frame');
         $("#avgHumd").html("Humid: "+ Math.ceil(glbsens.currentMeasurement.avgHumd)+" %");
