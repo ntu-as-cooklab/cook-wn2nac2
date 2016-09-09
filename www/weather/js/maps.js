@@ -264,9 +264,9 @@ function getCOOKDATA(){
 	};
     $('#maps').empty()
 	map_CWB_S = new google.maps.Map(document.getElementById('maps'), mapOptions);
-
+    var randomnumber = Math.floor((Math.random()*10000)+1);
 	obs1map = new google.maps.KmlLayer({
-		url: 'http://mospc.cook.as.ntu.edu.tw/COOKDATA.kml',
+		url: 'http://mospc.cook.as.ntu.edu.tw/COOKDATA.kml?'+randomnumber,
         preserveViewport: true
 	});
 
