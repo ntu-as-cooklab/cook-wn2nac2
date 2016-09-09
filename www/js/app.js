@@ -263,6 +263,6 @@ app
 })
 
 .controller('MapCtrl',function($scope, $state, $cordovaGeolocation){
-    getCWBforcast();
+    getCWBforecast();
 })
 ;
