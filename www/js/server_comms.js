@@ -1,7 +1,7 @@
 var lastMeasurement;
 var listenersActive = false;
 
-function getCWBDATA()
+function getCWBforcast()
 {
     glb.CWBDATA;
     $.ajax({

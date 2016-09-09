@@ -32,7 +32,7 @@
  }
 
 
-/* ---- Map -------*/
+/* ---- CWB Forcase Map -------*/
 function initMaps( ASData ) {
     window.vars.$maps = $('#maps').empty().append(ASData.map(function(t) {
         return $('<a />').attr('data-val', JSON.stringify(t)).attr('data-code', t.p).attr('title', t.c + ' ' + t.n);
@@ -41,11 +41,11 @@ function initMaps( ASData ) {
     window.vars.weathers = window.vars.$mapsA.map(function() {
         return $(this).data('val');
     }).toArray();
-    google.maps.event.addDomListener(window, 'load', function() {
+    //google.maps.event.addDomListener(window, 'load', function() {
         var lastPosition = getStorage('weathers.last.position');
-        var zoom = lastPosition && lastPosition.zoom && !isNaN(lastPosition.zoom) ? lastPosition.zoom : 12;
-        var lat = lastPosition && lastPosition.lat && !isNaN(lastPosition.lat) ? lastPosition.lat : 25.056678157775092;
-        var lng = lastPosition && lastPosition.lng && !isNaN(lastPosition.lng) ? lastPosition.lng : 121.53488159179688;
+        var zoom = lastPosition && lastPosition.zoom && !isNaN(lastPosition.zoom) ? lastPosition.zoom : 10;
+        var lat = lastPosition && lastPosition.lat && !isNaN(lastPosition.lat) ? lastPosition.lat : 25.037658;
+        var lng = lastPosition && lastPosition.lng && !isNaN(lastPosition.lng) ? lastPosition.lng : 121.514853;
         if (window.vars.$maps.data('position')) {
             zoom = window.vars.$maps.data('position').z;
             lat = window.vars.$maps.data('position').a;
@@ -164,7 +164,8 @@ function initMaps( ASData ) {
                     map: null
                 });
                 window.vars.info.setOptions({
-                    position: t.position
+                    position: t.position,
+                    zoom: window.vars.maps.zoom
                 });
                 window.vars.info.setOptions({
                     labelContent: infoContent(t)
@@ -184,9 +185,11 @@ function initMaps( ASData ) {
             return t;
         });
         function infoContent(t) {
-            return '<div>' + '<h3>' + t.n + '</h3>' + '<div>' + '<div><span>濕度</span><span>：</span><span>' + t.h + '%</span></div>' + '<div><span>雨量</span><span>：</span><span>' + t.r + 'mm</span></div>' + '</div>' + (t.s ? '<span>' + t.s.imgs.map(function(t) {
-                return '<img src=' + t + ' />';
-            }).join('') + t.s.desc + '</span>' : '') + '</div>';
+            return '<div>' + '<h3>' + t.n + '</h3>' + '<div>' +
+                    '<div><span>濕度</span><span>：</span><span>' + t.h + '%</span></div>' +
+                    '<div><span>雨量</span><span>：</span><span>' + t.r + 'mm</span></div>' + '</div>' +
+                    (t.s ? '<span>' + t.s.imgs.map(function(t){ return '<img src=' + t + ' />';}).join('') +
+                    t.s.desc + '</span>' : '') + '</div>';
         }
         function loadWeathers() {
             var ne = window.vars.maps.getBounds().getNorthEast()
@@ -225,5 +228,47 @@ function initMaps( ASData ) {
             clearTimeout(window.vars.zoomTimer);
             window.vars.zoomTimer = setTimeout(loadWeathers, 10);
         });
-    });
+    //});
+}
+
+/* ------  CWB Station -------*/
+function getCWBstation(){
+    var map_CWB_S;
+	var myLatlng = new google.maps.LatLng(25.037658, 121.514853);
+
+	var mapOptions = {
+		zoom: 10,
+		center: myLatlng,
+		disableDefaultUI: true
+	};
+    $('#maps').empty()
+	map_CWB_S = new google.maps.Map(document.getElementById('maps'), mapOptions);
+
+	obs1map = new google.maps.KmlLayer({
+		url: 'http://www.cwb.gov.tw/wwwgis/kml/newcwbobs_gmap_1.kml?1',
+        preserveViewport: true
+	});
+
+	obs1map.setMap(map_CWB_S);
+}
+
+/* ------  COOK DATA -------*/
+function getCOOKDATA(){
+    var map_CWB_S;
+	var myLatlng = new google.maps.LatLng(25.037658, 121.514853);
+
+	var mapOptions = {
+		zoom: 10,
+		center: myLatlng,
+		disableDefaultUI: true
+	};
+    $('#maps').empty()
+	map_CWB_S = new google.maps.Map(document.getElementById('maps'), mapOptions);
+
+	obs1map = new google.maps.KmlLayer({
+		url: 'http://mospc.cook.as.ntu.edu.tw/COOKDATA.kml',
+        preserveViewport: true
+	});
+
+	obs1map.setMap(map_CWB_S);
 }

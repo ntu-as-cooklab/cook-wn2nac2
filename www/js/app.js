@@ -262,7 +262,7 @@ app
     $scope.$ionicScrollDelegate.getScrollView().__enableScrollY = false;
 })
 
-.controller('MapCtrl',function($scope, $ionicScrollDelegate){
-    getCWBDATA();
+.controller('MapCtrl',function($scope, $state, $cordovaGeolocation){
+    getCWBforcast();
 })
 ;
