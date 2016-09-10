@@ -58,11 +58,11 @@ app
       }
     })
     .state('tabs.weather', {
-      url: '/weather',
+      url: '/windoo',
       views: {
-        'weather-view' : {
-          templateUrl: 'templates/weather_view.html',
-          controller: 'WeatherViewController'
+        'windoo-view' : {
+          templateUrl: 'templates/windoo_view.html',
+          controller: 'WindooViewController'
         }
       }
     })
@@ -148,12 +148,10 @@ app
 
 })
 
-.controller('WeatherViewController', function($scope, $ionicLoading, $compile) {
+.controller('WindooViewController', function($scope, $ionicLoading, $compile) {
 
   $scope.$on('$ionicView.enter', function() {
-
-    weather_main();
-
+      glb.inMeasureView = false;
   });
 })
 
