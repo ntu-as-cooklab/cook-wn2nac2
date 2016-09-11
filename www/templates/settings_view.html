@@ -1,6 +1,109 @@
 <ion-view>
-  <ion-content>
+    <ion-content>
+        <!-- <div style="padding:22px;"></div> -->
+        <div class="list"  ng-controller="setCtrl">
+            <div class="setting_list item item-divider">
+                System
+            </div>
 
+            <li class="myitem item item-icon-left  item-toggle" href="#">
+                <i class="icon ion-star"></i>
+                    Tutorial Enable
+                <label class="toggle toggle-positive">
+                  <input type="checkbox">
+                  <div class="track">
+                    <div class="handle"></div>
+                  </div>
+                </label>
+            </li>
 
-  </ion-content>
+            <div class="setting_list item item-divider">
+                To User
+            </div>
+
+            <a class="myitem item item-icon-left" ng-click="contact_modal.show()">
+                <i class="icon ion-android-drafts"></i>
+                Contact Us
+            </a>
+            <a class="myitem item item-icon-left" ng-click="about_modal.show()">
+                <i class="icon ion-ios-information-outline"></i>
+                About the Project
+            </a>
+            <a class="myitem item item-icon-left" onclick="window.open('https://github.com/seanstone/cook-wn2nac2', '_system', 'location=yes'); return false;">
+                <i class="icon ion-social-github"></i>
+                    Project on Github
+            </a>
+            <br><br><button class="button" onclick="fakeWindoo.start()">Start fake Windoo</button>
+        </div>
+        <script id="templates/contactUsModal.html" type="text/ng-template">
+             <ion-modal-view>
+                 <ion-header-bar class="bar bar-header bar-positive">
+                     <h1 class="title">Contact Us</h1>
+                     <button class="button button-clear button-primary" ng-click="contact_modal.hide()">Close</button>
+                 </ion-header-bar>
+                 <ion-content class="pane">
+                     <div style="padding:22px;"></div>
+                     <div class="list">
+                         <div class="setting_list item item-divider">
+                             Professor
+                         </div>
+                         <a class="item_list item item-icon-left" href="mailto:polin@ntu.edu.tw">
+                             <i class="icon ion-email"></i>
+                             林博雄
+                             <p style="padding-top:10px;">polin@ntu.edu.tw</p>
+                         </a>
+                         <div class="setting_list item item-divider">
+                             Developer
+                         </div>
+                         <a class="item_list item item-icon-left" href="mailto:b04209032@ntu.edu.tw">
+                             <i class="icon ion-email"></i>
+                             劉安齊
+                             <p style="padding-top:10px;">b04209032@ntu.edu.tw</p>
+                         </a>
+                         <div class="setting_list item item-divider">
+                             Social Network
+                         </div>
+                         <a class="item item-icon-left" onclick="window.open('https://www.facebook.com/groups/mos.pc', '_system', 'location=yes'); return false;">
+                             <i class="icon ion-social-facebook"></i>
+                             微氣象觀測網實驗MOS-PC
+                         </a>
+                     </div>
+                 </ion-content>
+             </ion-modal-view>
+         </script>
+         <script id="templates/AboutModal.html" type="text/ng-template">
+              <ion-modal-view>
+                  <ion-header-bar class="bar bar-header bar-positive">
+                      <h1 class="title">About</h1>
+                      <button class="button button-clear button-primary" ng-click="about_modal.hide()">Close</button>
+                  </ion-header-bar>
+                  <ion-content class="pane">
+                      <div style="padding:22px;"></div>
+                      <div class="card">
+                          <div class="item item-text-wrap">
+                            <div style="font-size:24px; padding:10px;">Windoo Network to NTU-AS COOK Lab (WN2NAC)</div>
+                            <p>Laboratory of Intrumentation and Measurement (COOK Team)</p>
+                            <p>Department of Atmosphere Science,</p>
+                            <p>National Taiwan University</p>
+                            <a onclick="window.open('http://www.cook.as.ntu.edu.tw/', '_system', 'location=yes'); return false;">
+                                http://www.cook.as.ntu.edu.tw/
+                            </a>
+                            <br>
+                            <br>
+                            <div style="font-size:20px; padding:10px;">Principal Investigator</div>
+                            <div style="font-size:18px;">林博雄 Polin Lin</div>
+                            <br>
+                            <div style="font-size:20px; padding:10px;">Developers</div>
+                            <div align="center">
+                                <table>
+                                    <tr><td>Prior Period:</td><td>&nbsp石恩, Alex Politowicz</td></tr>
+                                    <tr><td>Last Period:</td><td>&nbsp劉安齊</td></tr>
+                                </table>
+                            </div>
+                          </div>
+                    </div>
+                  </ion-content>
+              </ion-modal-view>
+          </script>
+    </ion-content>
 </ion-view>

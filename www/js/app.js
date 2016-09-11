@@ -143,7 +143,6 @@ app
 
   $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = false;
-    // initMaps();
   });
 
 })
@@ -164,7 +163,6 @@ app
 
   $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = true;
-    // console.log(glb.inMeasureView);
     setWeatherChecks(false, false, true);
     onTempEquilStatusChanged(0);
     onHumdEquilStatusChanged(0);
@@ -174,11 +172,8 @@ app
 
 .controller('SettingsViewController', function($scope, $ionicLoading, $compile, ConnectivityMonitor) {
 
-  settings_main(ConnectivityMonitor);
-
   $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = false;
-    // console.log(glb.inMeasureView);
   });
 })
 
@@ -202,7 +197,6 @@ app
 .controller('UserInfoController', function($scope, $ionicLoading, $compile) {
   $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = false;
-    // console.log(glb.inMeasureView);
   });
 })
 
@@ -265,5 +259,19 @@ app
 
 .controller('MapCtrl',function($scope, $state, $cordovaGeolocation){
     getCWBforecast();
+})
+
+.controller('setCtrl', function($scope, $ionicModal) {
+
+    $ionicModal.fromTemplateUrl('templates/contactUsModal.html', {
+        scope: $scope
+    }).then(function(contact_modal) {
+        $scope.contact_modal = contact_modal;
+    });
+    $ionicModal.fromTemplateUrl('templates/AboutModal.html', {
+        scope: $scope
+    }).then(function(about_modal) {
+        $scope.about_modal = about_modal;
+    });
 })
 ;
