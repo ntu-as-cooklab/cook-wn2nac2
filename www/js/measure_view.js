@@ -92,8 +92,6 @@ function measure_main()
 
     glbsens.currentMeasurement = new WindooMeasurement();
 
-    startCompass();
-
     $('.ppc-progress-fill').css('transform','rotate('+ 0 +'deg)');
 }
 
