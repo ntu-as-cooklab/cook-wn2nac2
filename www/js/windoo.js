@@ -36,11 +36,11 @@ function onEvent(event)
         case 4: // Wind
             document.dispatchEvent(new CustomEvent("newWind", { "detail": event.data }));
 
-            if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addWind(event.data);
-            if (glbsens.windooObservation.observing)   {
+            if (glbsens.currentMeasurement.observing){
+                glbsens.currentMeasurement.addWind(event.data);
+            }
+            if (glbsens.windooObservation.observing){
               glbsens.windooObservation.addWind(event.data);
-              plotPtOnGraph(event.type - 4, isWeather);
-              initGraphLines();
             }
             break;
 
@@ -48,11 +48,11 @@ function onEvent(event)
 
             document.dispatchEvent(new CustomEvent("newTemp", { "detail": event.data }));
 
-            if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addTemp(event.data);
-            if (glbsens.windooObservation.observing)   {
+            if (glbsens.currentMeasurement.observing){
+                glbsens.currentMeasurement.addTemp(event.data);
+            }
+            if (glbsens.windooObservation.observing){
               glbsens.windooObservation.addTemp(event.data);
-              plotPtOnGraph(event.type - 4, isWeather);
-              initGraphLines();
             }
             break;
 
@@ -60,11 +60,11 @@ function onEvent(event)
 
             document.dispatchEvent(new CustomEvent("newHumd", { "detail": event.data }));
 
-            if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addHumd(event.data);
-            if (glbsens.windooObservation.observing)   {
+            if (glbsens.currentMeasurement.observing){
+                glbsens.currentMeasurement.addHumd(event.data);
+            }
+            if (glbsens.windooObservation.observing){
               glbsens.windooObservation.addHumd(event.data);
-              plotPtOnGraph(event.type - 4, isWeather);
-              initGraphLines();
             }
             break;
 
@@ -72,11 +72,11 @@ function onEvent(event)
 
             document.dispatchEvent(new CustomEvent("newPres", { "detail": event.data }));
 
-            if (glbsens.currentMeasurement.observing)    glbsens.currentMeasurement.addPres(event.data);
-            if (glbsens.windooObservation.observing)   {
-              glbsens.windooObservation.addPres(event.data);
-              plotPtOnGraph(event.type - 4, isWeather);
-              initGraphLines();
+            if (glbsens.currentMeasurement.observing){
+                glbsens.currentMeasurement.addPres(event.data);
+            }
+            if (glbsens.windooObservation.observing){
+                glbsens.windooObservation.addPres(event.data);
             }
             break;
 
