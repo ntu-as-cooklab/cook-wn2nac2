@@ -1,0 +1,37 @@
+#weather-container {
+    position: absolute;
+    width: 100%;
+}
+
+#sensor-readings {
+    position: absolute;
+    top: 5px;
+    bottom: 1px;
+    left: 4px;
+    right: 5px;
+    z-index: 100;
+    background-color: white;
+    border: 1px solid grey;
+    opacity: 0.95;
+}
+
+.sensor-readings-row {
+    height: 49%;
+}
+
+.windooTitle{
+    font-size: 28px;
+    padding-top: 10px;
+}
+
+.windooNumber{
+    font-size: 45px;
+    padding-top: 40px;
+}
+
+.windooUnit{
+    width: 100%;
+    font-size: 20px;
+    text-align: right;
+    padding-top: 20px;
+}

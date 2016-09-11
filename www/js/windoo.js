@@ -40,7 +40,8 @@ function onEvent(event)
                 glbsens.currentMeasurement.addWind(event.data);
             }
             if (glbsens.windooObservation.observing){
-              glbsens.windooObservation.addWind(event.data);
+                $("#w_wind").html(event.data.toFixed(1));
+                glbsens.windooObservation.addWind(event.data);
             }
             break;
 
@@ -52,7 +53,8 @@ function onEvent(event)
                 glbsens.currentMeasurement.addTemp(event.data);
             }
             if (glbsens.windooObservation.observing){
-              glbsens.windooObservation.addTemp(event.data);
+                $("#w_temp").html(event.data.toFixed(1));
+                glbsens.windooObservation.addTemp(event.data);
             }
             break;
 
@@ -64,7 +66,8 @@ function onEvent(event)
                 glbsens.currentMeasurement.addHumd(event.data);
             }
             if (glbsens.windooObservation.observing){
-              glbsens.windooObservation.addHumd(event.data);
+                $("#w_rh").html(event.data.toFixed(1));
+                glbsens.windooObservation.addHumd(event.data);
             }
             break;
 
@@ -76,6 +79,8 @@ function onEvent(event)
                 glbsens.currentMeasurement.addPres(event.data);
             }
             if (glbsens.windooObservation.observing){
+                console.log(typeof(event.data));
+                $("#w_pres").html(event.data.toFixed(0));
                 glbsens.windooObservation.addPres(event.data);
             }
             break;

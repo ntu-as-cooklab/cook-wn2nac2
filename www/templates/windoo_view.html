@@ -1,0 +1,40 @@
+<ion-view>
+
+    <ion-content id="weather-content">
+
+        <windoo-status-bar></windoo-status-bar>
+
+        <div id="weather-container" class="has-windoo-status-bar-top">
+
+            <div id="sensor-readings">
+                <div class="row sensor-readings-row">
+                    <div class="live-data col col-50">
+                        <div class='windooTitle'>Temperature</div>
+                        <div class='windooNumber' id="w_temp">N/A</div>
+                        <div class="windooUnit">°C</div>
+                    </div>
+                    <div class="live-data col col-50">
+                        <div class='windooTitle'>Humidity</div>
+                        <div class='windooNumber' id="w_rh">N/A</div>
+                        <div class="windooUnit">%</div>
+                    </div>
+                </div>
+                <div class="row sensor-readings-row">
+                    <div class="live-data col col-50">
+                        <div class='windooTitle'>Pressure</div>
+                        <div class='windooNumber' id="w_pres">N/A</div>
+                        <div class="windooUnit">hPa</div>
+                    </div>
+                    <div class="live-data col col-50">
+                        <div class='windooTitle'>Wind Speed</div>
+                        <div class='windooNumber' id="w_wind">N/A</div>
+                        <div class="windooUnit">m/s</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </ion-content>
+
+</ion-view>

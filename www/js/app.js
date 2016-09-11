@@ -152,6 +152,9 @@ app
 
   $scope.$on('$ionicView.enter', function() {
       glb.inMeasureView = false;
+      glbsens.windooObservation = new WindooObservation();
+      glbsens.windooObservation.enable();
+      glbsens.currentMeasurement = new WindooMeasurement();
   });
 })
 
