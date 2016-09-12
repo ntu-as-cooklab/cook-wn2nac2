@@ -10,7 +10,9 @@
                 <i class="icon ion-star"></i>
                     Tutorial Enable
                 <label class="toggle toggle-positive">
-                  <input type="checkbox">
+                  <input type="checkbox"
+                    ng-model="tutorialCB.checked"
+                    ng-change="tutorialCBChange()">
                   <div class="track">
                     <div class="handle"></div>
                   </div>
@@ -35,13 +37,14 @@
             </a>
             <br><br><button class="button" onclick="fakeWindoo.start()">Start fake Windoo</button>
         </div>
+        <!--   Modals -->
         <script id="templates/contactUsModal.html" type="text/ng-template">
              <ion-modal-view>
                  <ion-header-bar class="bar bar-header bar-positive">
                      <h1 class="title">Contact Us</h1>
                      <button class="button button-clear button-primary" ng-click="contact_modal.hide()">Close</button>
                  </ion-header-bar>
-                 <ion-content class="pane">
+                 <ion-content class="full pane">
                      <div style="padding:22px;"></div>
                      <div class="list">
                          <div class="setting_list item item-divider">
@@ -77,7 +80,7 @@
                       <h1 class="title">About</h1>
                       <button class="button button-clear button-primary" ng-click="about_modal.hide()">Close</button>
                   </ion-header-bar>
-                  <ion-content class="pane">
+                  <ion-content class="full pane">
                       <div style="padding:22px;"></div>
                       <div class="card">
                           <div class="item item-text-wrap">
