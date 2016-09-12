@@ -79,7 +79,6 @@ function onEvent(event)
                 glbsens.currentMeasurement.addPres(event.data);
             }
             if (glbsens.windooObservation.observing){
-                console.log(typeof(event.data));
                 $("#w_pres").html(event.data.toFixed(0));
                 glbsens.windooObservation.addPres(event.data);
             }
