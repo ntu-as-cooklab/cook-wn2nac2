@@ -32,6 +32,8 @@ app
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
+    //let tutorial default on 
+    window.localStorage.setItem("tutorialCB",'on');
     //See If Logged In?
     if(window.localStorage.getItem("isLogIn") == null){
         window.localStorage.setItem("isLogIn", false);
