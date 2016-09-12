@@ -27,7 +27,17 @@ function getGeo(){
         + position.coords.longitude.toFixed(2) + ')');
         glb.latitude = position.coords.latitude;
         glb.longitude = position.coords.longitude;
-        setTimeout(function(){measure_tab_switch('.measure-view-disp-content','#wind_frame');}, 800);
+        setTimeout(function(){
+            measure_tab_switch('.measure-view-disp-content','#wind_frame');
+            // Tutorial
+            if(window.localStorage.getItem("tutorialCB")=='on'){
+                var modal = document.getElementById('windModal');
+                modal.style.display = "block";
+                $(".close").click(function(){
+                    modal.style.display = "none";
+                });
+            }
+        }, 800);
     }
     function showError(error){
         switch(error.code){
@@ -53,6 +63,14 @@ function getGeo(){
 
 function recordWind(){
     measure_tab_switch('.measure-view-disp-content','#timer_frame_1');
+    //tutorial
+    if(window.localStorage.getItem("tutorialCB")=='on'){
+        var modal2 = document.getElementById('timeModal');
+        modal2.style.display = "block";
+        $(".close").click(function(){
+            modal2.style.display = "none";
+        });
+    }
 }
 
 function startToMeasure(){

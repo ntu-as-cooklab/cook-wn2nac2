@@ -1,3 +1,71 @@
+/* The Modal (background) */
+.modal1 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 999; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal1-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal1-header {
+    padding: 2px 5px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.modal1-body {
+    padding: 2px 16px;
+}
+
+
+/* not use ionic default*/
 .progress-pie-chart-mystyle{
     margin: 20px auto 10px;
 }
@@ -184,7 +252,7 @@
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	z-index: 1000;
+	z-index: 800;
 	background: url('../img/arrow.svg');
 	width: 250px;
 	height: 250px;
@@ -224,12 +292,30 @@
     padding:0px 0px 5px;
 }
 
-/***** geoloaction *****/
+/***** IMG *****/
 .geolocation {
     padding:8px 0px 18px;
     left: 5vw;
     z-index: 200;
     width: 90vw;
     height: 63vw;
+    background-size: 100%;
+}
+
+.windimg {
+    width: 90px;
+    height: 110px;
+    background-size: 100%;
+}
+.phoneimg {
+    padding: 0px 5px;
+    width: 90px;
+    height: 80px;
+    background-size: 100%;
+}
+
+.holdphone {
+    width: 90%;
+    height: 20%;
     background-size: 100%;
 }
