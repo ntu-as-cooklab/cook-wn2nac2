@@ -262,7 +262,18 @@ app
 })
 
 .controller('setCtrl', function($scope, $ionicModal) {
-
+    // tutorial checkbox
+    $scope.tutorialCB = {
+        checked: true
+    };
+    $scope.tutorialCBChange = function() {
+        console.log('tutorialCB Change', $scope.tutorialCB.checked);
+        if($scope.tutorialCB.checked)
+            window.localStorage.setItem("tutorialCB",'on');
+        else
+            window.localStorage.setItem("tutorialCB",'off');
+    };
+    //modals
     $ionicModal.fromTemplateUrl('templates/contactUsModal.html', {
         scope: $scope
     }).then(function(contact_modal) {
