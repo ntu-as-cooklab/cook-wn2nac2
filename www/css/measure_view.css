@@ -152,7 +152,7 @@
 /***** Info boxes *****/
 
 .info-box {
-    padding-top: 10px;
+    padding-top: 2px;
     margin: 3vw 2vw 3vw 2vw;
     position: relative;
 }
