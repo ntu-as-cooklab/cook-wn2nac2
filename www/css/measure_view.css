@@ -67,7 +67,7 @@
 
 /* not use ionic default*/
 .progress-pie-chart-mystyle{
-    margin: 20px auto 10px;
+    margin: 10px auto 10px;
 }
 
 /*start button*/
@@ -139,7 +139,7 @@
 .measure_view-bar {
     position:relative;
     margin: 1ex;
-    margin-bottom: 2ex;
+    margin-bottom: 1ex;
 }
 
 .measure-status-icon {
