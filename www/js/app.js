@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var app = angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','chart.js']);
+var app = angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova']);
 
 app
 .run(function($ionicPlatform) {
@@ -32,7 +32,7 @@ app
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
-    //let tutorial default on 
+    //let tutorial default on
     window.localStorage.setItem("tutorialCB",'on');
     //See If Logged In?
     if(window.localStorage.getItem("isLogIn") == null){
