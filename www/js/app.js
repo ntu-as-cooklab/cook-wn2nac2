@@ -156,6 +156,7 @@ app
       glbsens.windooObservation = new WindooObservation();
       glbsens.windooObservation.enable();
       glbsens.currentMeasurement = new WindooMeasurement();
+      drawAllChart();
   });
 })
 

@@ -41,6 +41,7 @@ function onEvent(event)
             }
             if (glbsens.windooObservation.observing){
                 $("#w_wind").html(event.data.toFixed(1));
+                chartWind = event.data;
                 glbsens.windooObservation.addWind(event.data);
             }
             break;
@@ -54,6 +55,7 @@ function onEvent(event)
             }
             if (glbsens.windooObservation.observing){
                 $("#w_temp").html(event.data.toFixed(1));
+                chartTemp = event.data;
                 glbsens.windooObservation.addTemp(event.data);
             }
             break;
@@ -67,6 +69,7 @@ function onEvent(event)
             }
             if (glbsens.windooObservation.observing){
                 $("#w_rh").html(event.data.toFixed(1));
+                chartHumd = event.data;
                 glbsens.windooObservation.addHumd(event.data);
             }
             break;
@@ -80,6 +83,7 @@ function onEvent(event)
             }
             if (glbsens.windooObservation.observing){
                 $("#w_pres").html(event.data.toFixed(0));
+                chartPres = event.data;
                 glbsens.windooObservation.addPres(event.data);
             }
             break;
