@@ -243,9 +243,9 @@ function getCWBstation(){
 	};
     $('#maps').empty()
 	map_CWB_S = new google.maps.Map(document.getElementById('maps'), mapOptions);
-
+    var randomnumber = Math.floor((Math.random()*10000)+1);
 	obs1map = new google.maps.KmlLayer({
-		url: 'http://www.cwb.gov.tw/wwwgis/kml/newcwbobs_gmap_1.kml?1',
+		url: 'http://mospc.cook.as.ntu.edu.tw/CWBOBS.kml?'+randomnumber,
         preserveViewport: true
 	});
 
