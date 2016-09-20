@@ -8,7 +8,7 @@ function drawAllChart(){
 }
 function drawChart(target, val){
     var chartTarget = "#" + target;
-    var margin = {top: 10, right: 10, bottom: 20, left: 35},
+    var margin = {top: 10, right: 10, bottom: 20, left: 40},
     width = 160 - margin.left - margin.right,
     height = 140 - margin.top - margin.bottom,
     dataLen = 16;

@@ -21,19 +21,19 @@
 
 .windooTitle{
     font-size: 28px;
-    padding-top: 10px;
+    padding-top: 15px;
 }
 
 .windooNumber{
     font-size: 45px;
-    padding-top: 40px;
+    padding-top: 25px;
 }
 
 .windooUnit{
     width: 100%;
     font-size: 20px;
     text-align: right;
-    padding-top: 20px;
+    padding-top: 10px;
 }
 
 .axis path,
