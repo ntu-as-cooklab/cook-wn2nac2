@@ -223,6 +223,7 @@ app
             repassword: $scope.repassword,
             email: $scope.email
         };
+        glb.userid = $scope.userid;
         checkID(signUpInfo);  // check if the ID and email are used, and do the next step
     };
 })

@@ -1,9 +1,4 @@
 "use strict";
-
-function resetSignUp(){
-    window.location.href = '#/signUp';
-}
-
 function logOut(){
     if(glb.AB=='A'){
         window.location.href = '#/tab/user';
