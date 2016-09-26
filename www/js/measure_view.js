@@ -74,7 +74,7 @@ function recordWind(){
 }
 
 function startToMeasure(){
-    if(window.localStorage.getItem("isLogIn")=='false'){
+    if(window.localStorage.getItem("isLogIn")=='false'||window.localStorage.getItem("userid")=='N/A'){
         if(glb.AB=='A'){
             window.location.href = '#/tab/user';
         }else{
