@@ -26,10 +26,9 @@
               </label>
               <label class="item item-input-inset">
                   <span class="input-label" >Password</span>
-                  <input type="password" class="half" ng-model="password" name="passwd"  ng-minlength='6' required
-                    ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,}$/">
+                  <input type="password" class="half" ng-model="password" name="passwd"  ng-minlength='6' required>
                   <span class="item-note" ng-show="signUpForm.passwd.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="signUpForm.passwd.$error.pattern">Invalid</span>
+                  <span class="item-note" ng-show="signUpForm.passwd.$error.minlength">Too Short</span>
               </label>
               <label class="item item-input-inset">
                   <span class="input-label" >Re-Password</span>
@@ -52,7 +51,7 @@
       <div class='row' align="left">
           <div>
               <p>User ID should be at least 3 long and only contain numbers and letters.
-              <p>Password should be at least 6 long and contain numbers and special characters without space.</p>
+              <p>Password should be at least 6 long.</p>
           </div>
           <div>&nbsp</div>
           <div>
