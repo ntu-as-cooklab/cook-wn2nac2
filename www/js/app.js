@@ -24,6 +24,14 @@ app
 
     initSensor();
 
+    if(typeof window.ga !== undefined) {
+        window.ga.startTrackerWithId('UA-84804118-2');
+        window.ga.trackView('Open APP');
+        console.log("Google Analytics Launch!");
+    } else {
+        console.log("Google Analytics Unavailable");
+    }
+
   });
 
 })
@@ -145,6 +153,7 @@ app
 
   $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = false;
+    window.ga.trackView('Map View', '', true);
   });
 
 })
@@ -157,6 +166,7 @@ app
       glbsens.windooObservation.enable();
       glbsens.currentMeasurement = new WindooMeasurement();
       drawAllChart();
+      window.ga.trackView('Windoo View', '', true);
   });
 })
 
@@ -170,6 +180,7 @@ app
     onTempEquilStatusChanged(0);
     onHumdEquilStatusChanged(0);
     checkEqm();
+    window.ga.trackView('Measure View', '', true);
   });
 })
 
@@ -177,6 +188,7 @@ app
 
   $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = false;
+    window.ga.trackView('Setting View', '', true);
   });
 })
 
@@ -184,6 +196,7 @@ app
 
   $scope.$on('$ionicView.enter', function() {
     glb.inMeasureView = false;
+    window.ga.trackView('User View', '', true);
   });
 })
 
