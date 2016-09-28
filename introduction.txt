@@ -1,0 +1,46 @@
+■ 主題
+透過手機和特殊微型感測器Windoo與專用APP，進行微氣象觀測先驅實驗MOS-PC (Meteorological Observation by Smart Phone Citizen Scientists)
+
+■ 緣由
+綜觀天氣尺度分析與預報的研究與實務作業已經到達成熟階段，現階段大氣科學挑戰則是全球尺度氣候變遷以及更小尺度的天氣分析與預報；前者已有一些全球氣候模式加以探索，後者則視各國社會經濟條件以及氣象科技發展程度自行拓荒。2014年全球手機用戶已達到~45.5億，並且主要成長地區是亞太、中東及非洲等國家。智慧型手機全球用戶將於2014年成長到17.5億(~38%手機用戶)，並預期到了2017年時提高到50％。中央氣象局2014年調查，顯示台灣地區透過手機APP觀看即時天氣與預報也已接近60%，這些現象都突顯智慧型手機在人類生活與電子消費的成長趨勢。
+本研究透過瑞士公司生產SKYWATCH-Windoo微型感測器，完成氣溫與風速感測精確度校驗之後，透過氣象志工群的智慧型手機，將Windoo插入手機耳機孔以及安裝APP軟體，進行眾人移動式的小尺度天氣觀測網實驗，並即時傳輸到指定的網路伺服器匯集與搭配地圖近即時顯示氣象觀測資訊。這一實驗概念以小範圍空間，測試小尺度網格氣象監測資料對於中央氣象局現行城鄉天氣分析與預報的可能貢獻，以評估是否能再解析出小尺度網格的天氣現象，以評估智慧型手機氣象感測器應用在即時天氣觀測網之可能效果。
+
+■ 功能說明：
+1. Map: 有三種不同的地圖資訊，資料來源分別為氣象局地區預測資訊、氣象局測站資訊、台大大氣系COOK實驗室使用者回傳的氣象資訊。
+2. Windoo: 將 Windoo sensor 的即時數據以圖表顯示。
+3. Measure: 此頁面會帶領使用者將測量到的氣象數據回傳到台大大氣系COOK實驗室資料庫。
+4. Setting: 包含使用說明的開關，以及關於此程式的資訊。
+5. User: 使用者登錄系統，登入後可以看到使用者資訊。也可以在此頁面註冊。
+
+■ 細節說明：
+1. Map 的數據皆為一小時更新一次。
+2. 使用 Windoo、Measure 頁面需要插入 Windoo。另外 Measure 需要登入才能進行。
+3. 可以在 Setting 中關閉使用說明。
+
+■ 主辦: 臺灣大學大氣科學系大氣測計研究室(NTU AS COOK Lab)
+
+■ 主辦人: 臺灣大學大氣科學系 林博雄 副教授
+
+■ 臉書社團: https://www.facebook.com/groups/mos.pc/
+
+■ 程式負責人: 劉安齊(b04209032@ntu.edu.tw)
+
+■ 手機相容性:
+※相容的名單：
+• Samsung: Galaxy A3, A5, J, S3, S4, S4 mini, S5, S5 mini, Note 2, Note 3, Note 4
+• HTC: Butterfly S (LTE), Butterfly 2, One S, One M8, One M7, One M9, One mini 2, Desire EYE, Desire 610, Desire 816, Desire 820,
+• Sony: Xperia Z3 compact, Xperia M4
+• LG: G3
+• Xiaomi: 2S
+• Fareastone: Smart 503
+※不相容的名單：
+•HTC One mini
+•Huawei Ascend G6
+•Huawei Ascend Mate7
+•LG Nexus 5
+•Samsung Galaxy S2
+•Sony Xperia Z1, Z2, Z3 (classic), Z4
+
+■ 參考:
+•天氣地圖: http://works.ioa.tw/weather/index.html
+•中央氣象局: http://www.cwb.gov.tw/
