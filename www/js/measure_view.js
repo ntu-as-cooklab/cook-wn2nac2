@@ -20,7 +20,7 @@ function getGeo(){
         $("#geoInfo").html("Geolocation is not supported by this device. The measurement is aborded.");
         setTimeout(function(){
             measure_tab_switch('.measure-view-disp-content','#origin_frame');
-        }, 1000);
+        }, 2000);
     }
     function showPosition(position){
         $("#geoInfo").html('( '+position.coords.latitude.toFixed(2)+ ", " +
@@ -43,19 +43,19 @@ function getGeo(){
         switch(error.code){
             case error.PERMISSION_DENIED:
                 $("#geoInfo").html("User denied the request for Geolocation. The measurement is aborded.");
-                setTimeout(function(){measure_tab_switch('.measure-view-disp-content','#origin_frame');}, 1000);
+                setTimeout(function(){measure_tab_switch('.measure-view-disp-content','#origin_frame');}, 2000);
                 break;
             case error.POSITION_UNAVAILABLE:
                 $("#geoInfo").html("Location information is unavailable. The measurement is aborded.");
-                setTimeout(function(){measure_tab_switch('.measure-view-disp-content','#origin_frame');}, 1000);
+                setTimeout(function(){measure_tab_switch('.measure-view-disp-content','#origin_frame');}, 2000);
                 break;
             case error.TIMEOUT:
                 $("#geoInfo").html("The request to get user location timed out. The measurement is aborded.");
-                setTimeout(function(){measure_tab_switch('.measure-view-disp-content','#origin_frame');}, 1000);
+                setTimeout(function(){measure_tab_switch('.measure-view-disp-content','#origin_frame');}, 2000);
                 break;
             case error.UNKNOWN_ERROR:
                 $("#geoInfo").html("An unknown error occurred. The measurement is aborded.");
-                setTimeout(function(){measure_tab_switch('.measure-view-disp-content','#origin_frame');}, 1000);
+                setTimeout(function(){measure_tab_switch('.measure-view-disp-content','#origin_frame');}, 2000);
                 break;
           }
     }
