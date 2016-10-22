@@ -1,10 +1,10 @@
 <ion-view>
     <ion-content id="content"  scroll="false">
-        <div id="mapMenu" class="main-menu" onclick="switchMenu( this, 'SubMenu' )">Data Source&nbsp&#9660
+        <div id="mapMenu" class="main-menu" onclick="switchMenu( this, 'SubMenu' )">{{"DATASOURCE" | translate}}&nbsp&#9660
             <ul id="SubMenu" class="sub-menu" style="display:none;">
-                <li><a onclick="getCWBforecast()">CWB Forecast</a></li>
-                <li><a onclick="getCWBstation()">CWB Station</a></li>
-                <li><a onclick="getCOOKDATA()">NTU AS</a></li>
+                <li><a onclick="getCWBforecast()">{{"DS1" | translate}}</a></li>
+                <li><a onclick="getCWBstation()">{{"DS2" | translate}}</a></li>
+                <li><a onclick="getCOOKDATA()">{{"DS3" | translate}}</a></li>
             </ul>
         </div>
         <div id='maps' ng-controller="MapCtrl"></div>
