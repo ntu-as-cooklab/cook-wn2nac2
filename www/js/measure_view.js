@@ -81,7 +81,7 @@ function startToMeasure(){
             window.location.href = '#/tab/userB';
         }
     }else if(windooStatus==2 && window.localStorage.getItem("isLogIn")=='true'){
-        measure_tab_switch('#measure-background','#geo_frame');
+        measure_tab_switch('#origin_frame','#geo_frame');
     }
 }
 
@@ -117,7 +117,9 @@ function measure_main()
 
 function measure_tab_switch(frameName1, frameName2)
 {
-    $(frameName1).replaceWith(document.importNode(document.querySelector(frameName2).content, true));
+    var modal = document.getElementById('windModal');
+    $(frameName1).css("display","none");
+    $(frameName2).css("display","block");
 }
 
 var duration;
@@ -136,7 +138,7 @@ function chooseWeather(element, index){
     glbsens.currentMeasurement.weatherType = index;
     glbsens.currentMeasurement.windDirection = glb.winDir;
     setTimeout(function(){
-        measure_tab_switch('.measure-view-disp-content','#check_frame');
+        measure_tab_switch('#wind_frame','#check_frame');
         $("#avgHumd").html("Humid: "+ Math.ceil(glbsens.currentMeasurement.avgHumd)+" %");
         $("#avgPres").html("Pressure: "+ Math.ceil(glbsens.currentMeasurement.avgPres)+" hPa");
         $("#avgTemp").html("Temperature: "+ Math.ceil(glbsens.currentMeasurement.avgTemp)+" °C");
