@@ -22,7 +22,8 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard",
     "cordova-plugin-google-analytics",
-    "cordova-plugin-device-orientation"
+    "cordova-plugin-device-orientation",
+    "cordova-plugin-globalization"
   ],
   "cordovaPlatforms": [
     "ios"
