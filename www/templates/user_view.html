@@ -1,31 +1,31 @@
 <ion-view align='center'>
     <ion-header-bar class="bar bar-positive" align="center">
-         <h1 class="title" align="center">User Log In</h1>
+         <h1 class="title" align="center">{{"USERLOGIN" | translate}}</h1>
     </ion-header-bar>
     <ion-content>
         <div  ng-controller="logInFormCtrl">
           <div style="padding:22px;"></div>
           <form name="myForm" novalidate>
               <label class="item item-input-inset">
-                  <span class="input-label" >User ID</span>
+                  <span class="input-label" >{{"USERID" | translate}}</span>
                   <input type="text" ng-model="userid" name="userid" ng-pattern="/^[a-zA-Z0-9]{3,}$/" required>
               </label>
               <label class="item item-input-inset">
-                  <span class="input-label" >Password</span>
+                  <span class="input-label" >{{"PASSWORD" | translate}}</span>
                   <input type="password" ng-model="password" name="passwd" ng-minlength='6' required>
               </label>
               <button class="button button-positive  button-block"
                       ng-disabled=
                   " myForm.userid.$invalid || myForm.passwd.$invalid"
                    ng-click="submitLogIn()"
-                      >Submit</button>
+                      >{{"SUBMIT" | translate}}</button>
           </form>
       </div>
       <div align="right">
           <!-- <a id="facebook-sign-in" class="button button-light button-outline" onclick="facebookLogin()">
               Log in with Facebook
           </a> -->
-          <a class="button button-light button-outline" href="#/signUp">Sign Up</a>
+          <a class="button button-light button-outline" href="#/signUp">{{"SIGNUP" | translate}}</a>
       </div>
       <br/>
       <div id="showStatus"></div>

@@ -1,40 +1,40 @@
 <ion-view align='center'>
     <ion-content>
         <ion-bar class="bar bar-positive" align="left">
-             <h1 class="title" align="center">User Log In</h1>
+             <h1 class="title" align="center">{{"USERLOGIN" | translate}}</h1>
         </ion-bar>
         <div  ng-controller="signUpFormCtrl">
           <div style="padding:22px;"></div>
           <form name="signUpForm" novalidate>
               <label class="item item-input-inset">
-                  <span class="input-label" >User ID</span>
+                  <span class="input-label" >{{"USERID" | translate}}</span>
                   <input type="text" class="half" ng-model="userid" name="userid"  ng-trim="false" ng-pattern="/^[a-zA-Z0-9]{3,}$/"  required>
-                  <span  class="item-note" ng-show="signUpForm.userid.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="signUpForm.userid.$error.pattern">Invalid</span>
+                  <span  class="item-note" ng-show="signUpForm.userid.$error.required">{{"INVALID" | translate}}</span>
+                  <span class="item-note" ng-show="signUpForm.userid.$error.pattern">{{"INVALID" | translate}}</span>
               </label>
               <label class="item item-input-inset">
-                  <span class="input-label" >Your Name</span>
+                  <span class="input-label" >{{"USERNAME" | translate}}</span>
                   <input type="text" class="half" ng-model="username" name="username"  ng-minlength='3' required>
-                  <span  class="item-note" ng-show="signUpForm.username.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="signUpForm.username.$error.minlength">Too Short</span>
+                  <span  class="item-note" ng-show="signUpForm.username.$error.required">{{"INVALID" | translate}}</span>
+                  <span class="item-note" ng-show="signUpForm.username.$error.minlength">{{"TOOSHORT" | translate}}</span>
               </label>
               <label class="item item-input-inset">
                   <span class="input-label" >Email</span>
                   <input type="email" class="half" ng-model="email" name="email"  required>
-                  <span class="item-note" ng-show="signUpForm.email.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="signUpForm.email.$error.email">Wrong Type</span>
+                  <span class="item-note" ng-show="signUpForm.email.$error.required">{{"INVALID" | translate}}</span>
+                  <span class="item-note" ng-show="signUpForm.email.$error.email">{{"WRONGTYPE" | translate}}</span>
               </label>
               <label class="item item-input-inset">
-                  <span class="input-label" >Password</span>
+                  <span class="input-label" >{{"PASSWORD" | translate}}</span>
                   <input type="password" class="half" ng-model="password" name="passwd"  ng-minlength='6' required>
-                  <span class="item-note" ng-show="signUpForm.passwd.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="signUpForm.passwd.$error.minlength">Too Short</span>
+                  <span class="item-note" ng-show="signUpForm.passwd.$error.required">{{"INVALID" | translate}}</span>
+                  <span class="item-note" ng-show="signUpForm.passwd.$error.minlength">{{"TOOSHORT" | translate}}</span>
               </label>
               <label class="item item-input-inset">
-                  <span class="input-label" >Re-Password</span>
+                  <span class="input-label" >{{"REPASSWORD" | translate}}</span>
                   <input type="password" class="half" ng-model="repassword" name="repasswd" ng-match="signUpForm.password" ng-pattern="getPattern()" required >
-                  <span class="item-note" ng-show="signUpForm.repasswd.$error.required">Invalid</span>
-                  <span class="item-note" ng-show="signUpForm.repasswd.$error.pattern">Inconsistent</span>
+                  <span class="item-note" ng-show="signUpForm.repasswd.$error.required">{{"INVALID" | translate}}</span>
+                  <span class="item-note" ng-show="signUpForm.repasswd.$error.pattern">{{"INCONSISTENT" | translate}}</span>
               </label>
               <button class="button button-positive  button-block"
                       ng-disabled=
@@ -44,18 +44,20 @@
                        signUpForm.passwd.$invalid ||
                        signUpForm.repasswd.$invalid "
                      ng-click="submitSignUp()"
-                      >Sign Up</button>
+                      >{{"SIGNUP" | translate}}</button>
           </form>
       </div>
       <div id="showStatus2"></div>
       <div class='row' align="left">
           <div>
-              <p>User ID should be at least 3 long and only contain numbers and letters.
-              <p>Password should be at least 6 long.</p>
+              <p>{{"SIGNUP_INFO1" | translate}}</p>
+              <p>{{"SIGNUP_INFO2" | translate}}</p>
           </div>
           <div>&nbsp</div>
           <div>
-              <a class="button button-light button-outline" href="#/tab/user">Back</a>
+              <div style="right: 3px">
+                  <a class="button button-light button-outline" href="#/tab/user">{{"BACK" | translate}}</a>
+              </div>
           </div>
       </div>
   </ion-content>

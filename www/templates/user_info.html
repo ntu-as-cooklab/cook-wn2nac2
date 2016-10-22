@@ -1,6 +1,6 @@
 <ion-view align='center'>
     <ion-header-bar class="bar bar-positive" align="center">
-         <h1 class="title" align="center">User Information</h1>
+         <h1 class="title" align="center">{{"USERINFO" | translate}}</h1>
     </ion-header-bar>
     <ion-content>
         <div style="padding:22px;"></div>
@@ -21,13 +21,13 @@
                 </a>
                 <a  class="item item-icon-left">
                     <i class="icon ion-podium"></i>
-                    Total Send <strong>{{record}}</strong> Data
+                    {{"TOTALSEND1" | translate}} <strong>{{record}}</strong> {{"TOTALSEND2" | translate}}
                 </a>
             </div>
         </div>
 
         <div align='right' style='padding: 0px 15px 0px 0px'>
-            <button class="button button-light button-outline" onclick="logOut()">Log Out</button>
+            <button class="button button-light button-outline" onclick="logOut()">{{"LOGOUT" | translate}}</button>
         </div>
 
   </ion-content>
