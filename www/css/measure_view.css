@@ -101,7 +101,7 @@
     width: 100%;
 }
 
-#measure-background {
+.measure-background {
     position: absolute;
     top: 5px;
     bottom: 1px;

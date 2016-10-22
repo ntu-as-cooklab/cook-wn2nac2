@@ -1,52 +1,41 @@
-#measure-view-content {
+#measure-view-container {
+    position: absolute;
+    width: 100%;
+}
+#measure-view-bars {
+    width: 100%;
 }
 
-    /*windoo-status-bar*/
+.measure_view_button, .measure-time-button, .weather-button {
+    border-radius: 0px;
+    border: 1px solid #bbb;
+}
 
-    #measure-view-container {
-        position: absolute;
-        width: 100%;
-    }
-        #measure-view-bars {
-            width: 100%;
-        }
+.measurement-status {
+    font-size: 100%;
+    line-height: 100%;
+    text-align: left;
+}
 
-            #timed_measurement_bar {
-            }
+.measurement-summary {
+    font-size: 95%;
+    line-height: 95%;
+    text-align: left;
+}
 
-            #measurement_bar {
-            }
+#measure-view-disp {
+    padding: 5px;
+    padding-top: 0;
+    width: 100%;
+}
 
-                .measure_view_button, .measure-time-button, .weather-button {
-                    border-radius: 0px;
-                    border: 1px solid #bbb;
-                }
-
-                    .measurement-status {
-                        font-size: 100%;
-                        line-height: 100%;
-                        text-align: left;
-                    }
-
-                    .measurement-summary {
-                        font-size: 95%;
-                        line-height: 95%;
-                        text-align: left;
-                    }
-
-        #measure-view-disp {
-            padding: 5px;
-            padding-top: 0;
-            width: 100%;
-        }
-
-            .measure-view-disp-content {
-                position: absolute;
-                background-color: #f8f8f8;
-                border-radius: 0px;
-                border: 1px solid #bbb;
-                top: 5px;
-                bottom: 1px;
-                left: 4px;
-                right: 5px;
-            }
+.measure-view-disp-content {
+    position: absolute;
+    background-color: #f8f8f8;
+    border-radius: 0px;
+    border: 1px solid #bbb;
+    top: 5px;
+    bottom: 1px;
+    left: 4px;
+    right: 5px;
+}
