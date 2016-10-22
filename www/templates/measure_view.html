@@ -1,200 +1,174 @@
-<!--  The Progress: origin > geo_frame > wind_frame > time_frame_1 > weather_frame > check_frame > send_frame   -->
-<!-- TEMPLATE  -->
-<template id="geo_frame">
-    <div class="measure-view-disp-content" title="starter">
-
-        <div class="measure_view-bar">
-            <i class="icon measure_view-icon icon ion-location"></i>
-            <span class="measure-title">{{"GETLOC" | translate}}</span>
-        </div>
-
-        <div>
-            <img class="geolocation" src="img/geolocation.png" alt="Geolacation">
-        </div>
-
-        <div id="geoInfo" class="measure-title"></div>
-
-        <button id="geobtn" class="button button-balanced" onclick="getGeo()">
-            <i class="icon ion-android-stopwatch"></i>
-            <span>{{"GET" | translate}}</span>
-        </button>
-
-        <div class="info-box">
-            <i class="icon measure_view-icon ion-ios-information-outline"></i>
-            <span>{{"GETLOC_INFO" | translate}}</span>
-            <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong>{{"CANCEL" | translate}}<strong>&gt</strong></button>
-        </div>
-
-    </div>
-</template>
-
-<template id="timer_frame_1">
-    <div class="measure-view-disp-content">
-
-        <div class="measure_view-bar">
-            <i class="icon measure_view-icon ion-android-stopwatch"></i>
-            <span class="measure-title">{{"TIMEMEASURE" | translate}}</span>
-        </div>
-        <div id="timer-box">
-            <div class="button-bar measure-time-button-bar ">
-              <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="10000">10 sec</a>
-              <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="20000">20 sec</a>
-              <a class="button measure-time-button button-calm " onclick="chooseDuration(this)" data-duration="30000">30 sec</a>
-            </div>
-            <div class="button-bar measure-time-button-bar ">
-              <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="60000">60 sec</a>
-              <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="90000">90 sec</a>
-              <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="120000">120 sec</a>
-            </div>
-            <div id="timer-status">{{"CHOOSETIME" | translate}}</div>
-        </div>
-
-        <div id="progress-box">
-            <div class="progress-pie-chart-mystyle progress-pie-chart" data-percent="0">
-                <div class="ppc-progress">
-                    <div class="ppc-progress-fill"></div>
-                </div>
-                <div class="ppc-percents">
-                    <div class="pcc-percents-wrapper">
-                        <span>N/A</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <button id="start-button" class="button button-balanced" onclick="toggleMeasurement()">
-            <i class="icon ion-android-stopwatch"></i>
-            <span id="start-button-text">{{"START" | translate}}</span>
-        </button>
-        <!-- After Measuring then go to the next step (code in measure_view_measure.js line 90 ) -->
-
-        <div class="info-box">
-            <i class="icon measure_view-icon ion-ios-information-outline"></i>
-            <span>{{"MEASURETIME_INFO" | translate}}</span>
-            <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong>{{"CANCEL" | translate}} <strong>&gt</strong></button>
-        </div>
-
-    </div>
-</template>
-
-<template id="weather_frame">
-    <div class="measure-view-disp-content">
-        <div class="measure_view-bar">
-            <i class="icon measure_view-icon measure-title-icon ion-ios-partlysunny-outline"></i>
-            <span class="measure-title">{{"WEATHERTYPE" | translate}}</span>
-        </div>
-        <div class="button-bar weather-button-bar">
-          <a class="button weather-button" onclick="chooseWeather(this, 0)" ><div><i class="weather-icon ion-ios-sunny-outline"></i></br>{{"SUNNY" | translate}}</div></a>
-          <a class="button weather-button" onclick="chooseWeather(this, 1)" ><div><i class="weather-icon ion-ios-partlysunny-outline"></i></br>{{"PARTLYCLOUDY" | translate}}</div></a>
-          <a class="button weather-button" onclick="chooseWeather(this, 2)" ><div><i class="weather-icon ion-ios-cloudy-outline"></i></br>{{"CLOUDY" | translate}}</div></a>
-          <a class="button weather-button" onclick="chooseWeather(this, 3)" ><div><i class="weather-icon ion-ios-rainy-outline"></i></br>{{"RAINY" | translate}}</div></a>
-        </div>
-        <div class="info-box">
-            <i class="icon measure_view-icon ion-ios-information-outline"></i>
-            <span>{{"WEATHERTYPE_INFO" | translate}}</span>
-            <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong>{{"CANCEL" | translate}} <strong>&gt</strong></button>
-        </div>
-    </div>
-</template>
-
-<template id="wind_frame">
-    <div class="measure-view-disp-content">
-        <div class="measure_view-bar">
-            <i class="icon measure_view-icon measure-title-icon ion-flag"></i>
-            <span class="measure-title">{{"WINDDIR" | translate}}</span>
-        </div>
-        <div class="compass">
-    		<div class="arrow"></div>
-    		<div class="disc" id="compassDiscImg"></div>
-            <script src='../js/compass.js'></script>
-        </div>
-        <div class="measure-title" id='wd'>
-            {{"AZIMUTH" | translate}}: N/A
-        </div>
-        <button id="windbtn" class="button button-balanced" onclick="recordWind()">
-            <i class="icon ion-android-stopwatch"></i>
-            <span id="start-button-text">{{"RECORD" | translate}}</span>
-        </button>
-        <div class="info-box">
-            <i class="icon measure_view-icon ion-ios-information-outline"></i>
-            <span>{{"WINDDIR_INFO" | translate}}</span>
-            <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong> {{"CANCEL" | translate}} <strong>&gt</strong></button>
-        </div>
-    </div>
-</template>
-
-<template id="check_frame">
-    <div class="measure-view-disp-content">
-        <div class="measure_view-bar">
-            <i class="icon measure_view-icon measure-title-icon-paperplane-outline"></i>
-            <span class="measure-title">{{"DATACHECK" | translate}}</span>
-        </div>
-        <div class="list list-inset"  ng-controller="dataInfoCtrl" id="dataInfo">
-            <!-- <div class="row"> -->
-                <div class="item" id="avgHumd"></div>
-                <div class="item" id="avgTemp"></div>
-            <!-- </div> -->
-            <!-- <div class="row"> -->
-                <div class="item" id="avgWind"></div>
-                <div class="item" id="avgPres"></div>
-            <!-- </div> -->
-            <div class="item" id="weather"></div>
-        </div>
-        <button  class="button button-balanced" onclick="checkData()">
-            <i class="icon ion-android-stopwatch"></i>
-            <span id="start-button-text">{{"SEND" | translate}}</span>
-        </button>
-        <div class="info-box">
-            <i class="icon measure_view-icon ion-ios-information-outline"></i>
-            <span>{{"SEND_INFO" | translate}}</span>
-            <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong> {{"CANCEL" | translate}} <strong>&gt</strong></button>
-        </div>
-    </div>
-</template>
-
-<template id="send_frame">
-    <div class="measure-view-disp-content">
-        <div class="measure_view-bar">
-            <i class="icon measure_view-icon measure-title-icon ion-ios-paperplane-outline"></i>
-            <span class="measure-title">{{"SEND_MSG" | translate}}</span>
-        </div>
-        <div class="info-box">
-            <div class="card ">
-              <div class="item item-text-wrap">
-                  <i class="icon measure_view-icon ion-ios-information-outline"></i>
-                  <span>{{"SEND_MSG2" | translate}}<br>{{"SEND_MSG3" | translate}}
-                        <br>{{"SEND_MSG4" | translate}}
-                  </span>
-              </div>
-          </div><br>
-            <button class="button button-balanced" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')">
-                <i class="icon ion-android-stopwatch"></i>
-                <span id="start-button-text">{{"FINISHED" | translate}}</span>
-            </button>
-        </div>
-    </div>
-</template>
-<template id="origin_frame">
-    <div id="measure-background">
-        <button  onclick="startToMeasure()" class="round-button">{{"START" | translate}}</button>
-        <div class="bar bar-footer bar-positive">
-            <div class="title">{{"START_INFO" | translate}}</div>
-        </div>
-    </div>
-</template>
-
-<!-- TEMPLATE  -->
-<!--   Main    -->
 <ion-view>
     <ion-content id="measure-view-content" >
         <windoo-status-bar></windoo-status-bar>
         <div id="measure-container" class="has-windoo-status-bar-top" >
-            <div id="measure-background">
+            <!--  The Progress: origin > geo_frame > wind_frame > time_frame_1 > weather_frame > check_frame > send_frame   -->
+            <div id="origin_frame" class="measure-background">
                 <button  onclick="startToMeasure()" class="round-button">{{"START" | translate}}</button>
-                <div id='showMeasureInfo'>
-                    <div  class="bar bar-footer bar-energized">
-                        <div class="title">{{"START_INFO" | translate}}</div>
+                <div class="bar bar-footer bar-positive">
+                    <div class="title">{{"START_INFO" | translate}}</div>
+                </div>
+            </div>
+            <div id="geo_frame" class="measure-view-disp-content" style="display: none;">
+
+                <div class="measure_view-bar">
+                    <i class="icon measure_view-icon icon ion-location"></i>
+                    <span class="measure-title">{{"GETLOC" | translate}}</span>
+                </div>
+
+                <div>
+                    <img class="geolocation" src="img/geolocation.png" alt="Geolacation">
+                </div>
+
+                <div id="geoInfo" class="measure-title"></div>
+
+                <button id="geobtn" class="button button-balanced" onclick="getGeo()">
+                    <i class="icon ion-android-stopwatch"></i>
+                    <span>{{"GET" | translate}}</span>
+                </button>
+
+                <div class="info-box">
+                    <i class="icon measure_view-icon ion-ios-information-outline"></i>
+                    <span>{{"GETLOC_INFO" | translate}}</span>
+                    <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong>{{"CANCEL" | translate}}<strong>&gt</strong></button>
+                </div>
+
+            </div>
+
+            <div id="timer_frame_1" class="measure-view-disp-content" style="display: none;">
+
+                <div class="measure_view-bar">
+                    <i class="icon measure_view-icon ion-android-stopwatch"></i>
+                    <span class="measure-title">{{"TIMEMEASURE" | translate}}</span>
+                </div>
+                <div id="timer-box">
+                    <div class="button-bar measure-time-button-bar ">
+                      <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="10000">10 sec</a>
+                      <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="20000">20 sec</a>
+                      <a class="button measure-time-button button-calm " onclick="chooseDuration(this)" data-duration="30000">30 sec</a>
                     </div>
+                    <div class="button-bar measure-time-button-bar ">
+                      <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="60000">60 sec</a>
+                      <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="90000">90 sec</a>
+                      <a class="button measure-time-button" onclick="chooseDuration(this)" data-duration="120000">120 sec</a>
+                    </div>
+                    <div id="timer-status">{{"CHOOSETIME" | translate}}</div>
+                </div>
+
+                <div id="progress-box">
+                    <div class="progress-pie-chart-mystyle progress-pie-chart" data-percent="0">
+                        <div class="ppc-progress">
+                            <div class="ppc-progress-fill"></div>
+                        </div>
+                        <div class="ppc-percents">
+                            <div class="pcc-percents-wrapper">
+                                <span>N/A</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="start-button" class="button button-balanced" onclick="toggleMeasurement()">
+                    <i class="icon ion-android-stopwatch"></i>
+                    <span id="start-button-text">{{"START" | translate}}</span>
+                </button>
+                <!-- After Measuring then go to the next step (code in measure_view_measure.js line 90 ) -->
+
+                <div class="info-box">
+                    <i class="icon measure_view-icon ion-ios-information-outline"></i>
+                    <span>{{"MEASURETIME_INFO" | translate}}</span>
+                    <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong>{{"CANCEL" | translate}} <strong>&gt</strong></button>
+                </div>
+
+            </div>
+
+            <div id="weather_frame" class="measure-view-disp-content" style="display: none;">
+                <div class="measure_view-bar">
+                    <i class="icon measure_view-icon measure-title-icon ion-ios-partlysunny-outline"></i>
+                    <span class="measure-title">{{"WEATHERTYPE" | translate}}</span>
+                </div>
+                <div class="button-bar weather-button-bar">
+                  <a class="button weather-button" onclick="chooseWeather(this, 0)" ><div><i class="weather-icon ion-ios-sunny-outline"></i></br>{{"SUNNY" | translate}}</div></a>
+                  <a class="button weather-button" onclick="chooseWeather(this, 1)" ><div><i class="weather-icon ion-ios-partlysunny-outline"></i></br>{{"PARTLYCLOUDY1" | translate}}<br>{{"PARTLYCLOUDY2" | translate}}</div></a>
+                  <a class="button weather-button" onclick="chooseWeather(this, 2)" ><div><i class="weather-icon ion-ios-cloudy-outline"></i></br>{{"CLOUDY" | translate}}</div></a>
+                  <a class="button weather-button" onclick="chooseWeather(this, 3)" ><div><i class="weather-icon ion-ios-rainy-outline"></i></br>{{"RAINY" | translate}}</div></a>
+                </div>
+                <div class="info-box">
+                    <i class="icon measure_view-icon ion-ios-information-outline"></i>
+                    <span>{{"WEATHERTYPE_INFO" | translate}}</span>
+                    <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong>{{"CANCEL" | translate}} <strong>&gt</strong></button>
+                </div>
+            </div>
+
+            <div id="wind_frame" class="measure-view-disp-content" style="display: none;">
+                <div class="measure_view-bar">
+                    <i class="icon measure_view-icon measure-title-icon ion-flag"></i>
+                    <span class="measure-title">{{"WINDDIR" | translate}}</span>
+                </div>
+                <div class="compass">
+            		<div class="arrow"></div>
+            		<div class="disc" id="compassDiscImg"></div>
+                    <script src='../js/compass.js'></script>
+                </div>
+                <div class="measure-title" id='wd'>
+                    {{"AZIMUTH" | translate}}: N/A
+                </div>
+                <button id="windbtn" class="button button-balanced" onclick="recordWind()">
+                    <i class="icon ion-android-stopwatch"></i>
+                    <span id="start-button-text">{{"RECORD" | translate}}</span>
+                </button>
+                <div class="info-box">
+                    <i class="icon measure_view-icon ion-ios-information-outline"></i>
+                    <span>{{"WINDDIR_INFO" | translate}}</span>
+                    <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong> {{"CANCEL" | translate}} <strong>&gt</strong></button>
+                </div>
+            </div>
+
+            <div id="check_frame" class="measure-view-disp-content" style="display: none;">
+                <div class="measure_view-bar">
+                    <i class="icon measure_view-icon measure-title-icon-paperplane-outline"></i>
+                    <span class="measure-title">{{"DATACHECK" | translate}}</span>
+                </div>
+                <div class="list list-inset" id="dataInfo">
+                    <!-- <div class="row"> -->
+                        <div class="item" id="avgHumd"></div>
+                        <div class="item" id="avgTemp"></div>
+                    <!-- </div> -->
+                    <!-- <div class="row"> -->
+                        <div class="item" id="avgWind"></div>
+                        <div class="item" id="avgPres"></div>
+                    <!-- </div> -->
+                    <div class="item" id="weather"></div>
+                </div>
+                <button  class="button button-balanced" onclick="checkData()">
+                    <i class="icon ion-android-stopwatch"></i>
+                    <span id="start-button-text">{{"SEND" | translate}}</span>
+                </button>
+                <div class="info-box">
+                    <i class="icon measure_view-icon ion-ios-information-outline"></i>
+                    <span>{{"SEND_INFO" | translate}}</span>
+                    <button class="button  button-clear button-positive" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')"> <strong>&lt</strong> {{"CANCEL" | translate}} <strong>&gt</strong></button>
+                </div>
+            </div>
+
+            <div id="send_frame" class="measure-view-disp-content" style="display: none;">
+                <div class="measure_view-bar">
+                    <i class="icon measure_view-icon measure-title-icon ion-ios-paperplane-outline"></i>
+                    <span class="measure-title">{{"SEND_MSG" | translate}}</span>
+                </div>
+                <div class="info-box">
+                    <div class="card ">
+                      <div class="item item-text-wrap">
+                          <i class="icon measure_view-icon ion-ios-information-outline"></i>
+                          <span>{{"SEND_MSG2" | translate}}<br>{{"SEND_MSG3" | translate}}
+                                <br>{{"SEND_MSG4" | translate}}
+                          </span>
+                      </div>
+                  </div><br>
+                    <button class="button button-balanced" onclick="measure_tab_switch('.measure-view-disp-content','#origin_frame')">
+                        <i class="icon ion-android-stopwatch"></i>
+                        <span id="start-button-text">{{"FINISHED" | translate}}</span>
+                    </button>
                 </div>
             </div>
         </div>
