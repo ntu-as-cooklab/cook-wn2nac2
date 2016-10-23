@@ -18,6 +18,13 @@
                   </div>
                 </label>
             </li>
+            <li class="myitem item item-icon-left  item-select">
+                <i class="icon ion-earth"></i>
+                    {{"LANG" | translate}}
+                <select  ng-model="selectedLang" ng-change="update(selectedLang)"
+                     data-ng-options="lang as lang.name for lang in langs">
+                </select>
+            </li>
 
             <div class="setting_list item item-divider">
                 {{"INFO" | translate}}
