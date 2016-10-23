@@ -1,3 +1,11 @@
+.dataInfo{
+    size: 30px;
+}
+
+.itemPad{
+    padding: 9px;
+}
+
 /* The Modal (background) */
 .modal1 {
     display: none; /* Hidden by default */

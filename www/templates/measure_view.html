@@ -129,16 +129,12 @@
                     <i class="icon measure_view-icon measure-title-icon-paperplane-outline"></i>
                     <span class="measure-title">{{"DATACHECK" | translate}}</span>
                 </div>
-                <div class="list list-inset" id="dataInfo">
-                    <!-- <div class="row"> -->
-                        <div class="item" id="avgHumd"></div>
-                        <div class="item" id="avgTemp"></div>
-                    <!-- </div> -->
-                    <!-- <div class="row"> -->
-                        <div class="item" id="avgWind"></div>
-                        <div class="item" id="avgPres"></div>
-                    <!-- </div> -->
-                    <div class="item" id="weather"></div>
+                <div class="list list-inset">
+                    <div class="itemPad item"><div class="row"><div class="dataInfo col col-50" >{{"HUMD" | translate}}</div><div class="dataInfo col col-50" id="avgHumd"></div></div></div>
+                    <div class="itemPad item"><div class="row"><div class="dataInfo col col-50" >{{"TEMP" | translate}}</div><div class="dataInfo col col-50" id="avgTemp"></div></div></div>
+                    <div class="itemPad item"><div class="row"><div class="dataInfo col col-50" >{{"WINDSPEED" | translate}}</div><div class="dataInfo col col-50" id="avgWind"></div></div></div>
+                    <div class="itemPad item"><div class="row"><div class="dataInfo col col-50" >{{"PRES" | translate}}</div><div class="dataInfo col col-50" id="avgPres"></div></div></div>
+                    <div class="itemPad item"><div class="row"><div class="dataInfo col col-50" >{{"WEATHERTYPE" | translate}}</div><div class="dataInfo col col-50" id="weather"></div></div></div>
                 </div>
                 <button  class="button button-balanced" onclick="checkData()">
                     <i class="icon ion-android-stopwatch"></i>
@@ -203,6 +199,7 @@
                 </div>
                 <div class="modal1-body">
                     <img class="holdphone" src="img/hold.png" alt="Hold Phone">
+                    <br>
                      {{"TIMEMODAL" | translate}}
                      <div style="padding:7px;"></div>
                 </div>

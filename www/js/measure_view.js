@@ -15,7 +15,7 @@ var humd_equil_status;
 function getGeo(){
     $("#geobtn").disabled = true;
     if (navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
+        navigator.geolocation.getCurrentPosition(showPosition, showError,{maximumAge: 100, timeout: 5000, enableHighAccuracy: true});
     }else{
         $("#geoInfo").html("Geolocation is not supported by this device. The measurement is aborded.");
         setTimeout(function(){
@@ -139,14 +139,14 @@ function chooseWeather(element, index){
     glbsens.currentMeasurement.windDirection = glb.winDir;
     setTimeout(function(){
         measure_tab_switch('#wind_frame','#check_frame');
-        $("#avgHumd").html("Humid: "+ Math.ceil(glbsens.currentMeasurement.avgHumd)+" %");
-        $("#avgPres").html("Pressure: "+ Math.ceil(glbsens.currentMeasurement.avgPres)+" hPa");
-        $("#avgTemp").html("Temperature: "+ Math.ceil(glbsens.currentMeasurement.avgTemp)+" °C");
+        $("#avgHumd").html(Math.ceil(glbsens.currentMeasurement.avgHumd)+" %");
+        $("#avgPres").html(Math.ceil(glbsens.currentMeasurement.avgPres)+" hPa");
+        $("#avgTemp").html(Math.ceil(glbsens.currentMeasurement.avgTemp)+" °C");
         $("#avgWind").html(
-            "Wind: "+ Math.ceil(glbsens.currentMeasurement.avgWind)+" m/s "+
+            Math.ceil(glbsens.currentMeasurement.avgWind)+" m/s "+
             parseWindDir(glbsens.currentMeasurement.windDirection)
         );
-        $("#weather").html('Weather: '+parseWeather(glbsens.currentMeasurement.weatherType));
+        $("#weather").html(parseWeather(glbsens.currentMeasurement.weatherType));
     },200);
 }
 
