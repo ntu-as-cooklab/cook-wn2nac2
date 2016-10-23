@@ -6,6 +6,7 @@
   <author email="r01222055@ntu.edu.tw" href="http://www.github.com/seanstone"/>
   <content src="index.html"/>
   <access origin="*"/>
+  <allow-intent href="geo:*" />
   <access origin="mailto:*" launch-external="yes"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
