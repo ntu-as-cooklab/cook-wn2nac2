@@ -3,11 +3,24 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var app = angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova']);
+var app = angular.module('starter', ['ionic', 'controllers', 'services', 'ngCordova','pascalprecht.translate']);
 
 app
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $translate) {
   $ionicPlatform.ready(function() {
+    if(window.localStorage.getItem("LANG")==null){
+        if(typeof navigator.globalization !== "undefined") {
+            navigator.globalization.getPreferredLanguage(function(language) {
+                $translate.use((language.value).split("-")[0]).then(function(data) {
+                    window.localStorage.setItem("LANG",data);
+                    console.log("SUCCESS -> " + data);
+                }, function(error) {
+                    console.log("ERROR -> " + error);
+                });
+            }, null);
+        }
+    }
+
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -39,7 +52,17 @@ app
     $ionicConfigProvider.scrolling.jsScrolling(true);
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
+    //language part
+    $translateProvider.translations('en', _lang_en);
+    $translateProvider.translations('zh', _lang_zh);
+    if(window.localStorage.getItem("LANG")){
+        $translateProvider.preferredLanguage(window.localStorage.getItem("LANG"));
+    }else{
+        $translateProvider.preferredLanguage('zh')
+    }
+    $translateProvider.fallbackLanguage("en");
+
     //let tutorial default on
     window.localStorage.setItem("tutorialCB",'on');
     //See If Logged In?
@@ -278,7 +301,7 @@ app
     getCWBforecast();
 })
 
-.controller('setCtrl', function($scope, $ionicModal) {
+.controller('setCtrl', function($scope, $ionicModal, $translate) {
     // tutorial checkbox
     $scope.tutorialCB = {
         checked: true
@@ -290,6 +313,13 @@ app
         else
             window.localStorage.setItem("tutorialCB",'off');
     };
+    //language
+    $scope.langs = [{name: "中文", val: "zh", info: "請關閉程式重新開啟"}, {name: "English", val: "en", info: "Please shut down the app and restart it."}];
+    $scope.update = function(e) {
+        window.localStorage.setItem("LANG", e.val);
+        $translate.use(e.val);
+        alert(e.info);
+    }
     //modals
     $ionicModal.fromTemplateUrl('templates/contactUsModal.html', {
         scope: $scope
