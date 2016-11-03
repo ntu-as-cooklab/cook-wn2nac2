@@ -244,10 +244,17 @@ function getCWBstation(){
     $('#maps').empty()
 	map_CWB_S = new google.maps.Map(document.getElementById('maps'), mapOptions);
     var randomnumber = Math.floor((Math.random()*10000)+1);
-	obs1map = new google.maps.KmlLayer({
-		url: 'http://mospc.cook.as.ntu.edu.tw/CWBOBS.kml?'+randomnumber,
-        preserveViewport: true
-	});
+    if(window.localStorage.getItem("LANG")=='en'){
+    	obs1map = new google.maps.KmlLayer({
+    		url: 'http://mospc.cook.as.ntu.edu.tw/CWBOBS_EN.kml?'+randomnumber,
+            preserveViewport: true
+    	});
+    }else{
+        obs1map = new google.maps.KmlLayer({
+    		url: 'http://mospc.cook.as.ntu.edu.tw/CWBOBS_ZH.kml?'+randomnumber,
+            preserveViewport: true
+    	});
+    }
 
 	obs1map.setMap(map_CWB_S);
 }
@@ -265,10 +272,16 @@ function getCOOKDATA(){
     $('#maps').empty()
 	map_CWB_S = new google.maps.Map(document.getElementById('maps'), mapOptions);
     var randomnumber = Math.floor((Math.random()*10000)+1);
-	obs1map = new google.maps.KmlLayer({
-		url: 'http://mospc.cook.as.ntu.edu.tw/COOKDATA.kml?'+randomnumber,
-        preserveViewport: true
-	});
-
+    if(window.localStorage.getItem("LANG")=='en'){
+    	obs1map = new google.maps.KmlLayer({
+    		url: 'http://mospc.cook.as.ntu.edu.tw/COOKDATA_EN.kml?'+randomnumber,
+            preserveViewport: true
+    	});
+    }else{
+        obs1map = new google.maps.KmlLayer({
+    		url: 'http://mospc.cook.as.ntu.edu.tw/COOKDATA_ZH.kml?'+randomnumber,
+            preserveViewport: true
+    	});
+    }
 	obs1map.setMap(map_CWB_S);
 }
