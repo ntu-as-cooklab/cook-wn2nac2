@@ -75,6 +75,12 @@ function setMeasureButtonStatus(status)
             measureButton.classList.add     ("button-balanced");
             measureButtonText.innerHTML = "Finished";
             break;
+        case 6: // reload
+            progress_box.style.visibility = "visible";
+            timer_status.innerHTML = "Choose Measure Duration";
+            measureButton.disabled = false;
+            measureButtonText.innerHTML = "Start";
+            break;
     }
 }
 

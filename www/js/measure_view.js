@@ -5,7 +5,7 @@
 var tempEquilStatus = 0;
 var humdEquilStatus = 0;
 var equilStatus     = 0;
-var duration        = 60000;
+var duration        = 30000;
 
 // DOM elements
 
@@ -63,6 +63,8 @@ function getGeo(){
 
 function recordWind(){
     measure_tab_switch('.measure-view-disp-content','#timer_frame_1');
+    setMeasureButtonStatus(6);
+    $("#progress-box").html('<div class="progress-pie-chart-mystyle progress-pie-chart" data-percent="0"><div class="ppc-progress"><div class="ppc-progress-fill"></div></div><div class="ppc-percents"><div class="pcc-percents-wrapper"><span>N/A</span></div></div></div>');
     //tutorial
     if(window.localStorage.getItem("tutorialCB")=='on'){
         var modal2 = document.getElementById('timeModal');

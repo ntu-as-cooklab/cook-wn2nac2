@@ -86,7 +86,7 @@ WindooMeasurement.prototype.start = function()
     this.enable();
     this.timeStarted   = Date.now();
     this.interval = setInterval(this.onTick, 1000);
-    setTimeout( (function(measurement) { return function(){ measurement.stop(); }; })(this) , this.duration);
+    setTimeout( (function(measurement) { return function(){ measurement.stop(); }; })(this) , this.duration+200);//add more 200 ms to avoid crash
 };
 
 WindooMeasurement.prototype.stop = function()
