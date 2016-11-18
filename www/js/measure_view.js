@@ -140,7 +140,7 @@ function chooseWeather(element, index){
     glbsens.currentMeasurement.weatherType = index;
     glbsens.currentMeasurement.windDirection = glb.winDir;
     setTimeout(function(){
-        measure_tab_switch('#wind_frame','#check_frame');
+        measure_tab_switch('.measure-view-disp-content','#check_frame');
         $("#avgHumd").html(Math.ceil(glbsens.currentMeasurement.avgHumd)+" %");
         $("#avgPres").html(Math.ceil(glbsens.currentMeasurement.avgPres)+" hPa");
         $("#avgTemp").html(Math.ceil(glbsens.currentMeasurement.avgTemp)+" °C");
