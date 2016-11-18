@@ -35,6 +35,24 @@ app
       StatusBar.styleDefault();
     }
 
+    var permissions = cordova.plugins.permissions;
+    permissions.hasPermission(permissions.RECORD_AUDIO, checkPermissionCallback, null);
+
+    function checkPermissionCallback(status){
+        if(!status.hasPermission) {
+            var errorCallback = function(){
+                console.warn('RECORD_AUDIO permission is not turned on');
+            }
+
+            permissions.requestPermission(
+                permissions.RECORD_AUDIO,
+                function(status){
+                    if(!status.hasPermission) errorCallback();
+                }, errorCallback
+            );
+        }
+    }
+
     initSensor();
 
     if(typeof window.ga !== undefined) {
@@ -330,6 +348,12 @@ app
         scope: $scope
     }).then(function(about_modal) {
         $scope.about_modal = about_modal;
+    });
+    //BLE part
+    $ionicModal.fromTemplateUrl('templates/BLEModal.html', {
+        scope: $scope
+    }).then(function(ble_modal) {
+        $scope.ble_modal = ble_modal;
     });
 })
 ;
