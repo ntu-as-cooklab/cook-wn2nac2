@@ -233,7 +233,8 @@
 }
 
 .scroll{
-  height: 100%;
+    display:block;
+  height: 99.7%;
 }
 
 /*.content{
