@@ -46,6 +46,7 @@ var _lang_en = {
 
 	//SETTING VIEW
 	"SYSTEM": "System",
+	"BLE": "Bluetooth",
 	"EN": "English",
 	"ZH": "中文",
 	"LANG": "系統語言",
@@ -104,7 +105,7 @@ var _lang_zh = {
 	//MEASURE VIEW
 	"GETLOC": "取得地理位置",
 	"GET": "取得",
-	"GETLOC_INFO": "請設定允許手機存取地理位置。若是失敗，請試著打開 Google Map 之後再開啟本程式，或著重新開啟手機。",
+	"GETLOC_INFO": "請設定允許手機存取地理位置。若是失敗，請試著打開 Google Map 之後再開啟本程式，或著重新開啟手機。有時GPS訊號不好，可能要重複幾次才會成功。",
 	"CANCEL": "取消",
 	"TIMEMEASURE": "定時測量",
 	"CHOOSETIME": "選擇測量的時間長度",
@@ -136,6 +137,7 @@ var _lang_zh = {
 
 	//SETTING VIEW
 	"SYSTEM": "系統",
+	"BLE": "藍芽裝置",
 	"LANG": "Language",
 	"EN": "English",
 	"ZH": "中文",
