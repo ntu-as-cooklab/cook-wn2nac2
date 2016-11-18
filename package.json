@@ -26,7 +26,8 @@
     "cordova-plugin-globalization",
     "cordova-plugin-geolocation",
     "cordova-plugin-ble-central",
-    "cordova-plugin-inappbrowser"
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-android-permissions@0.10.0"
   ],
   "cordovaPlatforms": [
     "ios"
