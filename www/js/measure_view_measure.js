@@ -95,8 +95,10 @@ function onMeasurementFinish()
 
 function onMeasurementTick()
 {
+    var dur = glbsens.currentMeasurement.duration;
     var elapsed = Date.now() - glbsens.currentMeasurement.timeStarted;
-    var progress = elapsed/glbsens.currentMeasurement.duration;
+    var progress = elapsed/dur;
+
     var deg = 360 * progress;
 
     $('.ppc-progress-fill').css('transform','rotate('+ deg +'deg)');
@@ -106,7 +108,7 @@ function onMeasurementTick()
     $('.ppc-percents span').html((progress*100).toFixed(0) + '%' + "<br><br>" + (elapsed/1000).toFixed(0) + "/" + glbsens.currentMeasurement.duration/1000 + "s");
 
     // Mean A Data really finished then go to the next step
-    if(Math.ceil(progress*100)>=100){
+    if(Math.ceil(progress*100)>(((dur/1000-1)/(dur/1000)*100))){
         isMeasureDone = true;
         setTimeout(function(){measure_tab_switch('.measure-view-disp-content','#weather_frame');},1000);
     }
