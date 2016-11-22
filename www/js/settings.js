@@ -1,5 +1,5 @@
 'use strict';
-var skywatchID = "00:A0:50:08:58:DC";//; //Skywatch ID
+var skywatchID = "";//"00:A0:50:08:58:DC"; //Skywatch ID
 var ScanTime = 5000; //5s
 var skywatch = null;
 
@@ -33,8 +33,6 @@ function scanBLE(){
                     '<li class="item item-button-right">'+device.name+'<button class="button button-balanced" onClick="postScan(\''+device.id+'\')">Connect</button></li>'
                 );
             }
-            if(device.id = skywatchID)
-                connectSkywatch();
         },
         function() { console.warn("ERROR: Failed to start scan"); }
     );
@@ -59,16 +57,6 @@ function connectSkywatch(){
     ble.connect(skywatchID, function(device) { skywatchConnected(device) }, function() { console.warn("Failed to connect to skywatch."); } );
 }
 
-// function skywatchConnected(device){
-//     document.getElementById('deviceList').innerHTML += (
-//         '<li class="item">Device Connected!</li>'
-//     );
-//     // $('#deviceList>button').attr('disabled', true);
-//     console.warn("Connected to Skywatch.");
-//     skywatch = device;
-//     console.log(skywatch);
-//     initSkywatch();
-// }
 function skywatchConnected(device){
     document.getElementById('deviceList').innerHTML += (
         '<li class="item">Device Connected!</li>'
@@ -77,10 +65,11 @@ function skywatchConnected(device){
     console.warn("Connected to Skywatch.");
     skywatch = device;
     console.log(device);
-    showSkywatch_16(5);
-    showSkywatch_16(6);
-    showSkywatch_16(7);
-    showSkywatch_32(8);
+    initSkywatch();
+    // showSkywatch_16(5);
+    // showSkywatch_16(6);
+    // showSkywatch_16(7);
+    // showSkywatch_32(8);
 }
 
 function showSkywatch_16(i){
