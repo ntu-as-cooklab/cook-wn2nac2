@@ -1,8 +1,8 @@
 var txt =
 {
-    WINDOO_NOT_CONNECTED :  "Windoo not connected",
-    WINDOO_CALIBRATING :    "Windoo calibrating...",
-    WINDOO_CALIBRATED :     "Windoo calibrated",
+    WINDOO_NOT_CONNECTED :  "Device not connected",
+    WINDOO_CALIBRATING :    "Device calibrating...",
+    WINDOO_CALIBRATED :     "Device calibrated",
 
     WIND_TITLE :            "Wind speed",
     WIND_UNIT :             "m/s",
