@@ -15,6 +15,9 @@ function showSkywatch_wind(){
         $("#w_wind").html(sw_w.toFixed(1));
         chartWind = sw_w;
         console.log(sw_w);
+        if (glbsens.currentMeasurement.observing){
+            glbsens.currentMeasurement.addWind(sw_w);
+        }
     }
 }
 
@@ -25,6 +28,9 @@ function showSkywatch_temp(){
         $("#w_temp").html(sw_t.toFixed(1));
         chartTemp = sw_t;
         console.log(sw_t);
+        if (glbsens.currentMeasurement.observing){
+            glbsens.currentMeasurement.addTemp(sw_t);
+        }
     }
 }
 
@@ -35,6 +41,9 @@ function showSkywatch_humd(){
         $("#w_rh").html(sw_h.toFixed(1));
         chartHumd = sw_h;
         console.log(sw_h);
+        if (glbsens.currentMeasurement.observing){
+            glbsens.currentMeasurement.addHumd(sw_h);
+        }
     }
 }
 
@@ -45,9 +54,16 @@ function showSkywatch_pres(){
         $("#w_pres").html(sw_p.toFixed(0));
         chartPres = sw_p;
         console.log(sw_p);
+        if (glbsens.currentMeasurement.observing){
+            glbsens.currentMeasurement.addPres(sw_p);
+        }
     }
 }
 
 function hideSkywatch(i){
     ble.stopNotification(skywatchID, skywatch.characteristics[i].service, skywatch.characteristics[i].characteristic,function(){}, function() { console.warn("Failed to start data notifications"); } );
+}
+
+function checkBLEConn(){
+    ble.isConnected(skywatchID, function(){ glb.bleConn = true; }, function(){ glb.bleConn = false; });
 }
