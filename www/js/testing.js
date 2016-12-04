@@ -60,6 +60,7 @@ fakeWindoo.start = function()
         , 1000);
 }
 
+
 fakeWindoo.stop = function()
 {
     fakeSensorEvent(0);
