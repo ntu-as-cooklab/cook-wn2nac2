@@ -38,6 +38,9 @@ WindooStatusBar.prototype.createdCallback = function()
     document.addEventListener('windooStatusChanged',
         (function (instance) { return function (e) { instance.setStatus(e.detail); } })(this)
     )
+    document.addEventListener('skywatchStatusChanged',
+        (function (instance) { return function (e) { instance.setStatus(e.detail); } })(this)
+    )
 };
 
 WindooStatusBar = document.registerElement('windoo-status-bar', { prototype: WindooStatusBar.prototype });

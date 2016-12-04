@@ -84,6 +84,11 @@ function startToMeasure(){
         }
     }else if(windooStatus==2 && window.localStorage.getItem("isLogIn")=='true'){
         measure_tab_switch('#origin_frame','#geo_frame');
+    }else{
+         checkBLEConn();
+         if(glb.bleConn==2 && window.localStorage.getItem("isLogIn")=='true'){
+             measure_tab_switch('#origin_frame','#geo_frame');
+        }
     }
 }
 

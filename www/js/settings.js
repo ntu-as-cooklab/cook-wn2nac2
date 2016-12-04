@@ -70,6 +70,11 @@ function skywatchConnected(device){
     // showSkywatch_16(6);
     // showSkywatch_16(7);
     // showSkywatch_32(8);
+    setInterval(function(){
+        checkBLEConn();
+         document.dispatchEvent(new CustomEvent("skywatchStatusChanged", { "detail": glb.bleConn }));
+    }
+    ,1000);
 }
 
 function showSkywatch_16(i){

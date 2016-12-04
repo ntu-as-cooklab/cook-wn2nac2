@@ -65,5 +65,5 @@ function hideSkywatch(i){
 }
 
 function checkBLEConn(){
-    ble.isConnected(skywatchID, function(){ glb.bleConn = true; }, function(){ glb.bleConn = false; });
+    ble.isConnected(skywatchID, function(){ glb.bleConn = 2; }, function(){ glb.bleConn = 0; });
 }
