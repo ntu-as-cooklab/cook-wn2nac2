@@ -99,6 +99,7 @@ function checkData(){
     var d = new Date();
     var nowDate = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()+' '+d.getHours()+':'+d.getMinutes();
     glbsens.currentMeasurement.date = nowDate;
+    storeHistory();
     sendMeasurement();
     measure_tab_switch('.measure-view-disp-content','#send_frame');
 }
@@ -156,3 +157,18 @@ function chooseWeather(element, index){
         $("#weather").html(parseWeather(glbsens.currentMeasurement.weatherType));
     },200);
 }
+
+function storeHistory(){
+    var data = {};
+    data.humd = glbsens.currentMeasurement.avgHumd.toFixed(2);
+    data.pres = glbsens.currentMeasurement.avgPres.toFixed(0);
+    data.temp = glbsens.currentMeasurement.avgTemp.toFixed(2);
+    data.wind = glbsens.currentMeasurement.avgWind.toFixed(2);
+    data.date = glbsens.currentMeasurement.date;
+    data.location = `(${glbsens.currentMeasurement.longitude.toFixed(2)}, ${glbsens.currentMeasurement.latitude.toFixed(2)})`;
+    var json = JSON.parse(window.localStorage.getItem("historyData"));
+    json.unshift(data);
+    json = JSON.stringify(json);
+    window.localStorage.setItem("historyData", json);
+    renderHis();
+};

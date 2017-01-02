@@ -8,6 +8,11 @@ var app = angular.module('starter', ['ionic', 'controllers', 'services', 'ngCord
 app
 .run(function($ionicPlatform, $translate) {
   $ionicPlatform.ready(function() {
+    // init history data
+    if(window.localStorage.getItem("historyData")==null){
+        window.localStorage.setItem("historyData","[]");
+    }
+    // language
     if(window.localStorage.getItem("LANG")==null){
         if(typeof navigator.globalization !== "undefined") {
             navigator.globalization.getPreferredLanguage(function(language) {
@@ -354,6 +359,12 @@ app
         scope: $scope
     }).then(function(ble_modal) {
         $scope.ble_modal = ble_modal;
+    });
+    // History Data
+    $ionicModal.fromTemplateUrl('templates/HISModal.html', {
+        scope: $scope
+    }).then(function(his_modal) {
+        $scope.his_modal = his_modal;
     });
 })
 ;

@@ -31,6 +31,11 @@
                 {{"BLE" | translate}}
             </a>
 
+            <a class="myitem item item-icon-left" onclick="renderHis()" ng-click="his_modal.show()">
+                <i class="icon ion-android-clipboard"></i>
+                {{"HISTORY DATA" | translate}}
+            </a>
+
             <div class="setting_list item item-divider">
                 {{"INFO" | translate}}
             </div>
@@ -141,6 +146,19 @@
                             </ul>
                           </div>
                         </div>
+                   </ion-content>
+               </ion-modal-view>
+            </script>
+            <script id="templates/HISModal.html" type="text/ng-template">
+               <ion-modal-view>
+                   <ion-header-bar class="bar bar-header bar-positive">
+                       <h1 class="title">{{"HISTORY DATA" | translate}}</h1>
+                       <button class="button button-clear button-primary" ng-click="his_modal.hide()">Close</button>
+                   </ion-header-bar>
+                   <ion-content class="full pane">
+                       <div style="padding:22px;"></div>
+                        <ul class="list" id="historyList">
+                        </ul>
                    </ion-content>
                </ion-modal-view>
            </script>

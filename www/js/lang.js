@@ -45,6 +45,7 @@ var _lang_en = {
 	"FINISHED": "FINISHED",
 
 	//SETTING VIEW
+	"HISTORY DATA": "History Data",
 	"SYSTEM": "System",
 	"BLE": "Bluetooth",
 	"EN": "English",
@@ -136,6 +137,7 @@ var _lang_zh = {
 	"FINISHED": "完成",
 
 	//SETTING VIEW
+	"HISTORY DATA": "數據紀錄",
 	"SYSTEM": "系統",
 	"BLE": "藍芽裝置",
 	"LANG": "Language",

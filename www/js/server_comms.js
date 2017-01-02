@@ -118,6 +118,7 @@ function sendSignUpInfo( res )
     });
 }
 
+// Send the measurement data to server 
 function sendMeasurement(){
     $.ajax({
         url: 'http://mospc.cook.as.ntu.edu.tw/post4.php',

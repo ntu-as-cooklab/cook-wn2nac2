@@ -94,3 +94,24 @@ function showSkywatch_32(i){
 
     }
 }
+
+function renderHis(){
+    setTimeout( function(){
+        var json = JSON.parse( window.localStorage.getItem("historyData"));
+        var text ='';
+        json.forEach( function(e){
+            text+= `
+            <li class="item"><div><table><tr><td>${e.date}</td><td>${e.location}</td></tr>
+            </table></div><br><div class="item item-text-wrap"> <div><table><tr>
+            <td>氣溫：${e.temp} °C</td><td>濕度：${e.humd} %</td></tr><tr><td>壓力：${e.pres} hPa</td>
+            <td>風速：${e.wind} m/s</td></tr></table></div></div></li>`
+        });
+        text+='<a class ="cleanHis item" onclick="cleanHis()">Clean All History</a>'
+        $("#historyList").html(text);
+    }, 100);
+}
+
+function cleanHis(){
+     window.localStorage.setItem("historyData", '[]');
+     renderHis()
+}
