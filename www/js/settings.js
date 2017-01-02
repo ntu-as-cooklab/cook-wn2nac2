@@ -101,8 +101,8 @@ function renderHis(){
         var text ='';
         json.forEach( function(e){
             text+= `
-            <li class="item"><div><table><tr><td>${e.date}</td><td>${e.location}</td></tr>
-            </table></div><br><div class="item item-text-wrap"> <div><table><tr>
+            <li class="item"><div><table class="hisTable"><tr><td>${e.date}</td><td>${e.location}</td></tr>
+            </table></div><br><div class="item item-text-wrap"> <div><table class="hisTable"><tr>
             <td>氣溫：${e.temp} °C</td><td>濕度：${e.humd} %</td></tr><tr><td>壓力：${e.pres} hPa</td>
             <td>風速：${e.wind} m/s</td></tr></table></div></div></li>`
         });

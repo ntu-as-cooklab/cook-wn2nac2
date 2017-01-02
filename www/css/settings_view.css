@@ -13,14 +13,11 @@
 .full{
     height:101%;
 }
-table{
+.hisTable{
   width: 100%;
   font-size: large;
   text-align: center;
   table-layout: fixed;
-}
-td, tr{
-  /*padding: 15px;*/
   overflow: hidden;
 }
 

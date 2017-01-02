@@ -44,8 +44,8 @@ function initMaps( ASData ) {
     //google.maps.event.addDomListener(window, 'load', function() {
         var lastPosition = getStorage('weathers.last.position');
         var zoom = lastPosition && lastPosition.zoom && !isNaN(lastPosition.zoom) ? lastPosition.zoom : 10;
-        var lat = lastPosition && lastPosition.lat && !isNaN(lastPosition.lat) ? lastPosition.lat : 25.037658;
-        var lng = lastPosition && lastPosition.lng && !isNaN(lastPosition.lng) ? lastPosition.lng : 121.564853;
+        var lat = lastPosition && lastPosition.lat && !isNaN(lastPosition.lat) ? lastPosition.lat : 24.037658;
+        var lng = lastPosition && lastPosition.lng && !isNaN(lastPosition.lng) ? lastPosition.lng : 121.864853;
         if (window.vars.$maps.data('position')) {
             zoom = window.vars.$maps.data('position').z;
             lat = window.vars.$maps.data('position').a;
