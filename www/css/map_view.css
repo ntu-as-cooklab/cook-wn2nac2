@@ -1,3 +1,5 @@
+.stations, .stations svg { position: absolute; }
+
 #mapMenu{
     position:absolute;
     z-index:100;
