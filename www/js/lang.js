@@ -4,6 +4,7 @@ var _lang_en = {
 	"DS1": "CWB Forecast",
     "DS2": "CWB Station",
 	"DS3": "MOS-PC",
+	"DS4": "All Rain",
 
 	//WINDOO VIEW
 	"TEMP": "Temperature",
@@ -96,6 +97,7 @@ var _lang_zh = {
 	"DS1": "氣象局預報",
 	"DS2": "氣象局測站",
 	"DS3": "微氣象網絡",
+	"DS4": "測站雨量",
 
 	//WINDOO VIEW
 	"TEMP": "氣溫",
