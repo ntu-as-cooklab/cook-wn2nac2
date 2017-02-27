@@ -357,8 +357,9 @@ function getAllRain() {
   map.setMapTypeId('map_style');
 
   d3.json("http://mospc.cook.as.ntu.edu.tw/getCWBobs.php", function (data) {
+      
     let overlay = new google.maps.OverlayView();
-
+ 
     // Add the container when the overlay is added to the map.
     overlay.onAdd = function () {
       let layer = d3.select(this.getPanes().overlayLayer).append("div")
@@ -421,8 +422,14 @@ function getAllRain() {
           });
 
         function transform(d) {
-          d = new google.maps.LatLng(d.value.latitude, d.value.longitude);
+          //TODO fix the strange point
+          if (d.value.latitude)
+            d = new google.maps.LatLng(d.value.latitude, d.value.longitude);
+          else
+            d = new google.maps.LatLng(0, 0);
+
           d = projection.fromLatLngToDivPixel(d);
+
           return d3.select(this)
             .style("left", (d.x - padding) + "px")
             .style("top", (d.y - padding) + "px");
@@ -435,7 +442,7 @@ function getAllRain() {
           else if (rain < 15) return "blue";
           else if (rain < 50) return "green";
           else if (rain < 130) return "orange";
-          else return "red";
+          else if (rain >= 130) return "red";
         }
       };
     };
