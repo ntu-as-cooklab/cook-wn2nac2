@@ -50,7 +50,7 @@ function initMaps(ASData) {
   }
   window.vars.maps = new google.maps.Map(window.vars.$maps.get(0), {
     zoom: 10,
-    zoomControl: true,
+    zoomControl: false,
     scrollwheel: true,
     scaleControl: true,
     mapTypeControl: false,
@@ -292,7 +292,7 @@ function getAllRain() {
   let mapOptions = {
     zoom: 12,
     center: new google.maps.LatLng(25.03326, 121.518168),
-    zoomControl: true,
+    zoomControl: false,
     scrollwheel: true,
     scaleControl: true,
     mapTypeControl: false,
@@ -357,9 +357,9 @@ function getAllRain() {
   map.setMapTypeId('map_style');
 
   d3.json("http://mospc.cook.as.ntu.edu.tw/getCWBobs.php", function (data) {
-      
+
     let overlay = new google.maps.OverlayView();
- 
+
     // Add the container when the overlay is added to the map.
     overlay.onAdd = function () {
       let layer = d3.select(this.getPanes().overlayLayer).append("div")
@@ -436,13 +436,350 @@ function getAllRain() {
         }
 
         function rainColor(rain) {
-          if (rain == '-') return "black";
-          if (rain == '') return "black";
-          if (rain < 3) return "black";
+          if (rain == 0) return "black";
+          else if (rain < 3) return "purple";
           else if (rain < 15) return "blue";
           else if (rain < 50) return "green";
           else if (rain < 130) return "orange";
           else if (rain >= 130) return "red";
+          else return "black";
+        }
+      };
+    };
+
+    // Bind our overlay to the map…
+    overlay.setMap(map);
+
+  });
+}
+
+/* ------  All Temp  -------*/
+function getAllTemp() {
+
+  let mapOptions = {
+    zoom: 12,
+    center: new google.maps.LatLng(25.03326, 121.518168),
+    zoomControl: false,
+    scrollwheel: true,
+    scaleControl: true,
+    mapTypeControl: false,
+    navigationControl: true,
+    streetViewControl: false,
+    disableDoubleClickZoom: true,
+  };
+  let map = new google.maps.Map(document.getElementById('maps'), mapOptions);
+  map.mapTypes.set('map_style', new google.maps.StyledMapType([{
+    stylers: [{
+      gamma: 0
+    }, {
+      weight: 0.75
+    }]
+  }, {
+    featureType: 'all',
+    stylers: [{
+      visibility: 'on'
+    }]
+  }, {
+    featureType: 'administrative',
+    stylers: [{
+      visibility: 'off'
+    }]
+  }, {
+    featureType: 'landscape',
+    stylers: [{
+      visibility: 'on'
+    }]
+  }, {
+    featureType: 'poi',
+    stylers: [{
+      visibility: 'off'
+    }]
+  }, {
+    featureType: 'road',
+    stylers: [{
+      visibility: 'simplified'
+    }]
+  }, {
+    featureType: 'road.arterial',
+    stylers: [{
+      visibility: 'on'
+    }]
+  }, {
+    featureType: 'transit',
+    stylers: [{
+      visibility: 'off'
+    }]
+  }, {
+    featureType: 'water',
+    stylers: [{
+      color: '#b3d1ff',
+      visibility: 'on'
+    }]
+  }, {
+    elementType: "labels.icon",
+    stylers: [{
+      visibility: 'off'
+    }]
+  }]));
+  map.setMapTypeId('map_style');
+
+  d3.json("http://mospc.cook.as.ntu.edu.tw/getCWBobs.php", function (data) {
+
+    maxTemp = 0;
+    minTemp = 100;
+    let temps = [];
+    data.forEach((e) => {
+      e.temp = Number(e.temp);
+      temps.push(e.temp);
+    });
+    temps.sort(function (a, b) {
+      return a - b
+    });
+    minTemp = temps[3];
+    maxTemp = temps[temps.length - 3];
+
+    let overlay = new google.maps.OverlayView();
+
+    // Add the container when the overlay is added to the map.
+    overlay.onAdd = function () {
+      let layer = d3.select(this.getPanes().overlayLayer).append("div")
+        .attr("class", "stations");
+
+      overlay.draw = function () {
+        let projection = this.getProjection();
+        let padding = 16;
+
+        let marker = layer.selectAll("svg")
+          .data(d3.entries(data))
+          .each(transform) // update existing markers
+          .enter().append("svg:svg")
+          .each(transform)
+          .attr("class", "marker");
+
+        // 加入標籤
+        marker.append("svg:text")
+          .attr("x", padding + 25)
+          .attr("y", padding + 18)
+          .attr("dy", ".31em")
+          .attr("class", "text")
+          .attr("font-family", "微軟正黑體")
+          .attr("font-size", "15px")
+          .attr("text-anchor", "middle")
+          .text(function (d) {
+            return d.value.name;
+          });
+
+        // 加入圓點
+        marker.append("svg:circle")
+          .attr("r", 15)
+          .attr("cx", padding)
+          .attr("cy", padding)
+          .style("fill", (d) => {
+            return rainColor(d.value.temp);
+          })
+          .style("stroke-width", 0);
+
+        marker.append("svg:text")
+          .attr("x", padding)
+          .attr("y", padding)
+          .attr("dy", ".31em")
+          .attr("class", "text")
+          .attr("font-family", "微軟正黑體")
+          .attr("font-size", "15px")
+          .attr("text-anchor", "middle")
+          .style("fill", "white")
+          .text(function (d) {
+            return d.value.temp;
+          });
+
+        function transform(d) {
+          //TODO fix the strange point
+          if (d.value.latitude)
+            d = new google.maps.LatLng(d.value.latitude, d.value.longitude);
+          else
+            d = new google.maps.LatLng(0, 0);
+
+          d = projection.fromLatLngToDivPixel(d);
+
+          return d3.select(this)
+            .style("left", (d.x - padding) + "px")
+            .style("top", (d.y - padding) + "px");
+        }
+
+        function rainColor(temp) {
+          if (temp < minTemp) return `hsl(260, 100%, 40%)`
+          if (temp > maxTemp) return `hsl(0, 100%, 40%)`
+          let t = 260 - Math.floor((temp - minTemp) / (maxTemp - minTemp) * 260);
+          return `hsl(${t}, 100%, 40%)`
+        }
+      };
+    };
+
+    // Bind our overlay to the map…
+    overlay.setMap(map);
+
+  });
+}
+
+/* ------  All Humd  -------*/
+function getAllHumd() {
+
+  let mapOptions = {
+    zoom: 12,
+    center: new google.maps.LatLng(25.03326, 121.518168),
+    zoomControl: false,
+    scrollwheel: true,
+    scaleControl: true,
+    mapTypeControl: false,
+    navigationControl: true,
+    streetViewControl: false,
+    disableDoubleClickZoom: true,
+  };
+  let map = new google.maps.Map(document.getElementById('maps'), mapOptions);
+  map.mapTypes.set('map_style', new google.maps.StyledMapType([{
+    stylers: [{
+      gamma: 0
+    }, {
+      weight: 0.75
+    }]
+  }, {
+    featureType: 'all',
+    stylers: [{
+      visibility: 'on'
+    }]
+  }, {
+    featureType: 'administrative',
+    stylers: [{
+      visibility: 'off'
+    }]
+  }, {
+    featureType: 'landscape',
+    stylers: [{
+      visibility: 'on'
+    }]
+  }, {
+    featureType: 'poi',
+    stylers: [{
+      visibility: 'off'
+    }]
+  }, {
+    featureType: 'road',
+    stylers: [{
+      visibility: 'simplified'
+    }]
+  }, {
+    featureType: 'road.arterial',
+    stylers: [{
+      visibility: 'on'
+    }]
+  }, {
+    featureType: 'transit',
+    stylers: [{
+      visibility: 'off'
+    }]
+  }, {
+    featureType: 'water',
+    stylers: [{
+      color: '#b3d1ff',
+      visibility: 'on'
+    }]
+  }, {
+    elementType: "labels.icon",
+    stylers: [{
+      visibility: 'off'
+    }]
+  }]));
+  map.setMapTypeId('map_style');
+
+  d3.json("http://mospc.cook.as.ntu.edu.tw/getCWBobs.php", function (data) {
+
+    maxHumd = 0;
+    minHumd = 100;
+    let humds = [];
+    data.forEach((e) => {
+      e.humd = Number(e.humd);
+      humds.push(e.humd);
+    });
+    humds.sort(function (a, b) {
+      return a - b
+    });
+
+    minHumd = humds[3];
+    maxHumd = humds[humds.length - 3];
+
+    let overlay = new google.maps.OverlayView();
+
+    // Add the container when the overlay is added to the map.
+    overlay.onAdd = function () {
+      let layer = d3.select(this.getPanes().overlayLayer).append("div")
+        .attr("class", "stations");
+
+      overlay.draw = function () {
+        let projection = this.getProjection();
+        let padding = 16;
+
+        let marker = layer.selectAll("svg")
+          .data(d3.entries(data))
+          .each(transform) // update existing markers
+          .enter().append("svg:svg")
+          .each(transform)
+          .attr("class", "marker");
+
+        // 加入標籤
+        marker.append("svg:text")
+          .attr("x", padding + 25)
+          .attr("y", padding + 18)
+          .attr("dy", ".31em")
+          .attr("class", "text")
+          .attr("font-family", "微軟正黑體")
+          .attr("font-size", "15px")
+          .attr("text-anchor", "middle")
+          .text(function (d) {
+            return d.value.name;
+          });
+
+        // 加入圓點
+        marker.append("svg:circle")
+          .attr("r", 15)
+          .attr("cx", padding)
+          .attr("cy", padding)
+          .style("fill", (d) => {
+            return rainColor(d.value.humd);
+          })
+          .style("stroke-width", 0);
+
+        marker.append("svg:text")
+          .attr("x", padding)
+          .attr("y", padding)
+          .attr("dy", ".31em")
+          .attr("class", "text")
+          .attr("font-family", "微軟正黑體")
+          .attr("font-size", "15px")
+          .attr("text-anchor", "middle")
+          .style("fill", "white")
+          .text(function (d) {
+            return d.value.humd;
+          });
+
+        function transform(d) {
+          //TODO fix the strange point
+          if (d.value.latitude)
+            d = new google.maps.LatLng(d.value.latitude, d.value.longitude);
+          else
+            d = new google.maps.LatLng(0, 0);
+
+          d = projection.fromLatLngToDivPixel(d);
+
+          return d3.select(this)
+            .style("left", (d.x - padding) + "px")
+            .style("top", (d.y - padding) + "px");
+        }
+
+        function rainColor(humd) {
+          if (humd < minHumd) return `hsl(0, 100%, 40%)`
+          if (humd > maxHumd) return `hsl(260, 100%, 40%)`
+          let t = Math.floor((humd - minHumd) / (maxHumd - minHumd) * 260);
+          return `hsl(${t}, 100%, 40%)`
         }
       };
     };
