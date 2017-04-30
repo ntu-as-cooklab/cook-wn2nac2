@@ -9,6 +9,7 @@ var _lang_en = {
 	"DS6": "Stations Humd",
 	"DS7": "QPE Past",
 	"DS8": "QPE Future",
+	"DS9": "Stations Wind",
 
 	//WINDOO VIEW
 	"TEMP": "Temperature",
@@ -106,6 +107,7 @@ var _lang_zh = {
 	"DS6": "測站濕度",
 	"DS7": "過去1小時雷達定量降雨估計",
 	"DS8": "未來1小時雷達定量降雨預報",
+	"DS9": "測站風速",
 
 	//WINDOO VIEW
 	"TEMP": "氣溫",

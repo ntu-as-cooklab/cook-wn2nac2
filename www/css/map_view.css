@@ -1,34 +1,50 @@
-.stations, .stations svg { position: absolute; }
+.stations,
+.stations svg {
+  position: absolute;
+}
 
-#mapMenu{
-    position:absolute;
-    z-index:100;
-    left:10px;
-    top:10px;
-    display: inline-block;
+#mapMenu {
+  position: absolute;
+  z-index: 100;
+  left: 10px;
+  top: 10px;
+  display: inline-block;
 }
+
 .main-menu {
-     color:#FFFFFF;
-     background-color:#1C1C1C;
-     margin:0px;
-     width: 35vw;
-     padding: 5px;
-     cursor:pointer;
+  color: #FFFFFF;
+  background-color: #1C1C1C;
+  margin: 0px;
+  width: 35vw;
+  padding: 5px;
+  cursor: pointer;
 }
+
 .sub-menu {
-    color:#0000FF;
-    background-color:#424242;
-    margin:5px -5px;
-    width: 35vw;
-    padding:0px;
-    position:absolute;
+  color: #0000FF;
+  background-color: #424242;
+  margin: 5px -5px;
+  width: 35vw;
+  padding: 0px;
+  position: absolute;
 }
+
 .sub-menu li {
-    padding: 3px 5px;
-    text-align:center;
+  padding: 3px 5px;
+  text-align: center;
 }
+
 .sub-menu a {
-    text-align:center;
-    display:block;
-    color: white;
+  text-align: center;
+  display: block;
+  color: white;
+}
+
+.mapArrow {
+  stroke-width: 5;
+  stroke: #000;
+}
+
+#mapArrow {
+  stroke-width: 1;
 }

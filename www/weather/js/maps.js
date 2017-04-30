@@ -1,6 +1,6 @@
 /* ---- Map Menu-------*/
 let VisibleMenu = ''; // record now menu ID
-
+let mapSet = null;
 // show or hide menu
 function switchMenu(theMainMenu, theSubMenu, theEvent) {
   let SubMenu = document.getElementById(theSubMenu);
@@ -289,72 +289,7 @@ function getCOOKDATA() {
 /* ------  All Rain  -------*/
 function getAllRain() {
 
-  let mapOptions = {
-    zoom: 12,
-    center: new google.maps.LatLng(25.03326, 121.518168),
-    zoomControl: false,
-    scrollwheel: true,
-    scaleControl: true,
-    mapTypeControl: false,
-    navigationControl: true,
-    streetViewControl: false,
-    disableDoubleClickZoom: true,
-  };
-  let map = new google.maps.Map(document.getElementById('maps'), mapOptions);
-  map.mapTypes.set('map_style', new google.maps.StyledMapType([{
-    stylers: [{
-      gamma: 0
-    }, {
-      weight: 0.75
-    }]
-  }, {
-    featureType: 'all',
-    stylers: [{
-      visibility: 'on'
-    }]
-  }, {
-    featureType: 'administrative',
-    stylers: [{
-      visibility: 'off'
-    }]
-  }, {
-    featureType: 'landscape',
-    stylers: [{
-      visibility: 'on'
-    }]
-  }, {
-    featureType: 'poi',
-    stylers: [{
-      visibility: 'off'
-    }]
-  }, {
-    featureType: 'road',
-    stylers: [{
-      visibility: 'simplified'
-    }]
-  }, {
-    featureType: 'road.arterial',
-    stylers: [{
-      visibility: 'on'
-    }]
-  }, {
-    featureType: 'transit',
-    stylers: [{
-      visibility: 'off'
-    }]
-  }, {
-    featureType: 'water',
-    stylers: [{
-      color: '#b3d1ff',
-      visibility: 'on'
-    }]
-  }, {
-    elementType: "labels.icon",
-    stylers: [{
-      visibility: 'off'
-    }]
-  }]));
-  map.setMapTypeId('map_style');
+  setMap();
 
   d3.json("http://mospc.cook.as.ntu.edu.tw/getCWBobs.php", function (data) {
 
@@ -447,8 +382,8 @@ function getAllRain() {
       };
     };
 
-    // Bind our overlay to the map…
-    overlay.setMap(map);
+    // Bind our overlay to the mapSet…
+    overlay.setMap(mapSet);
 
   });
 }
@@ -456,72 +391,7 @@ function getAllRain() {
 /* ------  All Temp  -------*/
 function getAllTemp() {
 
-  let mapOptions = {
-    zoom: 12,
-    center: new google.maps.LatLng(25.03326, 121.518168),
-    zoomControl: false,
-    scrollwheel: true,
-    scaleControl: true,
-    mapTypeControl: false,
-    navigationControl: true,
-    streetViewControl: false,
-    disableDoubleClickZoom: true,
-  };
-  let map = new google.maps.Map(document.getElementById('maps'), mapOptions);
-  map.mapTypes.set('map_style', new google.maps.StyledMapType([{
-    stylers: [{
-      gamma: 0
-    }, {
-      weight: 0.75
-    }]
-  }, {
-    featureType: 'all',
-    stylers: [{
-      visibility: 'on'
-    }]
-  }, {
-    featureType: 'administrative',
-    stylers: [{
-      visibility: 'off'
-    }]
-  }, {
-    featureType: 'landscape',
-    stylers: [{
-      visibility: 'on'
-    }]
-  }, {
-    featureType: 'poi',
-    stylers: [{
-      visibility: 'off'
-    }]
-  }, {
-    featureType: 'road',
-    stylers: [{
-      visibility: 'simplified'
-    }]
-  }, {
-    featureType: 'road.arterial',
-    stylers: [{
-      visibility: 'on'
-    }]
-  }, {
-    featureType: 'transit',
-    stylers: [{
-      visibility: 'off'
-    }]
-  }, {
-    featureType: 'water',
-    stylers: [{
-      color: '#b3d1ff',
-      visibility: 'on'
-    }]
-  }, {
-    elementType: "labels.icon",
-    stylers: [{
-      visibility: 'off'
-    }]
-  }]));
-  map.setMapTypeId('map_style');
+  setMap();
 
   d3.json("http://mospc.cook.as.ntu.edu.tw/getCWBobs.php", function (data) {
 
@@ -616,80 +486,167 @@ function getAllTemp() {
     };
 
     // Bind our overlay to the map…
-    overlay.setMap(map);
+    overlay.setMap(mapSet);
+
+  });
+}
+
+/* ------  All Wind  -------*/
+function getAllWind() {
+
+  setMap();
+
+  d3.json("http://mospc.cook.as.ntu.edu.tw/getCWBobs.php", function (data) {
+
+    maxWind = 0;
+    minWind = 100;
+    let winds = [];
+    data.forEach((e) => {
+      e.ws = Number(e.ws);
+      winds.push(e.ws);
+    });
+    winds.sort(function (a, b) {
+      return a - b
+    });
+    minWind = winds[3];
+    maxWind = winds[winds.length - 3];
+
+    let overlay = new google.maps.OverlayView();
+
+    // Add the container when the overlay is added to the mapSet.
+    overlay.onAdd = function () {
+      let layer = d3.select(this.getPanes().overlayLayer).append("div")
+        .attr("class", "stations");
+
+      overlay.draw = function () {
+        let projection = this.getProjection();
+        let padding = 16;
+
+        let marker = layer.selectAll("svg")
+          .data(d3.entries(data))
+          .each(transform) // update existing markers
+          .enter().append("svg:svg")
+          .each(transform)
+          .attr("class", "marker")
+          .attr("width", 100)
+          .attr("height", 100);
+        // 加入標籤
+        marker.append("svg:text")
+          .attr("x", padding + 25)
+          .attr("y", padding + 18)
+          .attr("dy", ".31em")
+          .attr("class", "text")
+          .attr("font-family", "微軟正黑體")
+          .attr("font-size", "15px")
+          .attr("text-anchor", "middle")
+          .text(function (d) {
+            return d.value.name;
+          });
+
+
+        // 箭頭
+        defs = marker.append("defs")
+
+        defs.append("marker")
+          .attr({
+            "id": "mapArrow",
+            "viewBox": "0 -5 10 10",
+            "refX": 5,
+            "refY": 0,
+            "markerWidth": 4,
+            "markerHeight": 4,
+            "orient": "auto"
+          })
+          .append("path")
+          .attr("d", "M0,-5L10,0L0,5")
+          .attr("class", "arrowHead");
+
+        marker.append('line')
+          .attr({
+            "class": "mapArrow",
+            "marker-end": "url(#mapArrow)"
+          })
+          .each(transform)
+          .each(transformArrow);
+
+        function transformArrow(d) {
+          let x2, y2, theta;
+          let lg = 40;
+          let dir = d.value.wd2;
+          if (dir <= 360 && dir >= 0 && d.value.ws > 0) {
+            theta = 450 - dir;
+            x2 = lg * Math.cos(theta / 180 * 3.1415);
+            y2 = lg * Math.sin(theta / 180 * 3.1415);
+          } else {
+            x2 = padding;
+            y2 = padding;
+          }
+          console.log(dir)
+          console.log(x2)
+          console.log(y2)
+          return d3.select(this)
+            .attr("x", padding)
+            .attr("y", padding)
+            .attr("dy", ".31em")
+            .attr("x2", x2 )
+            .attr("y2", y2 )
+        }
+
+        // 加入圓點
+        marker.append("svg:circle")
+          .attr("r", 15)
+          .attr("cx", padding)
+          .attr("cy", padding)
+          .style("fill", (d) => {
+            return rainColor(d.value.temp);
+          })
+          .style("stroke-width", 0);
+
+        marker.append("svg:text")
+          .attr("x", padding)
+          .attr("y", padding)
+          .attr("dy", ".31em")
+          .attr("class", "text")
+          .attr("font-family", "微軟正黑體")
+          .attr("font-size", "15px")
+          .attr("text-anchor", "middle")
+          .style("fill", "white")
+          .text(function (d) {
+            return d.value.temp;
+          });
+
+        function transform(d) {
+          //TODO fix the strange point
+          if (d.value.latitude)
+            d = new google.maps.LatLng(d.value.latitude, d.value.longitude);
+          else
+            d = new google.maps.LatLng(0, 0);
+
+          d = projection.fromLatLngToDivPixel(d);
+
+          return d3.select(this)
+            .style("left", (d.x - padding) + "px")
+            .style("top", (d.y - padding) + "px");
+        }
+
+        function rainColor(wind) {
+          if (wind < minWind) return `hsl(260, 100%, 40%)`
+          if (wind > maxWind) return `hsl(0, 100%, 40%)`
+          let t = 260 - Math.floor((wind - minWind) / (maxWind - minWind) * 260);
+          return `hsl(${t}, 100%, 40%)`
+        }
+      };
+    };
+
+    // Bind our overlay to the mapSet…
+    overlay.setMap(mapSet);
 
   });
 }
 
 /* ------  All Humd  -------*/
 function getAllHumd() {
-
-  let mapOptions = {
-    zoom: 12,
-    center: new google.maps.LatLng(25.03326, 121.518168),
-    zoomControl: false,
-    scrollwheel: true,
-    scaleControl: true,
-    mapTypeControl: false,
-    navigationControl: true,
-    streetViewControl: false,
-    disableDoubleClickZoom: true,
-  };
-  let map = new google.maps.Map(document.getElementById('maps'), mapOptions);
-  map.mapTypes.set('map_style', new google.maps.StyledMapType([{
-    stylers: [{
-      gamma: 0
-    }, {
-      weight: 0.75
-    }]
-  }, {
-    featureType: 'all',
-    stylers: [{
-      visibility: 'on'
-    }]
-  }, {
-    featureType: 'administrative',
-    stylers: [{
-      visibility: 'off'
-    }]
-  }, {
-    featureType: 'landscape',
-    stylers: [{
-      visibility: 'on'
-    }]
-  }, {
-    featureType: 'poi',
-    stylers: [{
-      visibility: 'off'
-    }]
-  }, {
-    featureType: 'road',
-    stylers: [{
-      visibility: 'simplified'
-    }]
-  }, {
-    featureType: 'road.arterial',
-    stylers: [{
-      visibility: 'on'
-    }]
-  }, {
-    featureType: 'transit',
-    stylers: [{
-      visibility: 'off'
-    }]
-  }, {
-    featureType: 'water',
-    stylers: [{
-      color: '#b3d1ff',
-      visibility: 'on'
-    }]
-  }, {
-    elementType: "labels.icon",
-    stylers: [{
-      visibility: 'off'
-    }]
-  }]));
-  map.setMapTypeId('map_style');
+  setMap();
 
   d3.json("http://mospc.cook.as.ntu.edu.tw/getCWBobs.php", function (data) {
 
@@ -709,7 +666,7 @@ function getAllHumd() {
 
     let overlay = new google.maps.OverlayView();
 
-    // Add the container when the overlay is added to the map.
+    // Add the container when the overlay is added to the mapSet.
     overlay.onAdd = function () {
       let layer = d3.select(this.getPanes().overlayLayer).append("div")
         .attr("class", "stations");
@@ -784,8 +741,8 @@ function getAllHumd() {
       };
     };
 
-    // Bind our overlay to the map…
-    overlay.setMap(map);
+    // Bind our overlay to the mapSet…
+    overlay.setMap(mapSet);
 
   });
 }
@@ -794,78 +751,13 @@ function getAllHumd() {
 /* ------  QPE   -------*/
 function getQPE(type) {
 
-  let mapOptions = {
-    zoom: 8,
-    center: new google.maps.LatLng(25.03326, 121.518168),
-    zoomControl: false,
-    scrollwheel: true,
-    scaleControl: true,
-    mapTypeControl: false,
-    navigationControl: true,
-    streetViewControl: false,
-    disableDoubleClickZoom: true,
-  };
-  let map = new google.maps.Map(document.getElementById('maps'), mapOptions);
-  map.mapTypes.set('map_style', new google.maps.StyledMapType([{
-    stylers: [{
-      gamma: 0
-    }, {
-      weight: 0.75
-    }]
-  }, {
-    featureType: 'all',
-    stylers: [{
-      visibility: 'on'
-    }]
-  }, {
-    featureType: 'administrative',
-    stylers: [{
-      visibility: 'off'
-    }]
-  }, {
-    featureType: 'landscape',
-    stylers: [{
-      visibility: 'on'
-    }]
-  }, {
-    featureType: 'poi',
-    stylers: [{
-      visibility: 'off'
-    }]
-  }, {
-    featureType: 'road',
-    stylers: [{
-      visibility: 'simplified'
-    }]
-  }, {
-    featureType: 'road.arterial',
-    stylers: [{
-      visibility: 'on'
-    }]
-  }, {
-    featureType: 'transit',
-    stylers: [{
-      visibility: 'off'
-    }]
-  }, {
-    featureType: 'water',
-    stylers: [{
-      color: '#b3d1ff',
-      visibility: 'on'
-    }]
-  }, {
-    elementType: "labels.icon",
-    stylers: [{
-      visibility: 'off'
-    }]
-  }]));
-  map.setMapTypeId('map_style');
+  setMap();
   let url = `http://mospc.cook.as.ntu.edu.tw/returnJson.php?file=QPE` + type + `.json`;
   d3.json(url, function (data) {
 
     let overlay = new google.maps.OverlayView();
 
-    // Add the container when the overlay is added to the map.
+    // Add the container when the overlay is added to the mapSet.
     overlay.onAdd = function () {
       let layer = d3.select(this.getPanes().overlayLayer).append("div")
         .attr("class", "stations");
@@ -937,8 +829,77 @@ function getQPE(type) {
       };
     };
 
-    // Bind our overlay to the map…
-    overlay.setMap(map);
+    // Bind our overlay to the mapSet…
+    overlay.setMap(mapSet);
 
   });
+}
+
+function setMap() {
+  let mapOptions = {
+    zoom: 12,
+    center: new google.maps.LatLng(25.03326, 121.518168),
+    zoomControl: false,
+    scrollwheel: true,
+    scaleControl: true,
+    mapTypeControl: false,
+    navigationControl: true,
+    streetViewControl: false,
+    disableDoubleClickZoom: true,
+  };
+  mapSet = new google.maps.Map(document.getElementById('maps'), mapOptions);
+  mapSet.mapTypes.set('map_style', new google.maps.StyledMapType([{
+    stylers: [{
+      gamma: 0
+    }, {
+      weight: 0.75
+    }]
+  }, {
+    featureType: 'all',
+    stylers: [{
+      visibility: 'on'
+    }]
+  }, {
+    featureType: 'administrative',
+    stylers: [{
+      visibility: 'off'
+    }]
+  }, {
+    featureType: 'landscape',
+    stylers: [{
+      visibility: 'on'
+    }]
+  }, {
+    featureType: 'poi',
+    stylers: [{
+      visibility: 'off'
+    }]
+  }, {
+    featureType: 'road',
+    stylers: [{
+      visibility: 'simplified'
+    }]
+  }, {
+    featureType: 'road.arterial',
+    stylers: [{
+      visibility: 'on'
+    }]
+  }, {
+    featureType: 'transit',
+    stylers: [{
+      visibility: 'off'
+    }]
+  }, {
+    featureType: 'water',
+    stylers: [{
+      color: '#b3d1ff',
+      visibility: 'on'
+    }]
+  }, {
+    elementType: "labels.icon",
+    stylers: [{
+      visibility: 'off'
+    }]
+  }]));
+  mapSet.setMapTypeId('map_style');
 }
