@@ -508,8 +508,8 @@ function getAllWind() {
     winds.sort(function (a, b) {
       return a - b
     });
-    minWind = winds[3];
-    maxWind = winds[winds.length - 3];
+    minWind = winds[1];
+    maxWind = winds[winds.length - 1];
 
     let overlay = new google.maps.OverlayView();
 
@@ -520,7 +520,7 @@ function getAllWind() {
 
       overlay.draw = function () {
         let projection = this.getProjection();
-        let padding = 16;
+        let padding = 100;
 
         let marker = layer.selectAll("svg")
           .data(d3.entries(data))
@@ -528,8 +528,8 @@ function getAllWind() {
           .enter().append("svg:svg")
           .each(transform)
           .attr("class", "marker")
-          .attr("width", 100)
-          .attr("height", 100);
+          .attr("width", 200)
+          .attr("height", 200);
         // 加入標籤
         marker.append("svg:text")
           .attr("x", padding + 25)
@@ -544,17 +544,16 @@ function getAllWind() {
           });
 
 
-        // 箭頭
+        //箭頭
         defs = marker.append("defs")
-
         defs.append("marker")
           .attr({
             "id": "mapArrow",
             "viewBox": "0 -5 10 10",
             "refX": 5,
             "refY": 0,
-            "markerWidth": 4,
-            "markerHeight": 4,
+            "markerWidth": 3,
+            "markerHeight": 3,
             "orient": "auto"
           })
           .append("path")
@@ -566,30 +565,26 @@ function getAllWind() {
             "class": "mapArrow",
             "marker-end": "url(#mapArrow)"
           })
-          .each(transform)
           .each(transformArrow);
 
         function transformArrow(d) {
           let x2, y2, theta;
-          let lg = 40;
-          let dir = d.value.wd2;
+          let lg = 100 * (Number(d.value.ws) - minWind) / (maxWind - minWind);
+          let dir = Number(d.value.wd2);
           if (dir <= 360 && dir >= 0 && d.value.ws > 0) {
             theta = 450 - dir;
-            x2 = lg * Math.cos(theta / 180 * 3.1415);
-            y2 = lg * Math.sin(theta / 180 * 3.1415);
+            x2 = lg * Math.cos(theta / 180 * 3.1415) + padding + 30;
+            y2 = lg * Math.sin(theta / 180 * 3.1415) + padding + 30;
           } else {
             x2 = padding;
             y2 = padding;
           }
-          console.log(dir)
-          console.log(x2)
-          console.log(y2)
+
           return d3.select(this)
-            .attr("x", padding)
-            .attr("y", padding)
-            .attr("dy", ".31em")
-            .attr("x2", x2 )
-            .attr("y2", y2 )
+            .attr("x1", padding)
+            .attr("y1", padding)
+            .attr("x2", x2)
+            .attr("y2", y2)
         }
 
         // 加入圓點
@@ -612,7 +607,7 @@ function getAllWind() {
           .attr("text-anchor", "middle")
           .style("fill", "white")
           .text(function (d) {
-            return d.value.temp;
+            return d.value.ws;
           });
 
         function transform(d) {
@@ -630,8 +625,6 @@ function getAllWind() {
         }
 
         function rainColor(wind) {
-          if (wind < minWind) return `hsl(260, 100%, 40%)`
-          if (wind > maxWind) return `hsl(0, 100%, 40%)`
           let t = 260 - Math.floor((wind - minWind) / (maxWind - minWind) * 260);
           return `hsl(${t}, 100%, 40%)`
         }
@@ -837,7 +830,7 @@ function getQPE(type) {
 
 function setMap() {
   let mapOptions = {
-    zoom: 12,
+    zoom: 11,
     center: new google.maps.LatLng(25.03326, 121.518168),
     zoomControl: false,
     scrollwheel: true,
