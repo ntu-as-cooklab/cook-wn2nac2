@@ -520,7 +520,7 @@ function getAllWind() {
 
       overlay.draw = function () {
         let projection = this.getProjection();
-        let padding = 100;
+        let padding = 150;
 
         let marker = layer.selectAll("svg")
           .data(d3.entries(data))
@@ -528,8 +528,8 @@ function getAllWind() {
           .enter().append("svg:svg")
           .each(transform)
           .attr("class", "marker")
-          .attr("width", 200)
-          .attr("height", 200);
+          .attr("width", padding * 2)
+          .attr("height", padding * 2);
         // 加入標籤
         marker.append("svg:text")
           .attr("x", padding + 25)
@@ -569,12 +569,12 @@ function getAllWind() {
 
         function transformArrow(d) {
           let x2, y2, theta;
-          let lg = 100 * (Number(d.value.ws) - minWind) / (maxWind - minWind);
+          let lg = 30 + 100 * (Number(d.value.ws) - minWind) / (maxWind - minWind);
           let dir = Number(d.value.wd2);
           if (dir <= 360 && dir >= 0 && d.value.ws > 0) {
             theta = 450 - dir;
-            x2 = lg * Math.cos(theta / 180 * 3.1415) + padding + 30;
-            y2 = lg * Math.sin(theta / 180 * 3.1415) + padding + 30;
+            x2 = -lg * Math.cos(theta / 180 * 3.1415) + padding;
+            y2 = lg * Math.sin(theta / 180 * 3.1415) + padding;
           } else {
             x2 = padding;
             y2 = padding;
@@ -584,7 +584,7 @@ function getAllWind() {
             .attr("x1", padding)
             .attr("y1", padding)
             .attr("x2", x2)
-            .attr("y2", y2)
+            .attr("y2", y2);
         }
 
         // 加入圓點
