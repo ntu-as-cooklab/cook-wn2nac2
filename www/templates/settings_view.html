@@ -18,6 +18,30 @@
                   </div>
                 </label>
             </li>
+            <li class="myitem item item-icon-left  item-toggle" href="#">
+                <i class="icon ion-person"></i>
+                    {{"AC" | translate}}
+                <label class="toggle toggle-positive">
+                  <input type="checkbox"
+                    ng-model="accountCB.checked"
+                    ng-change="accountCBChange()">
+                  <div class="track">
+                    <div class="handle"></div>
+                  </div>
+                </label>
+            </li>
+            <li class="myitem item item-icon-left  item-toggle" href="#">
+                <i class="icon ion-navigate"></i>
+                    {{"AG" | translate}}
+                <label class="toggle toggle-positive">
+                  <input type="checkbox"
+                    ng-model="autoGeoCB.checked"
+                    ng-change="autoGeoCBChange()">
+                  <div class="track">
+                    <div class="handle"></div>
+                  </div>
+                </label>
+            </li>
             <li class="myitem item item-icon-left  item-select">
                 <i class="icon ion-earth"></i>
                     {{"LANG" | translate}}
