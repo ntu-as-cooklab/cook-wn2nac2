@@ -262,6 +262,17 @@ app
     });
   })
 
+  .controller('geoLoc', function ($scope) {
+    $scope.long = '0';
+    $scope.lat = '0';
+    $scope.ngGetGeo = function () {
+      glb.latitude = $scope.lat;
+      glb.longitude = $scope.long;
+      console.log("glb.latitude: ", glb.latitude);
+      console.log("glb.longitude: ", glb.longitude);
+    };
+  })
+
   // control the page of signing up
   .controller('signUpFormCtrl', function ($scope) {
     $scope.userid = '';
