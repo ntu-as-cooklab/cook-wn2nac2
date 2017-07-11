@@ -18,6 +18,8 @@ var _lang_en = {
   "WINDSPEED": "Wind Speed",
 
   //MEASURE VIEW
+  "LATITUDE": "latitude",
+  "LONGITUDE": "longitude",
   "GETLOC": "Get Geolocation",
   "GET": "GET",
   "GETLOC_INFO": "Press the button and allow the APP to use your Geolocation.",
@@ -118,6 +120,8 @@ var _lang_zh = {
   "WINDSPEED": "風速",
 
   //MEASURE VIEW
+  "LATITUDE": "緯度",
+  "LONGITUDE": "經度",
   "GETLOC": "取得地理位置",
   "GET": "取得",
   "GETLOC_INFO": "請設定允許手機存取地理位置。若是失敗，請試著打開 Google Map 之後再開啟本程式，或著重新開啟手機。有時GPS訊號不好，可能要重複幾次才會成功。",
