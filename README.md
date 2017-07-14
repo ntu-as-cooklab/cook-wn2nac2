@@ -1,4 +1,12 @@
-### Install [Node.js](https://nodejs.org/)
+# Introduce
+Via smart phone, Windoo sensor, and this APP, conduct experiment "Meteorological Observation by Smart Phone Citizen Scientists".
+
+## Have A Look
+![](https://raw.githubusercontent.com/seanstone/cook-wn2nac2/master/demo.gif)
+
+## Reqirement
+
+### [Node.js](https://nodejs.org/)
 
 ### Install Cordova and Ionic using npm
 ```
@@ -9,6 +17,8 @@ npm install -g cordova ionic
 ```
 npm install -g gulp bower
 ```
+
+## Run 
 
 ### Clone this repository
 ```
@@ -40,5 +50,6 @@ Then the browser open app as page
 [chrome://inspect](chrome://inspect)
 
 ### Referance
-[Taiwan's Weather Maps!](https://github.com/comdan66/weather), 
+[Taiwan's Weather Maps!](https://github.com/comdan66/weather)
+
 [Compass in HTML5 Demo](http://codepen.io/rlautan/pen/YPzGjo)
