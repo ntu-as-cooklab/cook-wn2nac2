@@ -378,3 +378,7 @@
   text-align: center;
   width: 30%;
 }
+
+.info-box p{
+  color: black;
+}
