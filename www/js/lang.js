@@ -45,10 +45,12 @@ var _lang_en = {
   "WINDDIR_INFO": "Please orient your phone in face of the wind and record the azimuth.",
   "DATACHECK": "Data Check",
   "SEND": "SEND",
-  "SEND_INFO": "Send the data if it is correct.",
+  "STORE": "SAVE",
+  "SEND_INFO": "SEND: Data is correct and internet is available.",
+  "SEND_INFO2": "SAVE: Send data later when internet  is available.",
   "SEND_MSG": "Send Data to Server",
   "SEND_MSG2": "Thank You!",
-  "SEND_MSG3": "Your measurement is sent to the server.",
+  "SEND_MSG3": "Your measurement is sent/saved.",
   "SEND_MSG4": "The map data will be updated evey 15 minutes.",
   "FINISHED": "FINISHED",
 
@@ -76,6 +78,7 @@ var _lang_en = {
   "DEVS": "Developers",
   "PP": "Prior Period",
   "LP": "Last Period",
+  "UPLOAD": "Upload Data",
 
   //USER VIEW
   "USERINFO": "User Information",
@@ -147,10 +150,12 @@ var _lang_zh = {
   "WINDDIR_INFO": "請將手機指向風向來源。",
   "DATACHECK": "資料檢查",
   "SEND": "傳送",
-  "SEND_INFO": "資料正確無誤請傳送。",
+  "STORE": "儲存",
+  "SEND_INFO2": "儲存：當有網路時再回傳。",
+  "SEND_INFO": "傳送：資料正確無誤且有網路。",
   "SEND_MSG": "資料回傳",
   "SEND_MSG2": "謝謝！",
-  "SEND_MSG3": "資料已經成功回傳",
+  "SEND_MSG3": "資料已經成功回傳/儲存",
   "SEND_MSG4": "地圖的資料將每15分鐘更新一次",
   "FINISHED": "完成",
 
@@ -178,6 +183,7 @@ var _lang_zh = {
   "DEVS": "開發團隊",
   "PP": "前期",
   "LP": "後期",
+  "UPLOAD": "上傳數據",
 
   //USER VIEW
   "USERINFO": "使用者資訊",
