@@ -119,11 +119,11 @@ function sendSignUpInfo( res )
 }
 
 // Send the measurement data to server 
-function sendMeasurement(){
+function sendMeasurement(d){
     $.ajax({
         url: 'http://mospc.cook.as.ntu.edu.tw/post4.php',
         type: 'POST',
-        data: JSON.parse(JSON.stringify(glbsens.currentMeasurement)),
+        data: JSON.parse(JSON.stringify(d)),
         success: function(data){
             console.log(data);
             window.localStorage.setItem("record", Number(window.localStorage.getItem("record"))+1);
