@@ -124,15 +124,17 @@ function startToMeasure() {
   }
 }
 
-function checkData() {
+function checkData(e) {
   glbsens.currentMeasurement.latitude = glb.latitude;
   glbsens.currentMeasurement.longitude = glb.longitude;
   glbsens.currentMeasurement.userId = window.localStorage.getItem("userid");
   var d = new Date();
   var nowDate = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes();
   glbsens.currentMeasurement.date = nowDate;
-  storeHistory();
-  sendMeasurement();
+  storeHistory(e);
+  if(e==0){
+    sendMeasurement(glbsens.currentMeasurement);
+  }
   measure_tab_switch('.measure-view-disp-content', '#send_frame');
 }
 
@@ -189,12 +191,19 @@ function chooseWeather(element, index) {
   }, 200);
 }
 
-function storeHistory() {
+function storeHistory(e) {
   var data = {};
-  data.humd = glbsens.currentMeasurement.avgHumd.toFixed(2);
-  data.pres = glbsens.currentMeasurement.avgPres.toFixed(0);
-  data.temp = glbsens.currentMeasurement.avgTemp.toFixed(2);
-  data.wind = glbsens.currentMeasurement.avgWind.toFixed(2);
+  data.userId = "anonymous";
+  data.avgHumd = glbsens.currentMeasurement.avgHumd.toFixed(2);
+  data.avgPres = glbsens.currentMeasurement.avgPres.toFixed(0);
+  data.avgTemp = glbsens.currentMeasurement.avgTemp.toFixed(2);
+  data.avgWind = glbsens.currentMeasurement.avgWind.toFixed(2);
+  data.upload = (e == 0)? 1: 0;
+  data.duration = glbsens.currentMeasurement.duration;
+  data.windDirection = glbsens.currentMeasurement.windDirection;
+  data.weatherType = glbsens.currentMeasurement.weatherType;
+  data.longitude = glbsens.currentMeasurement.longitude.toFixed(2);
+  data.latitude = glbsens.currentMeasurement.latitude.toFixed(2);
   data.date = glbsens.currentMeasurement.date;
   data.location = `(${glbsens.currentMeasurement.longitude.toFixed(2)}, ${glbsens.currentMeasurement.latitude.toFixed(2)})`;
   var json = JSON.parse(window.localStorage.getItem("historyData"));
