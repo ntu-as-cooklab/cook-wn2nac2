@@ -103,15 +103,27 @@ function renderHis(){
             text+= `
             <li class="item"><div><table class="hisTable"><tr><td>${e.date}</td><td>${e.location}</td></tr>
             </table></div><br><div class="item item-text-wrap"> <div><table class="hisTable"><tr>
-            <td>氣溫：${e.temp} °C</td><td>濕度：${e.humd} %</td></tr><tr><td>壓力：${e.pres} hPa</td>
-            <td>風速：${e.wind} m/s</td></tr></table></div></div></li>`
+            <td>氣溫：${e.avgTemp} °C</td><td>濕度：${e.avgHumd} %</td></tr><tr><td>壓力：${e.avgPres} hPa</td>
+            <td>風速：${e.avgWind} m/s</td></tr><tr><td>天氣: ${parseWeather(e.weatherType)}</td>
+            <td>狀態：${e.upload==1?"上傳":"未上傳"}</td></tr></table></div></div></li>`
         });
-        text+='<a class ="cleanHis item" onclick="cleanHis()">Clean All History</a>'
+        text+='<a class ="cleanHis item" onclick="cleanHis()"><i class="icon ion-close"></i>&nbsp;Clean All History</a>'
         $("#historyList").html(text);
     }, 100);
 }
 
 function cleanHis(){
      window.localStorage.setItem("historyData", '[]');
-     renderHis()
+     renderHis();
+}
+
+function uploadHis(){
+    var json = JSON.parse(window.localStorage.getItem("historyData"));
+    json.forEach(function(e){
+        if(e.upload == 0){
+            sendMeasurement(e);
+            e.upload = 1;
+        }
+    });
+    alert("Upload Done!");
 }

@@ -180,9 +180,9 @@
                        <button class="button button-clear button-primary" ng-click="his_modal.hide()">Close</button>
                    </ion-header-bar>
                    <ion-content class="full pane">
-                       <div style="padding:22px;"></div>
-                        <ul class="list" id="historyList">
-                        </ul>
+                        <div style="padding:22px;"></div>
+                        <a class ="uploadHis item" onclick="uploadHis()"><i class="icon ion-upload"></i>{{"UPLOAD" | translate}}</a>
+                        <ul class="list" id="historyList"></ul>
                    </ion-content>
                </ion-modal-view>
            </script>
